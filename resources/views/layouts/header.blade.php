@@ -89,60 +89,151 @@
           <a href="#" class="nav-link active">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
-              EVKIN
+              EVALUASI KINERJA
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link active">
+              <a href="#" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>UTAMA</p>
+                <p>Dashboard</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>MOBILE</p>
+                <p>Keuangan</p>
               </a>
             </li>
-            
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Pelayanan</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Operasional</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Sdm</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Administrasi</p>
+              </a>
+            </li>
           </ul>
         </li>
 
         {{-- DIREKSI --}}
 
-        <li class="nav-item menu-open">
+        <li class="nav-item menu-close">
           <a href="#" class="nav-link active">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
-              DIREKSI
+              UTAMA
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link active">
-                <i class="far fa-circle nav-icon"></i>
-                <p>UTAMA</p>
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>Perencanaan Dan Penelitian</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>UMUM</p>
+                <p>Satuan Pengawas Internal</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item menu-close">
+          <a href="#" class="nav-link active">
+            <p>
+              UMUM
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Umum Dan Kesekretariatan </p>
               </a>
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>TEKNIK</p>
+                <p>Keuangan</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>PELAYANAN</p>
+                <p>Sumber Daya Manusia</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item menu-close">
+          <a href="#" class="nav-link active">
+            <p>
+              TEKNIK
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Produksi</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Distribusi</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Perawatan</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item menu-close">
+          <a href="#" class="nav-link active">
+            <p>
+              PELAYANAN
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Hubungan Pelanggan</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Kepatuhan</p>
               </a>
             </li>
           </ul>

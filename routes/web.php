@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Pelayanan\PelayananController;
+use App\Http\Controllers\Admin\Utama\PpController;
 use App\Http\Controllers\Evkin\EvkinController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,8 @@ Route::get('dewas', function () {
 
 Route::get('evkin', [EvkinController::class, 'index']);
 Route::get('pelayanan', [PelayananController::class, 'index']);
+
+Route::get('perencanaanPenelitian', [PpController::class, 'index']);
 
 
 require __DIR__.'/auth.php';
