@@ -9,6 +9,12 @@ class PpController extends Controller
 {
     public function index ()
     {
-        return view ('admin.utama.pp');
+
+        $startYear = 2024;
+        $endYear = 2024;
+
+        // Panggil fungsi helper
+        $bulan = generateMonths($startYear, $endYear);
+        return view ('admin.utama.pp',compact('bulan'));
     }
 }
