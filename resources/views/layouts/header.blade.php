@@ -101,7 +101,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/keuangan" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Keuangan</p>
               </a>
@@ -173,7 +173,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/keuangan" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Keuangan</p>
               </a>

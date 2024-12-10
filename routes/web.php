@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Pelayanan\PelayananController;
+use App\Http\Controllers\Admin\Umum\KeuanganController;
 use App\Http\Controllers\Admin\Umum\SdmController;
 use App\Http\Controllers\Admin\Umum\UmkesController;
 use App\Http\Controllers\Admin\Utama\PpController;
@@ -44,6 +45,7 @@ Route::get('pelayanan', [PelayananController::class, 'index']);
 Route::get('perencanaanPenelitian', [PpController::class, 'index']);
 Route::get('umkes', [UmkesController::class, 'index']);
 Route::get('sdm', [SdmController::class, 'index']);
+Route::get('keuangan', [KeuanganController::class, 'index']);
 
 
 require __DIR__.'/auth.php';

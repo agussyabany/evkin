@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Umum;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class SdmController extends Controller
+class KeuanganController extends Controller
 {
     public function index ()
     {
@@ -14,7 +14,6 @@ class SdmController extends Controller
 
         // Panggil fungsi helper
     $bulan = generateMonths($startYear, $endYear);
-    return view('admin.umum.sdm',compact('bulan'));
-    }
-    
+    return view('admin.umum.keu',compact('bulan'));
+}
 }
