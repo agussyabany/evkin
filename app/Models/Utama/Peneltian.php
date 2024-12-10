@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Models\Utama\PerencanaanTek;
+namespace App\Models\Utama;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Perencanaantek extends Model
+class Peneltian extends Model
 {
     use HasFactory;
-    protected $table = 'utama_perenctknk';
+    protected $table = 'penelitians';
     protected $fillable = 
     [
         
-        'rab',
+        'data',
         'bulanTahun',
         'dept',
         'user',

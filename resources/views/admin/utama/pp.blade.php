@@ -14,7 +14,7 @@
   <!-- /.content-header -->
   <div class="content">
     <div class="float-right">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-keuangan" id="tambah_keuangan">Tambah Data Keuangan</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-pp" id="tambah_keuangan">Tambah Data Keuangan</button>
     </div>
   <br><br>
                                     <table class="table table-bordered">
@@ -137,11 +137,11 @@
                               </div>
                             </div>
 
-      <div class="modal fade" id="modal-keuangan">
+      <div class="modal fade" id="modal-pp">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title"  id="judul_keuangan">Input Data</h4>
+              <h4 class="modal-title"  id="judul_pp">Perencanaan Penelitian Pengawasan</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -149,9 +149,9 @@
             <div class="modal-body">
 
 
-              <form action="#" method="POST" id="form-keuangan">
+              <form action="/pp" method="POST" id="form-pp">
                 @csrf
-                <input required type="hidden" id="idKeu" name="idKeu" class="form-control">
+                <input required type="hidden" id="" name="" class="form-control">
               <fieldset class="border border-primary rounded">
                 <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>Perencanaan Teknik</h6></legend>
                   
@@ -159,13 +159,13 @@
                     <div class="row">
                       <div class="col form-group">
                         <label >Jumlah RAB</label>
-                        <input required type="number" class="form-control" name="labaStlPjk" id="labaStlPjk">
+                        <input required type="number" class="form-control" name="rab" id="rab">
                       </div>
 
                       <div class="col form-group">
                         <label >Periode</label>
                         
-                        <select name="" class="form-control" id="">
+                        <select name="periodRab" class="form-control" id="periodRab">
                           @foreach ($bulan as $month)
                             <option value="{{ $month }}">{{ $month }}</option>
                           @endforeach
@@ -182,12 +182,12 @@
                     <div class="row">
                       <div class="col form-group">
                         <label>Jumlah Pekerjan Diawasi</label>
-                        <input required type="number" class="form-control" name="biayaOps" id="biayaOps">
+                        <input required type="number" class="form-control" name="pengawasan" id="pengawasan">
                       </div>
 
                       <div class="col form-group">
                         <label>Periode</label>
-                        <select name="" class="form-control" id="">
+                        <select name="periodAwas" class="form-control" id="periodAwas">
                           @foreach ($bulan as $month)
                             <option value="{{ $month }}">{{ $month }}</option>
                           @endforeach
@@ -204,12 +204,12 @@
                     <div class="row">
                       <div class="col form-group">
                         <label >Jumlah Data</label>
-                        <input required type="number" class="form-control" name="kaStrkas" id="kaStrkas">
+                        <input required type="number" class="form-control" name="data" id="data">
                       </div>
 
                       <div class="col form-group">
                         <label>Periode</label>
-                        <select name="" class="form-control" id="">
+                        <select name="periodData" class="form-control" id="periodData">
                           @foreach ($bulan as $month)
                             <option value="{{ $month }}">{{ $month }}</option>
                           @endforeach
