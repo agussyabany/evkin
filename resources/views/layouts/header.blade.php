@@ -196,19 +196,19 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/produksi" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Produksi</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/distribusi" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Distribusi</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/perawatan" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Perawatan</p>
               </a>

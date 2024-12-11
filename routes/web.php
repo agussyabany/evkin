@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\Pelayanan\PelayananController;
+use App\Http\Controllers\Admin\Teknik\DistribusiController;
+use App\Http\Controllers\Admin\Teknik\PerawatanController;
+use App\Http\Controllers\Admin\Teknik\ProduksiController;
 use App\Http\Controllers\Admin\Umum\KeuanganController;
 use App\Http\Controllers\Admin\Umum\SdmController;
 use App\Http\Controllers\Admin\Umum\UmkesController;
@@ -46,6 +49,9 @@ Route::get('perencanaanPenelitian', [PpController::class, 'index']);
 Route::get('umkes', [UmkesController::class, 'index']);
 Route::get('sdm', [SdmController::class, 'index']);
 Route::get('keuangan', [KeuanganController::class, 'index']);
+Route::get('distribusi', [DistribusiController::class, 'index']);
+Route::get('produksi', [ProduksiController::class, 'index']);
+Route::get('perawatan', [PerawatanController::class, 'index']);
 
 
 require __DIR__.'/auth.php';

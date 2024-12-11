@@ -6,5 +6,21 @@
   <link rel="stylesheet" href="{{asset('assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{('assets/dist/css/adminlte.min.css')}}">
+  <style>
+    table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            font-weight: bold;
+        }
+</style>
 
 

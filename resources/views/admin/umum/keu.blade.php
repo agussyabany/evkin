@@ -252,10 +252,7 @@
 
           </div>
         </div>
-        
-    </div>
 
-    <div class="col">
         <div class="card">
           <div class="card-header">ASET</div>
           <div class="card-body">
@@ -305,6 +302,7 @@
 
           </div>
         </div>
+        
         
     </div>
  </div>
@@ -614,7 +612,7 @@
                     <fieldset class="border border-primary rounded">
                       <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>Periode</h6></legend>
                       <div class="container">
-                        <label>Realisasi Penerimaan</label>
+                        <label>Periode</label>
                         <select name="periode" class="form-control" id="periode">
                           @foreach ($bulan as $month)
                             <option value="{{ $month }}">{{ $month }}</option>
