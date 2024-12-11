@@ -225,13 +225,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/pelayanan" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Hubungan Pelanggan</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/kepatuhan" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Kepatuhan</p>
               </a>

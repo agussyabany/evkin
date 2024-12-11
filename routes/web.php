@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Pelayanan\KepatuhanController;
 use App\Http\Controllers\Admin\Pelayanan\PelayananController;
 use App\Http\Controllers\Admin\Teknik\DistribusiController;
 use App\Http\Controllers\Admin\Teknik\PerawatanController;
@@ -52,6 +53,7 @@ Route::get('keuangan', [KeuanganController::class, 'index']);
 Route::get('distribusi', [DistribusiController::class, 'index']);
 Route::get('produksi', [ProduksiController::class, 'index']);
 Route::get('perawatan', [PerawatanController::class, 'index']);
+Route::get('kepatuhan', [KepatuhanController::class, 'index']);
 
 
 require __DIR__.'/auth.php';

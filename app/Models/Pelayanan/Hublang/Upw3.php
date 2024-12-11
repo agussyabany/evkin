@@ -5,17 +5,23 @@ namespace App\Models\Pelayanan\Hublang;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Akurasi extends Model
+class Upw3 extends Model
 {
     use HasFactory;
-    protected $table = 'pel_akurasis';
+    protected $table = 'pel_upw3s';
     protected $fillable = 
     [
         
-        'kalibrasi',
-        'gantiMtr',
+        'tumbuhPlgn3',
+        'plgnTahunLl3',
+        'PermohonanSL3',
+        'realisasi3',
+        'permohonanTunda3',
         'bulanTahun',
         'dept',
-        'user'
+        'user',
+        'status',
+        'update',
+        'tabel'
     ];
 }

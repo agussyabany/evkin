@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Pelayanan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PelayananController extends Controller
+class KepatuhanController extends Controller
 {
     public function index ()
     {
@@ -14,6 +14,6 @@ class PelayananController extends Controller
 
         // Panggil fungsi helper
     $bulan = generateMonths($startYear, $endYear);
-    return view('admin.pelayanan.hublang',compact('bulan'));
+    return view('admin.pelayanan.kepatuhan',compact('bulan'));
     }
 }

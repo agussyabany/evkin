@@ -14,7 +14,7 @@
   <!-- /.content-header -->
   <div class="content">
     <div class="float-right">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-prod" id="tambah_prod">Tambah Data</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-perawatan" id="tambah_perawatan">Tambah Data</button>
     </div>
   <br><br>
 
@@ -118,7 +118,7 @@
 {{-- DATA BULANAN --}}
 
 <fieldset class="border border-primary rounded">
-    <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>Data Bulanan</h6></legend>
+    <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>Mekanikal Dan Elektrikal</h6></legend>
  <div class="row">
     
     <div class="col">
@@ -155,6 +155,43 @@
 
 </fieldset><br>
 
+<fieldset class="border border-primary rounded">
+  <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>Bangunan Dan Kantor</h6></legend>
+<div class="row">
+  
+  <div class="col">
+      <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>NO</th>
+                    <th>Jumlah Service</th>
+                    <th>Dikerjakan Sendiri</th>
+                    <th>Dikerjakan Pihak Ke 3</th>
+                    <th>Periode</th>
+                </tr>
+            </thead>
+            <tbody id="summary-table-body">
+              <tr>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>1</td>
+                  
+              </tr>
+            </tbody>
+        </table>
+
+        </div>
+      </div>
+      
+  </div>
+</div>
+
+</fieldset><br>
 
 
 
@@ -164,11 +201,11 @@
 </div>
 </div>
 
-      <div class="modal fade" id="modal-prod">
+      <div class="modal fade" id="modal-perawatan">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title"  id="judul_prod">PRODUKSI</h4>
+              <h4 class="modal-title"  id="judul_perawatan">PERAWATAN</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -182,35 +219,47 @@
                 <div class="row">
                   <div class="col"> 
                     <fieldset class="border border-primary rounded">
-                      <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>Produksi</h6></legend>
+                      <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>Mekanikal Dan Elektrikal</h6></legend>
                       <div class="container">
-                        <label>Kapasitas terpasang</label>
-                        <input required type="number" class="form-control" name="kapsTerpasang" id="kapsTerpasang">
-                        <label>Volume Produksi</label>
-                        <input required type="number" class="form-control" name="VolProduksi" id="VolProduksi">
+                        <label>Jumlah Service</label>
+                        <input required type="number" class="form-control" name="jumSrv" id="jumSrv">
+                        <label>Dikerjakan Sendiri</label>
+                        <input required type="number" class="form-control" name="sendiri" id="sendiri">
                         {{-- <label>Ratio Operasional</label>
                         <input required type="number" class="form-control" name="" id=""> --}}
-                        <label>Volume Air Baku</label>
-                        <input required type="number" class="form-control" name="volAirbaku" id="volAirbaku">
-                        <label>Kualitas Air Pelanggan</label>
-                        <input required type="number" class="form-control" name="kualitasAir" id="kualitasAir">
-                        <label>Jumlah Titik Uji Memenuhi Syarat</label>
-                        <input required type="number" class="form-control" name="ttkUjiSyarat" id="ttkUjiSyarat">
-                        <label>Jumlah Titik Uji</label>
-                        <input required type="number" class="form-control" name="ttkUji" id="ttkUji">
-                        <label>Periode</label>
-                            <select name="periode" class="form-control" id="periode">
-                                @foreach ($bulan as $month)
-                                <option value="{{ $month }}">{{ $month }}</option>
-                                @endforeach
-                            </select>
+                        <label>Dikerjakan Pihak Ke 3</label>
+                        <input required type="number" class="form-control" name="pihakTiga" id="pihakTiga">
+
                       </div><br>
 
                     </fieldset>
                   </div>
 
-                  
+                  <div class="col"> 
+                    <fieldset class="border border-primary rounded">
+                      <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>Banguanan Dan Kantor</h6></legend>
+                      <div class="container">
+                        <label>Jumlah Service</label>
+                        <input required type="number" class="form-control" name="jumSrvBk" id="jumSrvBk">
+                        <label>Dikerjakan Sendiri</label>
+                        <input required type="number" class="form-control" name="sendiriBk" id="sendiriBk">
+                        {{-- <label>Ratio Operasional</label>
+                        <input required type="number" class="form-control" name="" id=""> --}}
+                        <label>Dikerjakan Pihak Ke 3</label>
+                        <input required type="number" class="form-control" name="pihakTigaBk" id="pihakTigaBk">
+                        
+                      </div><br>
+
+                    </fieldset>
+                  </div>
                 </div><br>
+
+                <label>Periode</label>
+                            <select name="periode" class="form-control" id="periode">
+                                @foreach ($bulan as $month)
+                                <option value="{{ $month }}">{{ $month }}</option>
+                                @endforeach
+                            </select>
               </div>
 
             <div class="modal-footer justify-content-between">
