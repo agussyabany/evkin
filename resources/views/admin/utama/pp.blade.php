@@ -14,7 +14,7 @@
   <!-- /.content-header -->
   <div class="content">
     <div class="float-right">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-pp" id="tambah_keuangan">Tambah Data Keuangan</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-pp" id="tambah_keuangan">Tambah Data</button>
     </div>
   <br><br>
                                     <table class="table table-bordered">
@@ -149,82 +149,75 @@
             <div class="modal-body">
 
 
-              <form action="/pp" method="POST" id="form-pp">
+              <form action="/ppStore" method="POST" id="form-pp">
                 @csrf
                 <input required type="hidden" id="" name="" class="form-control">
-              <fieldset class="border border-primary rounded">
-                <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>Perencanaan Teknik</h6></legend>
-                  
-                <div class="container">
-                    <div class="row">
-                      <div class="col form-group">
-                        <label >Jumlah RAB</label>
-                        <input required type="number" class="form-control" name="rab" id="rab">
-                      </div>
-
-                      <div class="col form-group">
-                        <label >Periode</label>
+                <div class="row">
+                  <div class="col">
+                    <fieldset class="border border-primary rounded">
+                      <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>Perencanaan Teknik</h6></legend>
                         
-                        <select name="periodRab" class="form-control" id="periodRab">
-                          @foreach ($bulan as $month)
-                            <option value="{{ $month }}">{{ $month }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
+                      <div class="container">
+                        <div class="col form-group">
+                              <label >Jumlah RAB</label>
+                              <input required type="number" class="form-control" name="rab" id="rab">
+                            </div>
+                          </div>
+                      </fieldset><br>
+
                   </div>
-                </fieldset><br>
 
-                <fieldset class="border border-success rounded">
-                <legend class="ml-2 w-auto px-3 border border-success rounded"><h6>Pengawas Fisik</h6></legend>
-                  
-                <div class="container">
-                    <div class="row">
-                      <div class="col form-group">
-                        <label>Jumlah Pekerjan Diawasi</label>
-                        <input required type="number" class="form-control" name="pengawasan" id="pengawasan">
+                  <div class="col">
+                    <fieldset class="border border-success rounded">
+                      <legend class="ml-2 w-auto px-3 border border-success rounded"><h6>Pengawas Fisik</h6></legend>
+                        
+                      <div class="container">
+                        <div class="col form-group">
+                              <label>Jumlah Pekerjan Diawasi</label>
+                              <input required type="number" class="form-control" name="pengawasan" id="pengawasan">
+                            </div>
+                          </div>
+                      </fieldset><br>
+                     </div>
+
+                     <div class="col">
+
+                      <fieldset class="border border-success rounded">
+                        <legend class="ml-2 w-auto px-3 border border-success rounded"><h6>Penelitian</h6></legend>
+                          
+                        <div class="container">
+                          <div class="col form-group">
+                            <label >Jumlah Data</label>
+                            <input required type="number" class="form-control" name="data" id="data">
+                              </div>
+                            </div>
+                        </fieldset><br>
                       </div>
-
-                      <div class="col form-group">
-                        <label>Periode</label>
-                        <select name="periodAwas" class="form-control" id="periodAwas">
-                          @foreach ($bulan as $month)
-                            <option value="{{ $month }}">{{ $month }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset><br>
-
-                <fieldset class="border border-info rounded">
-                <legend class="ml-2 w-auto px-3 border border-info rounded" style="display:flex; justify-content:flex-end; align-items:center;"><h6>Penelitian</h6></legend>
-                  
-                <div class="container">
-                    <div class="row">
-                      <div class="col form-group">
-                        <label >Jumlah Data</label>
-                        <input required type="number" class="form-control" name="data" id="data">
-                      </div>
-
-                      <div class="col form-group">
-                        <label>Periode</label>
-                        <select name="periodData" class="form-control" id="periodData">
-                          @foreach ($bulan as $month)
-                            <option value="{{ $month }}">{{ $month }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset><br>
-
+                </div>
+              
 
                 
+
+                <fieldset class="border border-info rounded">
+                <legend class="ml-2 w-auto px-3 border border-info rounded" style="display:flex; justify-content:flex-end; align-items:center;"><h6>Periode</h6></legend>
+                  
+                <div class="container">
+                  <div class="col form-group">
+                    <div class="col form-group">
+                      <label>Periode</label>
+                      <select name="periodData" class="form-control" id="period">
+                        @foreach ($bulan as $month)
+                          <option value="{{ $month }}">{{ $month }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                </fieldset><br>
               </div>
 
             <div class="modal-footer justify-content-between">
-              <div class="float-right"><button type="submit" class="btn btn-primary">SIMPAN</button></div>
+              <div class="float-end"><button type="submit" class="btn btn-primary">SIMPAN</button></div>
             </div>
           </form>
 

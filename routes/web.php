@@ -44,16 +44,20 @@ Route::get('dewas', function () {
 
 
 Route::get('evkin', [EvkinController::class, 'index']);
-Route::get('pelayanan', [PelayananController::class, 'index']);
 
 Route::get('perencanaanPenelitian', [PpController::class, 'index']);
+Route::post('ppStore', [PpController::class, 'store']);
+
 Route::get('umkes', [UmkesController::class, 'index']);
 Route::get('sdm', [SdmController::class, 'index']);
 Route::get('keuangan', [KeuanganController::class, 'index']);
+
 Route::get('distribusi', [DistribusiController::class, 'index']);
 Route::get('produksi', [ProduksiController::class, 'index']);
 Route::get('perawatan', [PerawatanController::class, 'index']);
+
 Route::get('kepatuhan', [KepatuhanController::class, 'index']);
+Route::get('pelayanan', [PelayananController::class, 'index']);
 
 
 require __DIR__.'/auth.php';
