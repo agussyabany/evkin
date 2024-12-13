@@ -24,30 +24,30 @@
                                               <th>Kegiatan</th>
                                               <th>TAHUN</th>
                                               <th>BULAN</th>
-                                              <th>HARI INI</th>
+                                              
                                           </tr>
                                       </thead>
                                       <tbody id="summary-table-body">
                                           <tr>
                                               <td>Perencanaan</td>
                                               <td>Jumlah RAB</td>
-                                              <td id="perencanaan-tahun"></td>
-                                              <td id="perencanaan-bulan"></td>
-                                              <td id="perencanaan-hari"></td>
+                                              <td id="perencanaan-tahun">{{ $rencanaSum }}</td>
+                                              <td id="perencanaan-bulan">{{ $rab}}</td>
+                                              
                                           </tr>
                                           <tr>
                                               <td>Penelitian</td>
                                               <td>Jumlah Pengumpulan Data</td>
-                                              <td id="penelitian-tahun"></td>
-                                              <td id="penelitian-bulan"></td>
-                                              <td id="penelitian-hari"></td>
+                                              <td id="penelitian-tahun">{{$awasSum}}</td>
+                                              <td id="penelitian-bulan">{{$awas}}</td>
+                                              
                                           </tr>
                                           <tr>
                                               <td>Pengawasan</td>
                                               <td>Jumlah Pekerjaan Diawasi</td>
-                                              <td id="pengawasan-tahun"></td>
-                                              <td id="pengawasan-bulan"></td>
-                                              <td id="pengawasan-hari"></td>
+                                              <td id="pengawasan-tahun">{{$telitiSum}}</td>
+                                              <td id="pengawasan-bulan">{{$teliti}}</td>
+                                             
                                           </tr>
                                       </tbody>
                                   </table>
@@ -69,9 +69,26 @@
                         </tr>
                     </thead>
                     <tbody id="summary-table-body">
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    
+                    @foreach ($perencanaan as $item )
+                      
+                      <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $item->rab  }}</td>
+                        <td>{{ $item->bulanTahun}}</td>
+                        <td>
+                          <div class="btn-group">
+                          <button type="button" class="btn btn-default">Action</button>
+                          <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                          </button>
+                          <div class="dropdown-menu" role="menu" style="">
+                            <a class="dropdown-item" id="edit_pp" data-id="{{$item->id}}" href="#">Edit</a>
+                            <a class="dropdown-item" href="#">Hapus</a>
+                          </div>
+                        </td>
+                      </tr>
+                      @endforeach
                     </tbody>
                 </table>
 
@@ -94,9 +111,26 @@
                       </tr>
                   </thead>
                   <tbody id="summary-table-body">
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                    @foreach ( $pengawasan as $item )
+                      
+                    
+                    <tr>
+                      <td>{{$loop->iteration}}</td>
+                      <td>{{ $item->pengawasan}}</td>
+                      <td>{{ $item->bulanTahun}}</td>
+                      <td><div class="btn-group">
+                        <button type="button" class="btn btn-default">Action</button>
+                        <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu" style="">
+                          <a class="dropdown-item" href="#">Edit</a>
+                          <a class="dropdown-item" href="#">Hapus</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  @endforeach
                   </tbody>
               </table>
 
@@ -120,9 +154,27 @@
                     </tr>
                 </thead>
                 <tbody id="summary-table-body">
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                  @foreach ($penelitian as $item )
+                    
+                 
+                  <tr>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{ $item->data }}</td>
+                    <td>{{ $item->bulanTahun }}</td>
+                    <td>
+                      <div class="btn-group">
+                      <button type="button" class="btn btn-default btn-sm">Action</button>
+                      <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <div class="dropdown-menu" role="menu" style="">
+                        <a class="dropdown-item" href="#">Edit</a>
+                        <a class="dropdown-item" href="#">Hapus</a>
+                      </div>
+                    </td>
+                  </tr>
+                  @endforeach
+                    
                 </tbody>
             </table>
 
@@ -205,7 +257,7 @@
                   <div class="col form-group">
                     <div class="col form-group">
                       <label>Periode</label>
-                      <select name="periodData" class="form-control" id="period">
+                      <select name="periode" class="form-control" id="periode">
                         @foreach ($bulan as $month)
                           <option value="{{ $month }}">{{ $month }}</option>
                         @endforeach

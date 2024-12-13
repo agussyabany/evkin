@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Peneltian extends Model
 {
     use HasFactory;
+    public $timestamps = true;
     protected $table = 'peneltians';
     protected $fillable = 
     [
