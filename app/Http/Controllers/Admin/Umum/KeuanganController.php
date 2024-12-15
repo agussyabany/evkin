@@ -3,17 +3,145 @@
 namespace App\Http\Controllers\Admin\Umum;
 
 use App\Http\Controllers\Controller;
+use App\Models\Evkin\Keuangan;
+use App\Models\Pelayanan\Hublang\Akurasi;
+use App\Models\Pelayanan\Hublang\Rekening;
+use App\Models\Umum\Keuangan\Akutansi;
+use App\Models\Umum\Keuangan\Perencanakeu;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KeuanganController extends Controller
 {
     public function index ()
     {
-        $startYear = 2024;
-        $endYear = 2024;
 
-        // Panggil fungsi helper
-    $bulan = generateMonths($startYear, $endYear);
-    return view('admin.umum.keu',compact('bulan'));
-}
+        $keuangan = Keuangan::orderBy('bulanTahun','ASC')->get();
+        
+        return view('admin.umum.keu',compact('keuangan'));
+    }
+
+    public function create (Request $request)
+    {
+        // $labaStPjk = $request->input('labaStPjk');
+        // $JmllEkuitas = $request->input('JmllEkuitas');
+        // $biayaOpr = $request->input('biayaOpr');
+        // $pendapatan = $request->input('pendapatanOpr');
+        // $kasSetKas = $request->input('kasSetKas');
+        // $HtgLancar = $request->input('HtgLancar');
+        // $terimaAir = $request->input('terimair');
+        // $jumRekAir = $request->input('jumrekair');
+        // $ttlAktiva = $request->input('ttlAktiva');
+        // $ttlHutang = $request->input('ttlHutang');
+        // $periode = $request->input('periode');
+        
+        // $latestEvkin = Akutansi::max('evkin');
+        // $evkin = $latestEvkin ? $latestEvkin + 1 : 1;
+
+        // Akutansi::create([
+        //     'labaStPjk' => $labaStPjk,
+        //     'JmllEkuitas' => $JmllEkuitas,
+        //     'biayaOpr' => $biayaOpr,
+        //     'pendapatanOpr'=>$pendapatan,
+        //     'kasSetKas' => $kasSetKas,
+        //     'HtgLancar' => $HtgLancar,
+        //     'JmllEkuitas' => $JmllEkuitas,
+        //     'ttlHutang'=>$ttlHutang,
+        //     'ttlAktiva'=>$ttlAktiva,
+        //     'bulanTahun'=>$periode,
+        //     'dept' => 4,
+        //     'user' => 1,
+        //     'status' => 0,
+        //     'update' => 0,
+        //     'tabel' => 12,
+        //     'evkin' => $evkin
+        // ]);
+
+        // Rekening::create([
+        //     'terimaAir' => $terimaAir,
+        //     'jumRekAir' => $jumRekAir,
+        //     'bulanTahun'=>$periode,
+        //     'dept' => 9,
+        //     'user' => 1,
+        //     'status' => 0,
+        //     'update' => 0,
+        //     'tabel' => 30,
+        //     'evkin' => $evkin
+        // ]);
+
+        $data = [
+            'labaStlPjk' => $request->input('labaStlPjk'),
+            'jmlEkuitas' => $request->input('jmlEkuitas'),
+            'biayaOps' => $request->input('biayaOps'),
+            'PndptnOps' => $request->input('PndptnOps'),
+            'kaStrkas' => $request->input('kaStrkas'),
+            'HutangLancar' => $request->input('HutangLancar'),
+            'JmlPnrmRekAir' => $request->input('JmlPnrmRekAir'),
+            'jmlRekAir' => $request->input('jmlRekAir'),
+            'TotalAktiva' => $request->input('TotalAktiva'),
+            'TotalHutang' => $request->input('TotalHutang'),
+            'bulanTahun' => $request->input('date'),
+            'status' => 0,
+            'user' => 1
+        ];
+
+        Keuangan::create($data);
+
+        Alert::success('Berhasil!', 'Data berhasil disimpan.');
+        return redirect('/keuangan');
+    }
+
+    public function update (Request $request)
+    {
+            // Mengambil data berdasarkan ID
+    $keuangan = Keuangan::findOrFail($request->input('idKeu'));
+    
+    // Mengupdate data dengan input yang diterima
+    $keuangan->update([
+        'labaStlPjk' => $request->input('labaStlPjk'),
+        'jmlEkuitas' => $request->input('jmlEkuitas'),
+        'biayaOps' => $request->input('biayaOps'),
+        'PndptnOps' => $request->input('PndptnOps'),
+        'kaStrkas' => $request->input('kaStrkas'),
+        'HutangLancar' => $request->input('HutangLancar'),
+        'JmlPnrmRekAir' => $request->input('JmlPnrmRekAir'),
+        'jmlRekAir' => $request->input('jmlRekAir'),
+        'TotalAktiva' => $request->input('TotalAktiva'),
+        'TotalHutang' => $request->input('TotalHutang'),
+        'bulanTahun' => $request->input('date'),
+    ]);
+
+        Alert::success('Berhasil!', 'Data berhasil diupdate.');
+        return redirect('/keuangan');
+    }
+
+    public function destroy ($id)
+    {
+       
+        $keuangan = Keuangan::findOrFail($id);
+        $keuangan->delete();
+        
+        Alert::success('Berhasil!', 'Data berhasil diHapus.');
+        return
+        redirect('/keuangan');
+    }
+
+    public function verifiksi ($id)
+    {
+        $verKeu = Keuangan::where('id',$id);
+        $verKeu->update([
+            'status' => 1, 
+        ]);
+        
+        Alert::success('Berhasil!', 'Data berhasil diVerifikasi.');
+        return redirect('/keuangan');
+    }
+
+    function dataKeuBy ($id)
+    {
+        $keuangan = Keuangan::where('id',$id)->get();
+        return response()->json(['data' => $keuangan]);
+    }
+
+
 }

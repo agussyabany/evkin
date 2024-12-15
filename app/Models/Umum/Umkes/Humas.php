@@ -11,10 +11,14 @@ class Humas extends Model
         protected $table = 'umum_humas';
         protected $fillable = 
         [
-            
             'aduanCC',
             'bulanTahun',
             'dept',
-            'user'
+            'user',
+            'aduanSlsi',
+            'evkin',
+            'status',
+            'update',
+            'tabel'
         ];
 }

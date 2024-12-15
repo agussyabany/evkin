@@ -184,6 +184,12 @@
                 <p>Sumber Daya Manusia</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="/adm" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Aspek Adminsitrasi</p>
+              </a>
+            </li>
           </ul>
         </li>
 

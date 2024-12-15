@@ -20,6 +20,10 @@ class Upw extends Model
         'upw',
         'bulanTahun',
         'dept',
-        'user'
+        'user',
+        'pnddkTerlayan',
+        'pnddkLayan',
+        'evkin',
+        'jmlPlgn'
     ];
 }

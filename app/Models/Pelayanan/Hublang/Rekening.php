@@ -22,6 +22,11 @@ class Rekening extends Model
         'jumRekAir',
         'bulanTahun',
         'dept',
-        'user'
+        'user',
+        'status',
+        'update',
+        'tabel',
+        'evkin',
+        'jmlPlgn'
     ];
 }

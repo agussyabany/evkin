@@ -25,6 +25,9 @@ class Perencanakeu extends Model
             'paguBiaya',
             'bulanTahun',
             'dept',
-            'user'
+            'user',
+            'tabel',
+            'status',
+            'update'
         ];
 }

@@ -15,6 +15,7 @@ class Akutansi extends Model
             'labaStPjk',
             'JmllEkuitas',
             'biayaOpr',
+            'pendapatanOpr',
             'kasSetKas',
             'HtgLancar',
             'solvabilitas',
@@ -24,6 +25,9 @@ class Akutansi extends Model
             'labaBerjalan',
             'bulanTahun',
             'dept',
-            'user'
+            'user',
+            'tabel',
+            'update',
+            'evkin'
         ];
 }

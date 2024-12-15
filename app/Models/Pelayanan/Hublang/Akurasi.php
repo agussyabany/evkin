@@ -16,6 +16,10 @@ class Akurasi extends Model
         'gantiMtr',
         'bulanTahun',
         'dept',
-        'user'
+        'user',
+        'status',
+        'update',
+        'tabel',
+        'evkin'
     ];
 }

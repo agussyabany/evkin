@@ -171,6 +171,7 @@
                         <a class="dropdown-item" href="#">Edit</a>
                         <a class="dropdown-item" href="#">Hapus</a>
                       </div>
+                      </div>
                     </td>
                   </tr>
                   @endforeach
