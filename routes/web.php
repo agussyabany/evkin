@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 Route::get('/dashboard', function () {
@@ -40,16 +40,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('dewas', function () {
-        return '<h1>DEWAS<h1>';
-})->middleware(['auth', 'verified','role:dewas'])->name('dashboard');
+Route::middleware('auth','verified','role:sekretaris')->group(function () {
+    Route::get('/', function () {
+        return redirect('/perencanaanPenelitian');
+    });
+    Route::get('perencanaanPenelitian', [PpController::class, 'index']);
+});
+// END
 
 //MAIN DASHBOARD
 Route::get('evkin', [EvkinController::class, 'index']);
 //
 
 
-Route::get('perencanaanPenelitian', [PpController::class, 'index']);
+
 Route::post('ppStore', [PpController::class, 'store']);
 
 Route::get('umkes', [UmkesController::class, 'index']);
