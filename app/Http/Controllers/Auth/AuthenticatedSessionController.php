@@ -25,12 +25,31 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $request->authenticate();   
 
         $request->session()->regenerate();
 
-        if (Auth::user()->hasRole('sekrertaris')) {
+        if (Auth::user()->hasRole(['de-was','dirut','dirtek','dirpel'])) {
+            return redirect()->to('/perumdam');
+        }
+        if (Auth::user()->hasRole(['adminUtama'])) {
             return redirect()->to('/perencanaanPenelitian');
+        }
+
+        if (Auth::user()->hasRole(['adminUmum'])) {
+            return redirect()->to('/umkes');
+        }
+
+        if (Auth::user()->hasRole(['adminTeknik'])) {
+            return redirect()->to('/produksi');
+        }
+
+        if (Auth::user()->hasRole(['adminLayan'])) {
+            return redirect()->to('/pelayanan');
+        }
+
+        if (Auth::user()->hasRole(['spi'])) {
+            return redirect()->to('/evkin');
         }
 
         return redirect()->intended(RouteServiceProvider::HOME);

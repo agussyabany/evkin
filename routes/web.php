@@ -31,6 +31,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect('login');
+
+
 });
 
 Route::get('/dashboard', function () {
@@ -43,100 +45,135 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth','verified','role:sekretaris')->group(function () {
+Route::middleware('auth','verified')->group( function () {
+
+            Route::get('/perumdam',[MobileController::class, 'kinerja']);//HOME
+
+                        //Aspek Keungan
+            Route::get('/mKeuangan',[MobileController::class, 'keuangan']);
+
+                    //Aspek Operasional
+            Route::get('/mOperasional',[MobileController::class, 'operasional']);
+            Route::get('/rasProd',[MainController::class, 'rasprod']);
+            Route::get('/nrw',[MainController::class, 'nrw']);
+            Route::get('/jam',[MainController::class, 'jam']);
+            Route::get('/tekanan',[MainController::class, 'tekanan']);
+            Route::get('/kalibrasi',[MainController::class, 'kalibrasi']);
+                    
+                        //Aspek Pelayanan
+            Route::get('/mPelayanan',[MobileController::class, 'pelayanan']);
+            Route::get('/cakupan',[DashboardPelayananController::class, 'cakupan']);
+            Route::get('/aduan',[DashboardPelayananController::class, 'aduan']);
+            Route::get('/domestik',[DashboardPelayananController::class, 'domestik']);
+            Route::get('/uji',[DashboardPelayananController::class, 'uji']);
+            Route::get('/tumbuh',[DashboardPelayananController::class, 'tumbuh']);
+                    
+                        //Aspek SDM
+            Route::get('/mSdmkin',[MobileController::class, 'sdm']);
+            Route::get('/raspegawai',[DashboardSdmController::class, 'raspegawai']);
+            Route::get('/rasdiklat',[DashboardSdmController::class, 'rasdiklat']);
+            Route::get('/rasbiaya',[DashboardSdmController::class, 'rasbiaya']);
+            //Route::get('/mUtama',[MobileController::class, 'utama']);
+
+
+            Route::get('evkeu', [KeuanganController::class, 'evkeu']);
+            Route::get('keuangan', [KeuanganController::class, 'index']);
+            Route::get('evSdm', [SdmController::class, 'evSdm']);
+            Route::get('sdm', [SdmController::class, 'index']);
+            Route::get('evOp', [ProduksiController::class, 'evOp']);
+            Route::get('evPel', [PelayananController::class, 'evPel']);
+            Route::get('pelayanan', [PelayananController::class, 'index']);
+            Route::get('evkin', [EvkinController::class, 'index']);
+            Route::get('perencanaanPenelitian', [PpController::class, 'index']);
+            
+            Route::get('umkes', [UmkesController::class, 'index']);
+            Route::get('adm', [SdmController::class, 'administrasi']);
+            Route::get('distribusi', [DistribusiController::class, 'index']);
+            Route::get('produksi', [ProduksiController::class, 'index']);
+            Route::get('perawatan', [PerawatanController::class, 'index']);
+            Route::get('kepatuhan', [KepatuhanController::class, 'index']);
+
+});
+
+Route::middleware('auth','verified','role:de-was|dirut|dirpel|dirtek')->group(function () {
+    Route::get('/', function () {
+        return redirect('/perumdam');
+    });
+});
+
+Route::middleware('auth','verified','role:adminUtama')->group(function () {
     Route::get('/', function () {
         return redirect('/perencanaanPenelitian');
     });
-    Route::get('perencanaanPenelitian', [PpController::class, 'index']);
+    Route::post('ppStore', [PpController::class, 'store']); 
 });
-// END
 
-//MAIN DASHBOARD
-Route::get('evkin', [EvkinController::class, 'index']);
+Route::middleware('auth','verified','role:adminUmum')->group(function () {
+    Route::get('/', function () {
+        return redirect('/umkes');
+    });
 
+     //Aspek Keuangan
 
-//EVKIN
-    //Mobile view Data
-
-
-Route::get('/perumdam',[MobileController::class, 'kinerja']);//HOME
-
-            //Aspek Keungan
-Route::get('/mKeuangan',[MobileController::class, 'keuangan']);
-
-           //Aspek Operasional
-Route::get('/mOperasional',[MobileController::class, 'operasional']);
-Route::get('/rasProd',[MainController::class, 'rasprod']);
-Route::get('/nrw',[MainController::class, 'nrw']);
-Route::get('/jam',[MainController::class, 'jam']);
-Route::get('/tekanan',[MainController::class, 'tekanan']);
-Route::get('/kalibrasi',[MainController::class, 'kalibrasi']);
-           
-            //Aspek Pelayanan
-Route::get('/mPelayanan',[MobileController::class, 'pelayanan']);
-Route::get('/cakupan',[DashboardPelayananController::class, 'cakupan']);
-Route::get('/aduan',[DashboardPelayananController::class, 'aduan']);
-Route::get('/domestik',[DashboardPelayananController::class, 'domestik']);
-Route::get('/uji',[DashboardPelayananController::class, 'uji']);
-Route::get('/tumbuh',[DashboardPelayananController::class, 'tumbuh']);
-           
-            //Aspek SDM
-Route::get('/mSdmkin',[MobileController::class, 'sdm']);
-Route::get('/raspegawai',[DashboardSdmController::class, 'raspegawai']);
-Route::get('/rasdiklat',[DashboardSdmController::class, 'rasdiklat']);
-Route::get('/rasbiaya',[DashboardSdmController::class, 'rasbiaya']);
-//Route::get('/mUtama',[MobileController::class, 'utama']);
-    
-    
-
-    //Evkin Admin CRUD
-
-            //Aspek Keuangan
-Route::get('evkeu', [KeuanganController::class, 'evkeu']);
-    Route::get('keuangan', [KeuanganController::class, 'index']);
 Route::post('keuSave', [KeuanganController::class, 'create']);
 Route::get('/dataKeuBy/{id}',[KeuanganController::class, 'dataKeuBy']);
 Route::post('keuUpdate', [KeuanganController::class, 'update']);
 Route::post('/delKeu/{id}', [KeuanganController::class, 'destroy']);
-Route::post('verKeu/{id}', [KeuanganController::class, 'verifiksi']);
 
-            //Aspek Operasional
-Route::get('evOp', [ProduksiController::class, 'evOp']);
+
+ //Aspek SDM
+ 
+ Route::post('/sdmSave',[SdmController::class, 'save']);
+ Route::get('/dataSdmBy/{id}',[SdmController::class, 'dataSdmBy']);
+ Route::post('/sdmEdit',[SdmController::class, 'edit']);
+ 
+ Route::post('/delSdm/{id}',[SdmController::class, 'del']);
+ 
+    
+});
+
+Route::middleware('auth','verified','role:adminTeknik')->group(function () {
+    Route::get('/', function () {
+        return redirect('/produksi');
+    });
+     //Aspek Operasional
+
 Route::post('opSave', [ProduksiController::class, 'save']);
 Route::get('/dataOpBy/{id}',[ProduksiController::class, 'dataOpBy']);
 Route::post('/opEdit',[ProduksiController::class, 'edit']);
 Route::post('/delOps/{id}',[ProduksiController::class, 'del']);
-Route::post('verOp/{id}', [ProduksiController::class, 'ver']);
 
-            //Aspek Pelayanan
-Route::get('evPel', [PelayananController::class, 'evPel']);
-Route::get('pelayanan', [PelayananController::class, 'index']);
+});
+
+Route::middleware('auth','verified','role:adminLayan')->group(function () {
+    Route::get('/', function () {
+        return redirect('/pelayanan');
+    });
+
+     //Aspek Pelayanan
+
 Route::post('pelSave', [PelayananController::class, 'create']);
 Route::get('/dataPelBy/{id}',[PelayananController::class, 'dataPelBy']);
 Route::post('/pelEdit',[PelayananController::class, 'edit']);
 Route::post('/delPel/{id}',[PelayananController::class, 'del']);
-Route::post('/verPel/{id}',[PelayananController::class, 'ver']);
 
-            //Aspek SDM
-Route::get('evSdm', [SdmController::class, 'evSdm']);
-Route::get('sdm', [SdmController::class, 'index']);
-Route::post('/sdmSave',[SdmController::class, 'save']);
-Route::get('/dataSdmBy/{id}',[SdmController::class, 'dataSdmBy']);
-Route::post('/sdmEdit',[SdmController::class, 'edit']);
-Route::post('verSdm/{id}', [SdmController::class, 'ver']);
-Route::post('/delSdm/{id}',[SdmController::class, 'del']);
+    
+});
+
+Route::middleware('auth','verified','role:spi')->group(function () {
+    Route::get('/', function () {
+        return redirect('/evkin');
+
+    });
+
+    Route::post('verSdm/{id}', [SdmController::class, 'ver']);
+    Route::post('verOp/{id}', [ProduksiController::class, 'ver']);
+    Route::post('/verPel/{id}',[PelayananController::class, 'ver']);
+    Route::post('verKeu/{id}', [KeuanganController::class, 'verifiksi']);
+    
+});
 
 
-
-
-
-Route::post('ppStore', [PpController::class, 'store']);
-Route::get('umkes', [UmkesController::class, 'index']);
-Route::get('adm', [SdmController::class, 'administrasi']);
-Route::get('distribusi', [DistribusiController::class, 'index']);
-Route::get('produksi', [ProduksiController::class, 'index']);
-Route::get('perawatan', [PerawatanController::class, 'index']);
-Route::get('kepatuhan', [KepatuhanController::class, 'index']);
 
 
 
