@@ -9,7 +9,10 @@ use App\Http\Controllers\Admin\Umum\KeuanganController;
 use App\Http\Controllers\Admin\Umum\SdmController;
 use App\Http\Controllers\Admin\Umum\UmkesController;
 use App\Http\Controllers\Admin\Utama\PpController;
+use App\Http\Controllers\Dashboard\MainController;
 use App\Http\Controllers\Dashboard\MobileController;
+use App\Http\Controllers\Dashboard\PelayananController as DashboardPelayananController;
+use App\Http\Controllers\Dashboard\SdmController as DashboardSdmController;
 use App\Http\Controllers\Evkin\EvkinController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Evkin\Pelayanan;
@@ -97,9 +100,32 @@ Route::post('/verPel/{id}',[PelayananController::class, 'ver']);
 //Mobile
 Route::get('/perumdam',[MobileController::class, 'kinerja']);
 Route::get('/mKeuangan',[MobileController::class, 'keuangan']);
+
 Route::get('/mOperasional',[MobileController::class, 'operasional']);
+Route::get('/rasProd',[MainController::class, 'rasprod']);
+Route::get('/nrw',[MainController::class, 'nrw']);
+Route::get('/jam',[MainController::class, 'jam']);
+Route::get('/tekanan',[MainController::class, 'tekanan']);
+Route::get('/kalibrasi',[MainController::class, 'kalibrasi']);
+
+
 Route::get('/mPelayanan',[MobileController::class, 'pelayanan']);
+Route::get('/cakupan',[DashboardPelayananController::class, 'cakupan']);
+Route::get('/aduan',[DashboardPelayananController::class, 'aduan']);
+Route::get('/domestik',[DashboardPelayananController::class, 'domestik']);
+Route::get('/uji',[DashboardPelayananController::class, 'uji']);
+Route::get('/tumbuh',[DashboardPelayananController::class, 'tumbuh']);
+
+
+
+
 Route::get('/mSdmkin',[MobileController::class, 'sdm']);
+Route::get('/raspegawai',[DashboardSdmController::class, 'raspegawai']);
+Route::get('/rasdiklat',[DashboardSdmController::class, 'rasdiklat']);
+ Route::get('/rasbiaya',[DashboardSdmController::class, 'rasbiaya']);
+
 Route::get('/mUtama',[MobileController::class, 'utama']);
+
+
 
 require __DIR__.'/auth.php';

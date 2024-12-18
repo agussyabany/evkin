@@ -30,11 +30,12 @@
               <th>Penduduk wilayah</th>
               <th>Aduan Selesai</th>
               <th>Aduan</th>
-              <th>Air terjualplgn.domestik</th>
-              <th>Pelanggan Domestik</th>
               <th>Uji Kualitas Memenuhi Syarat</th>
               <th>Titik yg Diuji</th>
-              <th>Rasio Petumbuhan Pelanggan</th>
+              <th>Air terjualplgn.domestik</th>
+              <th>Pelanggan Domestik</th>
+              <th>Kalkulasi Jml Plgn</th>
+              <th>Plgn Th Lalu</th>
               <th>Pelanggan Tahun Lalu</th>
               <th>Periode</th>
               <th>Status</th>
@@ -48,14 +49,14 @@
           <td>{{ $loop->iteration}}</td>
           <td>{{ number_format($item->JmlPnddkTrlyni, 0) }}</td>
           <td>{{ number_format($item->jmlPndkWil, 0) }}</td>
-          <td>{{ number_format($item->kalKulasiJmlPlgn, 0) }}</td>
-          <td>{{ number_format($item->JmlPlgnThLl, 0) }}</td>
           <td>{{ number_format($item->AduanSlsai, 0) }}</td>
           <td>{{ number_format($item->JmlAduan, 0) }}</td>
           <td>{{ number_format($item->UjiKualitas, 0) }}</td>
           <td>{{ number_format($item->titikUji, 0) }}</td>
           <td>{{ number_format($item->JmlAirTrjualDom, 0) }}</td>
           <td>{{ number_format($item->JmlPlgnDom, 0) }}</td>
+          <td>{{ number_format($item->kalKulasiJmlPlgn, 0) }}</td>
+          <td>{{ number_format($item->JmlPlgnThLl, 0) }}</td>
           <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
           <td>
             @if ($item->status == 0)

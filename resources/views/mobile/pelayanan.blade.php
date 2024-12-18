@@ -10,65 +10,64 @@
     <h1 class="m-0 text-center">PELAYANAN</h1>
   </div>
   <div class="container">
-  <a href="#" id="cakup"><div class="info-box  bg-warning">
+  <a href="#" id="cakup"><div id="colCakup" class="info-box">
             <span class="info-box-icon"><i class="fas fa-globe-asia"></i></span>
             <div class="info-box-content">
               <span class=""><h5>Cakupan Pelayanan Teknis</h5></span>
-              <span class="info-box-number">
-                    79,83
+              <span class="info-box-number" id="cakpuanLyn">
+                    
                     <small>%</small>
               </span>
             </div>
-            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center"> 4 / 5</h5></div>
+            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center" id="nilaiCakup"> </h5></div>
         </div></a>
 
-        <a href="#" id="aduan"><div class="info-box  bg-success">
+        <a href="#" id="aduan"><div id="colAduan" class="info-box">
             <span class="info-box-icon"><i class="fas fa-edit"></i></span>
             <div class="info-box-content">
               <span class=""><h5>Penyelesaian Aduan</h5></span>
-              <span class="info-box-number">
-                    100
-                    <small>%</small>
+              <span class="info-box-number" id="hasilAduan">
+                    
+                    <small></small>
               </span>
             </div>
-            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center"> 5 / 5</h5></div>
+            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center" id="nilaiAduan"></h5></div>
         </div></a>
 
 
-        <a href="#" id="dom"><div class="info-box  bg-warning">
+        <a href="#" id="dom"><div id="colDomestik" class="info-box">
             <span class="info-box-icon"><i class="fas fa-shower"></i></span>
             <div class="info-box-content">
               <span class=""><h5>Konsumsi Air Domestik</h5></span>
-              <span class="info-box-number">
-                    24,23
-                    <small>%</small>
+              <span class="info-box-number" id="hasilDomestik">
+                    
+                    <small></small>
               </span>
             </div>
-            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center"> 4 / 5</h5></div>
+            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center" id="nilaiDomestik"></h5></div>
         </div></a>
 
-        <a href="#" id="kualitas"><div class="info-box  bg-danger">
+        <a href="#" id="kualitas"><div id="colUji" class="info-box">
             <span class="info-box-icon"><i class="fas fa-water"></i></span>
             <div class="info-box-content">
               <span class=""><h5>Kualitas Air Pelanggan</h5></span>
-              <span class="info-box-number">
-                    9,82
-                    <small>%</small>
+              <span class="info-box-number" id="hasilUji">
+                    <small></small>
               </span>
             </div>
-            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center"> 1 / 5</h5></div>
+            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center" id="nilaiUji"></h5></div>
         </div></a>
 
-        <a href="#" id="pertumbuhan"><div class="info-box  bg-danger">
+        <a href="#" id="pertumbuhan"><div id="colTumbuh" class="info-box">
             <span class="info-box-icon"><i class="fas fa-chart-line"></i></span>
             <div class="info-box-content">
               <span class=""><h5>Pertumbuhan Pelanggan</h5></span>
-              <span class="info-box-number">
-                    5,93
-                    <small>%</small>
+              <span class="info-box-number" id="hasilTumbuh">
+                   
+                    <small></small>
               </span>
             </div>
-            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center"> 2 / 5</h5></div>
+            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center" id="nilaiTumbuh"></h5></div>
         </div></a>
   </div>
 </div><br>

@@ -1,6 +1,19 @@
 $(document).ready(function() {
 
     //Rasio Pegawai Pelanggan
+    $.ajax({
+      url: '/raspegawai',
+      method: 'GET',
+      success: function (response) {
+          // Tampilkan hasil di elemen HTML
+          $('#hasilRaspeg').text(response.hasilRaspeg + '%');
+          $('#nilaiRaspeg').text(response.nilaiRaspeg + '/5');
+          $('#colRaspeg').addClass(response.cls)
+      },
+      error: function () {
+          alert('Terjadi kesalahan saat memuat data.');
+      }
+    });
   $(document).on('click', '#rasioPegawai', function() {
     $('#modal-lg').modal('show');
     $('#judul').empty();
@@ -8,15 +21,47 @@ $(document).ready(function() {
     kosong();
     $('#persen').html('/');
     $('#a').html('Jumlah Pagawai');
-    $('#a_nilai').html('618');
+    
     $('#b').html('(Jumlah Seluruh Pelanggan / 1000 )');
-    $('#b_nilai').html('173,65');
-    $('#hasil').html('3,56');
-    $('#nilai').html('5');
-    $('#target').html('5')
+    
+    
+    $.ajax({
+      url: '/raspegawai',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+          console.log('Data berhasil diterima:', response);
+          let JmlPgwaiPlgnFormatted = response.JmlPgwai.toLocaleString('id-ID');
+          let JmlPlgn1000Formatted = response.JmlPlgn1000.toLocaleString('id-ID');
+          $('#a_nilai').html(JmlPgwaiPlgnFormatted);
+          $('#b_nilai').html(JmlPlgn1000Formatted);
+          $('#hasil').html(response.hasilRaspeg +' %');
+          $('#nilai').html(response.nilaiRaspeg);
+          var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+          var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
+          var lab = 'Rasio Pegawai';
+          grafik(dataGrafik,lab);
+      },
+      error: function(xhr, status, error) {
+          console.error('Error:', error);
+      }
+  })
   })
 
   //Rasio Diklat Pegawai
+  $.ajax({
+    url: '/rasdiklat',
+    method: 'GET',
+    success: function (response) {
+        // Tampilkan hasil di elemen HTML
+        $('#hasilRasdik').text(response.hasilRasdik + '%');
+        $('#nilaiRasdik').text(response.nilaiRasdik + '/5');
+        $('#colRasdik').addClass(response.cls)
+    },
+    error: function () {
+        alert('Terjadi kesalahan saat memuat data.');
+    }
+  });
   $(document).on('click', '#rasioDiklat', function() {
     $('#modal-lg').modal('show');
     $('#judul').empty();
@@ -24,15 +69,44 @@ $(document).ready(function() {
     kosong();
     $('#persen').html('x 100%');
     $('#a').html('Jumlah Pagawai Yang Ikut Diklat');
-    $('#a_nilai').html('548');
+    
     $('#b').html('(Jumlah Pegawai)');
-    $('#b_nilai').html('618');
-    $('#hasil').html('88,67%');
-    $('#nilai').html('5');
-    $('#target').html('5')
+    $.ajax({
+      url: '/rasdiklat',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+          console.log('Data berhasil diterima:', response);
+          
+          $('#a_nilai').html(response.JmlPegDiklat);
+          $('#b_nilai').html(response.JmlPgwai);
+          $('#hasil').html(response.hasilRasdik +' %');
+          $('#nilai').html(response.nilaiRasdik);
+          var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+          var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
+          var lab = 'Rasio Diklat';
+          grafik(dataGrafik,lab);
+      },
+      error: function(xhr, status, error) {
+          console.error('Error:', error);
+      }
+  })
   })
 
   //Rasio Biaya Diklat
+  $.ajax({
+    url: '/rasbiaya',
+    method: 'GET',
+    success: function (response) {
+        // Tampilkan hasil di elemen HTML
+        $('#hasilRasby').text(response.hasilRasby + '%');
+        $('#nilaiRasby').text(response.nilaiRasby + '/5');
+        $('#colRasby').addClass(response.cls)
+    },
+    error: function () {
+        alert('Terjadi kesalahan saat memuat data.');
+    }
+  });
   $(document).on('click', '#rasioBiaya', function() {
     $('#modal-lg').modal('show');
     $('#judul').empty();
@@ -40,43 +114,36 @@ $(document).ready(function() {
     kosong();
     $('#persen').html('x 100%');
     $('#a').html('Realisasi Biaya Diklat');
-    $('#a_nilai').html('3.304.299.477');
+    
     $('#b').html('Realisasi Biaya Pegawai');
-    $('#b_nilai').html('113.777.783.341');
-    $('#hasil').html('2,90%');
-    $('#nilai').html('2');
-    $('#target').html('5')
+   
+    
+    
+    $.ajax({
+      url: '/rasbiaya',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+          console.log('Data berhasil diterima:', response);
+          let RealByDiklatFormatted = response.RealByDiklat.toLocaleString('id-ID');
+          let RealByPegFormatted = response.RealByPeg.toLocaleString('id-ID');
+          $('#a_nilai').html(RealByDiklatFormatted);
+          $('#b_nilai').html(RealByPegFormatted);
+          $('#hasil').html(response.hasilRasby +' %');
+          $('#nilai').html(response.nilaiRasby);
+          var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+          var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
+          var lab = 'Rasio Biaya';
+          grafik(dataGrafik,lab);
+      },
+      error: function(xhr, status, error) {
+          console.error('Error:', error);
+      }
+  })
+    
   })
 
-  //Edit data Sdm
-  $(document).on('click', '#edit_sdm', function() {
-    var id = $(this).data('id');
-    $('#modal-sdm').modal('show');
-    $('#judul_sdm').empty();
-    $('#judul_sdm').html('EDIT DATA ASPEK SDM');
-    $('#form-sdm').attr('action', '/sdmEdit');
-    $.ajax({
-      type: "GET",
-      url: "/dataSdmBy/"+ id,
-      success: function (data) {
-      $.each(data.data, function (index, item) {
-          $('#idSdm').val(id);
-          $('#JmlPgwai').val(item.JmlPgwai);
-          $('#JmlPlgn1000').val(item.JmlPlgn1000);
-          $('#JmlPegDiklat').val(item.JmlPegDiklat);
-          $('#RealByDiklat').val(item.RealByDiklat);
-          $('#RealByPeg').val(item.RealByPeg);
-          
-          $('#date').val(item.bulanTahun.replace(/(\w+) (\d{4})/, function(_, bulan, tahun) {
-          var bulanIndex = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-          return `${tahun}-${('0' + (bulanIndex.indexOf(bulan) + 1)).slice(-2)}`;
-      }));
 
-    });
-  }
-  });
-   
-})
 
 
 

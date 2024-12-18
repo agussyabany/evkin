@@ -1,0 +1,26 @@
+$tahun = Carbon::now()->year;
+        $VolProdBul1 = Operasional::select('VolProdRil')->where('bulanTahun', $tahun . '-01')->get();
+        $VolProdBul2 = Operasional::select('VolProdRil')->where('bulanTahun', $tahun . '-02')->get();
+        $VolProdBul3 = Operasional::select('VolProdRil')->where('bulanTahun', $tahun . '-03')->get();
+        $VolProdBul4 = Operasional::select('VolProdRil')->where('bulanTahun', $tahun . '-04')->get();
+        $VolProdBul5 = Operasional::select('VolProdRil')->where('bulanTahun', $tahun . '-05')->get();
+        $VolProdBul6 = Operasional::select('VolProdRil')->where('bulanTahun', $tahun . '-06')->get();
+        $VolProdBul7 = Operasional::select('VolProdRil')->where('bulanTahun', $tahun . '-07')->get();
+        $VolProdBul8 = Operasional::select('VolProdRil')->where('bulanTahun', $tahun . '-08')->get();
+        $VolProdBul9 = Operasional::select('VolProdRil')->where('bulanTahun', $tahun . '-09')->get();
+        $VolProdBul0 = Operasional::select('VolProdRil')->where('bulanTahun', $tahun . '-10')->get();
+        $VolProdBul11 = Operasional::select('VolProdRil')->where('bulanTahun', $tahun . '-11')->get();
+        $VolProdBul12 = Operasional::select('VolProdRil')->where('bulanTahun', $tahun . '-12')->get();
+
+        $KpstsTrpsng1 = Operasional::select('KpstsTrpsng')->where('bulanTahun', $tahun . '-01')->get();
+        $KpstsTrpsng2 = Operasional::select('KpstsTrpsng')->where('bulanTahun', $tahun . '-02')->get();
+        $KpstsTrpsng3 = Operasional::select('KpstsTrpsng')->where('bulanTahun', $tahun . '-03')->get();
+        $KpstsTrpsng4 = Operasional::select('KpstsTrpsng')->where('bulanTahun', $tahun . '-04')->get();
+        $KpstsTrpsng5 = Operasional::select('KpstsTrpsng')->where('bulanTahun', $tahun . '-05')->get();
+        $KpstsTrpsng6 = Operasional::select('KpstsTrpsng')->where('bulanTahun', $tahun . '-06')->get();
+        $KpstsTrpsng7 = Operasional::select('KpstsTrpsng')->where('bulanTahun', $tahun . '-07')->get();
+        $KpstsTrpsng8 = Operasional::select('KpstsTrpsng')->where('bulanTahun', $tahun . '-08')->get();
+        $KpstsTrpsng9 = Operasional::select('KpstsTrpsng')->where('bulanTahun', $tahun . '-09')->get();
+        $KpstsTrpsng0 = Operasional::select('KpstsTrpsng')->where('bulanTahun', $tahun . '-10')->get();
+        $KpstsTrpsng11 = Operasional::select('KpstsTrpsng')->where('bulanTahun', $tahun . '-11')->get();
+        $KpstsTrpsng12 = Operasional::select('KpstsTrpsng')->where('bulanTahun', $tahun . '-12')->get();

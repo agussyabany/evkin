@@ -6,14 +6,14 @@ function kosong()
     $('#b_nilai').empty;
   }
 
-function grafik(dataGrafik)
+function grafik(dataGrafik,lab)
 {
   var nrwChartCanvas = $('#chartKinerja').get(0).getContext('2d')
             var nrwChartData = {
               labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','Agustus','September','Oktober','November','Desember'],
               datasets: [
                 {
-                  label: 'CAKUPAN LAYANAN',
+                  label: lab,
                   backgroundColor: 'rgba(60,141,188,0.9)',
                   borderColor: 'rgba(60,141,188,0.8)',
                   pointRadius: true,

@@ -1,6 +1,19 @@
 $(document).ready(function() {
 
     //Cakupan Layanan
+    $.ajax({
+      url: '/cakupan',
+      method: 'GET',
+      success: function (response) {
+          // Tampilkan hasil di elemen HTML
+          $('#cakpuanLyn').text(response.cakupan + '%');
+          $('#nilaiCakup').text(response.nilaiCakup + '/5');
+          $('#colCakup').addClass(response.cls)
+      },
+      error: function () {
+          alert('Terjadi kesalahan saat memuat data.');
+      }
+  });
     $(document).on('click', '#cakup', function() {
         $('#modal-lg').modal('show');
         $('#judul').empty();
@@ -10,7 +23,6 @@ $(document).ready(function() {
         $('#persen').html('X 100 %');
         $('#a').html('Jumlah Penduduk Terlayani');
         $('#b').html('Jumlah penduduk wilayah pelayanan');
-        $('#nilai').html('4');
         $('#target').html('5')
 
         $.ajax({
@@ -23,23 +35,35 @@ $(document).ready(function() {
               let jmlPndkWilFormatted = response.jmlPndkWil.toLocaleString('id-ID');
               $('#a_nilai').html(JmlPnddkTrlyniFormatted);
               $('#b_nilai').html(jmlPndkWilFormatted);
-
-              var JmlPnddkTrlyni = response.JmlPnddkTrlyni;
-              var jmlPndkWil = response.jmlPndkWil;
-              var persenTase = (JmlPnddkTrlyni / jmlPndkWil) * 100;
-              var persenTaseFormatted = persenTase.toFixed(2);
-               $('#hasil').html(persenTaseFormatted +'%');
+              $('#hasil').html(response.cakupan +' %');
+              $('#nilai').html(response.nilaiCakup);
+              var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+              var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
+              var lab = 'Cakupan';
+              grafik(dataGrafik,lab);
           },
           error: function(xhr, status, error) {
               console.error('Error:', error);
           }
       })
-      var dataGrafik =[77.74,79.42,79.94,81.12,81.51,81.74,82.01,82.3,82.55];
-      grafik(dataGrafik);
+      
 
 
       })
       //Aduan
+      $.ajax({
+        url: '/aduan',
+        method: 'GET',
+        success: function (response) {
+            // Tampilkan hasil di elemen HTML
+            $('#hasilAduan').text(response.hasilAduan + '%');
+            $('#nilaiAduan').text(response.nilaiAduan + '/5');
+            $('#colAduan').addClass(response.cls)
+        },
+        error: function () {
+            alert('Terjadi kesalahan saat memuat data.');
+        }
+      });
       $(document).on('click', '#aduan', function() {
         $('#modal-lg').modal('show');
         $('#judul').empty();
@@ -53,8 +77,43 @@ $(document).ready(function() {
         $('#hasil').html('100 %');
         $('#nilai').html('5');
         $('#target').html('5')
+
+        $.ajax({
+          url: '/aduan',
+          type: 'GET',
+          dataType: 'json',
+          success: function(response) {
+              console.log('Data berhasil diterima:', response);
+              let AduanSlsaiFormatted = (response.AduanSlsai).toLocaleString('id-ID');
+              let JmlAduanFormatted = response.JmlAduan.toLocaleString('id-ID');
+              $('#a_nilai').html(AduanSlsaiFormatted);
+              $('#b_nilai').html(AduanSlsaiFormatted);
+              $('#hasil').html(response.hasilAduan +' %');
+              $('#nilai').html(response.nilaiAduan);
+              var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+              var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
+              var lab = 'Aduan';
+              grafik(dataGrafik,lab);
+          },
+          error: function(xhr, status, error) {
+              console.error('Error:', error);
+          }
+      })
       })
       //Konsumsi Air Domestik
+      $.ajax({
+        url: '/domestik',
+        method: 'GET',
+        success: function (response) {
+            // Tampilkan hasil di elemen HTML
+            $('#hasilDomestik').text(response.hasilDomestik + '%');
+            $('#nilaiDomestik').text(response.nilaiDomestik + '/5');
+            $('#colDomestik').addClass(response.cls)
+        },
+        error: function () {
+            alert('Terjadi kesalahan saat memuat data.');
+        }
+      });
       $(document).on('click', '#dom', function() {
         $('#modal-lg').modal('show');
         $('#judul').empty();
@@ -69,8 +128,42 @@ $(document).ready(function() {
         $('#nilai').html('4');
         $('#target').html('5')
       })
+      $.ajax({
+        url: '/domestik',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            console.log('Data berhasil diterima:', response);
+            let JmlAirTrjualDomFormatted = (response.JmlAirTrjualDom).toLocaleString('id-ID');
+            let JmlPlgnDomFormatted = response.JmlPlgnDom.toLocaleString('id-ID');
+            $('#a_nilai').html(JmlAirTrjualDomFormatted);
+            $('#b_nilai').html(JmlPlgnDomFormatted);
+            $('#hasil').html(response.hasilDomestik +' %');
+            $('#nilai').html(response.nilaiDomestik);
+            var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+            var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
+            var lab = 'Domestik';
+            grafik(dataGrafik,lab);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
+        }
+    })
 
 //Kulaitas Air Pelnggan
+  $.ajax({
+    url: '/uji',
+    method: 'GET',
+    success: function (response) {
+        // Tampilkan hasil di elemen HTML
+        $('#hasilUji').text(response.hasilUji + '%');
+        $('#nilaiUji').text(response.nilaiUji + '/5');
+        $('#colUji').addClass(response.cls)
+    },
+    error: function () {
+        alert('Terjadi kesalahan saat memuat data.');
+    }
+  });
   $(document).on('click', '#kualitas', function() {
     $('#modal-lg').modal('show');
     $('#judul').empty();
@@ -78,15 +171,44 @@ $(document).ready(function() {
     kosong();
     $('#persen').html('X 100 %');
     $('#a').html('Jml Uji Kualitas Yg Memenuhi Syarat ');
-    $('#a_nilai').html('188');
     $('#b').html('Jumlah Titik yg Diuji atau Titik Minimal');
-    $('#b_nilai').html('1.914');
-    $('#hasil').html('9,82 %');
-    $('#nilai').html('1');
-    $('#target').html('5')
+    $.ajax({
+      url: '/uji',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+          console.log('Data berhasil diterima:', response);
+          let UjiKualitasFormatted = response.UjiKualitas.toLocaleString('id-ID');
+          let titikUjiFormatted = response.titikUji.toLocaleString('id-ID');
+          $('#a_nilai').html(UjiKualitasFormatted);
+          $('#b_nilai').html(titikUjiFormatted);
+          $('#hasil').html(response.hasilUji +' %');
+          $('#nilai').html(response.nilaiUji);
+          var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+          var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
+          var lab = 'Uji';
+          grafik(dataGrafik,lab);
+      },
+      error: function(xhr, status, error) {
+          console.error('Error:', error);
+      }
+  })
   })
 
   //Pertumbuhan Pelanggan
+  $.ajax({
+    url: '/tumbuh',
+    method: 'GET',
+    success: function (response) {
+        // Tampilkan hasil di elemen HTML
+        $('#hasilTumbuh').text(response.hasilTumbuh + '%');
+        $('#nilaiTumbuh').text(response.nilaiTumbuh + '/5');
+        $('#colTumbuh').addClass(response.cls)
+    },
+    error: function () {
+        alert('Terjadi kesalahan saat memuat data.');
+    }
+  });
 $(document).on('click', '#pertumbuhan', function() {
   $('#modal-lg').modal('show');
   $('#judul').empty();
@@ -94,55 +216,30 @@ $(document).on('click', '#pertumbuhan', function() {
   kosong();
   $('#persen').html('X 100 %');
   $('#a').html('Jumlah Pelanggan Tahun ini - Jumlah Pelanggan Tahun Lalu');
-  $('#a_nilai').html('9.721');
   $('#b').html('Jumlah Pelanggan Tahun Lalu');
-  $('#b_nilai').html('163.933');
-  $('#hasil').html('5,93%');
-  $('#nilai').html('2');
-  $('#target').html('5')
+  $.ajax({
+    url: '/tumbuh',
+    type: 'GET',
+    dataType: 'json',
+    success: function(response) {
+        console.log('Data berhasil diterima:', response);
+        let kalKulasiJmlPlgnFormatted = response.kalKulasiJmlPlgn.toLocaleString('id-ID');
+        let JmlPlgnThLlFormatted = response.JmlPlgnThLl.toLocaleString('id-ID');
+        $('#a_nilai').html(kalKulasiJmlPlgnFormatted);
+        $('#b_nilai').html(JmlPlgnThLlFormatted);
+        $('#hasil').html(response.hasilTumbuh +' %');
+        $('#nilai').html(response.nilaiTumbuh);
+        var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+        var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
+        var lab = 'Pertumbuhan';
+        grafik(dataGrafik,lab);
+    },
+    error: function(xhr, status, error) {
+        console.error('Error:', error);
+    }
+})
 })
 
-  //Edit data Pelyanan
-  $(document).on('click', '#edit_pelayanan', function() {
-    var id = $(this).data('id');
-    $('#modal-pelayanan').modal('show');
-    $('#judul_pelayanan').empty();
-    $('#judul_pelayanan').html('EDIT DATA ASPEK PELAYANAN');
-    $('#form-pelayanan').attr('action', '/pelEdit');
-    $.ajax({
-      type: "GET",
-      url: "/dataPelBy/"+ id,
-      success: function (data) {
-      $.each(data.data, function (index, item) {
-          $('#idPel').val(id);
-          $('#JmlPnddkTrlyni').val(item.JmlPnddkTrlyni);
-          $('#jmlPndkWil').val(item.jmlPndkWil);
-          $("#kalKulasiJmlPlgn").val(item.kalKulasiJmlPlgn);
-          $('#JmlPlgnThLl').val(item.JmlPlgnThLl);
-          $('#AduanSlsai').val(item.AduanSlsai);
-          $('#JmlAduan').val(item.JmlAduan);
-          $("#UjiKualitas").val(item.UjiKualitas);
-          $('#titikUji').val(item.titikUji);
-          $('#JmlAirTrjualDom').val(item.JmlAirTrjualDom);
-          $('#JmlPlgnDom').val(item.JmlPlgnDom);
-          
-          $('#date').val(item.bulanTahun.replace(/(\w+) (\d{4})/, function(_, bulan, tahun) {
-          var bulanIndex = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-          return `${tahun}-${('0' + (bulanIndex.indexOf(bulan) + 1)).slice(-2)}`;
-      }));
-
-    });
-  }
-  });
-   
-})
-
-//Tambah data Operasional
-$(document).on('click', '#tambah_pelayanan', function() {
-  $('#judul_pelayanan').empty();
-  $('#judul_pelayanan').html('TAMBAH DATA ASPEK PELAYANAN');
-  $('#form-pelayanan').attr('action', '/pelSave');
- })
 
 
 })
