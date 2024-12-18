@@ -209,11 +209,11 @@ for ($bulan = 1; $bulan <= 12; $bulan++) {
     
     // Ambil nilai Plgnlayan dan PlgnAktiv untuk bulan tertentu
     $PlgnlayanG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormatted)->value('Plgnlayan') ?? 0;
-    $PlgnAktiv = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormatted)->value('PlgnAktiv') ?? 0;
+    $PlgnAktivG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormatted)->value('PlgnAktiv') ?? 0;
 
     // Hitung persentase jika PlgnAktiv > 0
-    if ($PlgnAktiv > 0) {
-        $persentase = ($PlgnlayanG / $PlgnAktiv) * 100;
+    if ($PlgnAktivG > 0) {
+        $persentase = ($PlgnlayanG / $PlgnAktivG) * 100;
     } else {
         $persentase = 0;
     }

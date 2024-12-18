@@ -68,7 +68,7 @@
         
                       <div class="info-box-content">
                         <span class="">Tekanan Air Pada SL</span>
-                        <span class="tekananHasil" id="">95,95%</span>
+                        <span class="tekananHasil" id="tekananHasil">95,95%</span>
                       </div>
                       <!-- /.info-box-content -->
                       <div class="info-box-text  mr-3 ml-2 mt-3" ><h3 id="tekananNilai" class="text-center">5/5</h3></div>

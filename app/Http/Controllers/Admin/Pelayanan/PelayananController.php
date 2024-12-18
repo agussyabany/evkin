@@ -13,6 +13,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PelayananController extends Controller
 {
+    public function evPel ()
+    {
+        $pelayanan = Pelayanan::orderBy('bulanTahun','ASC')->get();
+        return view('admin.evkin.evPelayanan',compact('pelayanan'));
+    }
     public function index ()
     {
         $pelayanan = Pelayanan::orderBy('bulanTahun','ASC')->get();

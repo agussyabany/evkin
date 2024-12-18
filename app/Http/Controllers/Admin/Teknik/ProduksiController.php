@@ -9,6 +9,12 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ProduksiController extends Controller
 {
+
+    public function  evOP ()
+    {
+        $operasional = Operasional::orderBy('bulanTahun','ASC')->get();
+        return view('admin.evkin.evOperasional',compact('operasional'));
+    }
     public function index ()
     {
         $operasional = Operasional::orderBy('bulanTahun','ASC')->get();

@@ -9,6 +9,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class SdmController extends Controller
 {
+    public function evSdm ()
+    {
+        $sdm = Sdm::orderBy('bulanTahun','ASC')->get();
+        return view('admin.evkin.evSdm',compact('sdm'));
+    }
     public function index ()
     {
         $sdm = Sdm::orderBy('bulanTahun','ASC')->get();

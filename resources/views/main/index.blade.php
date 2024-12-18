@@ -162,7 +162,7 @@
                 <div class="row">
                   <div class="col col-md-5">
                     <fieldset class=" border border-success rounded text-center">
-                      <legend class="ml-2 w-auto px-3 border border-success rounded"><h5 class="mt-2">ASPEK PELAYANAN 2023</h5></legend>
+                      <legend class="ml-2 w-auto px-3 border border-success rounded"><h5 class="mt-2">ASPEK PELAYANAN</h5></legend>
                     
                     <div class="container">
 
@@ -171,7 +171,7 @@
                           <tr>
                             <th>#</th>
                             <th  style="text-align: left;" ><h3>Task</h3></th>
-                            <th><h3>Progress</h3></th>
+                           
                             <th style="width: 40px"><h3>Hasil</h3></th>
                             <th style="width: 40px"><h3>Nilai</h3></th>
                             <th style="width: 40px"><h3>Target</h3></th>
@@ -181,60 +181,42 @@
                           <tr>
                             <td>1.</td>
                             <td style="text-align: left;"><a href="#" id="cakup"><h5>CAKUPAN PELAYANAN TEKNIS</h5></a></td>
-                            <td>
-                              <div class="progress progress-xs">
-                                <div class="progress-bar progress-bar-warning" style="width: 79.83%"></div>
-                              </div>
-                            </td>
-                            <td><span class="badge bg-warning"><h5>79,83%</h5></span></td>
-                            <td><h5>4</h5></td>
+                            
+                            <td><span id="colCakup" class="badge"><h5 id="cakpuanLyn">79,83%</h5></span></td>
+                            <td><h5 id="nilaiCakup">4</h5></td>
                             <td><h5>5</h5></td>
                           </tr>
                           
                           <tr>
                             <td>2.</td>
                             <td  style="text-align: left;"><a href="#" id="aduan"><h5>PENYELESAIAN ADUAN</h5></a></td>
-                            <td>
-                              <div class="progress progress-xs progress-striped active">
-                                <div class="progress-bar bg-primary" style="width: 100%"></div>
-                              </div>
-                            </td>
-                            <td><span class="badge bg-primary"><h5>100%</h5></span></td>
-                            <td><h5>5</h5></td>
+                            
+                            <td><span id="colAduan" class="badge"><h5 id="hasilAduan" >100%</h5></span></td>
+                            <td><h5 id="nilaiAduan">5</h5></td>
                             <td><h5>5</h5></td>
                           </tr>
                           <tr>
                             <td>3.</td>
                             <td  style="text-align: left;"><a href="#" id="dom"><h5>KONSUMSI AIR DOMESTIK (lt/plg/bulan)</h5></a></td>
-                            <td>
-                              
-                            </td>
-                            <td><span class="badge bg-success"><h5>24,23</h5></span></td>
-                            <td><h5>4</h5></td>
+                           
+                            <td><span id="colDomestik" class="badge"><h5 id="hasilDomestik">24,23</h5></span></td>
+                            <td><h5 id="nilaiDomestik">4</h5></td>
                             <td><h5>5</h5></td>
                           </tr>
                           <tr>
                             <td>4.</td>
                             <td  style="text-align: left;"><a href="#" id="kualitas"><h5>KUALITAS AIR PELANGGAN</h5></a></td>
-                            <td>
-                              <div class="progress progress-xs progress-striped active">
-                                <div class="progress-bar bg-success" style="width: 5.2%"></div>
-                              </div>
-                            </td>
-                            <td><span class="badge bg-success"><h5>9,82%</h5></span></td>
-                            <td><h5>1</h5></td>
+                            
+                            <td><span id="colUji" class="badge"><h5 id="hasilUji">9,82%</h5></span></td>
+                            <td><h5 id="nilaiUji">1</h5></td>
                             <td><h5>5</h5></td>
                           </tr>
                           <tr>
                             <td>5.</td>
                             <td  style="text-align: left;"><a href="#" id="pertumbuhan"><h5>PERTUMBUHAN PELANGGAN</h5></a></td>
-                            <td>
-                              <div class="progress progress-xs progress-striped active">
-                                <div class="progress-bar bg-success" style="width: 5.2%"></div>
-                              </div>
-                            </td>
-                            <td><span class="badge bg-success"><h5>5,93%</h5></span></td>
-                            <td><h5>2</h5></td>
+                            
+                            <td><span id="colTumbuh" class="badge"><h5 id="hasilTumbuh">5,93%</h5></span></td>
+                            <td><h5 id="nilaiTumbuh">2</h5></td>
                             <td><h5>5</h5></td>
                           </tr>
                         </tbody>
@@ -254,30 +236,30 @@
                     <div class="row">
                       <div class="col">
                         <!-- MAP -->
-                          <a href="#" id="rasioProd"><div class="info-box  bg-warning">
+                          <a href="#" id="rasioProd"><div id="colRasioProd" class="info-box">
                             <span class="info-box-icon"><i class="fa fa-cogs"></i></span>
               
                             <div class="info-box-content">
                               <span class=""><h4>Rasio Produksi</h4></span>
-                              <span class="info-box-number"><h4>93,76%</h4></span>
+                              <span class="info-box-number"><h4 id="rasioProduksi">93,76%</h4></span>
                             </div>
 
-                            <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center">5/5</h3></div>
+                            <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="nilaiRasioProd">5/5</h3></div>
                             <!-- /.info-box-content -->
                           </div></a>  
                         </div>
                        
                         <div class="col">
                               <!-- /.info-box -->
-                          <a href="#" id="nrw"><div class="info-box  bg-danger">
+                          <a href="#" id="nrw"><div id="colNrw" class="info-box">
                             <span class="info-box-icon"><i class="fa fa-tint"></i></span>
               
                             <div class="info-box-content">
                               <span class=""><h4>Kehilangan Air</h4></span>
-                              <span class=""><h4>39,54%</h4></span>
+                              <span class=""><h4 id="kehilangan">39,54%</h4></span>
                             </div>
                             <!-- /.info-box-content -->
-                            <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center">2/5</h3></div>
+                            <div class="info-box-text  mr-3 ml-2 mt-3"><h3 id="kehilnganNilai" class="text-center">2/5</h3></div>
                         </div></a>
                       </div>
 
@@ -287,29 +269,29 @@
                     <div class="row">
                       <div class="col">
                         <!-- /.info-box -->
-                      <a href="#" id="jam"><div class="info-box bg-success">
+                      <a href="#" id="jam"><div id="colJam" class="info-box">
                         <span class="info-box-icon"><i class="fas fa-clock"></i></span>
           
                         <div class="info-box-content">
                           <span class=""><h4>Jam Operasi Layanan (jam/hari)</h4></span>
-                          <span class=""><h4>23,50 Jam</h4></span>
+                          <span class=""><h4 id="jamOperasi">23,50 Jam</h4></span>
                         </div>
                         <!-- /.info-box-content -->
-                        <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center">5/5</h3></div>
+                        <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="jamNilai">5/5</h3></div>
                       </div></a>
                     </div>
 
                     <div class="col">
                       <!-- /.info-box -->
-                    <a href="#" id="tekanan"><div class="info-box  bg-info">
+                    <a href="#" id="tekanan"><div id="coltekanan" class="info-box">
                       <span class="info-box-icon"><i class="fas fa-tachometer-alt"></i></span>
         
                       <div class="info-box-content">
                         <span class=""><h4>Tekanan Air Pada SL</h4></span>
-                        <span class=""><h4>95,95%</h4></span>
+                        <span class=""><h4 id="tekananHasil">95,95%</h4></span>
                       </div>
                       <!-- /.info-box-content -->
-                      <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center">5/5</h3></div>
+                      <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="tekananNilai">5/5</h3></div>
                     </div></a>
                     <!-- /.info-box -->
 
@@ -324,15 +306,15 @@
 
                             <div class="col">
                               <!-- /.info-box -->
-                            <a href="#" id="kalibrasi"><div class="info-box  bg-primary">
+                            <a href="#" id="kalibrasi"><div id="colkalibarasi" class="info-box">
                               <span class="info-box-icon"><i class="fa fa-shower"></i></span>
                 
                               <div class="info-box-content">
                                 <span class=""><h4>Penggantian Dan Kalibrasi Meter</h4></span>
-                                <span class=""><h4>3,76</h4></span>
+                                <span class=""><h4 id="kalibarasiHasil">3,76</h4></span>
                               </div>
                               <!-- /.info-box-content -->
-                              <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center">1/5</h3></div>
+                              <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="kalibarasiNilai">1/5</h3></div>
                             </div></a>
                             <!-- /.info-box -->
 
@@ -437,15 +419,15 @@
                     <table class="table table-striped text-center">
                       <thead>
                         <tr>
-                          <th><h4>HASIL</h4></th>
-                          <th><h4>NILAI</h4></th>
+                          <th><h4 >HASIL</h4></th>
+                          <th><h4 >NILAI</h4></th>
                           <th><h4>TARGET</h4></th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td><h4>3,56 %</h4></td>
-                          <td><h4>5</h4></td>
+                          <td><h4 id="hasilRaspeg">3,56 %</h4></td>
+                          <td><h4 id="nilaiRaspeg">5</h4></td>
                           <td><h4>5</h4></td>
                         </tr>
                         
@@ -483,8 +465,8 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td><h4>88,67 %</h4></td>
-                          <td><h4>5</h4></td>
+                          <td><h4 id="hasilRasdik">88,67 %</h4></td>
+                          <td><h4 id="nilaiRasdik">5</h4></td>
                           <td><h4>5</h4></td>
                         </tr>
                         
@@ -519,8 +501,8 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td><h4>2,90 %</h4></td>
-                          <td><h4>2</h4></td>
+                          <td><h4 id="hasilRasby">2,90 %</h4></td>
+                          <td><h4 id="nilaiRasby">2</h4></td>
                           <td><h4>5</h4></td>
                         </tr>
                         

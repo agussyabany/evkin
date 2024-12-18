@@ -22,14 +22,15 @@
          
           <div class="card-body">
             <div class="row">
+              
               <a href="#" id="nrw" style="text-decoration: none;"><div class="col" >
-                <input type="text" class="knob" value="" data-width="90" data-readonly="true" data-height="90" data-fgColor="#f56954"  disabled>
+                <input type="number" class="knob"  value="38" data-width="90" data-readonly="true" data-height="90" data-fgColor="#f56954"  disabled>
 
                 <div class="knob-label text-center">NRW (%)</div>
               </div></a>
               
               <a href="#" id="cakup"><div class="col">
-                <input type="text" class="knob" value="" data-width="90" data-readonly="true" data-height="90" data-fgColor="#00a65a" disabled>
+                <input type="text" class="knob" value="83" data-width="90" data-readonly="true" data-height="90" data-fgColor="#00a65a" disabled>
                   <div class="knob-label text-center">CAKUPAN (%)</div>
               </div></a>
               

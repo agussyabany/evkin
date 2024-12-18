@@ -59,6 +59,7 @@ $(document).ready(function() {
         $('#kehilangan').text(response.nrw + '%');
         $('#kehilnganNilai').text(response.nilaiNrw + '/4');
         $('#colNrw').addClass(response.cls)
+        $('#homeNRW').val(response.nrw);
     },
     error: function () {
         alert('Terjadi kesalahan saat memuat data.');
@@ -87,6 +88,7 @@ $(document).ready(function() {
               $('#a_nilai').html(KalkulasiJumAirFormatted);
               $('#b_nilai').html(JmlAirDistFormatted);
               $('#hasil').html(data.nilaiNrw +'%');
+              
               $('#nilai').html(data.nilaiNrw);
               var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
               var dataGrafik = urutanBulan.map(bulan => data.persentaseBulanan[bulan]);
@@ -175,7 +177,7 @@ $(document).ready(function() {
     $('#persen').html('x 100%');
     $('#a').html('Jumlah Pelanggan yang Dilayanai dengan Tekanan > 0,7 Bar');
     $('#b').html('Jumlah Pelanggan Aktiv');
-    $('#target').html('5')
+        
     $.ajax({
       url: '/tekanan',
       type: 'GET',

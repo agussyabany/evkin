@@ -85,9 +85,32 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
+             <li class="nav-item menu-close">
+              <a href="#" class="nav-link active">
+                
+                <p>
+                  DASHBOARD
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="/evkin" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Main</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/perumdam" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Mobile</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
         <li class="nav-item menu-close">
           <a href="#" class="nav-link active">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+            
             <p>
               EVALUASI KINERJA
               <i class="right fas fa-angle-left"></i>
@@ -101,25 +124,25 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="/keuangan" class="nav-link">
+              <a href="/evkeu" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Keuangan</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/evPel" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Pelayanan</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/evOp" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Operasional</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/evSdm" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Sdm</p>
               </a>
