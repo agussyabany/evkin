@@ -1,6 +1,58 @@
 $(document).ready(function() {
 
     //REO BUTTON
+  // $(document).on('click', '#roe', function() {
+  //   $('#modal-lg').modal('show');
+  //   $('#judul').empty();
+  //   $('#chartKinerja').empty();
+  //   $('#judul').html('RETURN ON EQUITY');
+  //   kosong();
+  //   $('#persen').html('X 100%');
+  //   $('#a').html('Laba Setelah Pajak');
+  //   //$('#a_nilai').html('73.897.071.387');
+  //   $('#b').html('Jumlah Ekuitas');
+  //   //$('#b_nilai').html('577.162.239.562');
+  //   //$('#hasil').html('12,8 %');
+  //   $('#nilai').html('5');
+  //   $('#target').html('5')
+
+  //   $.ajax({
+  //     url: '/roe',
+  //     type: 'GET',
+  //     dataType: 'json',
+  //     success: function(response) {
+  //         console.log('Data berhasil diterima:', response);
+  //         let labaStlPjkFormatted = response.labaStlPjk.toLocaleString('id-ID');
+  //         let jmlEkuitasFormatted = response.jmlEkuitas.toLocaleString('id-ID');
+  //         $('#a_nilai').html(labaStlPjkFormatted);
+  //         $('#b_nilai').html(jmlEkuitasFormatted);
+
+  //         var labaStlPjk = response.labaStlPjk;
+  //         var jmlEkuitas = response.jmlEkuitas;
+  //         var persenTase = (labaStlPjk / jmlEkuitas) * 100;
+  //         var persenTaseFormatted = persenTase.toFixed(2);
+  //          $('#hasil').html(persenTaseFormatted +'%');
+  //     },
+  //     error: function(xhr, status, error) {
+  //         console.error('Error:', error);
+  //     }
+  // })
+  // var dataGrafik =[1.51,1.32,1.09,1.79,1.19,2.24,1.36,2.21,1.17];
+  // grafik(dataGrafik);
+  // })
+  $.ajax({
+    url: '/roe',
+    method: 'GET',
+    success: function (response) {
+        // Tampilkan hasil di elemen HTML
+        $('#hasilRoe').text(response.hasilRoe + ' %');
+        $('#nilaiRoe').text(response.nilaiRoe + '/5');
+        $('#colRoe').addClass(response.cls)
+    },
+    error: function () {
+        alert('Terjadi kesalahan saat memuat data.');
+    }
+  });
   $(document).on('click', '#roe', function() {
     $('#modal-lg').modal('show');
     $('#judul').empty();
@@ -9,15 +61,11 @@ $(document).ready(function() {
     kosong();
     $('#persen').html('X 100%');
     $('#a').html('Laba Setelah Pajak');
-    //$('#a_nilai').html('73.897.071.387');
     $('#b').html('Jumlah Ekuitas');
-    //$('#b_nilai').html('577.162.239.562');
-    //$('#hasil').html('12,8 %');
-    $('#nilai').html('5');
     $('#target').html('5')
 
     $.ajax({
-      url: '/laba',
+      url: '/roe',
       type: 'GET',
       dataType: 'json',
       success: function(response) {
@@ -26,21 +74,32 @@ $(document).ready(function() {
           let jmlEkuitasFormatted = response.jmlEkuitas.toLocaleString('id-ID');
           $('#a_nilai').html(labaStlPjkFormatted);
           $('#b_nilai').html(jmlEkuitasFormatted);
-
-          var labaStlPjk = response.labaStlPjk;
-          var jmlEkuitas = response.jmlEkuitas;
-          var persenTase = (labaStlPjk / jmlEkuitas) * 100;
-          var persenTaseFormatted = persenTase.toFixed(2);
-           $('#hasil').html(persenTaseFormatted +'%');
+          $('#hasil').html(response.hasilRoe +'%');
+          var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+          var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
+          var lab = 'Roe';
+          grafik(dataGrafik,lab);
       },
       error: function(xhr, status, error) {
           console.error('Error:', error);
       }
   })
-  var dataGrafik =[1.51,1.32,1.09,1.79,1.19,2.24,1.36,2.21,1.17];
-  grafik(dataGrafik);
+  
   })
   //Ratio Operational BUTTON
+  $.ajax({
+    url: '/rop',
+    method: 'GET',
+    success: function (response) {
+        // Tampilkan hasil di elemen HTML
+        $('#hasilRop').text(response.hasilRop + ' %');
+        $('#nilaiRop').text(response.nilaiRop + '/5');
+        $('#colRop').addClass(response.cls)
+    },
+    error: function () {
+        alert('Terjadi kesalahan saat memuat data.');
+    }
+  });
   $(document).on('click', '#rop', function() {
     $('#modal-lg').modal('show');
     $('#judul').empty();
@@ -48,15 +107,47 @@ $(document).ready(function() {
     kosong();
     $('#persen').html('/');
     $('#a').html('Biaya Operasi');
-    $('#a_nilai').html('354.746.734.631');
     $('#b').html('Pendapatan Operasi');
-    $('#b_nilai').html('467.368.442.487');
-    $('#hasil').html('0,76');
-    $('#nilai').html('3');
     $('#target').html('5')
+    
+    
+
+    $.ajax({
+      url: '/rop',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+          console.log('Data berhasil diterima:', response);
+          let biayaOpsFormatted = response.biayaOps.toLocaleString('id-ID');
+          let PndptnOpsFormatted = response.PndptnOps.toLocaleString('id-ID');
+          $('#a_nilai').html(biayaOpsFormatted);
+          $('#b_nilai').html(PndptnOpsFormatted);
+          $('#hasil').html(response.hasilRop +'%');
+          var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+          var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
+          var lab = 'Rop';
+          grafik(dataGrafik,lab);
+      },
+      error: function(xhr, status, error) {
+          console.error('Error:', error);
+      }
+  })
     
   })
   //Ratio Kas Button
+  $.ajax({
+    url: '/rok',
+    method: 'GET',
+    success: function (response) {
+        // Tampilkan hasil di elemen HTML
+        $('#hasilRok').text(response.hasilRok + ' %');
+        $('#nilaiRok').text(response.nilaiRok + '/5');
+        $('#colRok').addClass(response.cls)
+    },
+    error: function () {
+        alert('Terjadi kesalahan saat memuat data.');
+    }
+  });
   $(document).on('click', '#rok', function() {
     $('#modal-lg').modal('show');
     $('#judul').empty();
@@ -64,15 +155,45 @@ $(document).ready(function() {
     kosong();
     $('#persen').html('X 100 %');
     $('#a').html('Kas + Setara Kas');
-    $('#a_nilai').html('132.205.857.557');
     $('#b').html('Hutang Lancar');
-    $('#b_nilai').html('40.259.283.931');
-    $('#hasil').html('328,39 %');
-    $('#nilai').html('5');
     $('#target').html('5')
+
+    $.ajax({
+      url: '/rok',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+          console.log('Data berhasil diterima:', response);
+          let kaStrkasFormatted = response.kaStrkas.toLocaleString('id-ID');
+          let HutangLancarFormatted = response.HutangLancar.toLocaleString('id-ID');
+          $('#a_nilai').html(kaStrkasFormatted);
+          $('#b_nilai').html(HutangLancarFormatted);
+          $('#hasil').html(response.hasilRok +'%');
+          var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+          var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
+          var lab = 'Rok';
+          grafik(dataGrafik,lab);
+      },
+      error: function(xhr, status, error) {
+          console.error('Error:', error);
+      }
+  })
     
   })
   //Efektifitas Penagihan Button
+  $.ajax({
+    url: '/ef',
+    method: 'GET',
+    success: function (response) {
+        // Tampilkan hasil di elemen HTML
+        $('#hasilEf').text(response.hasilEf + ' %');
+        $('#nilaiEf').text(response.nilaiEf + '/5');
+        $('#colEf').addClass(response.cls)
+    },
+    error: function () {
+        alert('Terjadi kesalahan saat memuat data.');
+    }
+  });
   $(document).on('click', '#ep', function() {
     $('#modal-lg').modal('show');
     $('#judul').empty();
@@ -80,14 +201,45 @@ $(document).ready(function() {
     kosong();
     $('#persen').html('X 100 %');
     $('#a').html('Jumlah Penerimaan Rekening Air');
-    $('#a_nilai').html('354.089.247.034');
     $('#b').html('Jumlah Rekening Air');
-    $('#b_nilai').html('408.213.909.865');
-    $('#hasil').html('86,74 %');
-    $('#nilai').html('4');
     $('#target').html('5')
+
+    $.ajax({
+      url: '/ef',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+          console.log('Data berhasil diterima:', response);
+          let JmlPnrmRekAirFormatted = response.JmlPnrmRekAir.toLocaleString('id-ID');
+          let jmlRekAirFormatted = response.jmlRekAir.toLocaleString('id-ID');
+          $('#a_nilai').html(JmlPnrmRekAirFormatted);
+          $('#b_nilai').html(jmlRekAirFormatted);
+          $('#hasil').html(response.hasilEf +'%');
+          var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+          var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
+          var lab = 'Rok';
+          grafik(dataGrafik,lab);
+      },
+      error: function(xhr, status, error) {
+          console.error('Error:', error);
+      }
+  })
   })
   //Solavbilitas Button
+  $.ajax({
+    url: '/sol',
+    method: 'GET',
+    success: function (response) {
+        // Tampilkan hasil di elemen HTML
+        $('#hasilSol').text(response.hasilSol + ' %');
+        $('#nilaiSol').text(response.nilaiSol + '/5');
+        $('#colSol').addClass(response.cls)
+    },
+    error: function () {
+        alert('Terjadi kesalahan saat memuat data.');
+    }
+  });
+  
   $(document).on('click', '#solv', function() {
     $('#modal-lg').modal('show');
     $('#judul').empty();
@@ -95,61 +247,30 @@ $(document).ready(function() {
     kosong();
     $('#persen').html('X 100 %');
     $('#a').html('Total Aktiva');
-    $('#a_nilai').html('630.296.415.666');
     $('#b').html('Total Hutang');
-    $('#b_nilai').html('53.134.176.104');
-    $('#hasil').html('1.186,24 %');
-    $('#nilai').html('5');
     $('#target').html('5')
-  })
 
-  //Edit data keuangan
-  $(document).on('click', '#edit_keuangan', function() {
-    var id = $(this).data('id');
-    $('#modal-keuangan').modal('show');
-    $('#judul_keuangan').empty();
-    $('#judul_keuangan').html('EDIT DATA ASPEK KEUNGAN');
-    $('#form-keuangan').attr('action', '/keuEdit');
     $.ajax({
-      type: "GET",
-      url: "/dataKeuBy/"+ id,
-      success: function (data) {
-      $.each(data.data, function (index, item) {
-          $('#idKeu').val(id);
-          $('#labaStlPjk').val(item.labaStlPjk);
-          $('#jmlEkuitas').val(item.jmlEkuitas);
-          $('#biayaOps').val(item.biayaOps);
-          $('#PndptnOps').val(item.PndptnOps);
-          $('#kaStrkas').val(item.kaStrkas);
-          $('#HutangLancar').val(item.HutangLancar);
-          $('#JmlPnrmRekAir').val(item.JmlPnrmRekAir);
-          $('#jmlRekAir').val(item.jmlRekAir);
-          $('#TotalAktiva').val(item.TotalAktiva);
-          $('#TotalHutang').val(item.TotalHutang);
+      url: '/sol',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+          console.log('Data berhasil diterima:', response);
+          let TotalAktivaFormatted = response.TotalAktiva.toLocaleString('id-ID');
+          let TotalHutangFormatted = response.TotalHutang.toLocaleString('id-ID');
+          $('#a_nilai').html(TotalAktivaFormatted);
+          $('#b_nilai').html(TotalHutangFormatted);
+          $('#hasil').html(response.hasilSol +'%');
+          var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+          var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
+          var lab = 'Rok';
+          grafik(dataGrafik,lab);
+      },
+      error: function(xhr, status, error) {
+          console.error('Error:', error);
+      }
+  })
     
-           // Mengatur nilai input bulan dengan format YYYY-MM
-        $('#date').val(item.bulanTahun.replace(/(\w+) (\d{4})/, function(_, bulan, tahun) {
-          var bulanIndex = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-          return `${tahun}-${('0' + (bulanIndex.indexOf(bulan) + 1)).slice(-2)}`;
-      }));
-
-    });
-  }
-  });
-   
-})
-
-
-  
- //Tambah data keuangan
- $(document).on('click', '#tambah_keuangan', function() {
-  $('#judul_keuangan').empty();
-  $('#judul_keuangan').html('TAMBAH DATA ASPEK KEUANGAN');
-  $('#form-keuangan').attr('action', '/keuSave');
- })
-
-          
-
-  
+  })
 
 })

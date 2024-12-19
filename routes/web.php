@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Umum\KeuanganController;
 use App\Http\Controllers\Admin\Umum\SdmController;
 use App\Http\Controllers\Admin\Umum\UmkesController;
 use App\Http\Controllers\Admin\Utama\PpController;
+use App\Http\Controllers\Dashboard\KeuController;
 use App\Http\Controllers\Dashboard\MainController;
 use App\Http\Controllers\Dashboard\MobileController;
 use App\Http\Controllers\Dashboard\PelayananController as DashboardPelayananController;
@@ -51,6 +52,11 @@ Route::middleware('auth','verified')->group( function () {
 
                         //Aspek Keungan
             Route::get('/mKeuangan',[MobileController::class, 'keuangan']);
+            Route::get('/roe',[KeuController::class, 'roe']);
+            Route::get('/rop',[KeuController::class, 'rop']);
+            Route::get('/rok',[KeuController::class, 'rok']);
+            Route::get('/sol',[KeuController::class, 'sol']);
+            Route::get('/ef',[KeuController::class, 'efek']);
 
                     //Aspek Operasional
             Route::get('/mOperasional',[MobileController::class, 'operasional']);

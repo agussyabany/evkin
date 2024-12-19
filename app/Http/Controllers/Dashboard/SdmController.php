@@ -66,8 +66,6 @@ class SdmController extends Controller
             'cls'=>$cls,
             'persentaseBulanan' => $persentaseBulanan
         ]);
-
-
     }
 
     public function rasdiklat ()

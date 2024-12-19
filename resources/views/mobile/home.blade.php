@@ -35,7 +35,7 @@
               </div></a>
               
               <a href="#" id="laba"><div class="col">
-                <input type="text" class="knob" value="100" data-width="90" data-readonly="true" data-height="90" data-width="90" data-height="90" data-fgColor="#00a65a" disabled>
+                <input type="text" class="knob" value="{{$laba}}" data-width="90" data-readonly="true" data-height="90" data-width="90" data-height="90" data-fgColor="#00a65a" data-max=200 disabled>
 
                 <div class="knob-label text-center">LABA  (Miliar) </div>
               </div></a>
