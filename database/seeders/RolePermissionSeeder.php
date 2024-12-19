@@ -16,13 +16,18 @@ class RolePermissionSeeder extends Seeder
     {
         // Role::create(['name'=>'de-was']);
         // Permission::create(['name' =>'dewas']);
-        // $roleLl= Role::findByName('dewas');
+        // $roleLl= Role::findByName('de-was');
         // $roleLl->givePermissionTo('dewas');
 
         // Role::create(['name'=>'dirut']);
         // Permission::create(['name' =>'utama']);
         // $roleLl= Role::findByName('dirut');
         // $roleLl->givePermissionTo('utama');
+
+        Role::create(['name'=>'dirtek']);
+        Permission::create(['name' =>'teknik']);
+        $roleLl= Role::findByName('dirtek');
+        $roleLl->givePermissionTo('teknik');
 
         // Role::create(['name'=>'dirpel']);
         // Permission::create(['name' =>'pelayanan']);
@@ -49,9 +54,9 @@ class RolePermissionSeeder extends Seeder
         // $roleLl= Role::findByName('adminLayan');
         // $roleLl->givePermissionTo('lihat-layan');
 
-        Role::create(['name'=>'spi']);
-        Permission::create(['name' =>'verifikasi']);
-        $roleLl= Role::findByName('spi');
-        $roleLl->givePermissionTo('verifikasi');
+        // Role::create(['name'=>'spi']);
+        // Permission::create(['name' =>'verifikasi']);
+        // $roleLl= Role::findByName('spi');
+        // $roleLl->givePermissionTo('verifikasi');
     }
 }
