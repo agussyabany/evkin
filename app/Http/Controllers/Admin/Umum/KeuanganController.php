@@ -50,7 +50,7 @@ class KeuanganController extends Controller
         Keuangan::create($data);
 
         Alert::success('Berhasil!', 'Data berhasil disimpan.');
-        return redirect('/keuangan');
+        return redirect('/evkeu');
     }
 
     public function update (Request $request)
