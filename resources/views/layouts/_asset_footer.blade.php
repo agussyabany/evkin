@@ -38,9 +38,9 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td id="hasil"><h4>2,90 %</h4></td>
-                              <td id="nilai"><h4>5</h4></td>
-                              <td id="target"><h4>2</h4></td>
+                              <td id="hasil"><h4></h4></td>
+                              <td id="nilai"><h4></h4></td>
+                              <td id="target"><h4></h4></td>
                             </tr>
                             
                           </tbody>

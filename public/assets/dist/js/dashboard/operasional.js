@@ -160,7 +160,7 @@ $(document).ready(function() {
     method: 'GET',
     success: function (response) {
         // Tampilkan hasil di elemen HTML
-        $('#tekananHasil').text(response.tekanan);
+        $('#tekananHasil').text(response.tekanan + '%');
         $('#tekananNilai').text(response.nilaiTekanan + '/ 5');
         $('#coltekanan').addClass(response.cls);
     },

@@ -121,11 +121,7 @@ $(document).ready(function() {
         kosong();
         $('#persen').html('X 100 %');
         $('#a').html('Jml air yg terjual pada pel.domestik');
-        $('#a_nilai').html('51.734.497');
         $('#b').html('Jumlah Pelanggan Domestik');
-        $('#b_nilai').html('168.787');
-        $('#hasil').html('25,54');
-        $('#nilai').html('4');
         $('#target').html('5')
       })
       $.ajax({
@@ -172,6 +168,7 @@ $(document).ready(function() {
     $('#persen').html('X 100 %');
     $('#a').html('Jml Uji Kualitas Yg Memenuhi Syarat ');
     $('#b').html('Jumlah Titik yg Diuji atau Titik Minimal');
+    $('#target').html('5')
     $.ajax({
       url: '/uji',
       type: 'GET',
@@ -217,6 +214,7 @@ $(document).on('click', '#pertumbuhan', function() {
   $('#persen').html('X 100 %');
   $('#a').html('Jumlah Pelanggan Tahun ini - Jumlah Pelanggan Tahun Lalu');
   $('#b').html('Jumlah Pelanggan Tahun Lalu');
+  $('#target').html('5')
   $.ajax({
     url: '/tumbuh',
     type: 'GET',

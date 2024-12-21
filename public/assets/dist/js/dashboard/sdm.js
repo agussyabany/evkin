@@ -58,8 +58,8 @@ $(document).ready(function() {
     kosong();
     $('#persen').html('/');
     $('#a').html('Jumlah Pagawai');
-    
     $('#b').html('(Jumlah Seluruh Pelanggan / 1000 )');
+    $('#target').html('5')
     
     
     $.ajax({
@@ -143,8 +143,8 @@ $(document).ready(function() {
     kosong();
     $('#persen').html('x 100%');
     $('#a').html('Jumlah Pagawai Yang Ikut Diklat');
-    
     $('#b').html('(Jumlah Pegawai)');
+    $('#target').html('5');
     $.ajax({
       url: '/rasdiklat',
       type: 'GET',
@@ -223,8 +223,8 @@ $(document).ready(function() {
     kosong();
     $('#persen').html('x 100%');
     $('#a').html('Realisasi Biaya Diklat');
-    
     $('#b').html('Realisasi Biaya Pegawai');
+    $('#target').html('5')
    
     
     
