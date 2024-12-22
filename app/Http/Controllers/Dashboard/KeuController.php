@@ -13,59 +13,9 @@ class KeuController extends Controller
 {
     public function roe()
     {
-        // Check cache
-        $cacheKey = 'roe_data_' . Carbon::now()->year;
-        $roeData = Cache::remember($cacheKey, 60, function() {
-            $labaStlPjk = Keuangan::sum('labaStlPjk');
-            $jmlEkuitas = Keuangan::orderBy('bulanTahun', 'DESC')->value('jmlEkuitas');
-            $hitungRoe = $jmlEkuitas > 0 ? ($labaStlPjk / $jmlEkuitas) * 100 : 0;
-            $hasilRoe = round($hitungRoe, 2);
+        
 
-            if ($hasilRoe <= 10) {
-                $nilai = 0;
-                $cls = 'bg-danger';
-            } elseif ($hasilRoe > 0 && $hasilRoe <= 3) {
-                $nilai = 2;
-                $cls = 'bg-warning';
-            } elseif ($hasilRoe > 3 && $hasilRoe <= 7) {
-                $nilai = 3;
-                $cls = 'bg-primary';
-            } elseif ($hasilRoe > 7 && $hasilRoe <= 10) {
-                $nilai = 4;
-                $cls = 'bg-primary';
-            } else {
-                $nilai = 5;
-                $cls = 'bg-success';
-            }
-
-            $tahun = Carbon::now()->year;
-            $persentaseBulanan = [];
-
-            for ($bulan = 1; $bulan <= 12; $bulan++) {
-                $bulanFormatted = str_pad($bulan, 2, '0', STR_PAD_LEFT);
-                $labaStlPjkG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanFormatted)->value('labaStlPjk') ?? 0;
-                $jmlEkuitasG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanFormatted)->value('jmlEkuitas') ?? 0;
-
-                if ($jmlEkuitasG > 0) {
-                    $persentase = ($labaStlPjkG / $jmlEkuitasG) * 100;
-                } else {
-                    $persentase = 0;
-                }
-
-                $persentaseBulanan[$bulanFormatted] = round($persentase, 2);
-            }
-
-            return [
-                'labaStlPjk' => intval($labaStlPjk),
-                'jmlEkuitas' => intval($jmlEkuitas),
-                'hasilRoe' => intval($hasilRoe),
-                'nilaiRoe' => $nilai,
-                'cls' => $cls,
-                'persentaseBulanan' => $persentaseBulanan
-            ];
-        });
-
-        return response()->json($roeData);
+        
     }
 
     public function rop()

@@ -53,7 +53,7 @@ class MainController extends Controller
         if ($kpstsTrpsng > 0) {
             $persentase = ($volProdRil / $kpstsTrpsng) * 100;
         } else {
-            $persentase = 0; // Jika KpstsTrpsng nol, hasilnya 0
+            $persentase = 0;
         }
 
         // Simpan hasil perhitungan ke array

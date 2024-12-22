@@ -24,7 +24,7 @@
             <div class="row">
               
               <a href="#" id="nrw" style="text-decoration: none;"><div class="col" >
-                <input type="number" class="knob"  value="38" data-width="90" data-readonly="true" data-height="90" data-fgColor="#f56954"  disabled>
+                <input type="number" class="knob"  value="{{$nrw}}" data-width="90" data-readonly="true" data-height="90" data-fgColor="#f56954"  disabled>
 
                 <div class="knob-label text-center">NRW (%)</div>
               </div></a>
