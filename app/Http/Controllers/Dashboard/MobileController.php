@@ -352,8 +352,7 @@ class MobileController extends Controller
     //Jam Operasi layanan
 
         $JmlWktPly = Operasional::sum('JmlWktPly');
-        //$convjam = $JmlWktPlyM / 60 ;
-        $hari = 330;
+        $hari = Operasional::sum('hari');
         $hitungjam = $hari> 0 ? ($JmlWktPly / $hari) : 0;
         
         $jam = round($hitungjam,2);

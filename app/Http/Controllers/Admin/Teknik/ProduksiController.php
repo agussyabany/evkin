@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Teknik;
 use App\Http\Controllers\Controller;
 use App\Models\Evkin\Operasional;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\Constraint\Operator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProduksiController extends Controller
@@ -13,7 +14,14 @@ class ProduksiController extends Controller
     public function  evOP ()
     {
         $operasional = Operasional::orderBy('bulanTahun','ASC')->get();
-        return view('admin.evkin.evOperasional',compact('operasional'));
+        $VolProdRil = Operasional::sum('VolProdRil');
+        $KpstsTrpsng = Operasional::sum('KpstsTrpsng');
+        $KalkulasiJumAir = Operasional::sum('KalkulasiJumAir');
+        $JmlAirDist = Operasional::sum('JmlAirDist');
+        $JmlWktPly = Operasional::sum('JmlWktPly');
+        $MtrAirGnti = Operasional::sum('MtrAirGnti');
+        $hari = Operasional::sum('hari');
+        return view('admin.evkin.evOperasional',compact('operasional','VolProdRil','KpstsTrpsng','KalkulasiJumAir','JmlAirDist','JmlWktPly','MtrAirGnti','hari'));
     }
     public function index ()
     {

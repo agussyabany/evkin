@@ -12,7 +12,10 @@ class SdmController extends Controller
     public function evSdm ()
     {
         $sdm = Sdm::orderBy('bulanTahun','ASC')->get();
-        return view('admin.evkin.evSdm',compact('sdm'));
+        $JmlPegDiklat = Sdm::sum('JmlPegDiklat');
+        $RealByDiklat = Sdm::sum('RealByDiklat');
+        $RealByPeg = Sdm::sum('RealByPeg');
+        return view('admin.evkin.evSdm',compact('sdm','JmlPegDiklat','RealByDiklat','RealByPeg'));
     }
     public function index ()
     {

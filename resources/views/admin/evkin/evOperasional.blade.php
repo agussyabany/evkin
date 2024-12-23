@@ -21,7 +21,7 @@
   <fieldset class="border border-primary rounded">
     <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>ASPEK OPERASIONAL</h6></legend>
   <div class="card">
-    <div class="card-hedaer"></div>
+    <div class="card-header"></div>
     <div class="card-body">
       <table class="table table-striped responsive" id="tbl">
         <thead>
@@ -31,7 +31,8 @@
                 <th class="text-wrap" style="width: 200px;">Jumlah Kapasitas Terpasang</th>
                 <th class="text-wrap" style="width: 200px;">Air Disistribusikan - Air Terjual</th>
                 <th class="text-wrap" style="width: 200px;">Jumlah Air Didistribusikan</th>
-                <th class="text-wrap" style="width: 200px;">Jumlah Waktu Pelayanan/Distribusi Air ke Pelanggan dalam Setahun</th>
+                <th class="text-wrap" style="width: 200px;">Jumlah Waktu Pelayanan/Distribusi Air ke Pelanggan dalam Sebulan</th>
+                <th>Jumlah Hari</th>
                 <th>Jumlah Pelanggan yang Dilayanai dengan Tekanan > 0,7 Bar</th>
                 <th class="text-wrap" style="width: 200px;">Jumlah Pelanggan Aktiv</th>
                 <th>Jml Meter yg diganti/kalibrasi dalam setahun</th>
@@ -49,6 +50,7 @@
             <td>{{ number_format($item->KalkulasiJumAir, 0) }}</td>
             <td>{{ number_format($item->JmlAirDist, 0) }}</td>
             <td>{{ number_format($item->JmlWktPly, 0) }}</td>
+            <td>{{ number_format($item->hari, 0) }}</td>
             <td>{{ number_format($item->Plgnlayan, 0) }}</td>
             <td>{{ number_format($item->PlgnAktiv, 0) }}</td>
             <td>{{ number_format($item->MtrAirGnti, 0) }}</td>
@@ -91,6 +93,18 @@
             
           </tr>
           @endforeach
+          <tr>
+            <td><strong>TOT</strong></td>
+            <td><strong>{{number_format($VolProdRil)}}</strong></td>
+            <td><strong>{{number_format($KpstsTrpsng)}}</strong></td>
+            <td><strong>{{number_format($KalkulasiJumAir)}}</strong></td>
+            <td><strong>{{number_format($JmlAirDist)}}</strong></td>
+            <td><strong>{{number_format($JmlWktPly)}}</strong></td>
+            <td><strong>{{number_format($hari)}}</strong></td>
+            <td></td>
+            <td></td>
+            
+          </tr>
         </tbody>
     </table>
     </div>

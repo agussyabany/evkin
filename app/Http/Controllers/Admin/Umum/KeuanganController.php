@@ -17,7 +17,12 @@ class KeuanganController extends Controller
     public function evkeu ()
     {
         $keuangan = Keuangan::orderBy('bulanTahun','ASC')->get();
-        return view('admin.evkin.evKeuangan',compact('keuangan'));
+        $labaStlPjk = Keuangan::sum('labaStlPjk');
+        $biayaOps = Keuangan::sum('biayaOps');
+        $PndptnOps = Keuangan::sum('PndptnOps');
+        $JmlPnrmRekAir = Keuangan::sum('JmlPnrmRekAir');
+        $jmlRekAir = Keuangan::sum('jmlRekAir');    
+        return view('admin.evkin.evKeuangan',compact('keuangan','labaStlPjk','biayaOps','PndptnOps','JmlPnrmRekAir','jmlRekAir'));
     }
 
     public function index ()

@@ -84,6 +84,15 @@
                 </td>
               </tr>
               @endforeach
+              <tr>
+                <td><strong>TOT</strong></td>
+                <td></td>
+                <td></td>
+                <td><strong>{{number_format($JmlPegDiklat,0)}}</strong></td>
+                <td><strong>{{number_format($RealByDiklat,0)}}</strong></td>
+                <td><strong>{{number_format($RealByPeg,0)}}</strong></td>
+
+              </tr>
             </tbody>
         </table>
         </div>

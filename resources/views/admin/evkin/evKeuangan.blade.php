@@ -36,10 +36,10 @@
                       <th>Pendapatan Operasi</th>
                       <th>Kas + Setara Kas</th>
                       <th>Hutang Lancar</th>
-                      <th>Total Aktiva</th>
-                      <th>Total Hutang</th>
                       <th>Penerimaan Rekening Air</th>
                       <th>Rekening Air</th>
+                      <th>Total Aktiva</th>
+                      <th>Total Hutang</th>
                       <th>Periode</th>
                       <th>Status</th>
                       <th>-</th>
@@ -64,9 +64,7 @@
                   <td>{{ number_format($item->TotalAktiva, 0) }}</td>
                   <td>{{ number_format($item->TotalHutang, 0) }}</td>
                   <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
-                  
-                    
-                    <td>
+                  <td>
                       @if ($item->status == 0)
                           <span style="color: rgb(225, 236, 15);">POST</span>
                       @else
@@ -101,7 +99,21 @@
                     </td>
                     
                 </tr>
+                
                 @endforeach
+                <tr>
+                  <td><strong>TOT</strong></td>
+                  <td><strong>{{number_format($labaStlPjk, 0)}}</strong></td>
+                  <td></td>
+                  <td><strong>{{number_format($biayaOps, 0)}}</strong></td>
+                  <td><strong>{{number_format($PndptnOps, 0)}}</strong></td>
+                  <td></td>
+                  <td></td>
+                  <td><strong>{{number_format($JmlPnrmRekAir, 0)}}</strong></td>
+                  <td><strong>{{number_format($jmlRekAir, 0)}}</strong></td>
+                  <td></td>
+                  <td></td>   
+                </tr>
               </tbody>
           </table>
 

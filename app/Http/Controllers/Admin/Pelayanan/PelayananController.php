@@ -16,7 +16,12 @@ class PelayananController extends Controller
     public function evPel ()
     {
         $pelayanan = Pelayanan::orderBy('bulanTahun','ASC')->get();
-        return view('admin.evkin.evPelayanan',compact('pelayanan'));
+        $AduanSlsai = Pelayanan::sum('AduanSlsai');
+        $JmlAduan = Pelayanan::sum('JmlAduan');
+        $UjiKualitas = Pelayanan::sum('UjiKualitas');
+        $titikUji = Pelayanan::sum('titikUji');
+        $JmlAirTrjualDom = Pelayanan::sum('JmlAirTrjualDom');
+        return view('admin.evkin.evPelayanan',compact('pelayanan','AduanSlsai','JmlAduan','UjiKualitas','titikUji','JmlAirTrjualDom'));
     }
     public function index ()
     {
