@@ -12,7 +12,7 @@
   <div class="container">
     <div class="p-1 flex-fill" style="overflow: hidden"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
 
-                    <div class="row">
+                    
                       <div class="col">
                         <!-- MAP -->
                           <a href="#" id="rasioProd" data-toggle="modal" data-target="#modal-prod"><div id="colRasioProd" class="info-box {{$clsProd}}">
@@ -43,9 +43,9 @@
                       </div>
 
                       
-                    </div>
+                   
 
-                    <div class="row">
+                    
                       <div class="col">
                         <!-- /.info-box -->
                       <a href="#" id="jam" data-toggle="modal" data-target="#modal-jam">
@@ -78,11 +78,7 @@
 
                 </div>
 
-
-
-                    </div>
-
-                     <div class="row">
+                     
                       
 
                             <div class="col">
@@ -100,7 +96,7 @@
                             <!-- /.info-box -->
 
                         </div>
-                     </div>
+                    
 
                      <div class="row">
                         <div class="col">

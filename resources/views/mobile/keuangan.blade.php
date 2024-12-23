@@ -12,7 +12,7 @@
   </div>
   <!-- /.content-header -->
   <div class="container"><br>
-    <div class="row">
+    
             
     <div class="col">
      <a href="#" id="roe" data-toggle="modal" data-target="#modal-roe">
@@ -100,7 +100,7 @@
         </a>
       </div>
       
-    </div>
+   
   </div>
 </div>
 <script>
