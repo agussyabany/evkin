@@ -10,7 +10,6 @@ use App\Models\Evkin\Sdm;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-
 class MobileController extends Controller
 {
     public function utama ()
@@ -70,7 +69,7 @@ class MobileController extends Controller
             $hitungRoe = $jmlEkuitas > 0 ? ($labaStlPjk / $jmlEkuitas) * 100 : 0;
             $hasilRoe = round($hitungRoe, 2);
 
-            if ($hasilRoe <= 10) {
+            if ($hasilRoe <= 0) {
                 $nilaiRoe = 0;
                 $clsRoe = 'bg-danger';
             } elseif ($hasilRoe > 0 && $hasilRoe <= 3) {
@@ -147,16 +146,16 @@ class MobileController extends Controller
             $hitungRok = $HutangLancar > 0 ? ($kaStrkas / $HutangLancar) * 100 : 0;
             $hasilRok = round($hitungRok, 2);
 
-            if ($hasilRok >= 408.16) {
+            if ($hasilRok >= 100) {
                 $nilaiRok = 5;
                 $clsRok = 'bg-success';
-            } elseif ($hasilRok >= 306.12 && $hasilRok < 408.16) {
+            } elseif ($hasilRok >= 80 && $hasilRok < 100) {
                 $nilaiRok = 4;
                 $clsRok = 'bg-primary';
-            } elseif ($hasilRok >= 204.08 && $hasilRok < 306.12) {
+            } elseif ($hasilRok >= 60 && $hasilRok < 80) {
                 $nilaiRok = 3;
                 $clsRok = 'bg-warning';
-            } elseif ($hasilRok >= 102.04 && $hasilRok < 204.08) {
+            } elseif ($hasilRok >= 40 && $hasilRok < 60) {
                 $nilaiRok = 2;
                 $clsRok = 'bg-danger';
             } else {
@@ -189,13 +188,13 @@ class MobileController extends Controller
             if ($hasilEf >= 90) {
                 $nilaiEf = 5;
                 $clsEf = 'bg-success';
-            } elseif ($hasilEf >= 80 && $hasilEf < 90) {
+            } elseif ($hasilEf >= 85 && $hasilEf < 90) {
                 $nilaiEf = 4;
                 $clsEf = 'bg-primary';
-            } elseif ($hasilEf >= 70 && $hasilEf < 80) {
+            } elseif ($hasilEf >= 80 && $hasilEf < 85) {
                 $nilaiEf = 3;
                 $clsEf = 'bg-warning';
-            } elseif ($hasilEf >= 60 && $hasilEf < 70) {
+            } elseif ($hasilEf >= 75 && $hasilEf < 80) {
                 $nilaiEf = 2;
                 $clsEf = 'bg-danger';
             } else {
@@ -225,16 +224,16 @@ class MobileController extends Controller
             $hitungSol = $TotalHutang > 0 ? ($TotalAktiva / $TotalHutang) * 100 : 0;
             $hasilSol = round($hitungSol, 2);
 
-            if ($hasilSol >= 1186.24) {
+            if ($hasilSol >= 200) {
                 $nilaiSol = 5;
                 $clsSol = 'bg-success';
-            } elseif ($hasilSol >= 889.68 && $hasilSol < 1186.24) {
+            } elseif ($hasilSol >= 170 && $hasilSol < 200) {
                 $nilaiSol = 4;
                 $clsSol = 'bg-primary';
-            } elseif ($hasilSol >= 593.12 && $hasilSol < 889.68) {
+            } elseif ($hasilSol >= 135 && $hasilSol < 170) {
                 $nilaiSol = 3;
                 $clsSol = 'bg-warning';
-            } elseif ($hasilSol >= 296.56 && $hasilSol < 593.12) {
+            } elseif ($hasilSol >= 100 && $hasilSol < 135) {
                 $nilaiSol = 2;
                 $clsSol = 'bg-danger';
             } else {
@@ -270,16 +269,16 @@ class MobileController extends Controller
         $hitungrasioProd = $KpstsTrpsng > 0 ? ($VolProdRil / $KpstsTrpsng) * 100 : 0;
         $hasilProd = round($hitungrasioProd, 2);
 
-        if ($hasilProd <= 70) {
+        if ($hasilProd <= 90) {
             $nilaiProd = 1;
             $clsProd = 'bg-danger';
-        } elseif ($hasilProd > 70 && $hasilProd <= 80) {
+        } elseif ($hasilProd > 80 && $hasilProd <= 90) {
             $nilaiProd = 2;
             $clsProd = 'bg-warning';
-        } elseif ($hasilProd > 80 && $hasilProd <= 90) {
+        } elseif ($hasilProd > 70 && $hasilProd <= 80) {
             $nilaiProd = 3;
             $clsProd = 'bg-info';
-        } elseif ($hasilProd > 90 && $hasilProd <= 100) {
+        } elseif ($hasilProd > 60 && $hasilProd <= 70) {
             $nilaiProd = 4;
             $clsProd = 'bg-primary';
         } else {
@@ -318,15 +317,19 @@ class MobileController extends Controller
         $hitungnrw = $JmlAirDistM > 0 ? ($KalkulasiJumAirM / $JmlAirDistM) * 100 : 0;
         $nrw = round($hitungnrw, 2);
         
-        if ($nrw <= 20) {
-            $nilaiNrw = 4;
+        if ($nrw <= 25) {
+            $nilaiNrw = 5;
             $clsNrw= 'bg-success';
-        } elseif ($nrw > 20 && $nrw <= 30) {
-            $nilaiNrw = 3;
+        } elseif ($nrw > 25 && $nrw <= 30) {
+            $nilaiNrw = 4;
             $clsNrw = 'bg-primary';
-        } elseif ($nrw > 30 && $nrw <= 40) {
-            $nilaiNrw = 2;
-            $clsNrw = 'bg-warning';
+        } elseif ($nrw > 30 && $nrw <= 35) {
+            $nilaiNrw = 3;
+            $clsNrw = 'bg-info';
+        }
+        elseif ($nrw > 35 && $nrw <= 40) {
+                $nilaiNrw = 2;
+                $clsNrw = 'bg-warning';
         } else { 
             $nilaiNrw = 1;
             $clsNrw = 'bg-success';
@@ -356,16 +359,16 @@ class MobileController extends Controller
         $jam = round($hitungjam,2);
 
         
-        if ($jam <= 4) {
+        if ($jam <= 12) {
             $nilaiJam = 1;
             $clsJam = 'bg-danger';
-        } elseif ($jam > 4 && $jam <= 8) {
+        } elseif ($jam > 12 && $jam <= 16) {
             $nilaiJam = 2;
             $clsJam = 'bg-warning';
-        } elseif ($jam > 8 && $jam <= 16) {
+        } elseif ($jam > 16 && $jam <= 18) {
             $nilaiJam = 3;
             $clsJam = 'bg-primary';
-        } elseif ($jam > 16 && $jam <= 20) {
+        } elseif ($jam > 18 && $jam <= 21) {
             $nilaiJam = 4;
             $clsJam = 'bg-primary';
         } else {
@@ -402,20 +405,20 @@ class MobileController extends Controller
      // Bulatkan hasil ke 2 angka desimal
      $tekanan = round($hitungTekanan, 2);
      
-     if ($tekanan <= 70) {
+     if ($tekanan <= 20) {
          $nilaiTek = 1;
          $clsTek = 'bg-danger';
-     } elseif ($tekanan > 70 && $tekanan <= 80) {
+     } elseif ($tekanan > 20 && $tekanan <= 40) {
          $nilaiTek = 2;
          $clsTek = 'bg-warning';
-     } elseif ($tekanan > 80 && $tekanan <= 90) {
+     } elseif ($tekanan > 40 && $tekanan <= 60) {
          $nilaiTek = 3;
          $clsTek = 'bg-info';
-     } elseif ($tekanan > 90 && $tekanan <= 100) {
+     } elseif ($tekanan > 60 && $tekanan <= 80) {
          $nilaiTek = 4;
          $clsTek = 'bg-primary';
      } else {
-         $nilaiv = 5;
+         $nilaiTek = 5;
          $clsTek = 'bg-success';
      }
      
@@ -447,16 +450,16 @@ for ($bulanTek = 1; $bulanTek <= 12; $bulanTek++) {
             $hitungMtrAirGnti = $PlgnAktiv > 0 ? ($MtrAirGnti / $PlgnAktiv) * 100 : 0;
             $kalibrasi = round($hitungMtrAirGnti, 2);
 
-            if ($kalibrasi <= 10) {
+            if ($kalibrasi <= 5) {
                 $nilaiKal = 1;
                 $clsKal = 'bg-danger';
-            } elseif ($kalibrasi > 10 && $kalibrasi <= 20) {
+            } elseif ($kalibrasi > 5 && $kalibrasi <= 10) {
                 $nilaiKal= 2;
                 $clsKal = 'bg-warning';
-            } elseif ($kalibrasi > 20 && $kalibrasi <= 30) {
+            } elseif ($kalibrasi > 10 && $kalibrasi <= 15) {
                 $nilaiKal = 3;
                 $clsKal= 'bg-primary';
-            } elseif ($kalibrasi > 30 && $kalibrasi <= 40) {
+            } elseif ($kalibrasi > 15 && $kalibrasi <= 20) {
                 $nilaiKal = 4;
                 $clsKal = 'bg-primary'; 
             } else {
@@ -503,16 +506,16 @@ for ($bulanTek = 1; $bulanTek <= 12; $bulanTek++) {
         $hitungCakupan = $jmlPndkWil > 0 ? ($JmlPnddkTrlyni / $jmlPndkWil) * 100 : 0;
         $hasilCkp = round($hitungCakupan, 2);
 
-        if ($hasilCkp > 0 && $hasilCkp <= 3) {
+        if ($hasilCkp  <= 20) {
             $nilaiCkp = 1;
             $clsCkp = 'bg-danger';
-        } elseif ($hasilCkp > 3 && $hasilCkp <= 6) {
+        } elseif ($hasilCkp > 20 && $hasilCkp <= 40) {
             $nilaiCkp = 2;
             $clsCkp = 'bg-warning';
-        } elseif ($hasilCkp > 6 && $hasilCkp <= 9) {
+        } elseif ($hasilCkp > 40 && $hasilCkp <= 60) {
             $nilaiCkp = 3;
             $clsCkp = 'bg-primary';
-        } elseif ($hasilCkp > 9 && $hasilCkp <= 12) {
+        } elseif ($hasilCkp > 60 && $hasilCkp <= 80) {
             $nilaiCkp = 4;
             $clsCkp = 'bg-primary';
         } else {
@@ -549,16 +552,16 @@ for ($bulanTek = 1; $bulanTek <= 12; $bulanTek++) {
         $hitungAduan = $JmlAduan > 0 ? ($AduanSlsai / $JmlAduan) * 100 : 0;
         $hasilAdu = round($hitungAduan, 2);
 
-        if ($hasilAdu <= 70) {
+        if ($hasilAdu <= 80) {
             $nilaiAdu = 1;
             $clsAdu = 'bg-danger';
-        } elseif ($hasilAdu > 70 && $hasilAdu <= 80) {
+        } elseif ($hasilAdu > 60 && $hasilAdu <= 80) {
             $nilaiAdu = 2;
             $clsAdu = 'bg-warning';
-        } elseif ($hasilAdu > 80 && $hasilAdu <= 90) {
+        } elseif ($hasilAdu > 40 && $hasilAdu <= 60) {
             $nilaiAdu = 3;
             $clsAdu = 'bg-primary';
-        } elseif ($hasilAdu > 90 && $hasilAdu <= 99) {
+        } elseif ($hasilAdu > 20 && $hasilAdu <= 40) {
             $nilaiAdu = 4;
             $clsAdu = 'bg-primary';
         } else {
@@ -587,16 +590,16 @@ for ($bulanTek = 1; $bulanTek <= 12; $bulanTek++) {
         $hitungDomestik = $JmlPlgnDom > 0 ? ($JmlAirTrjualDom / $JmlPlgnDom) / 12 : 0;
         $hasilDom = round($hitungDomestik, 2);
 
-        if ($hasilDom <= 10) {
+        if ($hasilDom <= 15) {
             $nilaiDom = 1;
             $clsDom = 'bg-danger';
-        } elseif ($hasilDom > 10 && $hasilDom <= 20) {
+        } elseif ($hasilDom > 15 && $hasilDom <= 20) {
             $nilaiDom = 2;
             $clsDom = 'bg-warning';
-        } elseif ($hasilDom > 20 && $hasilDom <= 30) {
+        } elseif ($hasilDom > 20 && $hasilDom <= 25) {
             $nilaiDom = 3;
             $clsDom = 'bg-primary';
-        } elseif ($hasilDom > 30 && $hasilDom <= 40) {
+        } elseif ($hasilDom > 25 && $hasilDom <= 30) {
             $nilaiDom = 4;
             $clsDom = 'bg-primary'; 
         } else {
@@ -626,16 +629,16 @@ $UjiKualitas = Pelayanan::sum('UjiKualitas');
         $hitungUji = $titikUji > 0 ? ( $titikUji / $UjiKualitas ) * 100 : 0;
         $hasilQap = round($hitungUji, 2);
 
-        if ($hasilQap <= 10) {
+        if ($hasilQap <= 20) {
             $nilaiQap = 1;
             $clsQap = 'bg-danger';
-        } elseif ($hasilQap > 10 && $hasilQap <= 20) {
+        } elseif ($hasilQap > 20 && $hasilQap <= 40) {
             $nilai = 2;
             $cls = 'bg-warning';
-        } elseif ($hasilQap > 20 && $hasilQap <= 30) {
+        } elseif ($hasilQap > 40 && $hasilQap <= 60) {
             $nilai = 3;
             $cls = 'bg-info';
-        } elseif ($hasilQap > 30 && $hasilQap <= 40) {
+        } elseif ($hasilQap > 60 && $hasilQap <= 80) {
             $nilai = 4;
             $cls = 'bg-primary'; 
         } else {
@@ -668,16 +671,16 @@ $JmlPlgnThLl = Pelayanan::orderBy('bulanTahun', 'DESC')->value('JmlPlgnThLl');
 $hitungTumbuh = $JmlPlgnThLl > 0 ? ($kalKulasiJmlPlgn / $JmlPlgnThLl) * 100 : 0;
 $hasilTbh = round($hitungTumbuh, 2);
 
-if ($hasilTbh > 0 && $hasilTbh <= 3) {
+if ($hasilTbh <= 4) {
     $nilaiTbh = 1;
     $clsTbh = 'bg-danger';
-} elseif ($hasilTbh > 3 && $hasilTbh <= 6) {
+} elseif ($hasilTbh > 4 && $hasilTbh <= 6) {
     $nilaiTbh = 2;
     $clsTbh = 'bg-warning';
-} elseif ($hasilTbh > 6 && $hasilTbh <= 9) {
+} elseif ($hasilTbh > 6 && $hasilTbh <= 8) {
     $nilaiTbh = 3;
     $clsTbh = 'bg-primary';
-} elseif ($hasilTbh > 9 && $hasilTbh <= 12) {
+} elseif ($hasilTbh > 8 && $hasilTbh <= 10) {
     $nilaiTbh = 4;
     $clsTbh = 'bg-primary';
 } else {
@@ -711,21 +714,22 @@ $persentaseBulananTbh[$bulanFormattedTbh] = round($persentaseTbh, 2);
 
     public function sdm ()
     {
+        //Rasio Pegawai Terhadap pelanggan
         $JmlPgwai = Sdm::orderBy('bulanTahun', 'DESC')->value('JmlPgwai');
         $JmlPlgn1000 = Sdm::orderBy('bulanTahun', 'DESC')->value('JmlPlgn1000');
         $hitungRaspeg = $JmlPlgn1000 > 0 ? ($JmlPgwai / $JmlPlgn1000) : 0;
         $hasilRpl = round($hitungRaspeg, 2);
 
-        if ($hasilRpl > 0 && $hasilRpl <= 3) {
+        if ($hasilRpl > 12.0 ) {
             $nilaiRpl = 1;
             $clsRpl = 'bg-danger';
-        } elseif ($hasilRpl > 3 && $hasilRpl <= 6) {
+        } elseif ($hasilRpl > 10.0 && $hasilRpl <= 12.0) {
             $nilaiRpl = 2;
             $clsRpl = 'bg-warning';
-        } elseif ($hasilRpl > 6 && $hasilRpl <= 9) {
+        } elseif ($hasilRpl > 8.0 && $hasilRpl <= 10.0) {
             $nilaiRpl = 3;
             $clsRpl = 'bg-primary';
-        } elseif ($hasilRpl > 9 && $hasilRpl <= 12) {
+        } elseif ($hasilRpl > 6.0 && $hasilRpl <= 8.0) {
             $nilaiRpl = 4;
             $clsRpl = 'bg-primary';
         } else {
@@ -755,22 +759,22 @@ $persentaseBulananTbh[$bulanFormattedTbh] = round($persentaseTbh, 2);
         $persentaseBulananRpl[$bulanFormattedRpl] = round($persentaseRpl, 2);
     }
 
-    //Rasio Duiklat Pegawai
+    //Rasio Diklat Pegawai
     $JmlPegDiklat = Sdm::sum('JmlPegDiklat');
         $JmlPgwai = Sdm::orderBy('bulanTahun', 'DESC')->value('JmlPgwai');
         $hitungRasdik = $JmlPgwai > 0 ? ($JmlPegDiklat / $JmlPgwai) * 100 : 0;
         $hasilRdp = round($hitungRasdik, 2);
 
-        if ($hasilRdp <= 10) {
+        if ($hasilRdp < 20) {
             $nilaiRdp = 1;
             $clsRdp = 'bg-danger';
-        } elseif ($hasilRdp > 10 && $hasilRdp <= 20) {
+        } elseif ($hasilRdp > 20 && $hasilRdp <= 40) {
             $nilaiRdp = 2;
             $clsRdp = 'bg-warning';
-        } elseif ($hasilRdp > 20 && $hasilRdp <= 30) {
+        } elseif ($hasilRdp > 40 && $hasilRdp <= 60) {
             $nilaiRdp = 3;
             $clsRdp = 'bg-primary';
-        } elseif ($hasilRdp > 30 && $hasilRdp <= 40) {
+        } elseif ($hasilRdp > 60 && $hasilRdp <= 80) {
             $nilaiRdp = 4;
             $clsRdp = 'bg-primary'; 
         } else {
@@ -802,16 +806,16 @@ $RealByDiklat = Sdm::sum('RealByDiklat');
         $hitungRasby = $RealByPeg > 0 ? ($RealByDiklat / $RealByPeg) * 100 : 0;
         $hasilRbd = round($hitungRasby, 2);
 
-        if ($hasilRbd <= 10) {
+        if ($hasilRbd <= 2.5) {
             $nilaiRbd = 1;
             $clsRbd = 'bg-danger';
-        } elseif ($hasilRbd > 10 && $hasilRbd <= 20) {
+        } elseif ($hasilRbd > 2.5 && $hasilRbd <= 5) {
             $nilaiRbd = 2;
             $clsRbd = 'bg-warning';
-        } elseif ($hasilRbd > 20 && $hasilRbd <= 30) {
+        } elseif ($hasilRbd > 5 && $hasilRbd <= 7.5) {
             $nilaiRbd = 3;
             $clsRbd = 'bg-primary';
-        } elseif ($hasilRbd > 30 && $hasilRbd <= 40) {
+        } elseif ($hasilRbd > 7.5 && $hasilRbd <= 10) {
             $nilaiRbd = 4;
             $clsRbd = 'bg-primary'; 
         } else {

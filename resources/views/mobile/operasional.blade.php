@@ -57,7 +57,7 @@
                           <span class="" id="jamOperasi">{{$jam}} Jam</span>
                         </div>
                         <!-- /.info-box-content -->
-                        <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="jamNilai">{{$nilaiJam}}</h3></div>
+                        <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="jamNilai">{{$nilaiJam}} /5</h3></div>
                       </div></a>
                     </div>
 

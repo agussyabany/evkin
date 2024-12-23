@@ -14,7 +14,7 @@
   <a href="#" id="rasioPegawai" data-toggle="modal" data-target="#modal-rpl"><div id="colRaspeg" class="info-box {{$clsRpl}}">
             <span class="info-box-icon"><i class="fas fa-balance-scale"></i></span>
             <div class="info-box-content">
-              <span class=""><h5>Jumlah Pagawai Yang Ikut Diklat</h5></span>
+              <span class=""><h5>Rasio Pegawai Terhadap Pelanggan</h5></span>
               <span class="info-box-number" id="hasilRaspeg"> 
                     {{$hasilRpl}}
                     <small>%</small>

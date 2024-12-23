@@ -76,7 +76,7 @@
                       <small>%</small>
                 </span>
               </div>
-              <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="nilaiEf">{{$nilaiEf}}</h3></div>
+              <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="nilaiEf">{{$nilaiEf}} /5</h3></div>
           </div>
       </a>
     </div>
@@ -93,7 +93,7 @@
                       <small>%</small>
                 </span>
               </div>
-              <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="nilaiSol">{{$nilaiSol}}</h3></div>
+              <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="nilaiSol">{{$nilaiSol}} /5</h3></div>
           </div>
 
           

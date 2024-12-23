@@ -18,7 +18,7 @@
                           <tr>
                               <td id="a"><h2>Jml air yg terjual pada pel.domestik</h2></td>
                               <td id="a_nilai" style="text-align: right; text-size-adjust: 10px;"><h2>{{ number_format( $JmlAirTrjualDom, 0)}}</h2></td>
-                              <td rowspan="2" class="text-center mt-2" id="persen" style="width: 100%; text-align: center;"><h2>X 100 %</h2></td>
+                              <td rowspan="2" class="text-center mt-2" id="persen" style="width: 100%; text-align: center;"><h2>X 12</h2></td>
                           </tr>
                           <tr>
                               <td id="b"><h2>Jumlah Pelanggan Domestik</h2></td>

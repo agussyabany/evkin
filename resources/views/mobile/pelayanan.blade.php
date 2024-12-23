@@ -19,7 +19,7 @@
                     <small>%</small>
               </span>
             </div>
-            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center" id="nilaiCakup"> {{$nilaiCkp}} </h5></div>
+            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center" id="nilaiCakup"> {{$nilaiCkp}} /5</h5></div>
         </div></a>
 
         <a href="#" id="aduan" data-toggle="modal" data-target="#modal-adu"><div id="colAduan" class="info-box {{$clsAdu}}">
@@ -31,7 +31,7 @@
                     <small></small>
               </span>
             </div>
-            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center" id="nilaiAduan">{{$nilaiAdu}}</h5></div>
+            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center" id="nilaiAduan">{{$nilaiAdu}} /5</h5></div>
         </div></a>
 
 
@@ -44,7 +44,7 @@
                     <small>%</small>
               </span>
             </div>
-            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center" id="nilaiDomestik">{{$nilaiDom}}</h5></div>
+            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center" id="nilaiDomestik">{{$nilaiDom}} /5</h5></div>
         </div></a>
 
         <a href="#" id="kualitas" data-toggle="modal" data-target="#modal-qap"><div id="colUji" class="info-box {{$clsQap}}">
@@ -56,7 +56,7 @@
                     <small>%</small>
               </span>
             </div>
-            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center" id="nilaiUji">{{$nilaiQap}}</h5></div>
+            <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center" id="nilaiUji">{{$nilaiQap}} /5</h5></div>
         </div></a>
 
         <a href="#" id="pertumbuhan" data-toggle="modal" data-target="#modal-tbh"><div id="colTumbuh" class="info-box {{$clsTbh}}">
