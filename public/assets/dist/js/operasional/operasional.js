@@ -17,6 +17,7 @@ $(document).ready(function() {
           $('#KalkulasiJumAir').val(item.KalkulasiJumAir)
           $('#JmlAirDist').val(item.JmlAirDist);
           $('#JmlWktPly').val(item.JmlWktPly);
+          $('#hari').val(item.hari);
           $('#Plgnlayan').val(item.Plgnlayan);
           $('#PlgnAktiv').val(item.PlgnAktiv);
           $('#MtrAirGnti').val(item.MtrAirGnti);

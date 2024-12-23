@@ -37,6 +37,7 @@ class ProduksiController extends Controller
             'KalkulasiJumAir' => $request->input('KalkulasiJumAir'),
             'JmlAirDist' => $request->input('JmlAirDist'),
             'JmlWktPly' => $request->input('JmlWktPly'),
+            'hari' => $request->input('hari'),
             'Plgnlayan' => $request->input('Plgnlayan'),
             'PlgnAktiv' => $request->input('PlgnAktiv'),
             'MtrAirGnti' => $request->input('MtrAirGnti'),
@@ -47,7 +48,7 @@ class ProduksiController extends Controller
 
         Operasional::create($data);
         Alert::success('Berhasil!', 'Data berhasil disimpan.');
-        return redirect('/produksi');
+        return redirect('/evOp');
     }
 
     public function edit (Request $request)
@@ -60,6 +61,7 @@ class ProduksiController extends Controller
             'KalkulasiJumAir' => $request->input('KalkulasiJumAir'),
             'JmlAirDist' => $request->input('JmlAirDist'),
             'JmlWktPly' => $request->input('JmlWktPly'),
+            'hari' => $request->input('hari'),
             'Plgnlayan' => $request->input('Plgnlayan'),
             'PlgnAktiv' => $request->input('PlgnAktiv'),
             'MtrAirGnti' => $request->input('MtrAirGnti'),
@@ -67,7 +69,7 @@ class ProduksiController extends Controller
         ]);
 
         Alert::success('Berhasil!', 'Data berhasil disimpan.');
-        return redirect('/produksi');
+        return redirect('/evOp');
      }
 
      function del ($id) 

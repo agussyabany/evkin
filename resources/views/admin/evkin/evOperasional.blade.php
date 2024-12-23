@@ -187,7 +187,7 @@
 
                       <div class="col form-group">
                         <label >Jumlah Hari</label>
-                        <input required type="number" class="form-control" name="HutangLancar" id="HutangLancar">
+                        <input required type="number" class="form-control" name="hari" id="hari">
                       </div>
                     </div>
                   </div>

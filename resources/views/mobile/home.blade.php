@@ -63,7 +63,8 @@
     </table>
 
 
-    <a href="/mKeuangan"><div class="info-box  bg-primary">
+    <a href="/mKeuangan">
+      <div class="info-box  bg-primary">
       <span class="info-box-icon"><i class="fas fa-money-bill"></i></span>
 
       <div class="info-box-content">
@@ -126,7 +127,7 @@
       <div class="modal-header">
         <h4 class="text-center" id="judulLaba">Large Modal</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">×  </span>
         </button>
       </div>
       <div class="modal-body" id="body">
