@@ -633,16 +633,16 @@ $UjiKualitas = Pelayanan::sum('UjiKualitas');
             $clsQap = 'bg-danger';
         } elseif ($hasilQap > 20 && $hasilQap <= 40) {
             $nilaiQap = 2;
-            $cls = 'bg-warning';
+            $clsQap = 'bg-warning';
         } elseif ($hasilQap > 40 && $hasilQap <= 60) {
             $nilaiQap = 3;
-            $cls = 'bg-info';
+            $clsQap = 'bg-info';
         } elseif ($hasilQap > 60 && $hasilQap <= 80) {
             $nilaiQap = 4;
-            $cls = 'bg-primary'; 
+            $clsQap = 'bg-primary'; 
         } else {
             $nilaiQap = 5;
-            $cls = 'bg-success';
+            $clsQap = 'bg-success';
         }
         
 
