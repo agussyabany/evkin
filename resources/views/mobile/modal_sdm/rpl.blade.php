@@ -17,11 +17,11 @@
                           
                           <tr>
                               <td id="a"><h2>Jumlah Pagawai</h2></td>
-                              <td id="a_nilai" style="text-align: right; text-size-adjust: 10px;"><h2>{{ number_format( $JmlPgwai, 0)}}</h2></td>
-                              <td rowspan="2" class="text-center mt-2" id="persen" style="width: 100%; text-align: center;"><h2>X 100 %</h2></td>
+                              <td id="a_nilai" style="text-align: right; text-size-adjust: 10px;"><h2>{{ number_format($JmlPgwai, 0)}}</h2></td>
+                              <td rowspan="2" class="text-center mt-2" id="persen" style="width: 100%; text-align: center;"><h2></h2></td>
                           </tr>
                           <tr>
-                              <td id="b"><h2>Jumlah Seluruh Pelanggan / 1000</h2></td>
+                              <td id="b"><h2>Jumlah Seluruh Pelanggan / 1000 </h2></td>
                               <td id="b_nilai" style="text-align: right;"><h2>{{number_format ($JmlPlgn1000, 0)}}</h2></td>
                           </tr>
                        </table>
