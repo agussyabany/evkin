@@ -24,10 +24,10 @@ class RolePermissionSeeder extends Seeder
         // $roleLl= Role::findByName('dirut');
         // $roleLl->givePermissionTo('utama');
 
-        Role::create(['name'=>'dirtek']);
-        Permission::create(['name' =>'teknik']);
-        $roleLl= Role::findByName('dirtek');
-        $roleLl->givePermissionTo('teknik');
+        // Role::create(['name'=>'dirtek']);
+        // Permission::create(['name' =>'teknik']);
+        // $roleLl= Role::findByName('dirtek');
+        // $roleLl->givePermissionTo('teknik');
 
         // Role::create(['name'=>'dirpel']);
         // Permission::create(['name' =>'pelayanan']);
