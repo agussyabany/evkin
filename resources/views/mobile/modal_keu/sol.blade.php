@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="text-center" id="judul">SOLVABILITAS</h4>
+          <h4 class="text-center" id="judul">SOLVABILITAS
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
@@ -16,13 +16,13 @@
                         <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
                           
                           <tr>
-                              <td id="a"><h2>Total Aktiva</h2></td>
-                              <td id="a_nilai" style="text-align: right; text-size-adjust: 10px;"><h2>{{ number_format( $TotalAktiva, 0)}}</h2></td>
-                              <td rowspan="2" class="text-center mt-2" id="persen" style="width: 100%; text-align: center;"><h2>X 100 %</h2></td>
+                              <td id="a">Total Aktiva</td>
+                              <td id="a_nilai" style="text-align: right; text-size-adjust: 10px;">{{ number_format( $TotalAktiva, 0)}}</td>
+                              <td rowspan="2" class="text-center mt-2" id="persen" style="width: 100%; text-align: center;">X 100 %</td>
                           </tr>
                           <tr>
-                              <td id="b"><h2>Total Hutang</h2></td>
-                              <td id="b_nilai" style="text-align: right;"><h2>{{number_format ($TotalHutang, 0)}}</h2></td>
+                              <td id="b">Total Hutang</td>
+                              <td id="b_nilai" style="text-align: right;">{{number_format ($TotalHutang, 0)}}</td>
                           </tr>
                        </table>
   
@@ -31,16 +31,16 @@
                         <table class="table table-striped text-center">
                           <thead>
                             <tr>
-                              <th><h4>HASIL</h4></th>
-                              <th><h4>NILAI</h4></th>
-                              <th><h4>TARGET</h4></th>
+                              <th>HASIL</th>
+                              <th>NILAI</th>
+                              <th>TARGET</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
-                              <td id="hasil"><h4>{{ $hasilSol}} %</h4></td>
-                              <td id="nilai"><h4>{{ $nilaiSol}}</h4></td>
-                              <td id="target"><h4>5</h4></td>
+                              <td id="hasil">{{ $hasilSol}} %</td>
+                              <td id="nilai">{{ $nilaiSol}}</td>
+                              <td id="target">5</td>
                             </tr>
                             
                           </tbody>

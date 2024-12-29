@@ -16,13 +16,13 @@
                         <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
                           
                           <tr>
-                              <td id="a"><h2>Jml Uji Kualitas Yg Memenuhi Syarat</h2></td>
-                              <td id="a_nilai" style="text-align: right; text-size-adjust: 10px;"><h2>{{ number_format( $UjiKualitas, 0)}}</h2></td>
-                              <td rowspan="2" class="text-center mt-2" id="persen" style="width: 100%; text-align: center;"><h2>X 100 %</h2></td>
+                              <td id="a">Jml Uji Kualitas Yg Memenuhi Syarat</h2></td>
+                              <td id="a_nilai" style="text-align: right; text-size-adjust: 10px;">{{ number_format( $UjiKualitas, 0)}}</h2></td>
+                              <td rowspan="2" class="text-center mt-2" id="persen" style="width: 100%; text-align: center;">X 100 %</h2></td>
                           </tr>
                           <tr>
-                              <td id="b"><h2>Jumlah Titik yg Diuji atau Titik Minimal</h2></td>
-                              <td id="b_nilai" style="text-align: right;"><h2>{{number_format ($titikUji, 0)}}</h2></td>
+                              <td id="b">Jumlah Titik yg Diuji atau Titik Minimal</h2></td>
+                              <td id="b_nilai" style="text-align: right;">{{number_format ($titikUji, 0)}}</h2></td>
                           </tr>
                        </table>
   
@@ -31,16 +31,16 @@
                         <table class="table table-striped text-center">
                           <thead>
                             <tr>
-                              <th><h4>HASIL</h4></th>
-                              <th><h4>NILAI</h4></th>
-                              <th><h4>TARGET</h4></th>
+                              <th>HASIL</h4></th>
+                              <th>NILAI</h4></th>
+                              <th>TARGET</h4></th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
-                              <td id="hasil"><h4>{{ $hasilQap }} %</h4></td>
-                              <td id="nilai"><h4>{{ $nilaiQap}}</h4></td>
-                              <td id="target"><h4>5</h4></td>
+                              <td id="hasil">{{ $hasilQap }} %</h4></td>
+                              <td id="nilai">{{ $nilaiQap}}</h4></td>
+                              <td id="target">5</h4></td>
                             </tr>
                             
                           </tbody>

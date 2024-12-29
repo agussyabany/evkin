@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="text-center" id="judul">RETURN ON EQUITY</h4>
+          <h4 class="text-center" id="judul">RETURN ON EQUITY
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
@@ -16,13 +16,13 @@
                         <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
                           
                           <tr>
-                              <td id="a"><h2>Laba Setelah Pajak</h2></td>
-                              <td id="a_nilai" style="text-align: right; text-size-adjust: 10px;"><h2>{{ number_format( $labaStlPjk, 0)}}</h2></td>
-                              <td rowspan="2" class="text-center mt-2" id="persen" style="width: 100%; text-align: center;"><h2>X 100 %</h2></td>
+                              <td id="a">Laba Setelah Pajak</h2></td>
+                              <td id="a_nilai" style="text-align: right; text-size-adjust: 10px;">{{ number_format( $labaStlPjk, 0)}}</h2></td>
+                              <td rowspan="2" class="text-center mt-2" id="persen" style="width: 100%; text-align: center;">X 100 %</h2></td>
                           </tr>
                           <tr>
-                              <td id="b"><h2>Jumlah Ekuitas</h2></td>
-                              <td id="b_nilai" style="text-align: right;"><h2>{{number_format ($jmlEkuitas, 0)}}</h2></td>
+                              <td id="b">Jumlah Ekuitas</h2></td>
+                              <td id="b_nilai" style="text-align: right;">{{number_format ($jmlEkuitas, 0)}}</h2></td>
                           </tr>
                        </table>
   
@@ -31,16 +31,16 @@
                         <table class="table table-striped text-center">
                           <thead>
                             <tr>
-                              <th><h4>HASIL</h4></th>
-                              <th><h4>NILAI</h4></th>
-                              <th><h4>TARGET</h4></th>
+                              <th>HASIL</th>
+                              <th>NILAI</th>
+                              <th>TARGET</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
-                              <td id="hasil"><h4>{{ $hasilRoe}} %</h4></td>
-                              <td id="nilai"><h4>{{ $nilaiRoe}}</h4></td>
-                              <td id="target"><h4>5</h4></td>
+                              <td id="hasil">{{ $hasilRoe}} %</td>
+                              <td id="nilai">{{ $nilaiRoe}}</td>
+                              <td id="target">5</td>
                             </tr>
                             
                           </tbody>
