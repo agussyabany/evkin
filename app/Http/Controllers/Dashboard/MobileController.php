@@ -20,9 +20,12 @@ class MobileController extends Controller
     public function kinerja ()
     {
         $tahun = Carbon::now()->year;
+        //laba
         $labaSum = Keuangan::sum('labaStlPjk'); // nilaiRoe asli, misal 107038155372
         $laba = round($labaSum / pow(10, strlen(floor($labaSum)) - 3), 2); // Ambil 3 digit pertama dan 2 di belakang koma
-
+        $labaBulanan = Keuangan::select('labaStlPjk','bulanTahun')->get();
+        
+        //nrw
         $KalkulasiJumAirM = Operasional::sum('KalkulasiJumAir');
         $JmlAirDistM = Operasional::sum('JmlAirDist');
         $hitungnrw = $JmlAirDistM > 0 ? ($KalkulasiJumAirM / $JmlAirDistM) * 100 : 0;
@@ -55,9 +58,53 @@ class MobileController extends Controller
         }
         $persentaseBulananNrw[$bulanFormattedNrw] = round($persentaseNrw, 2);
     }
+
+    //cakupan
+        $JmlPnddkTrlyni = Pelayanan::orderBy('bulanTahun', 'DESC')->value('JmlPnddkTrlyni');
+        $jmlPndkWil = Pelayanan::orderBy('bulanTahun', 'DESC')->value('jmlPndkWil');
+        $hitungCakupan = $jmlPndkWil > 0 ? ($JmlPnddkTrlyni / $jmlPndkWil) * 100 : 0;
+        $hasilCkp = round($hitungCakupan, 2);
+
+        if ($hasilCkp  <= 20) {
+            $nilaiCkp = 1;
+            $clsCkp = 'bg-danger';
+        } elseif ($hasilCkp > 20 && $hasilCkp <= 40) {
+            $nilaiCkp = 2;
+            $clsCkp = 'bg-warning';
+        } elseif ($hasilCkp > 40 && $hasilCkp <= 60) {
+            $nilaiCkp = 3;
+            $clsCkp = 'bg-primary';
+        } elseif ($hasilCkp > 60 && $hasilCkp <= 80) {
+            $nilaiCkp = 4;
+            $clsCkp = 'bg-primary';
+        } else {
+            $nilaiCkp = 5;
+            $clsCkp = 'bg-success';
+        }
         
 
-        return view('mobile.home',compact('laba','nrw'));
+        $tahun = Carbon::now()->year;
+        $persentaseBulananCkp = [];
+    
+    for ($bulanCkp = 1; $bulanCkp <= 12; $bulanCkp++) {
+        $bulanFormattedCkp = str_pad($bulanCkp, 2, '0', STR_PAD_LEFT);
+        
+        // Ambil nilai Plgnlayan dan PlgnAktiv untuk bulan tertentu
+        $JmlPnddkTrlyniG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedCkp)->value('JmlPnddkTrlyni') ?? 0;
+        $jmlPndkWilG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedCkp)->value('jmlPndkWil') ?? 0;
+    
+        // Hitung persentase jika PlgnAktiv > 0
+        if ($jmlPndkWilG > 0) {
+            $persentaseCkp = ($JmlPnddkTrlyniG / $jmlPndkWilG) * 100;
+        } else {
+            $persentaseCkp = 0;
+        }
+    
+        // Simpan hasil ke array
+        $persentaseBulananCkp[$bulanFormattedCkp] = round($persentaseCkp, 2);
+    }
+    
+    return view('mobile.home',compact('laba','labaSum','nrw','nilaiNrw','persentaseBulananNrw','KalkulasiJumAirM','JmlAirDistM','JmlPnddkTrlyni','jmlPndkWil','hasilCkp','nilaiCkp','persentaseBulananCkp','labaBulanan'));
     }
 
     public function keuangan ()
@@ -482,16 +529,6 @@ for ($bulanTek = 1; $bulanTek <= 12; $bulanTek++) {
 
             $persentaseBulananKal[$bulanFormattedKal] = round($persentaseKal, 2);
             }
-
-
-            // return response()->json([
-            //     'MtrAirGnti'=> intval($MtrAirGnti),
-            //     'PlgnAktiv'=>intval($PlgnAktiv),
-            //     'kalibrasi' => intval($kalibrasi),
-            //     'nilaiKalibrasi' => $nilaiKal,
-            //     'cls'=>$clsKal,
-            //     'persentaseBulanan' => $persentaseBulananKal
-            // ]);
 
 
         return view('mobile.operasional',compact('VolProdRil','KpstsTrpsng','hasilProd','nilaiProd','clsProd','persentaseBulananProd','KalkulasiJumAirM','JmlAirDistM','nrw','nilaiNrw','clsNrw','persentaseBulananNrw','JmlWktPly','jam','hari','nilaiJam','clsJam','persentaseBulananJam','Plgnlayan','PlgnAktiv','tekanan','nilaiTek','clsTek','persentaseBulananTek','MtrAirGnti','PlgnAktiv','kalibrasi','nilaiKal','clsKal','persentaseBulananKal'));

@@ -23,18 +23,18 @@
           <div class="card-body">
             <div class="row">
               
-              <a href="#" id="nrw" style="text-decoration: none;"><div class="col" >
+              <a href="#" id="nrw" style="text-decoration: none;" data-toggle="modal" data-target="#modal-nrw"><div class="col" >
                 <input type="number" class="knob"  value="{{$nrw}}" data-width="90" data-readonly="true" data-height="90" data-fgColor="#f56954"  disabled>
 
                 <div class="knob-label text-center">NRW (%)</div>
               </div></a>
               
-              <a href="#" id="cakup"><div class="col">
+              <a href="#" id="cakup" data-toggle="modal" data-target="#modal-ckp"><div class="col">
                 <input type="text" class="knob" value="83" data-width="90" data-readonly="true" data-height="90" data-fgColor="#00a65a" disabled>
                   <div class="knob-label text-center">CAKUPAN (%)</div>
               </div></a>
               
-              <a href="#" id="laba"><div class="col">
+              <a href="#" id="laba"  data-toggle="modal" data-target="#modal-laba"><div class="col">
                 <input type="text" class="knob" value="{{$laba}}" data-width="90" data-readonly="true" data-height="90" data-width="90" data-height="90" data-fgColor="#00a65a" data-max=200 disabled>
 
                 <div class="knob-label text-center">LABA  (Miliar) </div>
@@ -125,7 +125,7 @@
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="text-center" id="judulLaba">Large Modal</h4>
+        <h4 class="text-center" id="judulLaba">Laba</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×  </span>
         </button>
@@ -143,18 +143,26 @@
                       <table class="table table-striped text-center">
                         <thead>
                           <tr>
-                            
+                            <th>NO</th>
                             <th>BULAN</th>
                             <th>NILAI</th>
                           </tr>
                         </thead>
                         <tbody>
-                        
+                        @foreach ($labaBulanan as $item )
+                          
+                       
                           <tr>
-                            <td id=""></td>
-                            <td id=""></td>
+                            <td>{{$loop->iteration}}</td>
+                            <td id="">{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
+                            <td id="">{{number_format($item->labaStlPjk, 0)}}</td>
                           </tr>
-                         
+                          @endforeach
+                          <tr>
+                            <td></td>
+                            <td><strong>TOTAL</strong></td>
+                            <td><strong>{{number_format($labaSum, 0)}}</strong></td>
+                          </tr>
                         </tbody>
                       </table>
                       
@@ -168,4 +176,11 @@
     </div>
  </div>
 </div>
+
+<script>
+   window.dataNrw = @json($persentaseBulananNrw);
+   window.dataCkp = @json($persentaseBulananCkp);
+</script>
+@include('mobile.modal_prod.nrw')
+@include('mobile.modal_pelayanan.ckp')
 @endsection
