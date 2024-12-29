@@ -54,9 +54,9 @@ class RolePermissionSeeder extends Seeder
         // $roleLl= Role::findByName('adminLayan');
         // $roleLl->givePermissionTo('lihat-layan');
 
-        // Role::create(['name'=>'spi']);
-        // Permission::create(['name' =>'verifikasi']);
-        // $roleLl= Role::findByName('spi');
-        // $roleLl->givePermissionTo('verifikasi');
+        Role::create(['name'=>'agus']);
+        Permission::create(['name' =>'super']);
+        $roleLl= Role::findByName('agus');
+        $roleLl->givePermissionTo('super');
     }
 }

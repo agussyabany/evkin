@@ -101,7 +101,7 @@
           </a>
           <ul class="nav nav-treeview">
           {{-- @if (Auth::user()->hasRole('adminUmum') || Auth::user()->hasRole('de-was') || Auth::user()->hasRole('dirut') || Auth::user()->hasRole('dirum') || Auth::user()->hasRole('dirtek') || Auth::user()->hasRole('dirpel') || Auth::user()->hasRole('spi') ) --}}
-             @if (Auth::user()->hasAnyRole(['adminUmum','de-was','dirut','dirum','spi']))
+             @if (Auth::user()->hasAnyRole(['adminUmum','de-was','dirut','dirum','spi','agus']))
                
 
             
@@ -125,7 +125,7 @@
             </li>
 
         @endif
-        @if (Auth::user()->hasAnyRole(['adminLayan','de-was','dirut','dirum','dirpel','spi']))
+        @if (Auth::user()->hasAnyRole(['adminLayan','de-was','dirut','dirum','dirpel','spi','agus']))
             <li class="nav-item">
               <a href="/evPel" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
@@ -134,7 +134,7 @@
             </li>
             @endif
 
-            @if (Auth::user()->hasAnyRole(['adminTeknik','de-was','dirut','dirum','dirtek','spi']))
+            @if (Auth::user()->hasAnyRole(['adminTeknik','de-was','dirut','dirum','dirtek','spi','agus']))
             <li class="nav-item">
               <a href="/evOp" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
@@ -148,7 +148,7 @@
         </li>
 
         {{-- DIREKSI --}}
-        @if (Auth::user()->hasAnyRole(['adminUtama','de-was','dirut','dirum','spi']))
+        @if (Auth::user()->hasAnyRole(['adminUtama','de-was','dirut','dirum','spi','agus']))
         <li class="nav-item menu-close">
           <a href="#" class="nav-link active">
             <p>
@@ -174,7 +174,7 @@
         @endif
 
 
-        @if (Auth::user()->hasAnyRole(['adminUmum','de-was','dirut','dirum','spi']))
+        @if (Auth::user()->hasAnyRole(['adminUmum','de-was','dirut','dirum','spi','agus']))
         <li class="nav-item menu-close">
           <a href="#" class="nav-link active">
             <p>
@@ -211,7 +211,7 @@
         </li>
         @endif
         
-        @if (Auth::user()->hasAnyRole(['adminTeknik','de-was','dirut','dirum','dirtek','spi']))
+        @if (Auth::user()->hasAnyRole(['adminTeknik','de-was','dirut','dirum','dirtek','spi','agus']))
         <li class="nav-item menu-close">
           <a href="#" class="nav-link active">
             <p>
@@ -242,7 +242,7 @@
         </li>
         @endif
 
-        @if (Auth::user()->hasAnyRole(['adminLayan','de-was','dirut','dirum','dirpel','spi']))
+        @if (Auth::user()->hasAnyRole(['adminLayan','de-was','dirut','dirum','dirpel','spi','agus']))
         <li class="nav-item menu-close">
           <a href="#" class="nav-link active">
             <p>

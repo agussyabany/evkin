@@ -14,7 +14,9 @@
   <!-- /.content-header -->
   <div class="content">
     <div class="float-right">
+      @if (Auth::user()->hasAnyRole(['adminLayan','agus']))
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_pelayanan" id="tambah_pelayanan">Tambah Data</button>
+      @endif
     </div>
   <br><br>
 
@@ -36,8 +38,10 @@
               <th>Air terjualplgn.domestik</th>
               <th>Pelanggan Domestik</th>
               <th>Periode</th>
+              @if (Auth::user()->hasAnyRole(['adminLayan','agus','spi']))
               <th>Status</th>
               <th>-</th>
+              @endif
               
           </tr>
       </thead>
@@ -55,6 +59,7 @@
           <td>{{ number_format($item->JmlAirTrjualDom, 0) }}</td>
           <td>{{ number_format($item->JmlPlgnDom, 0) }}</td>
           <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
+          @if (Auth::user()->hasAnyRole(['adminLayan','agus','spi']))
           <td>
             @if ($item->status == 0)
                 <span style="color: rgb(225, 236, 15);">POST</span>
@@ -90,6 +95,8 @@
                         </div>
                       </div>
           </td>
+
+          @endif
         </tr>
         @endforeach
         <tr>
@@ -104,8 +111,7 @@
           <td><strong>{{number_format($JmlAirTrjualDom,0)}}</strong></td>
           <td></td>
           <td></td>
-          <td></td>
-          <td></td>  
+          
         </tr>
       </tbody>
   </table>

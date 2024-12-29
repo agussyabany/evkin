@@ -14,7 +14,9 @@
   <!-- /.content-header -->
   <div class="content">
     <div class="float-right">
+      @if (Auth::user()->hasAnyRole(['adminUmum','agus']))
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-sdm" id="tambah_sdm">Tambah Data</button>
+      @endif
     </div>
   <br><br>
   <fieldset class="border border-primary rounded">
@@ -32,8 +34,10 @@
                     <th class="text-wrap" style="width: 200px;">Realisasi Biaya Diklat</th>
                     <th>Realisasi Biaya Pegawai</th>
                     <th>Bulan Tahun</th>
+                    @if (Auth::user()->hasAnyRole(['adminUmum','agus','spi']))
                     <th>Status</th>
                     <th></th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -46,6 +50,7 @@
                 <td>{{ number_format($item->RealByDiklat, 0) }}</td>
                 <td>{{ number_format($item->RealByPeg, 0) }}</td>
                 <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
+                @if (Auth::user()->hasAnyRole(['adminUmum','agus','spi']))
                 <td>
                   @if ($item->status == 0)
                   <span style="color: rgb(225, 236, 15);">POST</span>
@@ -82,6 +87,7 @@
                               </div>
                             </div>
                 </td>
+                @endif
               </tr>
               @endforeach
               <tr>

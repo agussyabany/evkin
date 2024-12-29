@@ -14,7 +14,9 @@
   <!-- /.content-header -->
   <div class="content">
     <div class="float-right">
+      @if (Auth::user()->hasAnyRole(['adminUmum','agus']))
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_evkeu" id="tambah_keu">Tambah Data Keuangan</button>
+      @endif
     </div>
   <br><br>
 
@@ -41,8 +43,11 @@
                       <th>Total Aktiva</th>
                       <th>Total Hutang</th>
                       <th>Periode</th>
+                      @if (Auth::user()->hasAnyRole(['adminUmum','agus','spi']))
                       <th>Status</th>
+                     
                       <th>-</th>
+                      @endif
                   </tr>
               </thead>
               <tbody id="summary-table-body">
@@ -64,6 +69,7 @@
                   <td>{{ number_format($item->TotalAktiva, 0) }}</td>
                   <td>{{ number_format($item->TotalHutang, 0) }}</td>
                   <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
+                  @if (Auth::user()->hasAnyRole(['adminUmum','agus','spi']))
                   <td>
                       @if ($item->status == 0)
                           <span style="color: rgb(225, 236, 15);">POST</span>
@@ -71,6 +77,7 @@
                           <span style="color: rgb(14, 244, 6);">VERIFIED</span>
                       @endif
                   </td>
+                
                     <td><div class="btn-group">
                       <button type="button" class="btn btn-default btn-sm">Action</button>
                       <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
@@ -97,6 +104,7 @@
                       </div>
                       </div>
                     </td>
+                    @endif
                     
                 </tr>
                 

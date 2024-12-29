@@ -101,20 +101,20 @@ Route::middleware('auth','verified')->group( function () {
 
 });
 
-Route::middleware('auth','verified','role:de-was|dirut|dirpel|dirtek')->group(function () {
+Route::middleware('auth','verified','role:de-was|dirut|dirpel|dirtek|agus')->group(function () {
     Route::get('/', function () {
         return redirect('/perumdam');
     });
 });
 
-Route::middleware('auth','verified','role:adminUtama')->group(function () {
+Route::middleware('auth','verified','role:adminUtama|agus|spi')->group(function () {
     Route::get('/', function () {
         return redirect('/perencanaanPenelitian');
     });
     Route::post('ppStore', [PpController::class, 'store']); 
 });
 
-Route::middleware('auth','verified','role:adminUmum')->group(function () {
+Route::middleware('auth','verified','role:adminUmum|agus|spi')->group(function () {
     Route::get('/', function () {
         return redirect('/umkes');
     });
@@ -138,7 +138,7 @@ Route::post('/delKeu/{id}', [KeuanganController::class, 'destroy']);
     
 });
 
-Route::middleware('auth','verified','role:adminTeknik')->group(function () {
+Route::middleware('auth','verified','role:adminTeknik|agus|spi')->group(function () {
     Route::get('/', function () {
         return redirect('/produksi');
     });
@@ -151,7 +151,7 @@ Route::post('/delOps/{id}',[ProduksiController::class, 'del']);
 
 });
 
-Route::middleware('auth','verified','role:adminLayan')->group(function () {
+Route::middleware('auth','verified','role:adminLayan|agus|spi')->group(function () {
     Route::get('/', function () {
         return redirect('/pelayanan');
     });
@@ -166,7 +166,7 @@ Route::post('/delPel/{id}',[PelayananController::class, 'del']);
     
 });
 
-Route::middleware('auth','verified','role:spi')->group(function () {
+Route::middleware('auth','verified','role:spi|agus')->group(function () {
     Route::get('/', function () {
         return redirect('/evkin');
 
