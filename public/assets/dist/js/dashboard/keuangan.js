@@ -9,10 +9,10 @@ $(document).ready(function() {
               datasets: [
                 {
                   label: lab,
-                  backgroundColor: 'rgba(60,141,188,0.9)',
+                  backgroundColor: 'rgba(60,141,188,0.0)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: true,
-                  pointColor: '#ffffff',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
                   pointStrokeColor: 'rgba(108, 185, 60,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -58,10 +58,10 @@ var ropChartCanvas = $('#chartRop').get(0).getContext('2d')
           datasets: [
             {
               label: lab,
-              backgroundColor: 'rgba(60,141,188,0.9)',
-              borderColor: 'rgba(60,141,188,0.8)',
-              pointRadius: true,
-              pointColor: '#ffffff',
+              backgroundColor: 'rgba(60,141,188,0.0)',
+                  borderColor: 'rgba(60,141,188,0.8)',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
               pointStrokeColor: 'rgba(108, 185, 60,1)',
               pointHighlightFill: '#fff',
               pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -107,10 +107,10 @@ var RokChartCanvas = $('#chartRok').get(0).getContext('2d')
           datasets: [
             {
               label: lab,
-              backgroundColor: 'rgba(60,141,188,0.9)',
-              borderColor: 'rgba(60,141,188,0.8)',
-              pointRadius: true,
-              pointColor: '#ffffff',
+              backgroundColor: 'rgba(60,141,188,0.0)',
+                  borderColor: 'rgba(60,141,188,0.8)',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
               pointStrokeColor: 'rgba(108, 185, 60,1)',
               pointHighlightFill: '#fff',
               pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -155,10 +155,10 @@ var EfChartCanvas = $('#chartEf').get(0).getContext('2d')
           datasets: [
             {
               label: lab,
-              backgroundColor: 'rgba(60,141,188,0.9)',
-              borderColor: 'rgba(60,141,188,0.8)',
-              pointRadius: true,
-              pointColor: '#ffffff',
+              backgroundColor: 'rgba(60,141,188,0.0)',
+                  borderColor: 'rgba(60,141,188,0.8)',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
               pointStrokeColor: 'rgba(108, 185, 60,1)',
               pointHighlightFill: '#fff',
               pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -202,9 +202,10 @@ var SolChartCanvas = $('#chartSol').get(0).getContext('2d')
           datasets: [
             {
               label: lab,
-              backgroundColor: 'rgba(60,141,188,0.9)',
-              borderColor: 'rgba(60,141,188,0.8)',
-              pointRadius: true,
+              backgroundColor: 'rgba(60,141,188,0.0)',
+                  borderColor: 'rgba(60,141,188,0.8)',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
               pointColor: '#ffffff',
               pointStrokeColor: 'rgba(108, 185, 60,1)',
               pointHighlightFill: '#fff',
