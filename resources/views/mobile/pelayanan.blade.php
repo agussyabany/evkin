@@ -79,6 +79,7 @@
   window.dataDom = @json($persentaseBulananDom);
   window.dataQap = @json($persentaseBulananQap);
   window.dataTbh = @json($persentaseBulananTbh);
+  window.dataBul = @json($urutanBulan);
   
 
 </script>

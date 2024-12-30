@@ -32,7 +32,7 @@
               <thead>
                   <tr>
                       <th>NO</th>
-                      <th>Laba Setelah Pajak</th>
+                      <th>Laba Sebelum Pajak</th>
                       <th>Jumlah Ekuitas</th>
                       <th>Biaya Operasi</th>
                       <th>Pendapatan Operasi</th>

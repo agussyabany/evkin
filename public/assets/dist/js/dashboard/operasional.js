@@ -3,7 +3,7 @@ $(document).ready(function() {
 // //Rasio Produksi
 
 var dataProd = window.dataProd
-    var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+    var urutanBulan =  window.dataBul;
     var dataGrafik = urutanBulan.map(bulan => dataProd[bulan]);
     var lab = 'Prod';
     var ProdChartCanvas = $('#chartProd').get(0).getContext('2d')
@@ -12,10 +12,10 @@ var dataProd = window.dataProd
               datasets: [
                 {
                   label: lab,
-                  backgroundColor: 'rgba(60,141,188,0.9)',
+                  backgroundColor: 'rgba(60,141,188,0.0)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: true,
-                  pointColor: '#ffffff',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
                   pointStrokeColor: 'rgba(108, 185, 60,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -51,7 +51,7 @@ var dataProd = window.dataProd
 
 // NRW
 var dataNrw = window.dataNrw
-    var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+   
     var dataGrafik = urutanBulan.map(bulan => dataNrw[bulan]);
     var lab = 'Prod';
     var NrwChartCanvas = $('#chartNrw').get(0).getContext('2d')
@@ -60,10 +60,10 @@ var dataNrw = window.dataNrw
               datasets: [
                 {
                   label: lab,
-                  backgroundColor: 'rgba(60,141,188,0.9)',
+                  backgroundColor: 'rgba(60,141,188,0.0)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: true,
-                  pointColor: '#ffffff',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
                   pointStrokeColor: 'rgba(108, 185, 60,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -99,7 +99,7 @@ var dataNrw = window.dataNrw
 
 //JAM
 var dataJam = window.dataJam
-    var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+   
     var dataGrafik = urutanBulan.map(bulan => dataJam[bulan]);
     var lab = 'Jam Layanan';
     var JamChartCanvas = $('#chartJam').get(0).getContext('2d')
@@ -108,10 +108,10 @@ var dataJam = window.dataJam
               datasets: [
                 {
                   label: lab,
-                  backgroundColor: 'rgba(60,141,188,0.9)',
+                  backgroundColor: 'rgba(60,141,188,0.0)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: true,
-                  pointColor: '#ffffff',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
                   pointStrokeColor: 'rgba(108, 185, 60,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -147,7 +147,7 @@ var dataJam = window.dataJam
 
 //TEKANAN PELANGGAN
 var dataTek = window.dataTek
-    var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+    
     var dataGrafik = urutanBulan.map(bulan => dataTek[bulan]);
     var lab = 'Tekanan';
     var TekChartCanvas = $('#chartTek').get(0).getContext('2d')
@@ -156,10 +156,10 @@ var dataTek = window.dataTek
               datasets: [
                 {
                   label: lab,
-                  backgroundColor: 'rgba(60,141,188,0.9)',
+                  backgroundColor: 'rgba(60,141,188,0.0)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: true,
-                  pointColor: '#ffffff',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
                   pointStrokeColor: 'rgba(108, 185, 60,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -195,7 +195,7 @@ var dataTek = window.dataTek
 
 //KALIBRASI
 var dataKal = window.dataKal
-    var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+   
     var dataGrafik = urutanBulan.map(bulan => dataKal[bulan]);
     var lab = 'Kalibrasi';
     var KalChartCanvas = $('#chartKal').get(0).getContext('2d')
@@ -204,10 +204,10 @@ var dataKal = window.dataKal
               datasets: [
                 {
                   label: lab,
-                  backgroundColor: 'rgba(60,141,188,0.9)',
+                  backgroundColor: 'rgba(60,141,188,0.0)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: true,
-                  pointColor: '#ffffff',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
                   pointStrokeColor: 'rgba(108, 185, 60,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',

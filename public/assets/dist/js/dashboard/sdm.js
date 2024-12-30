@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     var dataRpl = window.dataRpl
-    var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+    var urutanBulan = window.dataBul;
     var dataGrafik = urutanBulan.map(bulan => dataRpl[bulan]);
     var lab = 'Rasio Pegawai terhadap Pelanggan';
     var RplChartCanvas = $('#chartRpl').get(0).getContext('2d')
@@ -10,10 +10,10 @@ $(document).ready(function() {
               datasets: [
                 {
                   label: lab,
-                  backgroundColor: 'rgba(60,141,188,0.9)',
+                  backgroundColor: 'rgba(60,141,188,0.0)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: true,
-                  pointColor: '#ffffff',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
                   pointStrokeColor: 'rgba(108, 185, 60,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -49,7 +49,7 @@ $(document).ready(function() {
 
 //RASIO DIKLAT PEGAWAI
 var dataRdp = window.dataRdp
-    var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+    
     var dataGrafik = urutanBulan.map(bulan => dataRdp[bulan]);
     var lab = 'Rasio Diklat Pegawai';
     var RdpChartCanvas = $('#chartRdp').get(0).getContext('2d')
@@ -58,10 +58,10 @@ var dataRdp = window.dataRdp
               datasets: [
                 {
                   label: lab,
-                  backgroundColor: 'rgba(60,141,188,0.9)',
+                  backgroundColor: 'rgba(60,141,188,0.0)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: true,
-                  pointColor: '#ffffff',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
                   pointStrokeColor: 'rgba(108, 185, 60,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -97,7 +97,7 @@ var dataRdp = window.dataRdp
 
 //Rasio Biaya Diklat
 var dataRbd = window.dataRbd
-    var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+    
     var dataGrafik = urutanBulan.map(bulan => dataRbd[bulan]);
     var lab = 'Rasio Biaya Diklat';
     var RbdChartCanvas = $('#chartRbd').get(0).getContext('2d')
@@ -106,10 +106,10 @@ var dataRbd = window.dataRbd
               datasets: [
                 {
                   label: lab,
-                  backgroundColor: 'rgba(60,141,188,0.9)',
+                  backgroundColor: 'rgba(60,141,188,0.0)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: true,
-                  pointColor: '#ffffff',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
                   pointStrokeColor: 'rgba(108, 185, 60,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -217,7 +217,7 @@ var dataRbd = window.dataRbd
   //         $('#b_nilai').html(JmlPlgn1000Formatted);
   //         $('#hasil').html(response.hasilRaspeg +' %');
   //         $('#nilai').html(response.nilaiRaspeg);
-  //         var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+  //         
   //         var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
   //         var lab = 'Rasio Pegawai';
   //         grafik(dataGrafik,lab);
@@ -299,7 +299,7 @@ var dataRbd = window.dataRbd
   //         $('#b_nilai').html(response.JmlPgwai);
   //         $('#hasil').html(response.hasilRasdik +' %');
   //         $('#nilai').html(response.nilaiRasdik);
-  //         var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+  //         
   //         var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
   //         var lab = 'Rasio Diklat';
   //         grafik(dataGrafik,lab);
@@ -383,7 +383,7 @@ var dataRbd = window.dataRbd
   //         $('#b_nilai').html(RealByPegFormatted);
   //         $('#hasil').html(response.hasilRasby +' %');
   //         $('#nilai').html(response.nilaiRasby);
-  //         var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+  //         
   //         var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
   //         var lab = 'Rasio Biaya';
   //         grafik(dataGrafik,lab);

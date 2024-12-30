@@ -55,6 +55,7 @@
   window.dataRpl = @json($persentaseBulananRpl);
   window.dataRdp = @json($persentaseBulananRdp);
   window.dataRbd = @json($persentaseBulananRbd);
+  window.dataBul = @json($urutanBulan);
   
   
 

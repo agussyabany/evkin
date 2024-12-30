@@ -184,6 +184,7 @@
 <script>
    window.dataNrw = @json($persentaseBulananNrw);
    window.dataCkp = @json($persentaseBulananCkp);
+   window.dataBul = @json($urutanBulan);
 </script>
 @include('mobile.modal_prod.nrw')
 @include('mobile.modal_pelayanan.ckp')

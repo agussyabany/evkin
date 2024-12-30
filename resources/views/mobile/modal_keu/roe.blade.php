@@ -16,7 +16,7 @@
                         <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
                           
                           <tr>
-                              <td id="a">Laba Setelah Pajak</h2></td>
+                              <td id="a">Laba Sebelum Pajak</h2></td>
                               <td id="a_nilai" style="text-align: right; text-size-adjust: 10px;">{{ number_format( $labaStlPjk, 0)}}</h2></td>
                               <td rowspan="2" class="text-center mt-2" id="persen" style="width: 100%; text-align: center;">X 100 %</h2></td>
                           </tr>

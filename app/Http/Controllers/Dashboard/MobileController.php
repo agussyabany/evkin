@@ -20,6 +20,11 @@ class MobileController extends Controller
     public function kinerja ()
     {
         $tahun = Carbon::now()->year;
+        $arrayBulan = Operasional::count();
+            $urutanBulan = [];
+                for ($i = 1; $i <= $arrayBulan; $i++) {
+                    $urutanBulan[] = str_pad($i, 2, '0', STR_PAD_LEFT);
+                }
         //laba
         $labaSum = Keuangan::sum('labaStlPjk'); // nilaiRoe asli, misal 107038155372
         $laba = round($labaSum / pow(10, strlen(floor($labaSum)) - 3), 2); // Ambil 3 digit pertama dan 2 di belakang koma
@@ -104,7 +109,7 @@ class MobileController extends Controller
         $persentaseBulananCkp[$bulanFormattedCkp] = round($persentaseCkp, 2);
     }
     
-    return view('mobile.home',compact('laba','labaSum','nrw','nilaiNrw','persentaseBulananNrw','KalkulasiJumAirM','JmlAirDistM','JmlPnddkTrlyni','jmlPndkWil','hasilCkp','nilaiCkp','persentaseBulananCkp','labaBulanan'));
+    return view('mobile.home',compact('laba','labaSum','nrw','nilaiNrw','persentaseBulananNrw','KalkulasiJumAirM','JmlAirDistM','JmlPnddkTrlyni','jmlPndkWil','hasilCkp','nilaiCkp','persentaseBulananCkp','labaBulanan','urutanBulan'));
     }
 
     public function keuangan ()
@@ -315,7 +320,12 @@ class MobileController extends Controller
 
     public function operasional ()
     { 
-        $tahun = Carbon::now()->year; // Tahun saat ini  
+        $tahun = Carbon::now()->year; // Tahun saat ini
+        $arrayBulan = Operasional::count();
+            $urutanBulan = [];
+                for ($i = 1; $i <= $arrayBulan; $i++) {
+                    $urutanBulan[] = str_pad($i, 2, '0', STR_PAD_LEFT);
+                }  
         //Rasio Produksi
         $VolProdRil = Operasional::sum('VolProdRil');
         $KpstsTrpsng = Operasional::sum('KpstsTrpsng');
@@ -537,11 +547,16 @@ for ($bulanTek = 1; $bulanTek <= 12; $bulanTek++) {
             }
 
 
-        return view('mobile.operasional',compact('VolProdRil','KpstsTrpsng','hasilProd','nilaiProd','clsProd','persentaseBulananProd','KalkulasiJumAirM','JmlAirDistM','nrw','nilaiNrw','clsNrw','persentaseBulananNrw','JmlWktPly','jam','hari','nilaiJam','clsJam','persentaseBulananJam','Plgnlayan','PlgnAktiv','tekanan','nilaiTek','clsTek','persentaseBulananTek','MtrAirGnti','PlgnAktiv','kalibrasi','nilaiKal','clsKal','persentaseBulananKal'));
+        return view('mobile.operasional',compact('VolProdRil','KpstsTrpsng','hasilProd','nilaiProd','clsProd','persentaseBulananProd','KalkulasiJumAirM','JmlAirDistM','nrw','nilaiNrw','clsNrw','persentaseBulananNrw','JmlWktPly','jam','hari','nilaiJam','clsJam','persentaseBulananJam','Plgnlayan','PlgnAktiv','tekanan','nilaiTek','clsTek','persentaseBulananTek','MtrAirGnti','PlgnAktiv','kalibrasi','nilaiKal','clsKal','persentaseBulananKal','urutanBulan'));
     }
 
     public function pelayanan ()
     {
+        $arrayBulan = Pelayanan::count();
+            $urutanBulan = [];
+                for ($i = 1; $i <= $arrayBulan; $i++) {
+                    $urutanBulan[] = str_pad($i, 2, '0', STR_PAD_LEFT);
+                }
         //Cakupan Pelayanan Teknis
         $JmlPnddkTrlyni = Pelayanan::orderBy('bulanTahun', 'DESC')->value('JmlPnddkTrlyni');
         $jmlPndkWil = Pelayanan::orderBy('bulanTahun', 'DESC')->value('jmlPndkWil');
@@ -751,11 +766,16 @@ if ($JmlPlgnThLlG > 0) {
 // Simpan hasil ke array
 $persentaseBulananTbh[$bulanFormattedTbh] = round($persentaseTbh, 2);
 }
-        return view('mobile.pelayanan',compact('JmlPnddkTrlyni','jmlPndkWil','hasilCkp','nilaiCkp','clsCkp','persentaseBulananCkp','AduanSlsai','JmlAduan','hasilAdu','nilaiAdu','clsAdu','persentaseBulananAdu','JmlAirTrjualDom','JmlPlgnDom','hasilDom','nilaiDom','clsDom','persentaseBulananDom','UjiKualitas','titikUji','hasilQap','nilaiQap','clsQap','persentaseBulananQap','kalKulasiJmlPlgn','JmlPlgnThLl','hasilTbh','nilaiTbh','clsTbh','persentaseBulananTbh'));
+        return view('mobile.pelayanan',compact('JmlPnddkTrlyni','jmlPndkWil','hasilCkp','nilaiCkp','clsCkp','persentaseBulananCkp','AduanSlsai','JmlAduan','hasilAdu','nilaiAdu','clsAdu','persentaseBulananAdu','JmlAirTrjualDom','JmlPlgnDom','hasilDom','nilaiDom','clsDom','persentaseBulananDom','UjiKualitas','titikUji','hasilQap','nilaiQap','clsQap','persentaseBulananQap','kalKulasiJmlPlgn','JmlPlgnThLl','hasilTbh','nilaiTbh','clsTbh','persentaseBulananTbh','urutanBulan'));
     }
 
     public function sdm ()
     {
+        $arrayBulan = Sdm::count();
+            $urutanBulan = [];
+                for ($i = 1; $i <= $arrayBulan; $i++) {
+                    $urutanBulan[] = str_pad($i, 2, '0', STR_PAD_LEFT);
+                }
         //Rasio Pegawai Terhadap pelanggan
         $JmlPgwai = Sdm::orderBy('bulanTahun', 'DESC')->value('JmlPgwai');
         $JmlPlgn1000 = Sdm::orderBy('bulanTahun', 'DESC')->value('JmlPlgn1000');
@@ -884,7 +904,7 @@ for ($bulanRbd= 1; $bulanRbd <= 12; $bulanRbd++) {
 }
 
 
-        return view('mobile.sdm',compact('JmlPgwai','JmlPlgn1000','hasilRpl','nilaiRpl','clsRpl','persentaseBulananRpl','JmlPegDiklat','JmlPgwai','hasilRdp','nilaiRdp','clsRdp','persentaseBulananRdp','RealByDiklat','RealByPeg','hasilRbd','hasilRbd','nilaiRbd','clsRbd','persentaseBulananRbd'));
+        return view('mobile.sdm',compact('JmlPgwai','JmlPlgn1000','hasilRpl','nilaiRpl','clsRpl','persentaseBulananRpl','JmlPegDiklat','JmlPgwai','hasilRdp','nilaiRdp','clsRdp','persentaseBulananRdp','RealByDiklat','RealByPeg','hasilRbd','hasilRbd','nilaiRbd','clsRbd','persentaseBulananRbd','urutanBulan'));
     }
 
     private function formatNumber($number)

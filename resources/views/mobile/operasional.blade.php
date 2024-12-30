@@ -119,6 +119,7 @@
   window.dataJam = @json($persentaseBulananJam);
   window.dataTek = @json($persentaseBulananTek);
   window.dataKal = @json($persentaseBulananKal);
+  window.dataBul = @json($urutanBulan);
   
 
 </script>

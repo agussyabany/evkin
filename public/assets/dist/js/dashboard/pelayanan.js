@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 //     //Cakupan Layanan
 var dataCkp = window.dataCkp
-    var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+    var urutanBulan = window.dataBul
     var dataGrafik = urutanBulan.map(bulan => dataCkp[bulan]);
     var lab = 'Cakpuan Layanan';
     var CkpChartCanvas = $('#chartCkp').get(0).getContext('2d')
@@ -13,10 +13,10 @@ var dataCkp = window.dataCkp
               datasets: [
                 {
                   label: lab,
-                  backgroundColor: 'rgba(60,141,188,0.9)',
+                  backgroundColor: 'rgba(60,141,188,0.0)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: true,
-                  pointColor: '#ffffff',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
                   pointStrokeColor: 'rgba(108, 185, 60,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -52,7 +52,7 @@ var dataCkp = window.dataCkp
 
 // PENYELSIAIAN ADUIAN
 var dataAdu = window.dataAdu
-    var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+   
     var dataGrafik = urutanBulan.map(bulan => dataAdu[bulan]);
     var lab = 'Aduan';
     var AduChartCanvas = $('#chartAdu').get(0).getContext('2d')
@@ -61,10 +61,10 @@ var dataAdu = window.dataAdu
               datasets: [
                 {
                   label: lab,
-                  backgroundColor: 'rgba(60,141,188,0.9)',
+                  backgroundColor: 'rgba(60,141,188,0.0)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: true,
-                  pointColor: '#ffffff',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
                   pointStrokeColor: 'rgba(108, 185, 60,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -100,7 +100,7 @@ var dataAdu = window.dataAdu
 
 //DOSMESTIK
 var dataDom = window.dataDom
-    var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+   
     var dataGrafik = urutanBulan.map(bulan => dataDom[bulan]);
     var lab = 'Domestik';
     var DomChartCanvas = $('#chartDom').get(0).getContext('2d')
@@ -109,10 +109,10 @@ var dataDom = window.dataDom
               datasets: [
                 {
                   label: lab,
-                  backgroundColor: 'rgba(60,141,188,0.9)',
+                  backgroundColor: 'rgba(60,141,188,0.0)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: true,
-                  pointColor: '#ffffff',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
                   pointStrokeColor: 'rgba(108, 185, 60,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -148,7 +148,7 @@ var dataDom = window.dataDom
 
 //Qualitas air pelangan
 var dataQap = window.dataQap
-    var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+   
     var dataGrafik = urutanBulan.map(bulan => dataQap[bulan]);
     var lab = 'Kualitas Air Pelanggan';
     var QapChartCanvas = $('#chartQap').get(0).getContext('2d')
@@ -157,10 +157,10 @@ var dataQap = window.dataQap
               datasets: [
                 {
                   label: lab,
-                  backgroundColor: 'rgba(60,141,188,0.9)',
+                  backgroundColor: 'rgba(60,141,188,0.0)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: true,
-                  pointColor: '#ffffff',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
                   pointStrokeColor: 'rgba(108, 185, 60,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -196,7 +196,7 @@ var dataQap = window.dataQap
 //PERTUMBUHAN PELANGGAN
 
 var dataTbh = window.dataTbh
-    var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+   
     var dataGrafik = urutanBulan.map(bulan => dataTbh[bulan]);
     var lab = 'Pertumbuhan Pelanggan';
     var TbhChartCanvas = $('#chartTbh').get(0).getContext('2d')
@@ -205,10 +205,10 @@ var dataTbh = window.dataTbh
               datasets: [
                 {
                   label: lab,
-                  backgroundColor: 'rgba(60,141,188,0.9)',
+                  backgroundColor: 'rgba(60,141,188,0.0)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: true,
-                  pointColor: '#ffffff',
+                  pointRadius: 2.5,
+                  pointBackgroundColor: '#ffffff',
                   pointStrokeColor: 'rgba(108, 185, 60,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
@@ -277,7 +277,7 @@ var dataTbh = window.dataTbh
 //               $('#b_nilai').html(jmlPndkWilFormatted);
 //               $('#hasil').html(response.cakupan +' %');
 //               $('#nilai').html(response.nilaiCakup);
-//               var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+//              
 //               var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
 //               var lab = 'Cakupan';
 //               grafik(dataGrafik,lab);
@@ -330,7 +330,7 @@ var dataTbh = window.dataTbh
 //               $('#b_nilai').html(AduanSlsaiFormatted);
 //               $('#hasil').html(response.hasilAduan +' %');
 //               $('#nilai').html(response.nilaiAduan);
-//               var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+//              
 //               var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
 //               var lab = 'Aduan';
 //               grafik(dataGrafik,lab);
@@ -376,7 +376,7 @@ var dataTbh = window.dataTbh
 //             $('#b_nilai').html(JmlPlgnDomFormatted);
 //             $('#hasil').html(response.hasilDomestik +' %');
 //             $('#nilai').html(response.nilaiDomestik);
-//             var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+//            
 //             var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
 //             var lab = 'Domestik';
 //             grafik(dataGrafik,lab);
@@ -421,7 +421,7 @@ var dataTbh = window.dataTbh
 //           $('#b_nilai').html(titikUjiFormatted);
 //           $('#hasil').html(response.hasilUji +' %');
 //           $('#nilai').html(response.nilaiUji);
-//           var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+//          
 //           var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
 //           var lab = 'Uji';
 //           grafik(dataGrafik,lab);
@@ -467,7 +467,7 @@ var dataTbh = window.dataTbh
 //         $('#b_nilai').html(JmlPlgnThLlFormatted);
 //         $('#hasil').html(response.hasilTumbuh +' %');
 //         $('#nilai').html(response.nilaiTumbuh);
-//         var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+//        
 //         var dataGrafik = urutanBulan.map(bulan => response.persentaseBulanan[bulan]);
 //         var lab = 'Pertumbuhan';
 //         grafik(dataGrafik,lab);
