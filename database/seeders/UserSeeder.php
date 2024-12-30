@@ -67,11 +67,17 @@ class UserSeeder extends Seeder
             //     'password' => bcrypt('samarinda@2024'),
             //     'role' => 'adminLayan',
             // ],
+            // [
+            //     'name' => 'Muhammad Agus Syabany',
+            //     'email' => 'agus@evkin.smd',
+            //     'password' => bcrypt('a'),
+            //     'role' => 'agus',
+            // ]
             [
-                'name' => 'Muhammad Agus Syabany',
-                'email' => 'agus@evkin.smd',
-                'password' => bcrypt('a'),
-                'role' => 'agus',
+                'name' => 'UMUM',
+                'email' => 'umum@evkin.smd',
+                'password' => bcrypt('tirtakencana24'),
+                'role' => 'de-was',
             ]
         ];
 

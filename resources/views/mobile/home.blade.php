@@ -35,9 +35,13 @@
               </div></a>
               
               <a href="#" id="laba"  data-toggle="modal" data-target="#modal-laba"><div class="col">
-                <input type="text" class="knob" value="{{$laba}}" data-width="90" data-readonly="true" data-height="90" data-width="90" data-height="90" data-fgColor="#00a65a" data-max=200 disabled>
+                {{-- <input type="text" class="knob1 " value="{{$laba}}" data-width="90" data-readonly="true" data-height="90" data-width="90" data-height="90" data-fgColor="#00a65a" data-max=200 disabled> --}}
 
-                <div class="knob-label text-center">LABA  (Miliar) </div>
+                <div class="circle text-center">
+                  <span class="text">{{$laba}}</span>
+              </div>
+
+                <div class="knob-label text-center">LABA  (Miliar)</div>
               </div></a>
             </div>
           </div>

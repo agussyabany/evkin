@@ -21,6 +21,35 @@
         th {
             font-weight: bold;
         }
+
+/* body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+} */
+
+.circle {
+    width: 92px;
+    height: 92px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.text {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
 </style>
 
 
