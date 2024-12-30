@@ -30,7 +30,7 @@
               </div></a>
               
               <a href="#" id="cakup" data-toggle="modal" data-target="#modal-ckp"><div class="col">
-                <input type="text" class="knob" value="83" data-width="90" data-readonly="true" data-height="90" data-fgColor="#00a65a" disabled>
+                <input type="text" class="knob" value="{{$hasilCkp}}" data-width="90" data-readonly="true" data-height="90" data-fgColor="#00a65a" disabled>
                   <div class="knob-label text-center">CAKUPAN (%)</div>
               </div></a>
               
