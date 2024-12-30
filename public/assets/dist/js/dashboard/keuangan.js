@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var dataRoe = window.dataRoe
-    var urutanBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+    var urutanBulan = window.dataBul
     var dataGrafik = urutanBulan.map(bulan => dataRoe[bulan]);
     var lab = 'Roe';
     var roeChartCanvas = $('#chartRoe').get(0).getContext('2d')

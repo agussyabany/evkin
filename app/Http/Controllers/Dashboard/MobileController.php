@@ -111,6 +111,12 @@ class MobileController extends Controller
     {
             $tahun = Carbon::now()->year;
             //RETURN ON EQUTY
+            $arrayBulan = Keuangan::count();
+            $urutanBulan = [];
+                for ($i = 1; $i <= $arrayBulan; $i++) {
+                    $urutanBulan[] = str_pad($i, 2, '0', STR_PAD_LEFT);
+                }
+            
             $labaStlPjk = Keuangan::sum('labaStlPjk');
             $jmlEkuitas = Keuangan::orderBy('bulanTahun', 'DESC')->value('jmlEkuitas');
             $hitungRoe = $jmlEkuitas > 0 ? ($labaStlPjk / $jmlEkuitas) * 100 : 0;
@@ -303,7 +309,7 @@ class MobileController extends Controller
 
                 $persentaseBulananSol[$bulanFormattedSol] = round($persentaseSol, 2);
             }
-            return view('mobile.keuangan',compact('labaStlPjk','jmlEkuitas','hasilRoe','nilaiRoe','clsRoe','persentaseBulananRoe','biayaOps','PndptnOps','hasilRop','nilaiRop','clsRop','persentaseRopBulanan','kaStrkas','HutangLancar','hasilRok','nilaiRok','clsRok','persentaseBulananRok','JmlPnrmRekAir','jmlRekAir','hasilEf','nilaiEf','clsEf','persentaseBulananEf','TotalAktiva','TotalHutang','hasilSol','nilaiSol','clsSol','persentaseBulananSol'));
+            return view('mobile.keuangan',compact('labaStlPjk','jmlEkuitas','hasilRoe','nilaiRoe','clsRoe','persentaseBulananRoe','biayaOps','PndptnOps','hasilRop','nilaiRop','clsRop','persentaseRopBulanan','kaStrkas','HutangLancar','hasilRok','nilaiRok','clsRok','persentaseBulananRok','JmlPnrmRekAir','jmlRekAir','hasilEf','nilaiEf','clsEf','persentaseBulananEf','TotalAktiva','TotalHutang','hasilSol','nilaiSol','clsSol','persentaseBulananSol','urutanBulan'));
        
     }
 

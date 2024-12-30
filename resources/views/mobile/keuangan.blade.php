@@ -110,6 +110,8 @@
     window.dataRok = @json($persentaseBulananRok);
     window.dataEf = @json($persentaseBulananEf);
     window.dataSol = @json($persentaseBulananSol);
+    
+    window.dataBul = @json($urutanBulan);
 
 </script>
 
