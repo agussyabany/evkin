@@ -31,21 +31,21 @@
           <div class="row">
             
           <div class="col">
-          <a href="#" id="roe"><div class="info-box">
-              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-chart-bar"></i></span>
+          <a href="#" data-toggle="modal" data-target="#modal-roe" id="roe"><div class="info-box">
+              <span class="info-box-icon  {{$clsRoe}} elevation-1"><i class="fas fa-chart-bar"></i></span>
               <div class="info-box-content">
 
                 <div class="row">
                   <div class="col col-md-9">
                     <span class="info-box-text">Return On Equity</span>
                       <span class="info-box-number">
-                        12,8
+                        {{$hasilRoe}}
                         <small>%</small>
                       </span>
                     </div>
 
                   <div class="col border-left">
-                    <h3 class="text-center mt-3 ml-2">5 / 5</h3>
+                    <h3 class="text-center mt-3 ml-2">{{$nilaiRoe}} / 5</h3>
                   </div>
                 </div>
                 
@@ -54,20 +54,20 @@
           </div>
 
           <div class="col">
-            <a href="#" id="rop"><div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-balance-scale"></i></span>
+            <a href="#" id="rop" data-toggle="modal" data-target="#modal-rop"><div class="info-box mb-3">
+              <span class="info-box-icon {{$clsRop}} elevation-1"><i class="fas fa-balance-scale"></i></span>
 
               <div class="info-box-content">
                 <div class="row">
                   <div class="col col-md-9">
                     <span class="info-box-text">Ratio Operasional</span>
-                      <span class="info-box-number">0,76
-                        <small></small>
+                      <span class="info-box-number">{{$hasilRop}}
+                        <small>%</small>
                       </span>
                     </div>
 
                     <div class="col border-left">
-                      <h3 class="text-center mt-3 ml-2">3 / 5</h3>
+                      <h3 class="text-center mt-3 ml-2">{{$nilaiRop}} / 5</h3>
                     </div>
                   </div>
                   
@@ -78,19 +78,19 @@
 
           </div>
           <div class="col">
-            <a href="#" id="rok"><div class="info-box mb-3">
-              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-chart-pie"></i></span>
+            <a href="#" id="rok" data-toggle="modal" data-target="#modal-rok"><div class="info-box mb-3">
+              <span class="info-box-icon {{$clsRok}} elevation-1"><i class="fas fa-chart-pie"></i></span>
 
               <div class="info-box-content">
                 <div class="row">
                   <div class="col col-md-9">
                     <span class="info-box-text">Ratio Kas</span>
-                      <span class="info-box-number">328,39
+                      <span class="info-box-number">{{$hasilRok}}
                         <small>%</small>
                       </span>
                     </div>
                   <div class="col border-left">
-                    <h3 class="text-center mt-3 ml-2">5 / 5</h3>
+                    <h3 class="text-center mt-3 ml-2">{{$nilaiRok}} / 5</h3>
                   </div>
                 </div>
                 
@@ -102,20 +102,20 @@
 
           </div>
           <div class="col">
-            <a href="#" id="ep"><div class="info-box mb-3">
-              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
+            <a href="#" id="ep" data-toggle="modal" data-target="#modal-ef"><div class="info-box mb-3">
+              <span class="info-box-icon {{$clsEf}} elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
 
               <div class="info-box-content">
                 <div class="row">
                   <div class="col col-md-9">
                     <span class="info-box-text">Efektifitas Penagihan</span>
-                      <span class="info-box-number">86,74
+                      <span class="info-box-number">{{$hasilEf}}
                         <small>%</small>
                       </span>
 
                   </div>
                   <div class="col border-left">
-                    <h3 class="text-center mt-3 ml-2">4 / 5</h3>
+                    <h3 class="text-center mt-3 ml-2">{{$nilaiEf}} / 5</h3>
                   </div>
                 </div>
                 
@@ -127,20 +127,20 @@
 
           </div>
           <div class="col">
-            <a href="#" id="solv"><div class="info-box mb-3">
-              <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-handshake"></i></span>
+            <a href="#" id="solv" data-toggle="modal" data-target="#modal-sol"><div class="info-box mb-3">
+              <span class="info-box-icon {{$clsSol}} elevation-1"><i class="fas fa-handshake"></i></span>
 
               <div class="info-box-content">
                 <div class="row">
                   <div class="col col-md-9">
                     <span class="info-box-text">Solvabilitas</span>
-                      <span class="info-box-number">1.186,24
+                      <span class="info-box-number">{{$hasilSol}}
                         <small>%</small>
                       </span>
                     </div>
 
                   <div class="col border-left">
-                    <h3 class="text-center mt-3 ml-2">5 / 5</h3>
+                    <h3 class="text-center mt-3 ml-2">{{$nilaiSol}} / 5</h3>
                   </div>
                 </div>
                 
@@ -180,43 +180,43 @@
                         <tbody>
                           <tr>
                             <td>1.</td>
-                            <td style="text-align: left;"><a href="#" id="cakup"><h5>CAKUPAN PELAYANAN TEKNIS</h5></a></td>
+                            <td style="text-align: left;"><a href="#" id="cakup" data-toggle="modal" data-target="#modal-ckp"><h5>CAKUPAN PELAYANAN TEKNIS</h5></a></td>
                             
-                            <td><span id="colCakup" class="badge"><h5 id="cakpuanLyn">79,83%</h5></span></td>
-                            <td><h5 id="nilaiCakup">4</h5></td>
+                            <td><span id="colCakup" class="badge {{$clsCkp}}"><h5 id="cakpuanLyn">{{$hasilCkp}} %</h5></span></td>
+                            <td><h5 id="nilaiCakup">{{$nilaiCkp}}</h5></td>
                             <td><h5>5</h5></td>
                           </tr>
                           
                           <tr>
                             <td>2.</td>
-                            <td  style="text-align: left;"><a href="#" id="aduan"><h5>PENYELESAIAN ADUAN</h5></a></td>
+                            <td  style="text-align: left;"><a href="#" id="aduan" data-toggle="modal" data-target="#modal-adu"><h5>PENYELESAIAN ADUAN</h5></a></td>
                             
-                            <td><span id="colAduan" class="badge"><h5 id="hasilAduan" >100%</h5></span></td>
-                            <td><h5 id="nilaiAduan">5</h5></td>
+                            <td><span id="colAduan" class="badge {{$clsAdu}}"><h5 id="hasilAduan" >{{$hasilAdu}}%</h5></span></td>
+                            <td><h5 id="nilaiAduan">{{$nilaiAdu}}</h5></td>
                             <td><h5>5</h5></td>
                           </tr>
                           <tr>
                             <td>3.</td>
-                            <td  style="text-align: left;"><a href="#" id="dom"><h5>KONSUMSI AIR DOMESTIK (lt/plg/bulan)</h5></a></td>
+                            <td  style="text-align: left;"><a href="#" id="dom" data-toggle="modal" data-target="#modal-dom"><h5>KONSUMSI AIR DOMESTIK (lt/plg/bulan)</h5></a></td>
                            
-                            <td><span id="colDomestik" class="badge"><h5 id="hasilDomestik">24,23</h5></span></td>
-                            <td><h5 id="nilaiDomestik">4</h5></td>
+                            <td><span id="colDomestik" class="badge {{$clsDom}}"><h5 id="hasilDomestik">{{$hasilDom}}%</h5></span></td>
+                            <td><h5 id="nilaiDomestik">{{$nilaiDom}}</h5></td>
                             <td><h5>5</h5></td>
                           </tr>
                           <tr>
                             <td>4.</td>
-                            <td  style="text-align: left;"><a href="#" id="kualitas"><h5>KUALITAS AIR PELANGGAN</h5></a></td>
+                            <td  style="text-align: left;"><a href="#" id="kualitas" data-toggle="modal" data-target="#modal-qap"><h5>KUALITAS AIR PELANGGAN</h5></a></td>
                             
-                            <td><span id="colUji" class="badge"><h5 id="hasilUji">9,82%</h5></span></td>
-                            <td><h5 id="nilaiUji">1</h5></td>
+                            <td><span id="colUji" class="badge {{$clsQap}}"><h5 id="hasilUji">{{$hasilQap}}%</h5></span></td>
+                            <td><h5 id="nilaiUji">{{$nilaiQap}}</h5></td>
                             <td><h5>5</h5></td>
                           </tr>
                           <tr>
                             <td>5.</td>
-                            <td  style="text-align: left;"><a href="#" id="pertumbuhan"><h5>PERTUMBUHAN PELANGGAN</h5></a></td>
+                            <td  style="text-align: left;"><a href="#" id="pertumbuhan" data-toggle="modal" data-target="#modal-tbh"><h5>PERTUMBUHAN PELANGGAN</h5></a></td>
                             
-                            <td><span id="colTumbuh" class="badge"><h5 id="hasilTumbuh">5,93%</h5></span></td>
-                            <td><h5 id="nilaiTumbuh">2</h5></td>
+                            <td><span id="colTumbuh" class="badge {{$clsTbh}}"><h5 id="hasilTumbuh">{{$hasilTbh}}%</h5></span></td>
+                            <td><h5 id="nilaiTumbuh">{{$nilaiTbh}}</h5></td>
                             <td><h5>5</h5></td>
                           </tr>
                         </tbody>
@@ -236,30 +236,30 @@
                     <div class="row">
                       <div class="col">
                         <!-- MAP -->
-                          <a href="#" id="rasioProd"><div id="colRasioProd" class="info-box">
+                          <a href="#" id="rasioProd" data-toggle="modal" data-target="#modal-prod"><div id="colRasioProd" class="info-box {{$clsProd}}">
                             <span class="info-box-icon"><i class="fa fa-cogs"></i></span>
               
                             <div class="info-box-content">
                               <span class=""><h4>Rasio Produksi</h4></span>
-                              <span class="info-box-number"><h4 id="rasioProduksi">93,76%</h4></span>
+                              <span class="info-box-number"><h4 id="rasioProduksi">{{$hasilProd}}</h4></span>
                             </div>
 
-                            <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="nilaiRasioProd">5/5</h3></div>
+                            <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="nilaiRasioProd">{{$nilaiProd}}/5</h3></div>
                             <!-- /.info-box-content -->
                           </div></a>  
                         </div>
                        
                         <div class="col">
                               <!-- /.info-box -->
-                          <a href="#" id="nrw"><div id="colNrw" class="info-box">
+                          <a href="#" id="nrw" data-toggle="modal" data-target="#modal-nrw"><div id="colNrw" class="info-box {{ $clsNrw }}">
                             <span class="info-box-icon"><i class="fa fa-tint"></i></span>
               
                             <div class="info-box-content">
                               <span class=""><h4>Kehilangan Air</h4></span>
-                              <span class=""><h4 id="kehilangan">39,54%</h4></span>
+                              <span class=""><h4 id="kehilangan">{{$nrw}}</h4></span>
                             </div>
                             <!-- /.info-box-content -->
-                            <div class="info-box-text  mr-3 ml-2 mt-3"><h3 id="kehilnganNilai" class="text-center">2/5</h3></div>
+                            <div class="info-box-text  mr-3 ml-2 mt-3"><h3 id="kehilnganNilai" class="text-center">{{$nilaiNrw}}/5</h3></div>
                         </div></a>
                       </div>
 
@@ -269,29 +269,29 @@
                     <div class="row">
                       <div class="col">
                         <!-- /.info-box -->
-                      <a href="#" id="jam"><div id="colJam" class="info-box">
+                      <a href="#" id="jam" data-toggle="modal" data-target="#modal-jam"><div id="colJam" class="info-box {{$clsJam}}">
                         <span class="info-box-icon"><i class="fas fa-clock"></i></span>
           
                         <div class="info-box-content">
                           <span class=""><h4>Jam Operasi Layanan (jam/hari)</h4></span>
-                          <span class=""><h4 id="jamOperasi">23,50 Jam</h4></span>
+                          <span class=""><h4 id="jamOperasi">{{$jam}} Jam</h4></span>
                         </div>
                         <!-- /.info-box-content -->
-                        <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="jamNilai">5/5</h3></div>
+                        <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="jamNilai">{{$nilaiJam}}/5</h3></div>
                       </div></a>
                     </div>
 
                     <div class="col">
                       <!-- /.info-box -->
-                    <a href="#" id="tekanan"><div id="coltekanan" class="info-box">
+                    <a href="#" id="tekanan" data-toggle="modal" data-target="#modal-tek"><div id="coltekanan" class="info-box {{$clsTek}}">
                       <span class="info-box-icon"><i class="fas fa-tachometer-alt"></i></span>
         
                       <div class="info-box-content">
                         <span class=""><h4>Tekanan Air Pada SL</h4></span>
-                        <span class=""><h4 id="tekananHasil">95,95%</h4></span>
+                        <span class=""><h4 id="tekananHasil">{{$tekanan}}%</h4></span>
                       </div>
                       <!-- /.info-box-content -->
-                      <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="tekananNilai">5/5</h3></div>
+                      <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="tekananNilai">{{$nilaiTek}}/5</h3></div>
                     </div></a>
                     <!-- /.info-box -->
 
@@ -306,15 +306,15 @@
 
                             <div class="col">
                               <!-- /.info-box -->
-                            <a href="#" id="kalibrasi"><div id="colkalibarasi" class="info-box">
+                            <a href="#" id="kalibrasi" data-toggle="modal" data-target="#modal-kal"><div id="colkalibarasi" class="info-box {{$clsKal}}">
                               <span class="info-box-icon"><i class="fa fa-shower"></i></span>
                 
                               <div class="info-box-content">
                                 <span class=""><h4>Penggantian Dan Kalibrasi Meter</h4></span>
-                                <span class=""><h4 id="kalibarasiHasil">3,76</h4></span>
+                                <span class=""><h4 id="kalibarasiHasil">{{$kalibrasi}}</h4></span>
                               </div>
                               <!-- /.info-box-content -->
-                              <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="kalibarasiNilai">1/5</h3></div>
+                              <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center" id="kalibarasiNilai">{{$nilaiKal}}/5</h3></div>
                             </div></a>
                             <!-- /.info-box -->
 
@@ -426,8 +426,8 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td><h4 id="hasilRaspeg">3,56 %</h4></td>
-                          <td><h4 id="nilaiRaspeg">5</h4></td>
+                          <td><h4 id="hasilRaspeg">{{$hasilRpl}} %</h4></td>
+                          <td><h4 id="nilaiRaspeg">{{$nilaiRpl}}</h4></td>
                           <td><h4>5</h4></td>
                         </tr>
                         
@@ -465,8 +465,8 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td><h4 id="hasilRasdik">88,67 %</h4></td>
-                          <td><h4 id="nilaiRasdik">5</h4></td>
+                          <td><h4 id="hasilRasdik">{{$hasilRdp}} %</h4></td>
+                          <td><h4 id="nilaiRasdik">{{$nilaiRdp}}</h4></td>
                           <td><h4>5</h4></td>
                         </tr>
                         
@@ -501,8 +501,8 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td><h4 id="hasilRasby">2,90 %</h4></td>
-                          <td><h4 id="nilaiRasby">2</h4></td>
+                          <td><h4 id="hasilRasby">{{$hasilRbd}} %</h4></td>
+                          <td><h4 id="nilaiRasby">{{$nilaiRbd}}</h4></td>
                           <td><h4>5</h4></td>
                         </tr>
                         
@@ -592,4 +592,48 @@
     </div>
   </div>
 </div> -->
+
+ <script>
+  window.dataRoe = @json($persentaseBulananRoe);
+  window.dataRop = @json($persentaseRopBulanan);
+  window.dataRok = @json($persentaseBulananRok);
+  window.dataEf = @json($persentaseBulananEf);
+  window.dataSol = @json($persentaseBulananSol);
+  window.dataProd = @json($persentaseBulananProd);
+  window.dataNrw = @json($persentaseBulananNrw);
+  window.dataJam = @json($persentaseBulananJam);
+  window.dataTek = @json($persentaseBulananTek);
+  window.dataKal = @json($persentaseBulananKal);
+  window.dataCkp = @json($persentaseBulananCkp);
+  window.dataAdu = @json($persentaseBulananAdu);
+  window.dataDom = @json($persentaseBulananDom);
+  window.dataQap = @json($persentaseBulananQap);
+  window.dataTbh = @json($persentaseBulananTbh);
+  window.dataRpl = @json($persentaseBulananRpl);
+  window.dataRdp = @json($persentaseBulananRdp);
+  window.dataRbd = @json($persentaseBulananRbd);
+  window.dataBul = @json($urutanBulan);
+
+  // window.dataRplChart = @json($hasilRpl);
+  // window.dataRdpChart = @jason($hasilRdp);
+
+ </script>
+  @include('mobile.modal_keu.roe')
+  @include('mobile.modal_keu.rop')
+  @include('mobile.modal_keu.rok')
+  @include('mobile.modal_keu.ef')
+  @include('mobile.modal_keu.sol')
+  @include('mobile.modal_prod.prod')
+  @include('mobile.modal_prod.nrw')
+  @include('mobile.modal_prod.jam')
+  @include('mobile.modal_prod.tek')
+  @include('mobile.modal_prod.kal')
+  @include('mobile.modal_pelayanan.ckp')
+  @include('mobile.modal_pelayanan.adu')
+  @include('mobile.modal_pelayanan.dom')
+  @include('mobile.modal_pelayanan.qap')
+  @include('mobile.modal_pelayanan.tbh')
+  @include('mobile.modal_sdm.rpl')
+  @include('mobile.modal_sdm.rdp')
+  @include('mobile.modal_sdm.rbd')
 @endsection
