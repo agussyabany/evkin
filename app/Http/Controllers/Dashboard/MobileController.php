@@ -19,7 +19,7 @@ class MobileController extends Controller
     }
     public function kinerja ()
     {
-        $tahun = Carbon::now()->year;
+        $tahun = 2024;
         $arrayBulan = Operasional::count();
             $urutanBulan = [];
                 for ($i = 1; $i <= $arrayBulan; $i++) {
@@ -88,7 +88,7 @@ class MobileController extends Controller
         }
         
 
-        $tahun = Carbon::now()->year;
+        $tahun = 2024;
         $persentaseBulananCkp = [];
     
     for ($bulanCkp = 1; $bulanCkp <= 12; $bulanCkp++) {
@@ -114,7 +114,7 @@ class MobileController extends Controller
 
     public function keuangan ()
     {
-            $tahun = Carbon::now()->year;
+            $tahun = 2024;
             //RETURN ON EQUTY
             $arrayBulan = Keuangan::count();
             $urutanBulan = [];
@@ -320,7 +320,7 @@ class MobileController extends Controller
 
     public function operasional ()
     { 
-        $tahun = Carbon::now()->year; // Tahun saat ini
+        $tahun = 2024; // Tahun saat ini
         $arrayBulan = Operasional::count();
             $urutanBulan = [];
                 for ($i = 1; $i <= $arrayBulan; $i++) {
@@ -581,7 +581,7 @@ for ($bulanTek = 1; $bulanTek <= 12; $bulanTek++) {
         }
         
 
-        $tahun = Carbon::now()->year;
+        $tahun = 2024;
         $persentaseBulananCkp = [];
     
     for ($bulanCkp = 1; $bulanCkp <= 12; $bulanCkp++) {
@@ -800,7 +800,7 @@ $persentaseBulananTbh[$bulanFormattedTbh] = round($persentaseTbh, 2);
         }
         
 
-        $tahun = Carbon::now()->year;
+        $tahun = 2024;
         $persentaseBulananRpl = [];
     
     for ($bulanRpl = 1; $bulanRpl <= 12; $bulanRpl++) {

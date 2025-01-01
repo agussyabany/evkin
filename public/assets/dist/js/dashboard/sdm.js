@@ -152,7 +152,7 @@ var dataRdp = window.dataRdp
           labels: ['Completed', 'Remaining'],
           datasets: [{
             data: [valuePelanggan, remainingPelanggan], // Your value and the remaining percentage
-            backgroundColor: ['#f1c40f', '#d2d6de'], // Color for the value and the remaining part
+            backgroundColor: [window.dataRplPie, '#d2d6de'], // Color for the value and the remaining part
           }]
         };
 
@@ -190,7 +190,7 @@ var dataRdp = window.dataRdp
           labels: ['Completed', 'Remaining'],
           datasets: [{
             data: [valuePegawai, remainingPegawai], // Your value and the remaining percentage
-            backgroundColor: ['#f1c40f', '#d2d6de'], // Color for the value and the remaining part
+            backgroundColor: [window.dataRdpPie, '#d2d6de'], // Color for the value and the remaining part
           }]
         };
 
@@ -214,5 +214,39 @@ var dataRdp = window.dataRdp
           type: 'doughnut',
           data: PegawaiData,
           options: PegawaiOptions
+        });
+//RBD
+var donutDiklatCanvas = $('#diklat').get(0).getContext('2d');
+        var valueDiklat = window.dataRbdChart; // The value you want to show (e.g., 50%)
+        var remainingDiklat = 100 - valueDiklat; // The remaining percentage to make it 100%
+
+        var DiklatData = {
+          labels: ['Completed', 'Remaining'],
+          datasets: [{
+            data: [valueDiklat, remainingDiklat], // Your value and the remaining percentage
+            backgroundColor: [window.dataRbdPie, '#d2d6de'], // Color for the value and the remaining part
+          }]
+        };
+
+        var DiklatOptions = {
+          maintainAspectRatio: false,
+          responsive: true,
+          cutout: '70%', // This will make it look like a donut (inner circle cutout)
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: function(tooltipItem) {
+                  return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+                }
+              }
+            }
+          }
+        };
+
+        // Create doughnut chart
+        new Chart(donutDiklatCanvas, {
+          type: 'doughnut',
+          data: DiklatData,
+          options: DiklatOptions
         });
 })

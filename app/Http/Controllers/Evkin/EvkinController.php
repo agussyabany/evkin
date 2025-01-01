@@ -15,7 +15,7 @@ class EvkinController extends Controller
     public function index ()
     {
 
-        $tahun = Carbon::now()->year;
+        $tahun = 2024;
         //RETURN ON EQUTY
         $arrayBulan = Keuangan::count();
         $urutanBulan = [];
@@ -471,7 +471,7 @@ for ($bulanTek = 1; $bulanTek <= 12; $bulanTek++) {
         }
         
 
-        $tahun = Carbon::now()->year;
+        $tahun = 2024;
         $persentaseBulananCkp = [];
     
     for ($bulanCkp = 1; $bulanCkp <= 12; $bulanCkp++) {
@@ -671,22 +671,27 @@ $hasilRpl = round($hitungRaspeg, 2);
 if ($hasilRpl > 12.0 ) {
 $nilaiRpl = 1;
 $clsRpl = 'bg-danger';
+$clsRplPie = '#e74c3c';
 } elseif ($hasilRpl > 10.0 && $hasilRpl <= 12.0) {
 $nilaiRpl = 2;
 $clsRpl = 'bg-warning';
+$clsRplPie = '#f1c40f';
 } elseif ($hasilRpl > 8.0 && $hasilRpl <= 10.0) {
 $nilaiRpl = 3;
-$clsRpl = 'bg-primary';
+$clsRpl = 'bg-info';
+$clsRplPie = '#9b59b6';
 } elseif ($hasilRpl > 6.0 && $hasilRpl <= 8.0) {
 $nilaiRpl = 4;
 $clsRpl = 'bg-primary';
+$clsRplPie = '#3498db';
 } else {
 $nilaiRpl = 5;
 $clsRpl = 'bg-success';
+$clsRplPie = '#2ecc71';
 }
 
 
-$tahun = Carbon::now()->year;
+$tahun = 2024;
 $persentaseBulananRpl = [];
 
 for ($bulanRpl = 1; $bulanRpl <= 12; $bulanRpl++) {
@@ -716,18 +721,23 @@ $hasilRdp = round($hitungRasdik, 2);
 if ($hasilRdp < 20) {
 $nilaiRdp = 1;
 $clsRdp = 'bg-danger';
+$clsRdpPie = '#e74c3c';
 } elseif ($hasilRdp > 20 && $hasilRdp <= 40) {
 $nilaiRdp = 2;
 $clsRdp = 'bg-warning';
+$clsRdpPie = '#f1c40f';
 } elseif ($hasilRdp > 40 && $hasilRdp <= 60) {
 $nilaiRdp = 3;
-$clsRdp = 'bg-primary';
+$clsRdp = 'bg-info';
+$clsRdpPie = '#9b59b6';
 } elseif ($hasilRdp > 60 && $hasilRdp <= 80) {
 $nilaiRdp = 4;
-$clsRdp = 'bg-primary'; 
+$clsRdp = 'bg-primary';
+$clsRdpPie = '#3498db'; 
 } else {
 $nilaiRdp = 5;
 $clsRdp = 'bg-success';
+$clsRdpPie = '#2ecc71';
 }
 
 
@@ -757,19 +767,30 @@ $hasilRbd = round($hitungRasby, 2);
 if ($hasilRbd <= 2.5) {
 $nilaiRbd = 1;
 $clsRbd = 'bg-danger';
+$clsRbdPie = '#e74c3c';
+
 } elseif ($hasilRbd > 2.5 && $hasilRbd <= 5) {
 $nilaiRbd = 2;
 $clsRbd = 'bg-warning';
+$clsRbdPie = '#f1c40f';
 } elseif ($hasilRbd > 5 && $hasilRbd <= 7.5) {
 $nilaiRbd = 3;
-$clsRbd = 'bg-primary';
+$clsRbd = 'bg-info';
+$clsRbdPie = '#9b59b6';
 } elseif ($hasilRbd > 7.5 && $hasilRbd <= 10) {
 $nilaiRbd = 4;
-$clsRbd = 'bg-primary'; 
+$clsRbd = 'bg-primary';
+$clsRbdPie = '#3498db'; 
 } else {
 $nilaiRbd = 5;
 $clsRbd = 'bg-success';
+$clsRbdPie = '#2ecc71';
 }
+// Kuning :#f1c40f
+// Merah: #e74c3c (Flat UI "Alizarin")
+// Biru: #3498db (Flat UI "Peter River")
+// Ungu: #9b59b6 (Flat UI "Amethyst")
+//Hijau: #2ecc71 (Flat UI "Emerald")
 
 
 
@@ -789,6 +810,6 @@ $persentaseRbd = 0;
 $persentaseBulananRbd[$bulanFormattedRbd] = round($persentaseRbd, 2);
 }
 
-        return view('main.index',compact('labaStlPjk','jmlEkuitas','hasilRoe','nilaiRoe','clsRoe','persentaseBulananRoe','biayaOps','PndptnOps','hasilRop','nilaiRop','clsRop','persentaseRopBulanan','kaStrkas','HutangLancar','hasilRok','nilaiRok','clsRok','persentaseBulananRok','JmlPnrmRekAir','jmlRekAir','hasilEf','nilaiEf','clsEf','persentaseBulananEf','TotalAktiva','TotalHutang','hasilSol','nilaiSol','clsSol','persentaseBulananSol','urutanBulan','VolProdRil','KpstsTrpsng','hasilProd','nilaiProd','clsProd','persentaseBulananProd','KalkulasiJumAirM','JmlAirDistM','nrw','nilaiNrw','clsNrw','persentaseBulananNrw','JmlWktPly','jam','hari','nilaiJam','clsJam','persentaseBulananJam','Plgnlayan','PlgnAktiv','tekanan','nilaiTek','clsTek','persentaseBulananTek','MtrAirGnti','PlgnAktiv','kalibrasi','nilaiKal','clsKal','persentaseBulananKal','urutanBulan','JmlPnddkTrlyni','jmlPndkWil','hasilCkp','nilaiCkp','clsCkp','persentaseBulananCkp','AduanSlsai','JmlAduan','hasilAdu','nilaiAdu','clsAdu','persentaseBulananAdu','JmlAirTrjualDom','JmlPlgnDom','hasilDom','nilaiDom','clsDom','persentaseBulananDom','UjiKualitas','titikUji','hasilQap','nilaiQap','clsQap','persentaseBulananQap','kalKulasiJmlPlgn','JmlPlgnThLl','hasilTbh','nilaiTbh','clsTbh','persentaseBulananTbh','urutanBulan','JmlPgwai','JmlPlgn1000','hasilRpl','nilaiRpl','clsRpl','persentaseBulananRpl','JmlPegDiklat','JmlPgwai','hasilRdp','nilaiRdp','clsRdp','persentaseBulananRdp','RealByDiklat','RealByPeg','hasilRbd','hasilRbd','nilaiRbd','clsRbd','persentaseBulananRbd','urutanBulan'));
+        return view('main.index',compact('labaStlPjk','jmlEkuitas','hasilRoe','nilaiRoe','clsRoe','persentaseBulananRoe','biayaOps','PndptnOps','hasilRop','nilaiRop','clsRop','persentaseRopBulanan','kaStrkas','HutangLancar','hasilRok','nilaiRok','clsRok','persentaseBulananRok','JmlPnrmRekAir','jmlRekAir','hasilEf','nilaiEf','clsEf','persentaseBulananEf','TotalAktiva','TotalHutang','hasilSol','nilaiSol','clsSol','persentaseBulananSol','urutanBulan','VolProdRil','KpstsTrpsng','hasilProd','nilaiProd','clsProd','persentaseBulananProd','KalkulasiJumAirM','JmlAirDistM','nrw','nilaiNrw','clsNrw','persentaseBulananNrw','JmlWktPly','jam','hari','nilaiJam','clsJam','persentaseBulananJam','Plgnlayan','PlgnAktiv','tekanan','nilaiTek','clsTek','persentaseBulananTek','MtrAirGnti','PlgnAktiv','kalibrasi','nilaiKal','clsKal','persentaseBulananKal','urutanBulan','JmlPnddkTrlyni','jmlPndkWil','hasilCkp','nilaiCkp','clsCkp','persentaseBulananCkp','AduanSlsai','JmlAduan','hasilAdu','nilaiAdu','clsAdu','persentaseBulananAdu','JmlAirTrjualDom','JmlPlgnDom','hasilDom','nilaiDom','clsDom','persentaseBulananDom','UjiKualitas','titikUji','hasilQap','nilaiQap','clsQap','persentaseBulananQap','kalKulasiJmlPlgn','JmlPlgnThLl','hasilTbh','nilaiTbh','clsTbh','persentaseBulananTbh','urutanBulan','JmlPgwai','JmlPlgn1000','hasilRpl','nilaiRpl','clsRpl','persentaseBulananRpl','JmlPegDiklat','JmlPgwai','hasilRdp','nilaiRdp','clsRdp','persentaseBulananRdp','RealByDiklat','RealByPeg','hasilRbd','hasilRbd','nilaiRbd','clsRbd','persentaseBulananRbd','urutanBulan','clsRplPie','clsRdpPie','clsRbdPie'));
     }
 }

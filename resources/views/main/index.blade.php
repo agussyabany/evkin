@@ -12,7 +12,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0 text-center">PERUMDAM TIRTA KENCANA KOTA SAMARINDA</h1>
+            <h1 class="m-0 text-center">PERUMDAM TIRTA KENCANA KOTA SAMARINDA <br> DASHBOARD KINERJA TAHUN 2024</h1>
           </div><!-- /.col -->
           
         </div><!-- /.row -->
@@ -26,7 +26,7 @@
         <!-- Info boxes -->
        
         <fieldset class=" border border-primary rounded text-center">
-          <legend class="ml-2 w-auto px-3 border border-primary rounded"><h5 class="mt-2">ASPEK KEUANGAN 2023</h5></legend>
+          <legend class="ml-2 w-auto px-3 border border-primary rounded"><h5 class="mt-2">ASPEK KEUANGAN </h5></legend>
         <div class="content ml-2 mr-2">
           <div class="row">
             
@@ -230,7 +230,7 @@
                   <!-- /.col -->
                   <div class="col">
                     <fieldset class=" border border-warning rounded text-center">
-                      <legend class="ml-2 w-auto px-3 border border-warning rounded"><h5 class="mt-2">ASPEK OPERASIONAL 2023</h5></legend>
+                      <legend class="ml-2 w-auto px-3 border border-warning rounded"><h5 class="mt-2">ASPEK OPERASIONAL </h5></legend>
                     <div class="p-1 flex-fill" style="overflow: hidden"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
 
                     <div class="row">
@@ -353,7 +353,7 @@
 
         <!-- ASPEK OPERASIONAL -->
         <fieldset class="border border-danger rounded">
-          <legend class="ml-2 w-auto px-3 border border-danger rounded text-center"><h5 class="mt-2">ASPEK ADMINISTRASI 2023</h5></legend>
+          <legend class="ml-2 w-auto px-3 border border-danger rounded text-center"><h5 class="mt-2">ASPEK ADMINISTRASI </h5></legend>
         <div class="content ml-2 mr-2">
         <div class="card">
           <div class="row">
@@ -403,13 +403,13 @@
         </fieldset><br>
       
         <fieldset class="border border-info rounded">
-          <legend class="ml-2 w-auto px-3 border border-info rounded text-center"><h5 class="mt-2">ASPEK SDM 2023</h5></legend>
+          <legend class="ml-2 w-auto px-3 border border-info rounded text-center"><h5 class="mt-2">ASPEK SDM </h5></legend>
         <div class="row">
           
 
           <div class="col">
             <div class="card">
-              <a href="#" id="rasioPegawai"><div class="card-header"><h6 class="text-center">RASIO PEGAWAI TERHADAP PELANGGAN</h6></div></a>
+              <a href="#" id="rasioPegawai" data-toggle="modal" data-target="#modal-rpl"><div class="card-header"><h6 class="text-center">RASIO PEGAWAI TERHADAP PELANGGAN</h6></div></a>
               <div class="card-body">
                 <div class="row">
                   <div class="col">
@@ -446,7 +446,7 @@
 
           <div class="col">
             <div class="card">
-              <a href="#" id="rasioDiklat"><div class="card-header"><h6 class="text-center">RASIO DIKLAT PEGAWAI</h6></div></a>
+              <a href="#" id="rasioDiklat" data-toggle="modal" data-target="#modal-rdp"><div class="card-header"><h6 class="text-center">RASIO DIKLAT PEGAWAI</h6></div></a>
               <div class="card-body">
                 <div class="row">
                   <div class="col">
@@ -483,7 +483,7 @@
 
           <div class="col">
             <div class="card">
-              <a href="#" id="rasioBiaya"><div class="card-header"><h6 class="text-center">RASIO BIAYA DIKLAT</h6></div></a>
+              <a href="#" id="rasioBiaya" data-toggle="modal" data-target="#modal-rbd"><div class="card-header"><h6 class="text-center">RASIO BIAYA DIKLAT</h6></div></a>
               <div class="card-body">
                 <div class="row">
                   <div class="col">
@@ -614,8 +614,13 @@
   window.dataRbd = @json($persentaseBulananRbd);
   window.dataBul = @json($urutanBulan);
 
-  // window.dataRplChart = @json($hasilRpl);
-  // window.dataRdpChart = @jason($hasilRdp);
+  window.dataRplChart = @json($hasilRpl);
+  window.dataRdpChart = @json($hasilRdp);
+  window.dataRbdChart = @json($hasilRbd);
+
+  window.dataRplPie = @json($clsRplPie);
+  window.dataRdpPie = @json($clsRdpPie);
+  window.dataRbdPie = @json($clsRbdPie);
 
  </script>
   @include('mobile.modal_keu.roe')

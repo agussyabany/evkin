@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="text-center" id="judul">RASIO PEGAWAI TERHAAP PELANGGAN</h4>
+          <h4 class="text-center" id="judul">RASIO PEGAWAI TERHADAP PELANGGAN</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
