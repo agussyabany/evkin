@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Helpers\evkinHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Evkin\EvkinController;
 use App\Models\Evkin\Keuangan;
 use App\Models\Evkin\Operasional;
 use App\Models\Evkin\Pelayanan;
@@ -112,51 +114,23 @@ class MobileController extends Controller
     return view('mobile.home',compact('laba','labaSum','nrw','nilaiNrw','persentaseBulananNrw','KalkulasiJumAirM','JmlAirDistM','JmlPnddkTrlyni','jmlPndkWil','hasilCkp','nilaiCkp','persentaseBulananCkp','labaBulanan','urutanBulan'));
     }
 
+    
+    
+    
+    
     public function keuangan ()
     {
             $tahun = 2024;
-            //RETURN ON EQUTY
-            $arrayBulan = Keuangan::count();
-            $urutanBulan = [];
-                for ($i = 1; $i <= $arrayBulan; $i++) {
-                    $urutanBulan[] = str_pad($i, 2, '0', STR_PAD_LEFT);
-                }
-            
-            $labaStlPjk = Keuangan::sum('labaStlPjk');
-            $jmlEkuitas = Keuangan::orderBy('bulanTahun', 'DESC')->value('jmlEkuitas');
-            $hitungRoe = $jmlEkuitas > 0 ? ($labaStlPjk / $jmlEkuitas) * 100 : 0;
+            $urutanBulan =evkinHelper::UrutanBulan();
+            //RETURN OF EQUITY
+            $labaStlPjk = evkinHelper::labaStlPjk();
+            $jmlEkuitas = evkinHelper::jmlEkuitas();
+            $hitungRoe = evkinHelper::hitungRoe() ;
             $hasilRoe = round($hitungRoe, 2);
-
-            if ($hasilRoe <= 0) {
-                $nilaiRoe = 0;
-                $clsRoe = 'bg-danger';
-            } elseif ($hasilRoe > 0 && $hasilRoe <= 3) {
-                $nilaiRoe = 2;
-                $clsRoe = 'bg-warning';
-            } elseif ($hasilRoe > 3 && $hasilRoe <= 7) {
-                $nilaiRoe = 3;
-                $clsRoe = 'bg-primary';
-            } elseif ($hasilRoe > 7 && $hasilRoe <= 10) {
-                $nilaiRoe = 4;
-                $clsRoe = 'bg-primary';
-            } else {
-                $nilaiRoe = 5;
-                $clsRoe = 'bg-success';
-            }
-
-            
-            $persentaseBulananRoe = [];
-            for ($bulanRoe = 1; $bulanRoe <= 12; $bulanRoe++) {
-                $bulanRoeFormatted = str_pad($bulanRoe, 2, '0', STR_PAD_LEFT);
-                $labaStlPjkG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRoeFormatted)->value('labaStlPjk') ?? 0;
-                $jmlEkuitasG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRoeFormatted)->value('jmlEkuitas') ?? 0;
-                if ($jmlEkuitasG > 0) {
-                    $persentaseRoe = ($labaStlPjkG / $jmlEkuitasG) * 100;
-                } else {
-                    $persentaseRoe = 0;
-                }
-                $persentaseBulananRoe[$bulanRoeFormatted] = round($persentaseRoe, 2);
-            }
+            $roeData = EvkinHelper::nilaiRoe($hasilRoe);
+            $nilaiRoe = $roeData['nilaiRoe'];
+            $clsRoe = $roeData['clsRoe'];
+            $persentaseBulananRoe = EvkinHelper::hitungRoeBulanan($tahun);
 
             //RASIO OPERASIONAL
 

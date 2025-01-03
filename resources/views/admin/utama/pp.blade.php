@@ -255,11 +255,7 @@
                   <div class="col form-group">
                     <div class="col form-group">
                       <label>Periode</label>
-                      <select name="periode" class="form-control" id="periode">
-                        @foreach ($bulan as $month)
-                          <option value="{{ $month }}">{{ $month }}</option>
-                        @endforeach
-                      </select>
+                      <input required type="month" class="form-control" name="periode" id="date">
                     </div>
                   </div>
                 </div>
