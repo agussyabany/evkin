@@ -122,6 +122,7 @@ class MobileController extends Controller
     {
             $tahun = 2024;
             $urutanBulan =evkinHelper::UrutanBulan();
+            
             //RETURN OF EQUITY
             $labaStlPjk = evkinHelper::labaStlPjk();
             $jmlEkuitas = evkinHelper::jmlEkuitas();
@@ -133,161 +134,46 @@ class MobileController extends Controller
             $persentaseBulananRoe = EvkinHelper::hitungRoeBulanan($tahun);
 
             //RASIO OPERASIONAL
-
-            $biayaOps = Keuangan::sum('biayaOps');
-            $PndptnOps = Keuangan::sum('PndptnOps');
-            $hitungRop = $PndptnOps > 0 ? ($biayaOps / $PndptnOps) : 0;
+            $biayaOps = evkinHelper::biayaOps();
+            $PndptnOps = evkinHelper::PndptnOps();
+            $hitungRop = evkinHelper::hitungRop();
             $hasilRop = round($hitungRop, 2);
-
-            if ($hasilRop > 1) {
-                $nilaiRop = 1;
-                $clsRop = 'bg-danger';
-            } elseif ($hasilRop > 0.85 && $hasilRop <= 1) {
-                $nilaiRop = 2;
-                $clsRop = 'bg-warning';
-            } elseif ($hasilRop > 0.65 && $hasilRop <= 0.85) {
-                $nilaiRop = 3;
-                $clsRop = 'bg-primary';
-            } elseif ($hasilRop > 0.50 && $hasilRop <= 0.65) {
-                $nilaiRop = 4;
-                $clsRop = 'bg-primary';
-            } else {
-                $nilaiRop = 5;
-                $clsRop = 'bg-success';
-            }
-
-            $persentaseRopBulanan = [];
-
-            for ($bulanRop = 1; $bulanRop <= 12; $bulanRop++) {
-                $bulanRopFormatted = str_pad($bulanRop, 2, '0', STR_PAD_LEFT);
-                $biayaOpsG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRopFormatted)->value('biayaOps') ?? 0;
-                $PndptnOpsG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRopFormatted)->value('PndptnOps') ?? 0;
-
-                if ($PndptnOpsG > 0) {
-                    $persentaseRop = ($biayaOpsG / $PndptnOpsG);
-                } else {
-                    $persentaseRop = 0;
-                }
-
-                $persentaseRopBulanan[$bulanRopFormatted] = round($persentaseRop, 2);
-            }
-
+            $ropData = evkinHelper::nilaiRop($hasilRop);
+            $nilaiRop = $ropData['nilaiRop'];
+            $clsRop = $ropData['clsRop'];
+            $persentaseRopBulanan = evkinHelper::hitungRopBulanan($tahun);
+            
             //RATIO KAS
-            $kaStrkas = Keuangan::orderBy('bulanTahun', 'DESC')->value('kaStrkas');
-            $HutangLancar = Keuangan::orderBy('bulanTahun', 'DESC')->value('HutangLancar');
-            $hitungRok = $HutangLancar > 0 ? ($kaStrkas / $HutangLancar) * 100 : 0;
+            $kaStrkas = evkinHelper::kaStrkas();
+            $HutangLancar = evkinHelper::HutangLancar();
+            $hitungRok = evkinHelper::hitungRok();
             $hasilRok = round($hitungRok, 2);
-
-            if ($hasilRok >= 100) {
-                $nilaiRok = 5;
-                $clsRok = 'bg-success';
-            } elseif ($hasilRok >= 80 && $hasilRok < 100) {
-                $nilaiRok = 4;
-                $clsRok = 'bg-primary';
-            } elseif ($hasilRok >= 60 && $hasilRok < 80) {
-                $nilaiRok = 3;
-                $clsRok = 'bg-warning';
-            } elseif ($hasilRok >= 40 && $hasilRok < 60) {
-                $nilaiRok = 2;
-                $clsRok = 'bg-danger';
-            } else {
-                $nilaiRok = 1;
-                $clsRok = 'bg-dark';
-            }
-
-            $persentaseBulananRok = [];
-
-            for ($bulanRok = 1; $bulanRok <= 12; $bulanRok++) {
-                $bulanRokFormatted = str_pad($bulanRok, 2, '0', STR_PAD_LEFT);
-                $kaStrkasG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRokFormatted)->value('kaStrkas') ?? 0;
-                $HutangLancarG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRokFormatted)->value('HutangLancar') ?? 0;
-
-                if ($HutangLancarG > 0) {
-                    $persentaseRok = ($kaStrkasG / $HutangLancarG) * 100;
-                } else {
-                    $persentaseRok = 0;
-                }
-
-                $persentaseBulananRok[$bulanRokFormatted] = round($persentaseRok, 2);
-            }
-
+            $rokData = evkinHelper::nilaiRok($hasilRok);
+            $nilaiRok = $rokData['nilaiRok'];
+            $clsRok = $rokData['clsRok'];
+            $persentaseBulananRok = evkinHelper::persentaseBulananRok($tahun);
+            
             //EFEKTIFITAS PENAGIHAN
-            $JmlPnrmRekAir = Keuangan::sum('JmlPnrmRekAir');
-            $jmlRekAir = Keuangan::sum('jmlRekAir');
-            $hitungEf = $jmlRekAir > 0 ? ($JmlPnrmRekAir / $jmlRekAir) * 100 : 0;
+            $JmlPnrmRekAir = evkinHelper::JmlPnrmRekAir();
+            $jmlRekAir = evkinHelper::jmlRekAir();
+            $hitungEf = evkinHelper::hitungEf();
             $hasilEf = round($hitungEf, 2);
-
-            if ($hasilEf >= 90) {
-                $nilaiEf = 5;
-                $clsEf = 'bg-success';
-            } elseif ($hasilEf >= 85 && $hasilEf < 90) {
-                $nilaiEf = 4;
-                $clsEf = 'bg-primary';
-            } elseif ($hasilEf >= 80 && $hasilEf < 85) {
-                $nilaiEf = 3;
-                $clsEf = 'bg-warning';
-            } elseif ($hasilEf >= 75 && $hasilEf < 80) {
-                $nilaiEf = 2;
-                $clsEf = 'bg-danger';
-            } else {
-                $nilaiEf = 1;
-                $clsEf = 'bg-danger';
-            }
-
-            $persentaseBulananEf = [];
-
-            for ($bulanEf = 1; $bulanEf <= 12; $bulanEf++) {
-                $bulanEfFormatted = str_pad($bulanEf, 2, '0', STR_PAD_LEFT);
-                $JmlPnrmRekAirG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanEfFormatted)->value('JmlPnrmRekAir') ?? 0;
-                $jmlRekAirG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanEfFormatted)->value('jmlRekAir') ?? 0;
-
-                if ($jmlRekAirG > 0) {
-                    $persentaseEf = ($JmlPnrmRekAirG / $jmlRekAirG) * 100;
-                } else {
-                    $persentaseEf = 0;
-                }
-
-                $persentaseBulananEf[$bulanEfFormatted] = round($persentaseEf, 2);
-            }
+            $efData = evkinHelper::nilaiEf($hasilEf);
+            $clsEf = $efData['clsEf'];
+            $nilaiEf = $efData['nilaiEf'];
+            $persentaseBulananEf = evkinHelper::persentaseBulananEf($tahun);
 
             //SOLVABILITAS
-            $TotalAktiva = Keuangan::orderBy('bulanTahun', 'DESC')->value('TotalAktiva');
-            $TotalHutang = Keuangan::orderBy('bulanTahun', 'DESC')->value('TotalHutang');
-            $hitungSol = $TotalHutang > 0 ? ($TotalAktiva / $TotalHutang) * 100 : 0;
+            $TotalAktiva = evkinHelper::TotalAktiva();
+            $TotalHutang = evkinHelper::TotalHutang();
+            $hitungSol = evkinHelper::hitungSol();
             $hasilSol = round($hitungSol, 2);
+            $solData = evkinHelper::nilaiSol($hasilSol);
+            $nilaiSol = $solData['nilaiSol'];
+            $clsSol = $solData['clsSol'];
+            $persentaseBulananSol = evkinHelper::persentaseBulananSol($tahun);
 
-            if ($hasilSol >= 200) {
-                $nilaiSol = 5;
-                $clsSol = 'bg-success';
-            } elseif ($hasilSol >= 170 && $hasilSol < 200) {
-                $nilaiSol = 4;
-                $clsSol = 'bg-primary';
-            } elseif ($hasilSol >= 135 && $hasilSol < 170) {
-                $nilaiSol = 3;
-                $clsSol = 'bg-warning';
-            } elseif ($hasilSol >= 100 && $hasilSol < 135) {
-                $nilaiSol = 2;
-                $clsSol = 'bg-danger';
-            } else {
-                $nilaiSol = 1;
-                $clsSol = 'bg-dark';
-            }
-
-            $persentaseBulananSol = [];
-
-            for ($bulanSol = 1; $bulanSol <= 12; $bulanSol++) {
-                $bulanFormattedSol = str_pad($bulanSol, 2, '0', STR_PAD_LEFT);
-                $TotalAktivaG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanFormattedSol)->value('TotalAktiva') ?? 0;
-                $TotalHutangG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanFormattedSol)->value('TotalHutang') ?? 0;
-
-                if ($TotalHutangG > 0) {
-                    $persentaseSol = ($TotalAktivaG / $TotalHutangG) * 100;
-                } else {
-                    $persentaseSol = 0;
-                }
-
-                $persentaseBulananSol[$bulanFormattedSol] = round($persentaseSol, 2);
-            }
+            
             return view('mobile.keuangan',compact('labaStlPjk','jmlEkuitas','hasilRoe','nilaiRoe','clsRoe','persentaseBulananRoe','biayaOps','PndptnOps','hasilRop','nilaiRop','clsRop','persentaseRopBulanan','kaStrkas','HutangLancar','hasilRok','nilaiRok','clsRok','persentaseBulananRok','JmlPnrmRekAir','jmlRekAir','hasilEf','nilaiEf','clsEf','persentaseBulananEf','TotalAktiva','TotalHutang','hasilSol','nilaiSol','clsSol','persentaseBulananSol','urutanBulan'));
        
     }
@@ -295,135 +181,39 @@ class MobileController extends Controller
     public function operasional ()
     { 
         $tahun = 2024; // Tahun saat ini
-        $arrayBulan = Operasional::count();
-            $urutanBulan = [];
-                for ($i = 1; $i <= $arrayBulan; $i++) {
-                    $urutanBulan[] = str_pad($i, 2, '0', STR_PAD_LEFT);
-                }  
+        $urutanBulan =evkinHelper::UrutanBulanOps(); 
+        
         //Rasio Produksi
-        $VolProdRil = Operasional::sum('VolProdRil');
-        $KpstsTrpsng = Operasional::sum('KpstsTrpsng');
-        $hitungrasioProd = $KpstsTrpsng > 0 ? ($VolProdRil / $KpstsTrpsng) * 100 : 0;
+        $VolProdRil = evkinHelper::VolProdRil();
+        $KpstsTrpsng = evkinHelper::KpstsTrpsng();
+        $hitungrasioProd = evkinHelper::hitungrasioProd();
         $hasilProd = round($hitungrasioProd, 2);
-
-        if ($hasilProd <= 90) {
-            $nilaiProd = 1;
-            $clsProd = 'bg-danger';
-        } elseif ($hasilProd > 80 && $hasilProd <= 90) {
-            $nilaiProd = 2;
-            $clsProd = 'bg-warning';
-        } elseif ($hasilProd > 70 && $hasilProd <= 80) {
-            $nilaiProd = 3;
-            $clsProd = 'bg-info';
-        } elseif ($hasilProd > 60 && $hasilProd <= 70) {
-            $nilaiProd = 4;
-            $clsProd = 'bg-primary';
-        } else {
-            $nilaiProd = 5;
-            $clsProd = 'bg-success';
-        }
+        $prodData = evkinHelper::nilaiProd($hasilProd);
+        $nilaiProd= $prodData['nilaiProd'];
+        $clsProd = $prodData['clsProd'];
+        $persentaseBulananProd = evkinHelper::persentaseBulananProd($tahun);
         
-
-        
-        $persentaseBulananProd = []; // Array untuk menyimpan hasil perhitungan setiap bulan
-
-    // Loop untuk setiap bulan dari 1 sampai 12
-    for ($bulanProd = 1; $bulanProd <= 12; $bulanProd++) {
-        // Format bulan dengan leading zero (01, 02, ... 12)
-        $bulanFormattedProd = str_pad($bulanProd, 2, '0', STR_PAD_LEFT);
-
-        // Ambil VolProdRil dan KpstsTrpsng untuk bulan dan tahun tertentu
-        $volProdRil = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedProd)->sum('VolProdRil');
-        $kpstsTrpsng = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedProd)->sum('KpstsTrpsng');
-
-        // Cek agar tidak terjadi pembagian dengan nol
-        if ($kpstsTrpsng > 0) {
-            $persentaseProd = ($volProdRil / $kpstsTrpsng) * 100;
-        } else {
-            $persentaseProd= 0; // Jika KpstsTrpsng nol, hasilnya 0
-        }
-
-        // Simpan hasil perhitungan ke array
-        $persentaseBulananProd[$bulanFormattedProd] = round($persentaseProd ,2); // Format dengan 2 angka desimal
-    }
-        
-    
-    //KEHILANGAN AIR
-        $KalkulasiJumAirM = Operasional::sum('KalkulasiJumAir');
-        $JmlAirDistM = Operasional::sum('JmlAirDist');
-        $hitungnrw = $JmlAirDistM > 0 ? ($KalkulasiJumAirM / $JmlAirDistM) * 100 : 0;
+        //Kehilangan Air
+        $KalkulasiJumAirM = evkinHelper::KalkulasiJumAir();
+        $JmlAirDistM = evkinHelper::JmlAirDist();
+        $hitungnrw = evkinHelper::hitungnrw();
         $nrw = round($hitungnrw, 2);
+        $dataNrw = evkinHelper::nilaiNrw($nrw);
+        $nilaiNrw = $dataNrw['nilaiNrw'];
+        $clsNrw = $dataNrw['clsNrw'];
+        $persentaseBulananNrw = evkinHelper::persentaseBulananNrw($tahun);
         
-        if ($nrw <= 25) {
-            $nilaiNrw = 5;
-            $clsNrw= 'bg-success';
-        } elseif ($nrw > 25 && $nrw <= 30) {
-            $nilaiNrw = 4;
-            $clsNrw = 'bg-primary';
-        } elseif ($nrw > 30 && $nrw <= 35) {
-            $nilaiNrw = 3;
-            $clsNrw = 'bg-info';
-        }
-        elseif ($nrw > 35 && $nrw <= 40) {
-                $nilaiNrw = 2;
-                $clsNrw = 'bg-warning';
-        } else { 
-            $nilaiNrw = 1;
-            $clsNrw = 'bg-success';
-        }
-        
-        
-        $persentaseBulananNrw = [];
-    for ($bulanNrw = 1; $bulanNrw <= 12; $bulanNrw++) {
-        $bulanFormattedNrw = str_pad($bulanNrw, 2, '0', STR_PAD_LEFT);
-        $KalkulasiJumAir = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedNrw)->sum('KalkulasiJumAir');
-        $JmlAirDist = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedNrw)->sum('KpstsTrpsng');
-        if ($JmlAirDist > 0) {
-            $persentaseNrw = ($KalkulasiJumAir / $JmlAirDist) * 100;
-        } else {
-            $persentaseNrw = 0; 
-        }
-        $persentaseBulananNrw[$bulanFormattedNrw] = round($persentaseNrw, 2);
-    }
-
-    //Jam Operasi layanan
-
-        $JmlWktPly = Operasional::sum('JmlWktPly');
-        $hari = Operasional::sum('hari');
-        $hitungjam = $hari> 0 ? ($JmlWktPly / $hari) : 0;
-        
+        //Jam Operasi layanan
+        $JmlWktPly = evkinHelper::JmlWktPly();
+        $hari = evkinHelper::hari();
+        $hitungjam = evkinHelper::hitungjam();
         $jam = round($hitungjam,2);
-
+        $dataJam = evkinHelper::nilaijam($jam);
+        $nilaiJam = $dataJam['nilaiJam'];
+        $clsJam = $dataJam['clsJam'];
+        $persentaseBulananJam = evkinHelper::persentaseBulananJam($tahun);
         
-        if ($jam <= 12) {
-            $nilaiJam = 1;
-            $clsJam = 'bg-danger';
-        } elseif ($jam > 12 && $jam <= 16) {
-            $nilaiJam = 2;
-            $clsJam = 'bg-warning';
-        } elseif ($jam > 16 && $jam <= 18) {
-            $nilaiJam = 3;
-            $clsJam = 'bg-primary';
-        } elseif ($jam > 18 && $jam <= 21) {
-            $nilaiJam = 4;
-            $clsJam = 'bg-primary';
-        } else {
-            $nilaiJam = 5;
-            $clsJam = 'bg-success';
-        }
         
-        $persentaseBulananJam = [];
-    for ($bulanJam = 1; $bulanJam <= 12; $bulanJam++) {
-        $bulanFormattedJam = str_pad($bulanJam, 2, '0', STR_PAD_LEFT);
-        $JmlWktPlyG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedJam)->sum('JmlWktPly');
-        $hariB = 30;
-        if ($hariB > 0) {
-            $persentaseJam= ($JmlWktPly / $hariB);
-        } else {
-            $persentaseJam = 0; 
-        }
-        $persentaseBulananJam[$bulanFormattedJam] = round($persentaseJam ,2);
-    }
 
     //TEKANAN AIR PADA PELANGGAN
 
