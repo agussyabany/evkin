@@ -213,119 +213,41 @@ class MobileController extends Controller
         $clsJam = $dataJam['clsJam'];
         $persentaseBulananJam = evkinHelper::persentaseBulananJam($tahun);
         
+        //Tekanan Air Pada Pelanggan
+        $Plgnlayan = evkinHelper::Plgnlayan();
+        $PlgnAktiv = evkinHelper::PlgnAktiv();
+        $hitungTekanan = evkinHelper::hitungTekanan();
+        $tekanan = round($hitungTekanan, 2);
+        $dataTekanan = evkinHelper::tekanan($tekanan);
+        $clsTek = $dataTekanan['clsTek'];
+        $nilaiTek = $dataTekanan['nilaiTek'];
+        $persentaseBulananTek = evkinHelper::persentaseBulananTek($tahun);
         
-
-    //TEKANAN AIR PADA PELANGGAN
-
-     // Ambil data terbaru berdasarkan 'bulanTahun'
-     $Plgnlayan = Operasional::orderBy('bulanTahun', 'DESC')->value('Plgnlayan');
-     $PlgnAktiv = Operasional::orderBy('bulanTahun', 'DESC')->value('PlgnAktiv');
-
-     // Hitung tekanan jika PlgnAktiv > 0
-     if ($PlgnAktiv > 0) {
-         $hitungTekanan = ($Plgnlayan / $PlgnAktiv) * 100;
-     } else {
-         $hitungTekanan = 0;
-     }
-
-     // Bulatkan hasil ke 2 angka desimal
-     $tekanan = round($hitungTekanan, 2);
-     
-     if ($tekanan <= 20) {
-         $nilaiTek = 1;
-         $clsTek = 'bg-danger';
-     } elseif ($tekanan > 20 && $tekanan <= 40) {
-         $nilaiTek = 2;
-         $clsTek = 'bg-warning';
-     } elseif ($tekanan > 40 && $tekanan <= 60) {
-         $nilaiTek = 3;
-         $clsTek = 'bg-info';
-     } elseif ($tekanan > 60 && $tekanan <= 80) {
-         $nilaiTek = 4;
-         $clsTek = 'bg-primary';
-     } else {
-         $nilaiTek = 5;
-         $clsTek = 'bg-success';
-     }
-     
- 
- $persentaseBulananTek = [];
-
-for ($bulanTek = 1; $bulanTek <= 12; $bulanTek++) {
- $bulanFormattedTek = str_pad($bulanTek, 2, '0', STR_PAD_LEFT);
- 
- // Ambil nilai Plgnlayan dan PlgnAktiv untuk bulan tertentu
- $PlgnlayanG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedTek)->value('Plgnlayan') ?? 0;
- $PlgnAktivG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedTek)->value('PlgnAktiv') ?? 0;
-
- // Hitung persentase jika PlgnAktiv > 0
- if ($PlgnAktivG > 0) {
-     $persentaseTek = ($PlgnlayanG / $PlgnAktivG) * 100;
- } else {
-     $persentaseTek = 0;
- }
-
- // Simpan hasil ke array
- $persentaseBulananTek[$bulanFormattedTek] = round($persentaseTek, 2);
-}
-            
-
-//Kalibarasi
-            $MtrAirGnti = Operasional::sum('MtrAirGnti');
-            $PlgnAktiv = Operasional::orderBy('bulanTahun', 'DESC')->value('PlgnAktiv');
-            $hitungMtrAirGnti = $PlgnAktiv > 0 ? ($MtrAirGnti / $PlgnAktiv) * 100 : 0;
-            $kalibrasi = round($hitungMtrAirGnti, 2);
-
-            if ($kalibrasi <= 5) {
-                $nilaiKal = 1;
-                $clsKal = 'bg-danger';
-            } elseif ($kalibrasi > 5 && $kalibrasi <= 10) {
-                $nilaiKal= 2;
-                $clsKal = 'bg-warning';
-            } elseif ($kalibrasi > 10 && $kalibrasi <= 15) {
-                $nilaiKal = 3;
-                $clsKal= 'bg-primary';
-            } elseif ($kalibrasi > 15 && $kalibrasi <= 20) {
-                $nilaiKal = 4;
-                $clsKal = 'bg-primary'; 
-            } else {
-                $nilaiKal = 5;
-                $clsKal = 'bg-success';
-            }
-
-
-            $persentaseBulananKal = [];
-
-            for ($bulanKal = 1; $bulanKal <= 12; $bulanKal++) {
-            $bulanFormattedKal = str_pad($bulanKal, 2, '0', STR_PAD_LEFT);
-            $MtrAirGntiG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedKal)->value('MtrAirGnti') ?? 0;
-            $PlgnAktivG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedKal)->value('PlgnAktiv') ?? 0;
-
-            if ($PlgnAktivG > 0) {
-            $persentaseKal = ($MtrAirGntiG / $PlgnAktivG) * 100;
-            } else {
-            $persentaseKal= 0;
-            }
-
-            $persentaseBulananKal[$bulanFormattedKal] = round($persentaseKal, 2);
-            }
-
-
+        //Kalibarasi
+        $MtrAirGnti = evkinHelper::MtrAirGnti();
+        $hitungMtrAirGnti = evkinHelper::hitungMtrAirGnti();
+        $kalibrasi = round($hitungMtrAirGnti, 2);
+        $dataKalibrasi = evkinHelper::kalibrasi($kalibrasi);
+        $nilaiKal = $dataKalibrasi['nilaiKal'];
+        $clsKal  =$dataKalibrasi['clsKal'];
+        $persentaseBulananKal = evkinHelper::persentaseBulananKal($tahun);
+        
+        
         return view('mobile.operasional',compact('VolProdRil','KpstsTrpsng','hasilProd','nilaiProd','clsProd','persentaseBulananProd','KalkulasiJumAirM','JmlAirDistM','nrw','nilaiNrw','clsNrw','persentaseBulananNrw','JmlWktPly','jam','hari','nilaiJam','clsJam','persentaseBulananJam','Plgnlayan','PlgnAktiv','tekanan','nilaiTek','clsTek','persentaseBulananTek','MtrAirGnti','PlgnAktiv','kalibrasi','nilaiKal','clsKal','persentaseBulananKal','urutanBulan'));
     }
 
     public function pelayanan ()
     {
-        $arrayBulan = Pelayanan::count();
-            $urutanBulan = [];
-                for ($i = 1; $i <= $arrayBulan; $i++) {
-                    $urutanBulan[] = str_pad($i, 2, '0', STR_PAD_LEFT);
-                }
+        $urutanBulan = evkinHelper::UrutanBulanPel();
+        $tahun = 2024;
+
+
         //Cakupan Pelayanan Teknis
-        $JmlPnddkTrlyni = Pelayanan::orderBy('bulanTahun', 'DESC')->value('JmlPnddkTrlyni');
-        $jmlPndkWil = Pelayanan::orderBy('bulanTahun', 'DESC')->value('jmlPndkWil');
-        $hitungCakupan = $jmlPndkWil > 0 ? ($JmlPnddkTrlyni / $jmlPndkWil) * 100 : 0;
+        $JmlPnddkTrlyni = evkinHelper::JmlPnddkTrlyni();
+        $jmlPndkWil = evkinHelper::jmlPndkWil();
+        $hitungCakupan = evkinHelper::hitungCakupan();
         $hasilCkp = round($hitungCakupan, 2);
+        
 
         if ($hasilCkp  <= 20) {
             $nilaiCkp = 1;
@@ -368,7 +290,7 @@ for ($bulanTek = 1; $bulanTek <= 12; $bulanTek++) {
 
     //PENYELESAIAN ADUAN
 
-    $AduanSlsai = Pelayanan::sum('AduanSlsai');
+        $AduanSlsai = Pelayanan::sum('AduanSlsai');
         $JmlAduan = Pelayanan::sum('JmlAduan');
         $hitungAduan = $JmlAduan > 0 ? ($AduanSlsai / $JmlAduan) * 100 : 0;
         $hasilAdu = round($hitungAduan, 2);

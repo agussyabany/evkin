@@ -3,6 +3,7 @@ namespace App\Helpers;
 
 use App\Models\Evkin\Keuangan;
 use App\Models\Evkin\Operasional;
+use App\Models\Evkin\Pelayanan;
 
 class evkinHelper {
     //-------------------ASPEK KEUANGAN----------------//
@@ -379,6 +380,140 @@ public static function persentaseBulananJam ($tahun)
         $persentaseBulananJam[$bulanFormattedJam] = round($persentaseJam ,2);
     } return $persentaseBulananJam;  
 }
+
+//Tekanan Air Pada Pelanggan
+public static function hitungTekanan ()
+{
+    $Plgnlayan = Operasional::orderBy('bulanTahun', 'DESC')->value('Plgnlayan');
+    $PlgnAktiv = Operasional::orderBy('bulanTahun', 'DESC')->value('PlgnAktiv');
+    if ($PlgnAktiv > 0) {
+        $hitungTekanan = ($Plgnlayan / $PlgnAktiv) * 100;
+    } else {
+        $hitungTekanan = 0;
+    } 
+    return $hitungTekanan;
+}
+public static function Plgnlayan ()
+{
+    return Operasional::orderBy('bulanTahun', 'DESC')->value('Plgnlayan');
+}
+public static function PlgnAktiv()
+{
+    return Operasional::orderBy('bulanTahun', 'DESC')->value('PlgnAktiv');
+}
+public static function tekanan ($tekanan)
+{
+    if ($tekanan <= 20) {
+        return ['nilaiTek' => 1, 'clsTek' => 'bg-danger'];
+    } elseif ($tekanan > 20 && $tekanan <= 40) {
+        return ['nilaiTek' => 2, 'clsTek' => 'bg-warning'];
+    } elseif ($tekanan > 40 && $tekanan <= 60) {
+        return ['nilaiTek' => 3, 'clsTek' => 'bg-info'];
+    } elseif ($tekanan > 60 && $tekanan <= 80) {
+        return ['nilaiTek' => 4, 'clsTek' => 'bg-primary'];
+    } else {
+        return ['nilaiTek' => 5, 'clsTek' => 'bg-success'];
+    }
+}
+public static function persentaseBulananTek ($tahun)
+{
+    $persentaseBulananTek = [];
+    for ($bulanTek = 1; $bulanTek <= 12; $bulanTek++) {
+    $bulanFormattedTek = str_pad($bulanTek, 2, '0', STR_PAD_LEFT);
+    $PlgnlayanG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedTek)->value('Plgnlayan') ?? 0;
+    $PlgnAktivG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedTek)->value('PlgnAktiv') ?? 0;
+    if ($PlgnAktivG > 0) {
+        $persentaseTek = ($PlgnlayanG / $PlgnAktivG) * 100;
+    } else {
+        $persentaseTek = 0;
+    }
+
+    $persentaseBulananTek[$bulanFormattedTek] = round($persentaseTek, 2);
+    }
+    return $persentaseBulananTek;
+}
+
+//Kalibrasi Dan Penggantina meter
+public static function MtrAirGnti ()
+{
+   return  Operasional::sum('MtrAirGnti');
+}
+public static function hitungMtrAirGnti ()
+{
+    $MtrAirGnti = Operasional::sum('MtrAirGnti');
+    $PlgnAktiv = Operasional::orderBy('bulanTahun', 'DESC')->value('PlgnAktiv');
+    
+    return $PlgnAktiv > 0 ? ($MtrAirGnti / $PlgnAktiv) * 100 : 0;
+}
+public static function kalibrasi ($kalibrasi)
+{
+    if ($kalibrasi <= 5) {
+        return ['nilaiKal' => 1, 'clsKal' => 'bg-danger'];
+    } elseif ($kalibrasi > 5 && $kalibrasi <= 10) {
+        return ['nilaiKal' => 2, 'clsKal' => 'bg-warning'];
+    } elseif ($kalibrasi > 10 && $kalibrasi <= 15) {
+        return ['nilaiKal' => 3, 'clsKal' => 'bg-primary'];
+    } elseif ($kalibrasi > 15 && $kalibrasi <= 20) {
+        return ['nilaiKal' => 4, 'clsKal' => 'bg-primary'];
+    } else {
+        return ['nilaiKal' => 5, 'clsKal' => 'bg-success'];
+    }
+}
+public static function persentaseBulananKal ($tahun)
+{
+    $persentaseBulananKal = [];
+
+            for ($bulanKal = 1; $bulanKal <= 12; $bulanKal++) {
+            $bulanFormattedKal = str_pad($bulanKal, 2, '0', STR_PAD_LEFT);
+            $MtrAirGntiG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedKal)->value('MtrAirGnti') ?? 0;
+            $PlgnAktivG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedKal)->value('PlgnAktiv') ?? 0;
+
+            if ($PlgnAktivG > 0) {
+            $persentaseKal = ($MtrAirGntiG / $PlgnAktivG) * 100;
+            } else {
+            $persentaseKal= 0;
+            }
+
+            $persentaseBulananKal[$bulanFormattedKal] = round($persentaseKal, 2);
+            }
+             return $persentaseBulananKal;
+}
+
+                //-------------------ASPEK PELAYANAN----------------//
+
+
+//Cakupan Pelayanan Teknis
+public static function UrutanBulanPel() {
+    $arrayBulan = Pelayanan::count();
+    $urutanBulan = [];
+    for ($i = 1; $i <= $arrayBulan; $i++) {
+        $urutanBulan[] = str_pad($i, 2, '0', STR_PAD_LEFT);
+    }
+    return $urutanBulan;
+}
+
+public static function JmlPnddkTrlyni ()
+{
+    return Pelayanan::orderBy('bulanTahun', 'DESC')->value('JmlPnddkTrlyni');
+}
+public static function jmlPndkWil ()
+{
+    return Pelayanan::orderBy('bulanTahun', 'DESC')->value('jmlPndkWil');
+}
+
+public static function hitungCakupan  ()
+{
+    $JmlPnddkTrlyni = evkinHelper::JmlPnddkTrlyni();
+    $jmlPndkWil = evkinHelper::jmlPndkWil();
+    return $jmlPndkWil > 0 ? ($JmlPnddkTrlyni / $jmlPndkWil) * 100 : 0;
+}
+public static function  hasilCakup ()
+{
+     
+}
+
+
+
 
     
 
