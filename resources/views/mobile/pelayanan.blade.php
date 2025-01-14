@@ -28,7 +28,7 @@
               <span class=""><h5>Penyelesaian Aduan</h5></span>
               <span class="info-box-number" id="hasilAduan">
                     {{$hasilAdu}}
-                    <small></small>
+                    <small>%</small>
               </span>
             </div>
             <div class="info-box-text  mr-3 ml-2 mt-3"><h5 class="text-center" id="nilaiAduan">{{$nilaiAdu}} /5</h5></div>

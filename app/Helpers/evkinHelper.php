@@ -1,9 +1,12 @@
 <?php
 namespace App\Helpers;
 
+use App\Http\Controllers\Evkin\EvkinController;
 use App\Models\Evkin\Keuangan;
 use App\Models\Evkin\Operasional;
 use App\Models\Evkin\Pelayanan;
+use App\Models\Evkin\Sdm;
+use Psy\Test\CodeCleaner\FinalClassPassTest;
 
 class evkinHelper {
     //-------------------ASPEK KEUANGAN----------------//
@@ -500,21 +503,420 @@ public static function jmlPndkWil ()
 {
     return Pelayanan::orderBy('bulanTahun', 'DESC')->value('jmlPndkWil');
 }
-
 public static function hitungCakupan  ()
 {
     $JmlPnddkTrlyni = evkinHelper::JmlPnddkTrlyni();
     $jmlPndkWil = evkinHelper::jmlPndkWil();
     return $jmlPndkWil > 0 ? ($JmlPnddkTrlyni / $jmlPndkWil) * 100 : 0;
 }
-public static function  hasilCakup ()
+public static function  hasilCkp ($hasilCkp)
 {
-     
+    if ($hasilCkp <= 20) {
+        return ['nilaiCkp' => 1, 'clsCkp' => 'bg-danger'];
+    } elseif ($hasilCkp > 20 && $hasilCkp <= 40) {
+        return ['nilaiCkp' => 2, 'clsCkp' => 'bg-warning'];
+    } elseif ($hasilCkp > 40 && $hasilCkp <= 60) {
+        return ['nilaiCkp' => 3, 'clsCkp' => 'bg-primary'];
+    } elseif ($hasilCkp > 60 && $hasilCkp <= 80) {
+        return ['nilaiCkp' => 4, 'clsCkp' => 'bg-primary'];
+    } else {
+        return ['nilaiCkp' => 5, 'clsCkp' => 'bg-success'];
+    } 
+}
+public static function persentaseBulananCkp ($tahun)
+{
+    $persentaseBulananCkp = [];
+    
+    for ($bulanCkp = 1; $bulanCkp <= 12; $bulanCkp++) {
+        $bulanFormattedCkp = str_pad($bulanCkp, 2, '0', STR_PAD_LEFT);
+        
+        // Ambil nilai Plgnlayan dan PlgnAktiv untuk bulan tertentu
+        $JmlPnddkTrlyniG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedCkp)->value('JmlPnddkTrlyni') ?? 0;
+        $jmlPndkWilG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedCkp)->value('jmlPndkWil') ?? 0;
+    
+        // Hitung persentase jika PlgnAktiv > 0
+        if ($jmlPndkWilG > 0) {
+            $persentaseCkp = ($JmlPnddkTrlyniG / $jmlPndkWilG) * 100;
+        } else {
+            $persentaseCkp = 0;
+        }
+    
+        // Simpan hasil ke array
+        $persentaseBulananCkp[$bulanFormattedCkp] = round($persentaseCkp, 2);
+    }
+    return $persentaseBulananCkp;
+}
+
+
+//Penyelesaian Aduan
+public static function AduanSlsai ()
+{
+    return  Pelayanan::sum('AduanSlsai');
+}
+public static function JmlAduan ()
+{
+    return Pelayanan::sum('JmlAduan');
+}
+public static function hitungAduan ()
+{
+    $AduanSlsai = Pelayanan::sum('AduanSlsai');
+    $JmlAduan = Pelayanan::sum('JmlAduan');
+    return $JmlAduan > 0 ? ($AduanSlsai / $JmlAduan) * 100 : 0;
+}
+public static function hasilAdu ($hasilAdu)
+{
+    if ($hasilAdu <= 20) {
+        return ['nilaiAdu' => 1, 'clsAdu' => 'bg-danger'];
+    } elseif ($hasilAdu > 20 && $hasilAdu <= 40) {
+        return ['nilaiAdu' => 2, 'clsAdu' => 'bg-warning'];
+    } elseif ($hasilAdu > 40 && $hasilAdu <= 60) {
+        return ['nilaiAdu' => 3, 'clsAdu' => 'bg-info'];
+    } elseif ($hasilAdu > 60 && $hasilAdu <= 80) {
+        return ['nilaiAdu' => 4, 'clsAdu' => 'bg-primary'];
+    } else {
+        return ['nilaiAdu' => 5, 'clsAdu' => 'bg-success'];
+    }
+}
+ public static function persentaseBulananAdu ($tahun)
+ {
+    $persentaseBulananAdu = [];
+    for ($bulanAdu = 1; $bulanAdu <= 12; $bulanAdu++) {
+        $bulanFormattedAdu = str_pad($bulanAdu, 2, '0', STR_PAD_LEFT);
+        $AduanSlsaiG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedAdu)->sum('AduanSlsai');
+        $JmlAduanG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedAdu)->sum('JmlAduan');
+        if ($JmlAduanG > 0) {
+            $persentaseAdu = ($AduanSlsaiG / $JmlAduanG) * 100;
+        } else {
+            $persentaseAdu = 0;
+        }
+        $persentaseBulananAdu[$bulanFormattedAdu] = round($persentaseAdu, 2);
+    }
+    return $persentaseBulananAdu;
+ }
+
+ //Konsumsi Air Domestik
+ public static function JmlAirTrjualDom ()
+ {
+    return Pelayanan::sum('JmlAirTrjualDom');
+ }
+ public static function JmlPlgnDom ()
+ {
+    return Pelayanan::orderBy('bulanTahun', 'DESC')->value('JmlPlgnDom');
+ }
+ public static function hitungDomestik ()
+ {
+    $JmlAirTrjualDom = evkinHelper::JmlAirTrjualDom();
+    $JmlPlgnDom = evkinHelper::JmlPlgnDom();
+    return  $JmlPlgnDom > 0 ? ($JmlAirTrjualDom / $JmlPlgnDom) / 12 : 0;
+ }
+ public static function hasilDom ($hasilDom)
+ {
+    if ($hasilDom <= 15) {
+        return ['nilaiDom' => 1, 'clsDom' => 'bg-danger'];
+    } elseif ($hasilDom > 15 && $hasilDom <= 20) {
+        return ['nilaiDom' => 2, 'clsDom' => 'bg-warning'];
+    } elseif ($hasilDom > 20 && $hasilDom <= 25) {
+        return ['nilaiDom' => 3, 'clsDom' => 'bg-primary'];
+    } elseif ($hasilDom > 25 && $hasilDom <= 30) {
+        return ['nilaiDom' => 4, 'clsDom' => 'bg-primary'];
+    } else {
+        return ['nilaiDom' => 5, 'clsDom' => 'bg-success'];
+    }
+ }
+ public static function persentaseBulananDom ($tahun)
+ {
+        $persentaseBulananDom = [];
+
+    for ($bulanDom = 1; $bulanDom <= 12; $bulanDom++) {
+        $bulanFormattedDom = str_pad($bulanDom, 2, '0', STR_PAD_LEFT);
+        $JmlAirTrjualDomG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedDom)->value('JmlAirTrjualDom') ?? 0;
+        $JmlPlgnDomG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedDom)->value('JmlPlgnDom') ?? 0;
+
+        if ($JmlPlgnDomG > 0) {
+            $persentaseDom = ($JmlAirTrjualDomG / $JmlPlgnDomG) * 100;
+        } else {
+            $persentaseDom = 0;
+        }
+
+        $persentaseBulananDom[$bulanFormattedDom] = round($persentaseDom, 2);
+    }
+    return $persentaseBulananDom;
+ }
+ 
+ //Kualitas Air Pelanggan
+ public static function UjiKualitas ()
+ {
+    return Pelayanan::sum('UjiKualitas');
+ }
+ public static function titikUji ()
+ {
+    return Pelayanan::sum('titikUji');
+ }
+ public static function hitungUji ()
+ {
+    $UjiKualitas = evkinHelper::UjiKualitas();
+    $titikUji = evkinHelper::titikUji();
+    return $titikUji > 0 ? ( $titikUji / $UjiKualitas ) * 100 : 0;
+ }
+ public static function hasilQap ($hasilQap)
+{
+    if ($hasilQap <= 20) {
+        return ['nilaiQap' => 1, 'clsQap' => 'bg-danger'];
+    } elseif ($hasilQap > 20 && $hasilQap <= 40) {
+        return ['nilaiQap' => 2, 'clsQap' => 'bg-warning'];
+    } elseif ($hasilQap > 40 && $hasilQap <= 60) {
+        return ['nilaiQap' => 3, 'clsQap' => 'bg-info'];
+    } elseif ($hasilQap > 60 && $hasilQap <= 80) {
+        return ['nilaiQap' => 4, 'clsQap' => 'bg-primary'];
+    } else {
+        return ['nilaiQap' => 5, 'clsQap' => 'bg-success'];
+    }
+}
+    public static function persentaseBulananQap ($tahun)
+    {
+        $persentaseBulananQap = [];
+
+    for ($bulanQap = 1; $bulanQap <= 12; $bulanQap++) {
+        $bulanFormattedQap = str_pad($bulanQap, 2, '0', STR_PAD_LEFT);
+        $UjiKualitasG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedQap)->value('UjiKualitas') ?? 0;
+        $JtitikUjiG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedQap)->value('titikUji') ?? 0;
+
+        if ($JtitikUjiG > 0) {
+            $persentaseQap = (  $JtitikUjiG /$UjiKualitasG) * 100;
+        } else {
+            $persentaseQap = 0;
+        }
+
+        $persentaseBulananQap[$bulanFormattedQap] = round($persentaseQap, 2);
+    }
+    return $persentaseBulananQap;
+
+    }
+
+//Pertumbuhan Pelanggan
+    public static function kalKulasiJmlPlgn ()
+    {
+        return Pelayanan::orderBy('bulanTahun', 'DESC')->value('kalKulasiJmlPlgn');
+    }
+    public static function JmlPlgnThLl ()
+    {
+        return Pelayanan::orderBy('bulanTahun', 'DESC')->value('JmlPlgnThLl');
+    }
+    public static function hitungTumbuh ()
+    {
+        $kalKulasiJmlPlgn = evkinHelper::kalKulasiJmlPlgn();
+        $JmlPlgnThLl = evkinHelper::JmlPlgnThLl();
+        return $JmlPlgnThLl > 0 ? ($kalKulasiJmlPlgn / $JmlPlgnThLl) * 100 : 0;
+    }
+
+    public static function hasilTbh ($hasilTbh)
+    {
+        {
+            if ($hasilTbh <= 4) {
+                return ['nilaiTbh' => 1, 'clsTbh' => 'bg-danger'];
+            } elseif ($hasilTbh > 4 && $hasilTbh <= 6) {
+                return ['nilaiTbh' => 2, 'clsTbh' => 'bg-warning'];
+            } elseif ($hasilTbh > 6 && $hasilTbh <= 8) {
+                return ['nilaiTbh' => 3, 'clsTbh' => 'bg-primary'];
+            } elseif ($hasilTbh > 8 && $hasilTbh <= 10) {
+                return ['nilaiTbh' => 4, 'clsTbh' => 'bg-primary'];
+            } else {
+                return ['nilaiTbh' => 5, 'clsTbh' => 'bg-success'];
+            }
+        }
+    }
+    public static function persentaseBulananTbh ($tahun)
+    {
+        $persentaseBulananTbh = [];
+
+            for ($bulanTbh = 1; $bulanTbh <= 12; $bulanTbh++) {
+            $bulanFormattedTbh = str_pad($bulanTbh, 2, '0', STR_PAD_LEFT);
+
+            // Ambil nilai Plgnlayan dan PlgnAktiv untuk bulan tertentu
+            $kalKulasiJmlPlgnG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedTbh)->value('kalKulasiJmlPlgn') ?? 0;
+            $JmlPlgnThLlG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedTbh)->value('jmlPndkWil') ?? 0;
+
+            // Hitung persentase jika PlgnAktiv > 0
+            if ($JmlPlgnThLlG > 0) {
+                $persentaseTbh = ($kalKulasiJmlPlgnG / $JmlPlgnThLlG) * 100;
+            } else {
+                $persentaseTbh = 0;
+            }
+
+            // Simpan hasil ke array
+            $persentaseBulananTbh[$bulanFormattedTbh] = round($persentaseTbh, 2);
+            }
+            return $persentaseBulananTbh;
+    }
+
+                //-------------------ASPEK SDM----------------//
+
+
+    public static function urutanBulanSdm ()
+    {
+        $arrayBulan = Sdm::count();
+        $urutanBulan = [];
+            for ($i = 1; $i <= $arrayBulan; $i++) {
+                $urutanBulan[] = str_pad($i, 2, '0', STR_PAD_LEFT);
+            } 
+         return $urutanBulan; 
+    }
+    //Rasio Pegawai Terhadap Pelanggan
+
+    public static function JmlPgwai ()
+    {
+        return Sdm::orderBy('bulanTahun', 'DESC')->value('JmlPgwai');
+    }
+    public static function JmlPlgn1000 ()
+    {
+        return Sdm::orderBy('bulanTahun', 'DESC')->value('JmlPlgn1000');
+    }
+    public static function hitungRaspeg ()
+    {
+        $JmlPgwai =evkinHelper::JmlPgwai();
+        $JmlPlgn1000 = evkinHelper::JmlPlgn1000();
+        return $JmlPlgn1000 > 0 ? ($JmlPgwai / $JmlPlgn1000) : 0;
+    }
+    public static function  hasilRpl($hasilRpl)
+    {
+        if ($hasilRpl > 12.0) {
+            return ['nilaiRpl' => 1, 'clsRpl' => 'bg-danger'];
+        } elseif ($hasilRpl > 10.0 && $hasilRpl <= 12.0) {
+            return ['nilaiRpl' => 2, 'clsRpl' => 'bg-warning'];
+        } elseif ($hasilRpl > 8.0 && $hasilRpl <= 10.0) {
+            return ['nilaiRpl' => 3, 'clsRpl' => 'bg-primary'];
+        } elseif ($hasilRpl > 6.0 && $hasilRpl <= 8.0) {
+            return ['nilaiRpl' => 4, 'clsRpl' => 'bg-primary'];
+        } else {
+            return ['nilaiRpl' => 5, 'clsRpl' => 'bg-success'];
+        }
+    }
+    public static function persentaseBulananRpl ($tahun)
+    {
+        $persentaseBulananRpl = [];
+    
+        for ($bulanRpl = 1; $bulanRpl <= 12; $bulanRpl++) {
+            $bulanFormattedRpl = str_pad($bulanRpl, 2, '0', STR_PAD_LEFT);
+            
+            // Ambil nilai Plgnlayan dan PlgnAktiv untuk bulan tertentu
+            $JmlPgwaiG = Sdm::where('bulanTahun', $tahun . '-' . $bulanFormattedRpl)->value('JmlPgwai') ?? 0;
+            $JmlPlgn1000G = Sdm::where('bulanTahun', $tahun . '-' . $bulanFormattedRpl)->value('JmlPlgn1000') ?? 0;
+        
+            // Hitung persentase jika PlgnAktiv > 0
+            if ($JmlPlgn1000G > 0) {
+                $persentaseRpl = ($JmlPgwaiG / $JmlPlgn1000G);
+            } else {
+                $persentaseRpl = 0;
+            }
+        
+            // Simpan hasil ke array
+            $persentaseBulananRpl[$bulanFormattedRpl] = round($persentaseRpl, 2);
+        } 
+        return $persentaseBulananRpl;
+    }
+
+//Rasio Diklat Pegawai
+    public static function JmlPegDiklat ()
+    {
+        return Sdm::sum('JmlPegDiklat');
+    }
+    public static function hitungRasdik()
+    {
+        $JmlPegDiklat = evkinHelper::JmlPegDiklat();
+        $JmlPgwai  = evkinHelper::JmlPgwai();
+        return $JmlPgwai > 0 ? ($JmlPegDiklat / $JmlPgwai) * 100 : 0;
+    }
+    public static function  hasilRdp ($hasilRdp)
+    {
+        if ($hasilRdp < 20) {
+            return ['nilaiRdp' => 1, 'clsRdp' => 'bg-danger'];
+        } elseif ($hasilRdp > 20 && $hasilRdp <= 40) {
+            return ['nilaiRdp' => 2, 'clsRdp' => 'bg-warning'];
+        } elseif ($hasilRdp > 40 && $hasilRdp <= 60) {
+            return ['nilaiRdp' => 3, 'clsRdp' => 'bg-primary'];
+        } elseif ($hasilRdp > 60 && $hasilRdp <= 80) {
+            return ['nilaiRdp' => 4, 'clsRdp' => 'bg-primary'];
+        } else {
+            return ['nilaiRdp' => 5, 'clsRdp' => 'bg-success'];
+        }
+    }
+    public static function persentaseBulananRdp ($tahun)
+    {
+                $persentaseBulananRdp = [];
+
+        for ($bulanRdp = 1; $bulanRdp <= 12; $bulanRdp++) {
+            $bulanFormattedRdp= str_pad($bulanRdp, 2, '0', STR_PAD_LEFT);
+            $JmlPegDiklatG = Sdm::where('bulanTahun', $tahun . '-' . $bulanFormattedRdp)->value('JmlPegDiklat') ?? 0;
+            $JmlPgwaiG = Sdm::where('bulanTahun', $tahun . '-' . $bulanFormattedRdp)->value('JmlPgwai') ?? 0;
+
+            if ($JmlPgwaiG > 0) {
+                $persentaseRdp = ($JmlPegDiklatG / $JmlPgwaiG) * 100;
+            } else {
+                $persentaseRdp = 0;
+            }
+
+            $persentaseBulananRdp[$bulanFormattedRdp] = round($persentaseRdp, 2);
+        }
+        return $persentaseBulananRdp;
+    }
+
+//Rasio Biaya Diklat
+    public static function RealByDiklat ()
+    {
+        return Sdm::sum('RealByDiklat');
+    } 
+    public static function RealByPeg()
+    {
+        return Sdm::sum('RealByPeg');
+    }
+    public static function hitungRasby ()
+    {
+        $RealByDiklat = evkinHelper::RealByDiklat();
+        $RealByPeg = evkinHelper::RealByPeg();
+        return $RealByPeg > 0 ? ($RealByDiklat / $RealByPeg) * 100 : 0;
+    }
+    public static function hasilRbd ($hasilRbd)
+    {
+        if ($hasilRbd <= 2.5) {
+            return ['nilaiRbd' => 1, 'clsRbd' => 'bg-danger'];
+        } elseif ($hasilRbd > 2.5 && $hasilRbd <= 5) {
+            return ['nilaiRbd' => 2, 'clsRbd' => 'bg-warning'];
+        } elseif ($hasilRbd > 5 && $hasilRbd <= 7.5) {
+            return ['nilaiRbd' => 3, 'clsRbd' => 'bg-primary'];
+        } elseif ($hasilRbd > 7.5 && $hasilRbd <= 10) {
+            return ['nilaiRbd' => 4, 'clsRbd' => 'bg-primary'];
+        } else {
+            return ['nilaiRbd' => 5, 'clsRbd' => 'bg-success'];
+        }
+    }
+
+    public static function persentaseBulananRbd ($tahun)
+    {
+        $persentaseBulananRbd = [];
+
+        for ($bulanRbd= 1; $bulanRbd <= 12; $bulanRbd++) {
+            $bulanFormattedRbd = str_pad($bulanRbd, 2, '0', STR_PAD_LEFT);
+            $RealByDiklatG = Sdm::where('bulanTahun', $tahun . '-' . $bulanFormattedRbd)->value('RealByDiklat') ?? 0;
+            $JRealByPegG = Sdm::where('bulanTahun', $tahun . '-' . $bulanFormattedRbd)->value('RealByPeg') ?? 0;
+
+            if ($JRealByPegG > 0) {
+                $persentaseRbd = ($RealByDiklatG / $JRealByPegG) * 100;
+            } else {
+                $persentaseRbd = 0;
+            }
+
+            $persentaseBulananRbd[$bulanFormattedRbd] = round($persentaseRbd, 2);
+        }
+
+        return $persentaseBulananRbd;
+    }
+    
+
+
 }
 
 
 
-
     
 
 
@@ -530,4 +932,3 @@ public static function  hasilCakup ()
 
     
 
-}
