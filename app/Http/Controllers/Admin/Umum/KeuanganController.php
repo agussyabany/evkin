@@ -79,7 +79,7 @@ class KeuanganController extends Controller
     ]);
 
         Alert::success('Berhasil!', 'Data berhasil diupdate.');
-        return redirect('/keuangan');
+        return redirect('/evkeu');
     }
 
     public function destroy ($id)
@@ -90,7 +90,7 @@ class KeuanganController extends Controller
         
         Alert::success('Berhasil!', 'Data berhasil diHapus.');
         return
-        redirect('/keuangan');
+        redirect('/evkeu');
     }
 
     public function verifiksi ($id)
@@ -101,7 +101,7 @@ class KeuanganController extends Controller
         ]);
         
         Alert::success('Berhasil!', 'Data berhasil diVerifikasi.');
-        return redirect('/keuangan');
+        return redirect('/evkeu');
     }
 
     function dataKeuBy ($id)

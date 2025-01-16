@@ -44,7 +44,7 @@ class SdmController extends Controller
         Sdm::create($data);
 
         Alert::success('Berhasil!', 'Data berhasil diVerifikasi.');
-        return redirect('/sdm');
+        return redirect('/evSdm');
 
             
     }
@@ -67,7 +67,7 @@ class SdmController extends Controller
         ]);
 
         Alert::success('Berhasil!', 'Data berhasil diVerifikasi.');
-        return redirect('/sdm');
+        return redirect('/evSdm');
 
             
     }
@@ -80,7 +80,7 @@ class SdmController extends Controller
         ]);
         
         Alert::success('Berhasil!', 'Data berhasil diVerifikasi.');
-        return redirect('/sdm');
+        return redirect('/evSdm');
     }
 
     function del ($id) 
@@ -92,7 +92,7 @@ class SdmController extends Controller
          $sdm->delete();
  
          Alert::success('Berhasil!', 'Data berhasil diHapus.');
-        return redirect('/sdm');
+        return redirect('/evSdm');
      }
 
     function dataSdmBy ($id)

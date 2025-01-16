@@ -50,7 +50,7 @@ class PelayananController extends Controller
         Pelayanan::create($data);
 
         Alert::success('Berhasil!', 'Data berhasil disimpan.');
-        return redirect('/pelayanan');
+        return redirect('/evPel');
     }
     public function edit (Request $request)
     {
@@ -71,7 +71,7 @@ class PelayananController extends Controller
             'bulanTahun' => $request->input('date')
         ]);
         Alert::success('Berhasil!', 'Data berhasil disimpan.');
-        return redirect('/pelayanan');
+        return redirect('/evPel');
 
             
     }
@@ -85,7 +85,7 @@ class PelayananController extends Controller
          $pelayanan->delete();
  
          Alert::success('Berhasil!', 'Data berhasil dihapus.');
-        return redirect('/pelayanan');
+        return redirect('/evPel');
      }
 
      function ver ($id)
@@ -96,7 +96,7 @@ class PelayananController extends Controller
         ]);
         
         Alert::success('Berhasil!', 'Data berhasil diVerifikasi.');
-        return redirect('/pelayanan');
+        return redirect('/evPel');
      }
 
 

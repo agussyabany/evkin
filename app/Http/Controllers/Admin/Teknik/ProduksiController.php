@@ -79,7 +79,7 @@ class ProduksiController extends Controller
          $operasional->delete();
  
          Alert::success('Berhasil!', 'Data berhasil dihapus.');
-        return redirect('/produksi');
+        return redirect('/evOp');
      }
 
     function dataOpBy ($id)
@@ -96,7 +96,7 @@ class ProduksiController extends Controller
         ]);
         
         Alert::success('Berhasil!', 'Data berhasil diVerifikasi.');
-        return redirect('/produksi');
+        return redirect('/evOp');
 
     }
 }
