@@ -33,7 +33,7 @@
                             <tr>
                               <th><h4>HASIL</th>
                               <th><h4>NILAI</th>
-                              <th><h4>TARGET</th>
+                              <th><h4>NILAI MAKSIMAL</th>
                             </tr>
                           </thead>
                           <tbody>
