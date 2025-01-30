@@ -29,7 +29,8 @@ class MobileController extends Controller
                 }
         //laba
         $labaSum = Keuangan::sum('labaStlPjk');
-        $laba = round($labaSum / pow(10, strlen(floor($labaSum)) - 2), 3);
+        //$laba = round($labaSum / pow(10, strlen(floor($labaSum)) - 2), 3);
+        $laba = number_format(round($labaSum / pow(10, strlen(floor($labaSum)) - 2), 3), 3, ',', '');
         $labaBulanan = Keuangan::select('labaStlPjk','bulanTahun')->get();
         
         //nrw
