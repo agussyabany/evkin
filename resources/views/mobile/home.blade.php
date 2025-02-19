@@ -68,7 +68,7 @@
 
 
     <a href="/mKeuangan">
-      <div class="info-box  bg-primary">
+      <div class="info-box  bg-info">
       <span class="info-box-icon"><i class="fas fa-money-bill"></i></span>
 
       <div class="info-box-content">
@@ -79,7 +79,7 @@
       <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center"></h3></div>
       <!-- /.info-box-content -->
     </div></a>
-    <a href="/mOperasional"><div class="info-box bg-success">
+    <a href="/mOperasional"><div class="info-box bg-secondary">
       <span class="info-box-icon"><i class="fas fa-cogs"></i></span>
 
       <div class="info-box-content">
@@ -89,7 +89,7 @@
       <!-- /.info-box-content -->
       <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center"></h3></div>
     </div></a>
-    <a href="/mPelayanan"><div class="info-box bg-info">
+    <a href="/mPelayanan"><div class="info-box bg-default">
       <span class="info-box-icon"><i class="fas fa-handshake"></i></span>
 
       <div class="info-box-content">
@@ -99,7 +99,7 @@
       <!-- /.info-box-content -->
       <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center"></h3></div>
     </div></a>
-    <a href="/mSdmkin"><div class="info-box  bg-warning">
+    <a href="/mSdmkin"><div class="info-box  bg-white">
       <span class="info-box-icon"><i class="fas fa-users"></i></span>
 
       <div class="info-box-content">
@@ -110,7 +110,7 @@
       <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center"></h3></div>
   </div></a>
 
-  <a href="#"><div class="info-box  bg-danger">
+  <a href="#"><div class="info-box  bg-light">
       <span class="info-box-icon"><i class="fas fa-edit"></i></span>
 
       <div class="info-box-content">
