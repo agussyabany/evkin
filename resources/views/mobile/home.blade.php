@@ -78,7 +78,9 @@
 
       <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center"></h3></div>
       <!-- /.info-box-content -->
-    </div></a>
+    </div>
+  </a>
+  
     <a href="/mOperasional"><div class="info-box bg-secondary">
       <span class="info-box-icon"><i class="fas fa-cogs"></i></span>
 
