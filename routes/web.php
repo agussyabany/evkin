@@ -107,7 +107,7 @@ Route::middleware('auth','verified','role:de-was|dirut|dirpel|dirtek|agus')->gro
 
 Route::middleware('auth','verified','role:adminUtama|agus|spi')->group(function () {
     Route::get('/', function () {
-        return redirect('/perencanaanPenelitian');
+        return redirect('/perumdam');
     });
     Route::post('ppStore', [PpController::class, 'store']); 
 });
