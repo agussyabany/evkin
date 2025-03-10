@@ -656,7 +656,7 @@ public static function hasilAdu ($hasilAdu)
  {
     $UjiKualitas = evkinHelper::UjiKualitas();
     $titikUji = evkinHelper::titikUji();
-    return $titikUji > 0 ? ( $titikUji / $UjiKualitas ) * 100 : 0;
+    return $titikUji > 0 ? ( $UjiKualitas / $titikUji ) * 100 : 0;
  }
  public static function hasilQap ($hasilQap)
 {
