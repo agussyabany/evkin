@@ -15,7 +15,7 @@
         <div class="card">
           <div class="card-header">
             <h6 class="text-center">
-              PERUMDAM TIRTA KENCANA KOTA SAMARINDA TAHUN 2024
+              PERUMDAM TIRTA KENCANA KOTA SAMARINDA TAHUN {{$tahun}}
             </h6>
 
           </div>

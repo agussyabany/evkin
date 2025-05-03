@@ -19,8 +19,9 @@
   <ul class="navbar-nav ml-auto d-flex align-items-center">
     <!-- Navbar Search -->
     <li class="nav-item mx-2">  <!-- Added margin spacing -->
-      <select name="" id="" class="form-control select2" style="width: 100px;">  <!-- Removed select2-hidden-accessible, added fixed width -->
-        <option value="">2024</option>
+      <select name="" id="" class="form-control select2" style="width: 100px;" onchange="window.location.href='?tahun='+this.value">  <!-- Removed select2-hidden-accessible, added fixed width -->
+        <option value="2024" {{ session('tahun', date('Y')) == '2024' ? 'selected' : '' }}>2024</option>
+        <option value="2025" {{ session('tahun', date('Y')) == '2025' ? 'selected' : '' }}>2025</option>
       </select>
     </li>
 
