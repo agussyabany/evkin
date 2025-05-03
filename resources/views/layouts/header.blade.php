@@ -16,19 +16,26 @@
   </ul>
 
   <!-- Right navbar links -->
-  <ul class="navbar-nav ml-auto">
+  <ul class="navbar-nav ml-auto d-flex align-items-center">
     <!-- Navbar Search -->
-    <li class="nav-item float-start">
-      <a href="/perumdam" class="nav-link btn btn-info"><i class="fas fa-home"></i></a>
+    <li class="nav-item mx-2">  <!-- Added margin spacing -->
+      <select name="" id="" class="form-control select2" style="width: 100px;">  <!-- Removed select2-hidden-accessible, added fixed width -->
+        <option value="">2024</option>
+      </select>
     </li>
 
+    <li class="nav-item mx-2">  <!-- Added margin spacing -->
+      <a href="/perumdam" class="nav-link btn btn-info px-3">  <!-- Added horizontal padding -->
+        <i class="fas fa-home"></i>
+      </a>
+    </li>
     
-    <li class="nav-item">
-      <a class="nav-link btn-danger ml-2"   href="/logout" role="button">
+    <li class="nav-item mx-2">  <!-- Added margin spacing -->
+      <a class="nav-link btn-danger px-3" href="/logout" role="button">  <!-- Added horizontal padding -->
         <i class="fas fa-sign-out-alt"></i>
       </a>
     </li>
-  </ul>
+</ul>
 </nav>
 <!-- /.navbar -->
 <!-- Main Sidebar Container -->
