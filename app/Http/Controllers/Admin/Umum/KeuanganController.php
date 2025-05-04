@@ -16,12 +16,13 @@ class KeuanganController extends Controller
 
     public function evkeu ()
     {
-        $keuangan = Keuangan::orderBy('bulanTahun','ASC')->get();
-        $labaStlPjk = Keuangan::sum('labaStlPjk');
-        $biayaOps = Keuangan::sum('biayaOps');
-        $PndptnOps = Keuangan::sum('PndptnOps');
-        $JmlPnrmRekAir = Keuangan::sum('JmlPnrmRekAir');
-        $jmlRekAir = Keuangan::sum('jmlRekAir');    
+        $tahun = session('tahun');
+        $keuangan = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->orderBy('bulanTahun','ASC')->get();
+        $labaStlPjk = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('labaStlPjk');
+        $biayaOps = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('biayaOps');
+        $PndptnOps = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('PndptnOps');
+        $JmlPnrmRekAir = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('JmlPnrmRekAir');
+        $jmlRekAir = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('jmlRekAir');    
         return view('admin.evkin.evKeuangan',compact('keuangan','labaStlPjk','biayaOps','PndptnOps','JmlPnrmRekAir','jmlRekAir'));
     }
 

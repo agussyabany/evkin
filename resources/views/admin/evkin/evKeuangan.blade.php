@@ -9,13 +9,13 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
-    <h1 class="m-0 text-center">KEUANGAN</h1>
+    <h1 class="m-0 text-center">ASPEK KEUANGAN TAHUN {{session('tahun')}}</h1>
   </div>
   <!-- /.content-header -->
   <div class="content">
     <div class="float-right">
       @if (Auth::user()->hasAnyRole(['adminUmum','agus']))
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_evkeu" id="tambah_keu">Tambah Data Keuangan</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_evkeu" id="tambah_keu">TAMBAH</button>
       @endif
     </div>
   <br><br>
@@ -32,6 +32,7 @@
               <thead>
                   <tr>
                       <th>NO</th>
+                      <th>Periode</th>
                       <th>Laba Sebelum Pajak</th>
                       <th>Jumlah Ekuitas</th>
                       <th>Biaya Operasi</th>
@@ -42,7 +43,7 @@
                       <th>Rekening Air</th>
                       <th>Total Aktiva</th>
                       <th>Total Hutang</th>
-                      <th>Periode</th>
+                     
                       @if (Auth::user()->hasAnyRole(['adminUmum','agus','spi']))
                       <th>Status</th>
                      
@@ -58,6 +59,7 @@
                
                 <tr>
                   <td>{{ $loop->iteration }}</td>
+                  <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
                   <td>{{ number_format($item->labaStlPjk, 0) }}</td>
                   <td>{{ number_format($item->jmlEkuitas, 0) }}</td>
                   <td>{{ number_format( $item->biayaOps, 0) }}</td>
@@ -68,7 +70,7 @@
                   <td>{{ number_format($item->jmlRekAir, 0) }}</td>
                   <td>{{ number_format($item->TotalAktiva, 0) }}</td>
                   <td>{{ number_format($item->TotalHutang, 0) }}</td>
-                  <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
+                  
                   @if (Auth::user()->hasAnyRole(['adminUmum','agus','spi']))
                   <td>
                       @if ($item->status == 0)
@@ -85,6 +87,8 @@
                       </button>
                       <div class="dropdown-menu" role="menu" style="">
                         <a class="dropdown-item" href="#" data-id="{{$item->id}}" id="edit_keu">Edit</a>
+
+                        @if (Auth::user()->hasAnyRole(['spi']))
                         <form action="/verKeu/{{ $item->id }}" method="POST" style="display:inline;">
                           @csrf
                           
@@ -93,6 +97,8 @@
                                   this.closest('form').submit(); 
                               }">Verifikasi</a>
                        </form>
+                       @endif
+                       
                         <form action="/delKeu/{{ $item->id }}" method="POST" style="display:inline;">
                           @csrf
                           
@@ -111,8 +117,8 @@
                 @endforeach
                 <tr>
                   <td><strong>TOT</strong></td>
-                  <td><strong>{{number_format($labaStlPjk, 0)}}</strong></td>
                   <td></td>
+                  <td><strong>{{number_format($labaStlPjk, 0)}}</strong></td>
                   <td><strong>{{number_format($biayaOps, 0)}}</strong></td>
                   <td><strong>{{number_format($PndptnOps, 0)}}</strong></td>
                   <td></td>

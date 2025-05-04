@@ -7,7 +7,7 @@
 @section('content')
 <div class="content-wrapper">
   <div class="content-header">
-    <h1 class="m-0 text-center">SUMBER DAYA MANUSIA</h1>
+    <h1 class="m-0 text-center">ASPEK SDM TAHUN {{session('tahun')}}</h1>
   </div>
   <div class="container">
 

@@ -15,12 +15,13 @@ class PelayananController extends Controller
 {
     public function evPel ()
     {
-        $pelayanan = Pelayanan::orderBy('bulanTahun','ASC')->get();
-        $AduanSlsai = Pelayanan::sum('AduanSlsai');
-        $JmlAduan = Pelayanan::sum('JmlAduan');
-        $UjiKualitas = Pelayanan::sum('UjiKualitas');
-        $titikUji = Pelayanan::sum('titikUji');
-        $JmlAirTrjualDom = Pelayanan::sum('JmlAirTrjualDom');
+        $tahun = session('tahun');
+        $pelayanan = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->orderBy('bulanTahun','ASC')->get();
+        $AduanSlsai = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('AduanSlsai');
+        $JmlAduan = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('JmlAduan');
+        $UjiKualitas = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('UjiKualitas');
+        $titikUji = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('titikUji');
+        $JmlAirTrjualDom = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('JmlAirTrjualDom');
         return view('admin.evkin.evPelayanan',compact('pelayanan','AduanSlsai','JmlAduan','UjiKualitas','titikUji','JmlAirTrjualDom'));
     }
     public function index ()

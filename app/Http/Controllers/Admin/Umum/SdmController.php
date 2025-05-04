@@ -11,10 +11,11 @@ class SdmController extends Controller
 {
     public function evSdm ()
     {
-        $sdm = Sdm::orderBy('bulanTahun','ASC')->get();
-        $JmlPegDiklat = Sdm::sum('JmlPegDiklat');
-        $RealByDiklat = Sdm::sum('RealByDiklat');
-        $RealByPeg = Sdm::sum('RealByPeg');
+        $tahun = session('tahun');
+        $sdm = Sdm::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->orderBy('bulanTahun','ASC')->get();
+        $JmlPegDiklat = Sdm::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('JmlPegDiklat');
+        $RealByDiklat = Sdm::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('RealByDiklat');
+        $RealByPeg = Sdm::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('RealByPeg');
         return view('admin.evkin.evSdm',compact('sdm','JmlPegDiklat','RealByDiklat','RealByPeg'));
     }
     public function index ()

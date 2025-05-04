@@ -9,13 +9,13 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
-    <h1 class="m-0 text-center">PRODUKSI</h1>
+    <h1 class="m-0 text-center">ASPEK OPERASIONAL TAHUN {{session('tahun')}}</h1>
   </div>
   <!-- /.content-header -->
   <div class="content">
     <div class="float-right">
       @if (Auth::user()->hasAnyRole(['adminTeknik','agus']))
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_operasional" id="tambah_prod">Tambah Data</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_operasional" id="tambah_prod">TAMBAH</button>
       @endif
     </div>
   <br><br>
@@ -29,6 +29,7 @@
         <thead>
             <tr>
                 <th>NO</th>
+                <th>Periode</th>
                 <th class="text-wrap" style="width: 200px;">Volume Produksi Riil</th>
                 <th class="text-wrap" style="width: 200px;">Jumlah Kapasitas Terpasang</th>
                 <th class="text-wrap" style="width: 200px;">Air Disistribusikan - Air Terjual</th>
@@ -38,7 +39,7 @@
                 <th>Jumlah Pelanggan yang Dilayanai dengan Tekanan > 0,7 Bar</th>
                 <th class="text-wrap" style="width: 200px;">Jumlah Pelanggan Aktiv</th>
                 <th>Jml Meter yg diganti/kalibrasi dalam setahun</th>
-                <th>Bulan Tahun</th>
+                
                 @if (Auth::user()->hasAnyRole(['adminTeknik','agus','spi']))
                 <th>Status</th>
                 <th></th>
@@ -49,6 +50,7 @@
         @foreach($operasional as $item)
           <tr>
             <td>{{ $loop->iteration}}</td>
+            <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
             <td>{{ number_format($item->VolProdRil, 0) }}</td>
             <td>{{ number_format($item->KpstsTrpsng, 0) }}</td>
             <td>{{ number_format($item->KalkulasiJumAir, 0) }}</td>
@@ -58,7 +60,7 @@
             <td>{{ number_format($item->Plgnlayan, 0) }}</td>
             <td>{{ number_format($item->PlgnAktiv, 0) }}</td>
             <td>{{ number_format($item->MtrAirGnti, 0) }}</td>
-            <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
+            
 
             @if (Auth::user()->hasAnyRole(['adminTeknik','agus','spi']))
             <td>
@@ -86,6 +88,7 @@
                                       this.closest('form').submit(); 
                                   }">Hapus</a>
                           </form>
+                          @if (Auth::user()->hasAnyRole(['spi']))
                           <form action="/verOp/{{ $item->id }}" method="POST" style="display:inline;">
                             @csrf
                             
@@ -94,6 +97,7 @@
                                     this.closest('form').submit(); 
                                 }">Verifikasi</a>
                         </form>
+                        @endif
                           </div>
                         </div>
             </td>
@@ -103,6 +107,7 @@
           @endforeach
           <tr>
             <td><strong>TOT</strong></td>
+            <td></td>
             <td><strong>{{number_format($VolProdRil)}}</strong></td>
             <td><strong>{{number_format($KpstsTrpsng)}}</strong></td>
             <td><strong>{{number_format($KalkulasiJumAir)}}</strong></td>

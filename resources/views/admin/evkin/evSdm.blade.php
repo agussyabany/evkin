@@ -9,13 +9,13 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
-    <h1 class="m-0 text-center">SUMBER DAYA MANUSIA</h1>
+    <h1 class="m-0 text-center">ASPEK SUMBER DAYA MANUSIA TAHUN {{ session('tahun') }}</h1>
   </div>
   <!-- /.content-header -->
   <div class="content">
     <div class="float-right">
       @if (Auth::user()->hasAnyRole(['adminUmum','agus']))
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-sdm" id="tambah_sdm">Tambah Data</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-sdm" id="tambah_sdm">TAMBAH Data</button>
       @endif
     </div>
   <br><br>
@@ -28,12 +28,13 @@
             <thead>
                 <tr>
                     <th>NO</th>
+                    <th>Bulan Tahun</th>
                     <th class="text-wrap" style="width: 200px;">Jumlah Pagawai</th>
                     <th class="text-wrap" style="width: 200px;">(Jumlah Seluruh Pelanggan / 1000 )</th>
                     <th class="text-wrap" style="width: 200px;">Jumlah Pagawai Yang Ikut Diklat</th>
                     <th class="text-wrap" style="width: 200px;">Realisasi Biaya Diklat</th>
                     <th>Realisasi Biaya Pegawai</th>
-                    <th>Bulan Tahun</th>
+                    
                     @if (Auth::user()->hasAnyRole(['adminUmum','agus','spi']))
                     <th>Status</th>
                     <th></th>
@@ -44,12 +45,13 @@
             @foreach($sdm as $item)
               <tr>
                 <td>{{ $loop->iteration}}</td>
+                <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
                 <td>{{ number_format($item->JmlPgwai, 0) }}</td>
                 <td>{{ number_format($item->JmlPlgn1000, 0) }}</td>
                 <td>{{ number_format($item->JmlPegDiklat, 0) }}</td>
                 <td>{{ number_format($item->RealByDiklat, 0) }}</td>
                 <td>{{ number_format($item->RealByPeg, 0) }}</td>
-                <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
+                
                 @if (Auth::user()->hasAnyRole(['adminUmum','agus','spi']))
                 <td>
                   @if ($item->status == 0)
@@ -68,6 +70,8 @@
                               </button>
                               <div class="dropdown-menu" role="menu" style="">
                                 <a class="dropdown-item" href="#" data-id="{{ $item->id }}" id="edit_sdm">Edit</a>
+
+                                @if (Auth::user()->hasAnyRole(['spi']))
                                 <form action="/verSdm/{{ $item->id }}" method="POST" style="display:inline;">
                                   @csrf
                                   
@@ -76,6 +80,8 @@
                                           this.closest('form').submit(); 
                                       }">Verikasi</a>
                               </form>
+                              @endif
+
                                 <form action="/delSdm/{{ $item->id }}" method="POST" style="display:inline;">
                                   @csrf
                                   

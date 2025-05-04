@@ -7,7 +7,7 @@
 @section('content')
 <div class="content-wrapper">
   <div class="content-header">
-    <h1 class="m-0 text-center">PELAYANAN</h1>
+    <h1 class="m-0 text-center">ASPEK PELAYANAN TAHUN {{session('tahun')}}</h1>
   </div>
   <div class="container">
   <a href="#" id="cakup" data-toggle="modal" data-target="#modal-ckp"><div id="colCakup" class="info-box {{$clsCkp}}">

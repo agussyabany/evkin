@@ -9,13 +9,13 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
-    <h1 class="m-0 text-center">HUBUNGAN PELANGGAN</h1>
+    <h1 class="m-0 text-center">ASPEK PELAYANAN TAHUN {{ session('tahun') }}</h1>
   </div>
   <!-- /.content-header -->
   <div class="content">
     <div class="float-right">
       @if (Auth::user()->hasAnyRole(['adminLayan','agus']))
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_pelayanan" id="tambah_pelayanan">Tambah Data</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_pelayanan" id="tambah_pelayanan">TAMBAH</button>
       @endif
     </div>
   <br><br>
@@ -28,6 +28,7 @@
       <thead>
           <tr>
               <th>NO</th>
+              <th>Periode</th>
               <th>Penduduk Terlayani</th>
               <th>Penduduk wilayah</th>
               <th>Plgn Thn ini - plgn Th llu</th>
@@ -37,7 +38,7 @@
               <th>Titik yg Diuji</th>
               <th>Air terjualplgn.domestik</th>
               <th>Pelanggan Domestik</th>
-              <th>Periode</th>
+              
               @if (Auth::user()->hasAnyRole(['adminLayan','agus','spi']))
               <th>Status</th>
               <th>-</th>
@@ -49,6 +50,7 @@
       @foreach($pelayanan as $item)
         <tr>
           <td>{{ $loop->iteration}}</td>
+          <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
           <td>{{ number_format($item->JmlPnddkTrlyni, 0) }}</td>
           <td>{{ number_format($item->jmlPndkWil, 0) }}</td>
           <td>{{ number_format($item->kalKulasiJmlPlgn, 0) }}</td>
@@ -58,7 +60,7 @@
           <td>{{ number_format($item->titikUji, 0) }}</td>
           <td>{{ number_format($item->JmlAirTrjualDom, 0) }}</td>
           <td>{{ number_format($item->JmlPlgnDom, 0) }}</td>
-          <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
+          
           @if (Auth::user()->hasAnyRole(['adminLayan','agus','spi']))
           <td>
             @if ($item->status == 0)
@@ -84,6 +86,7 @@
                                     this.closest('form').submit(); 
                                 }">Hapus</a>
                         </form>
+                        @if (Auth::user()->hasAnyRole(['spi']))
                         <form action="/verPel/{{ $item->id }}" method="POST" style="display:inline;">
                           @csrf
                           
@@ -92,6 +95,7 @@
                                   this.closest('form').submit(); 
                               }">Verifikasi</a>
                       </form>
+                      @endif
                         </div>
                       </div>
           </td>

@@ -318,7 +318,7 @@ class evkinHelper {
     } elseif ($nrw > 35 && $nrw <= 40) {
         return ['nilaiNrw' => 2, 'clsNrw' => 'bg-warning'];
     } else {
-        return ['nilaiNrw' => 1, 'clsNrw' => 'bg-success'];
+        return ['nilaiNrw' => 1, 'clsNrw' => 'bg-danger'];
     
  }
 }

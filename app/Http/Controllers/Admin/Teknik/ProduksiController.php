@@ -13,14 +13,15 @@ class ProduksiController extends Controller
 
     public function  evOP ()
     {
-        $operasional = Operasional::orderBy('bulanTahun','ASC')->get();
-        $VolProdRil = Operasional::sum('VolProdRil');
-        $KpstsTrpsng = Operasional::sum('KpstsTrpsng');
-        $KalkulasiJumAir = Operasional::sum('KalkulasiJumAir');
-        $JmlAirDist = Operasional::sum('JmlAirDist');
-        $JmlWktPly = Operasional::sum('JmlWktPly');
-        $MtrAirGnti = Operasional::sum('MtrAirGnti');
-        $hari = Operasional::sum('hari');
+        $tahun = session('tahun');
+        $operasional = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->orderBy('bulanTahun','ASC')->get();
+        $VolProdRil = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('VolProdRil');
+        $KpstsTrpsng = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('KpstsTrpsng');
+        $KalkulasiJumAir = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('KalkulasiJumAir');
+        $JmlAirDist = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('JmlAirDist');
+        $JmlWktPly = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('JmlWktPly');
+        $MtrAirGnti = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('MtrAirGnti');
+        $hari = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('hari');
         return view('admin.evkin.evOperasional',compact('operasional','VolProdRil','KpstsTrpsng','KalkulasiJumAir','JmlAirDist','JmlWktPly','MtrAirGnti','hari'));
     }
     public function index ()
