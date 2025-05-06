@@ -19,23 +19,56 @@
   <ul class="navbar-nav ml-auto d-flex align-items-center">
     <!-- Navbar Search -->
     <li class="nav-item mx-2">  <!-- Added margin spacing -->
+      <select name="" id="" class="form-control select2" style="width: 100px;" disabled>  <!-- Removed select2-hidden-accessible, added fixed width -->
+        <option value="1">JANUARI</option>
+        <option value="2">FEBRUARI</option>
+        <option value="3">MARET</option>
+        <option value="4">APRIL</option>
+        <option value="5">MEI</option>
+        <option value="6">JUNI</option>
+        <option value="7">JULI</option>
+        <option value="8">AGUSTUS</option>
+        <option value="9">SEPETEMBER</option>
+        <option value="10">OKTOBER</option>
+        <option value="11">NOVEMBER</option>
+        <option value="12">DESEMEBER</option>
+      </select>
+    </li>
+
+    <li class="nav-item mx-2">  <!-- Added margin spacing -->
+      <select name="" id="" class="form-control select2" style="width: 100px;" disabled>  <!-- Removed select2-hidden-accessible, added fixed width -->
+        <option value="1">JANUARI</option>
+        <option value="2">FEBRUARI</option>
+        <option value="3">MARET</option>
+        <option value="4">APRIL</option>
+        <option value="5">MEI</option>
+        <option value="6">JUNI</option>
+        <option value="7">JULI</option>
+        <option value="8">AGUSTUS</option>
+        <option value="9">SEPETEMBER</option>
+        <option value="10">OKTOBER</option>
+        <option value="11">NOVEMBER</option>
+        <option value="12">DESEMEBER</option>
+      </select>
+    </li>
+    <li class="nav-item mx-2">  <!-- Added margin spacing -->
       <select name="" id="" class="form-control select2" style="width: 100px;" onchange="window.location.href='?tahun='+this.value">  <!-- Removed select2-hidden-accessible, added fixed width -->
         <option value="2024" {{ session('tahun', date('Y')) == '2024' ? 'selected' : '' }}>2024</option>
         <option value="2025" {{ session('tahun', date('Y')) == '2025' ? 'selected' : '' }}>2025</option>
       </select>
     </li>
 
-    <li class="nav-item mx-2">  <!-- Added margin spacing -->
+    {{-- <li class="nav-item mx-2">  <!-- Added margin spacing -->
       <a href="/perumdam" class="nav-link btn btn-info px-3">  <!-- Added horizontal padding -->
         <i class="fas fa-home"></i>
       </a>
-    </li>
+    </li> --}}
     
-    <li class="nav-item mx-2">  <!-- Added margin spacing -->
+    {{-- <li class="nav-item mx-2">  <!-- Added margin spacing -->
       <a class="nav-link btn-danger px-3" href="/logout" role="button">  <!-- Added horizontal padding -->
         <i class="fas fa-sign-out-alt"></i>
       </a>
-    </li>
+    </li> --}}
 </ul>
 </nav>
 <!-- /.navbar -->

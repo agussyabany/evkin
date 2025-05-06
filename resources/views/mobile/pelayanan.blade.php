@@ -89,6 +89,7 @@
     @include('mobile.modal_pelayanan.dom')
     @include('mobile.modal_pelayanan.qap')
     @include('mobile.modal_pelayanan.tbh')
+    @include('mobile.bottom.bootm')
     
 
 @endsection

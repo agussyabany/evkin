@@ -129,5 +129,6 @@
 @include('mobile.modal_prod.jam')
 @include('mobile.modal_prod.tek')
 @include('mobile.modal_prod.kal')
+@include('mobile.bottom.bootm')
 
 @endsection

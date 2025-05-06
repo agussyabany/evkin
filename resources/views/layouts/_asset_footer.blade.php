@@ -34,6 +34,15 @@
 <script src="{{ asset('assets/dist/js/dashboard/operasional.js')}}"></script>
 <script src="{{ asset('assets/dist/js/dashboard/pelayanan.js')}}"></script>
 <script src="{{ asset('assets/dist/js/dashboard/home.js')}}"></script>
+<script>
+    function moveIndicator(el, index) {
+      let indicator = document.getElementById('indicator');
+      let links = document.querySelectorAll('.navbar a');
+      links.forEach(link => link.classList.remove('active'));
+      el.classList.add('active');
+      indicator.style.left = `${index * 75 + 15}px`; 
+    }
+  </script>
 {{-- 
 
 

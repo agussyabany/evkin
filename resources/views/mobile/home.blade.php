@@ -190,4 +190,5 @@
 </script>
 @include('mobile.modal_prod.nrw')
 @include('mobile.modal_pelayanan.ckp')
+@include('mobile.bottom.bootm')
 @endsection

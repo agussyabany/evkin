@@ -64,4 +64,5 @@
     @include('mobile.modal_sdm.rpl')
     @include('mobile.modal_sdm.rdp')
     @include('mobile.modal_sdm.rbd')
+    @include('mobile.bottom.bootm')
 @endsection

@@ -120,4 +120,5 @@
 @include('mobile.modal_keu.rok')
 @include('mobile.modal_keu.ef')
 @include('mobile.modal_keu.sol')
+@include('mobile.bottom.bootm')
 @endsection

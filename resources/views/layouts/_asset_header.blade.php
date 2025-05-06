@@ -49,6 +49,82 @@
     font-weight: bold;
     text-align: center;
 }
+/* button nav */
+.bottom-navi {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: #89a49a;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    overflow: visible;
+    z-index: 9999;
+}
+
+.navi-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.navi-item {
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.navi-item.active {
+    color: yellow; /* Warna item aktif */
+}
+
+.navi-center {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.navi-btn {
+    background: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f26c4f;
+    font-size: 28px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.navi-btn.active-btn {
+    background: yellow; /* Jika tombol tengah aktif */
+    color: #f26c4f;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .bottom-navi {
+        height: 60px;
+    }
+    .navi-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+    .navi-item {
+        font-size: 20px;
+    }
+}
 
 </style>
 
