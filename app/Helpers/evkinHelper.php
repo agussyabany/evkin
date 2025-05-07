@@ -42,8 +42,8 @@ class evkinHelper {
         for ($bulanRoe = 1; $bulanRoe <= 12; $bulanRoe++) {
             $bulanRoeFormatted = str_pad($bulanRoe, 2, '0', STR_PAD_LEFT);
             
-            $labaStlPjkG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRoeFormatted)->value('labaStlPjk') ?? 0;
-            $jmlEkuitasG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRoeFormatted)->value('jmlEkuitas') ?? 0;
+            $labaStlPjkG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRoeFormatted)->where('status',1)->value('labaStlPjk') ?? 0;
+            $jmlEkuitasG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRoeFormatted)->where('status',1)->value('jmlEkuitas') ?? 0;
             
             if ($jmlEkuitasG > 0) {
                 $persentaseRoe = ($labaStlPjkG / $jmlEkuitasG) * 100;
@@ -93,8 +93,8 @@ class evkinHelper {
         $persentaseRopBulanan = [];
         for ($bulanRop = 1; $bulanRop <= 12; $bulanRop++) {
             $bulanRopFormatted = str_pad($bulanRop, 2, '0', STR_PAD_LEFT);
-            $biayaOpsG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRopFormatted)->value('biayaOps') ?? 0;
-            $PndptnOpsG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRopFormatted)->value('PndptnOps') ?? 0;
+            $biayaOpsG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRopFormatted)->where('status',1)->value('biayaOps') ?? 0;
+            $PndptnOpsG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRopFormatted)->where('status',1)->value('PndptnOps') ?? 0;
             if ($PndptnOpsG > 0) {
                 $persentaseRop = ($biayaOpsG / $PndptnOpsG);
             } else {
@@ -135,8 +135,8 @@ class evkinHelper {
         $persentaseBulananRok = [];
             for ($bulanRok = 1; $bulanRok <= 12; $bulanRok++) {
                 $bulanRokFormatted = str_pad($bulanRok, 2, '0', STR_PAD_LEFT);
-                $kaStrkasG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRokFormatted)->value('kaStrkas') ?? 0;
-                $HutangLancarG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRokFormatted)->value('HutangLancar') ?? 0;
+                $kaStrkasG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRokFormatted)->where('status',1)->value('kaStrkas') ?? 0;
+                $HutangLancarG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRokFormatted)->where('status',1)->value('HutangLancar') ?? 0;
 
                 if ($HutangLancarG > 0) {
                     $persentaseRok = ($kaStrkasG / $HutangLancarG) * 100;
@@ -180,8 +180,8 @@ class evkinHelper {
 
             for ($bulanEf = 1; $bulanEf <= 12; $bulanEf++) {
                 $bulanEfFormatted = str_pad($bulanEf, 2, '0', STR_PAD_LEFT);
-                $JmlPnrmRekAirG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanEfFormatted)->value('JmlPnrmRekAir') ?? 0;
-                $jmlRekAirG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanEfFormatted)->value('jmlRekAir') ?? 0;
+                $JmlPnrmRekAirG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanEfFormatted)->where('status',1)->value('JmlPnrmRekAir') ?? 0;
+                $jmlRekAirG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanEfFormatted)->where('status',1)->value('jmlRekAir') ?? 0;
 
                 if ($jmlRekAirG > 0) {
                     $persentaseEf = ($JmlPnrmRekAirG / $jmlRekAirG) * 100;
@@ -225,8 +225,8 @@ class evkinHelper {
         $persentaseBulananSol = [];
             for ($bulanSol = 1; $bulanSol <= 12; $bulanSol++) {
                 $bulanFormattedSol = str_pad($bulanSol, 2, '0', STR_PAD_LEFT);
-                $TotalAktivaG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanFormattedSol)->value('TotalAktiva') ?? 0;
-                $TotalHutangG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanFormattedSol)->value('TotalHutang') ?? 0;
+                $TotalAktivaG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanFormattedSol)->where('status',1)->value('TotalAktiva') ?? 0;
+                $TotalHutangG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanFormattedSol)->where('status',1)->value('TotalHutang') ?? 0;
 
                 if ($TotalHutangG > 0) {
                     $persentaseSol = ($TotalAktivaG / $TotalHutangG) * 100;
@@ -327,8 +327,8 @@ public static function persentaseBulananNrw ($tahun)
     $persentaseBulananNrw = [];
     for ($bulanNrw = 1; $bulanNrw <= 12; $bulanNrw++) {
         $bulanFormattedNrw = str_pad($bulanNrw, 2, '0', STR_PAD_LEFT);
-        $KalkulasiJumAir = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedNrw)->sum('KalkulasiJumAir');
-        $JmlAirDist = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedNrw)->sum('KpstsTrpsng');
+        $KalkulasiJumAir = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedNrw)->where('status',1)->sum('KalkulasiJumAir');
+        $JmlAirDist = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedNrw)->where('status',1)->sum('KpstsTrpsng');
         if ($JmlAirDist > 0) {
             $persentaseNrw = ($KalkulasiJumAir / $JmlAirDist) * 100;
         } else {
@@ -423,8 +423,8 @@ public static function persentaseBulananTek ($tahun)
     $persentaseBulananTek = [];
     for ($bulanTek = 1; $bulanTek <= 12; $bulanTek++) {
     $bulanFormattedTek = str_pad($bulanTek, 2, '0', STR_PAD_LEFT);
-    $PlgnlayanG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedTek)->value('Plgnlayan') ?? 0;
-    $PlgnAktivG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedTek)->value('PlgnAktiv') ?? 0;
+    $PlgnlayanG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedTek)->where('status',1)->value('Plgnlayan') ?? 0;
+    $PlgnAktivG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedTek)->where('status',1)->value('PlgnAktiv') ?? 0;
     if ($PlgnAktivG > 0) {
         $persentaseTek = ($PlgnlayanG / $PlgnAktivG) * 100;
     } else {
@@ -468,8 +468,8 @@ public static function persentaseBulananKal ($tahun)
 
             for ($bulanKal = 1; $bulanKal <= 12; $bulanKal++) {
             $bulanFormattedKal = str_pad($bulanKal, 2, '0', STR_PAD_LEFT);
-            $MtrAirGntiG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedKal)->value('MtrAirGnti') ?? 0;
-            $PlgnAktivG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedKal)->value('PlgnAktiv') ?? 0;
+            $MtrAirGntiG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedKal)->where('status',1)->value('MtrAirGnti') ?? 0;
+            $PlgnAktivG = Operasional::where('bulanTahun', $tahun . '-' . $bulanFormattedKal)->where('status',1)->value('PlgnAktiv') ?? 0;
 
             if ($PlgnAktivG > 0) {
             $persentaseKal = ($MtrAirGntiG / $PlgnAktivG) * 100;
@@ -531,8 +531,8 @@ public static function persentaseBulananCkp ($tahun)
         $bulanFormattedCkp = str_pad($bulanCkp, 2, '0', STR_PAD_LEFT);
         
         // Ambil nilai Plgnlayan dan PlgnAktiv untuk bulan tertentu
-        $JmlPnddkTrlyniG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedCkp)->value('JmlPnddkTrlyni') ?? 0;
-        $jmlPndkWilG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedCkp)->value('jmlPndkWil') ?? 0;
+        $JmlPnddkTrlyniG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedCkp)->where('status',1)->value('JmlPnddkTrlyni') ?? 0;
+        $jmlPndkWilG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedCkp)->where('status',1)->value('jmlPndkWil') ?? 0;
     
         // Hitung persentase jika PlgnAktiv > 0
         if ($jmlPndkWilG > 0) {
@@ -597,7 +597,7 @@ public static function hasilAdu ($hasilAdu)
  //Konsumsi Air Domestik
  public static function JmlAirTrjualDom ($tahun)
  {
-    return Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->sum('JmlAirTrjualDom');
+    return Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->where('status',1)->sum('JmlAirTrjualDom');
  }
  public static function JmlPlgnDom ($tahun)
  {
@@ -629,8 +629,8 @@ public static function hasilAdu ($hasilAdu)
 
     for ($bulanDom = 1; $bulanDom <= 12; $bulanDom++) {
         $bulanFormattedDom = str_pad($bulanDom, 2, '0', STR_PAD_LEFT);
-        $JmlAirTrjualDomG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedDom)->value('JmlAirTrjualDom') ?? 0;
-        $JmlPlgnDomG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedDom)->value('JmlPlgnDom') ?? 0;
+        $JmlAirTrjualDomG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedDom)->where('status',1)->value('JmlAirTrjualDom') ?? 0;
+        $JmlPlgnDomG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedDom)->where('status',1)->value('JmlPlgnDom') ?? 0;
 
         if ($JmlPlgnDomG > 0) {
             $persentaseDom = ($JmlAirTrjualDomG / $JmlPlgnDomG) * 100;
@@ -678,8 +678,8 @@ public static function hasilAdu ($hasilAdu)
 
     for ($bulanQap = 1; $bulanQap <= 12; $bulanQap++) {
         $bulanFormattedQap = str_pad($bulanQap, 2, '0', STR_PAD_LEFT);
-        $UjiKualitasG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedQap)->value('UjiKualitas') ?? 0;
-        $JtitikUjiG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedQap)->value('titikUji') ?? 0;
+        $UjiKualitasG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedQap)->where('status',1)->value('UjiKualitas') ?? 0;
+        $JtitikUjiG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedQap)->where('status',1)->value('titikUji') ?? 0;
 
         if ($JtitikUjiG > 0) {
             $persentaseQap = (  $JtitikUjiG /$UjiKualitasG) * 100;
@@ -733,8 +733,8 @@ public static function hasilAdu ($hasilAdu)
             $bulanFormattedTbh = str_pad($bulanTbh, 2, '0', STR_PAD_LEFT);
 
             // Ambil nilai Plgnlayan dan PlgnAktiv untuk bulan tertentu
-            $kalKulasiJmlPlgnG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedTbh)->value('kalKulasiJmlPlgn') ?? 0;
-            $JmlPlgnThLlG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedTbh)->value('jmlPndkWil') ?? 0;
+            $kalKulasiJmlPlgnG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedTbh)->where('status',1)->value('kalKulasiJmlPlgn') ?? 0;
+            $JmlPlgnThLlG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedTbh)->where('status',1)->value('jmlPndkWil') ?? 0;
 
             // Hitung persentase jika PlgnAktiv > 0
             if ($JmlPlgnThLlG > 0) {
@@ -846,8 +846,8 @@ public static function hasilAdu ($hasilAdu)
 
         for ($bulanRdp = 1; $bulanRdp <= 12; $bulanRdp++) {
             $bulanFormattedRdp= str_pad($bulanRdp, 2, '0', STR_PAD_LEFT);
-            $JmlPegDiklatG = Sdm::where('bulanTahun', $tahun . '-' . $bulanFormattedRdp)->value('JmlPegDiklat') ?? 0;
-            $JmlPgwaiG = Sdm::where('bulanTahun', $tahun . '-' . $bulanFormattedRdp)->value('JmlPgwai') ?? 0;
+            $JmlPegDiklatG = Sdm::where('bulanTahun', $tahun . '-' . $bulanFormattedRdp)->where('status',1)->value('JmlPegDiklat') ?? 0;
+            $JmlPgwaiG = Sdm::where('bulanTahun', $tahun . '-' . $bulanFormattedRdp)->where('status',1)->value('JmlPgwai') ?? 0;
 
             if ($JmlPgwaiG > 0) {
                 $persentaseRdp = ($JmlPegDiklatG / $JmlPgwaiG) * 100;
@@ -896,8 +896,8 @@ public static function hasilAdu ($hasilAdu)
 
         for ($bulanRbd= 1; $bulanRbd <= 12; $bulanRbd++) {
             $bulanFormattedRbd = str_pad($bulanRbd, 2, '0', STR_PAD_LEFT);
-            $RealByDiklatG = Sdm::where('bulanTahun', $tahun . '-' . $bulanFormattedRbd)->value('RealByDiklat') ?? 0;
-            $JRealByPegG = Sdm::where('bulanTahun', $tahun . '-' . $bulanFormattedRbd)->value('RealByPeg') ?? 0;
+            $RealByDiklatG = Sdm::where('bulanTahun', $tahun . '-' . $bulanFormattedRbd)->where('status',1)->value('RealByDiklat') ?? 0;
+            $JRealByPegG = Sdm::where('bulanTahun', $tahun . '-' . $bulanFormattedRbd)->where('status',1)->value('RealByPeg') ?? 0;
 
             if ($JRealByPegG > 0) {
                 $persentaseRbd = ($RealByDiklatG / $JRealByPegG) * 100;
