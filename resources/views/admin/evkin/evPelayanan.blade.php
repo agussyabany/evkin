@@ -163,7 +163,7 @@
                     <div class="row">
                       <div class="col form-group">
                         <label >Jumlah Penduduk Terlayani</label>
-                        <input required type="number" class="form-control" name="JmlPnddkTrlyni" id="tahunIni">
+                        <input required type="number" class="form-control" name="JmlPnddkTrlyni" id="">
                       </div>
 
                       <div class="col form-group">
@@ -236,14 +236,14 @@
                     <div class="row">
 
                       <div class="col form-group">
-                        <label>Pelanggan Tahun Lalu</label>
+                        <label> Tahun Lalu</label>
                         <input required type="text" class="form-control" name="JmlPlgnThLl" id="JmlPlgnThLl">
                       </div>
 
-                      {{-- <div class="col form-group">
-                        <label>Penduduk Terlayani</label>
+                      <div class="col form-group">
+                        <label>Tahun Ini</label>
                         <input required type="text" class="form-control" name="JmlPnddkTrlyni" id="tahunIni">
-                      </div> --}}
+                      </div>
 
                       <div class="col form-group">
                         <label>Tahun ini - Tahun lalu</label>

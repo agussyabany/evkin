@@ -57,7 +57,7 @@
         var tumbuh = ini - lalu;
         $('#kalKulasiJmlPlgn').val(tumbuh);
     });
-     
+    
     })
   </script>
 {{-- 
