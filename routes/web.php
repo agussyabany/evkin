@@ -160,6 +160,7 @@ Route::post('pelSave', [PelayananController::class, 'create']);
 Route::get('/dataPelBy/{id}',[PelayananController::class, 'dataPelBy']);
 Route::post('/pelEdit',[PelayananController::class, 'edit']);
 Route::post('/delPel/{id}',[PelayananController::class, 'del']);
+Route::get('/lalu',[PelayananController::class, 'lalu']);
 
     
 });

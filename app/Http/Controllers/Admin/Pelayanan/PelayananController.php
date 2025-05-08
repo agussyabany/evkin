@@ -106,4 +106,18 @@ class PelayananController extends Controller
         $pelayanan = Pelayanan::where('id',$id)->get();
         return response()->json(['data' => $pelayanan]);
     }
+
+    function lalu()
+    {
+        $tahun = session('tahun') - 1;
+
+        $lalu = Pelayanan::select('JmlPnddkTrlyni','bulanTahun')
+            ->whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])
+            ->orderBy('id', 'DESC')
+            ->first();
+
+        return response()->json([
+            'data' => $lalu ?? ['JmlPnddkTrlyni' => 0] // Kalau kosong, kirim angka 0
+        ]);
+    }
 }

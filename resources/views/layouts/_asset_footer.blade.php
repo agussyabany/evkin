@@ -42,6 +42,23 @@
       el.classList.add('active');
       indicator.style.left = `${index * 75 + 15}px`; 
     }
+
+    $(document).ready(function() {
+
+        $(document).on('click', '#tambah_pelayanan', function() {
+          $.get('/lalu', function (data) {
+            $('#JmlPlgnThLl').val(data.data.JmlPnddkTrlyni);
+        });
+      })
+
+      $('#tahunIni').on('keyup', function () {
+        var lalu = parseInt($('#JmlPlgnThLl').val()) || 0;
+        var ini = parseInt($(this).val()) || 0;
+        var tumbuh = ini - lalu;
+        $('#kalKulasiJmlPlgn').val(tumbuh);
+    });
+     
+    })
   </script>
 {{-- 
 
