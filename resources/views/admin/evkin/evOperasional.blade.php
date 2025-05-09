@@ -30,13 +30,18 @@
             <tr>
                 <th>NO</th>
                 <th>Periode</th>
+                <th>Jumlah Hari</th>
                 <th class="text-wrap" style="width: 200px;">Volume Produksi Riil</th>
                 <th class="text-wrap" style="width: 200px;">Jumlah Kapasitas Terpasang</th>
-                <th class="text-wrap" style="width: 200px;">Air Disistribusikan - Air Terjual</th>
                 <th class="text-wrap" style="width: 200px;">Jumlah Air Didistribusikan</th>
+                <th class="text-wrap" style="width: 200px;">Jumlah Air Terjual (DRD)</th>
+                <th class="text-wrap" style="width: 200px;">Air Tidak Berekening (NRW)</th>
+                <th class="text-wrap" style="width: 200px;">Presentase NRW</th>
+                
                 <th class="text-wrap" style="width: 200px;">Jumlah Waktu Pelayanan/Distribusi Air ke Pelanggan dalam Sebulan</th>
-                <th>Jumlah Hari</th>
+                
                 <th>Jumlah Pelanggan yang Dilayanai dengan Tekanan > 0,7 Bar</th>
+                <th>Jml Aduan Pelanggan di Distribusi & PKA</th>
                 <th class="text-wrap" style="width: 200px;">Jumlah Pelanggan Aktiv</th>
                 <th>Jml Meter yg diganti/kalibrasi dalam setahun</th>
                 
@@ -47,17 +52,43 @@
             </tr>
         </thead>
         <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>(m3)</td>
+            <td>(m3)</td>
+            <td>(m3)</td>
+            <td>(m3)</td>
+            <td>(m3)</td>
+            <td>(%)</td>
+            <td>(jam/hari)</td>
+            <td>(sl)</td>
+            <td></td>
+            <td>(sl)</td>
+            <td>(sl)</td>
+            <td>(sl)</td>
+          </tr>
         @foreach($operasional as $item)
           <tr>
             <td>{{ $loop->iteration}}</td>
             <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
-            <td>{{ number_format($item->VolProdRil, 0) }}</td>
-            <td>{{ number_format($item->KpstsTrpsng, 0) }}</td>
-            <td>{{ number_format($item->KalkulasiJumAir, 0) }}</td>
-            <td>{{ number_format($item->JmlAirDist, 0) }}</td>
-            <td>{{ number_format($item->JmlWktPly, 0) }}</td>
             <td>{{ number_format($item->hari, 0) }}</td>
+           
+            <td>{{ number_format($item->KpstsTrpsng, 0) }}</td>
+            <td>{{ number_format($item->VolProdRil, 0) }}</td>
+           
+           
+            <td>{{ number_format($item->JmlAirDist, 0) }}</td>
+            <td>drd</td>
+            <td>{{ number_format($item->KalkulasiJumAir, 0) }}</td>
+            
+            <td>0%</td>
+            <td>{{ number_format($item->JmlWktPly, 0) }}</td>
+           
+            
             <td>{{ number_format($item->Plgnlayan, 0) }}</td>
+            <td></td>
             <td>{{ number_format($item->PlgnAktiv, 0) }}</td>
             <td>{{ number_format($item->MtrAirGnti, 0) }}</td>
             
@@ -108,12 +139,16 @@
           <tr>
             <td><strong>TOT</strong></td>
             <td></td>
+            <td><strong>{{number_format($hari)}}</strong></td>
             <td><strong>{{number_format($VolProdRil)}}</strong></td>
             <td><strong>{{number_format($KpstsTrpsng)}}</strong></td>
-            <td><strong>{{number_format($KalkulasiJumAir)}}</strong></td>
             <td><strong>{{number_format($JmlAirDist)}}</strong></td>
+            <td></td>
+            <td><strong>{{number_format($KalkulasiJumAir)}}</strong></td>
+            <td></td>
             <td><strong>{{number_format($JmlWktPly)}}</strong></td>
-            <td><strong>{{number_format($hari)}}</strong></td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             
@@ -175,14 +210,23 @@
                   
                 <div class="container">
                     <div class="row">
-                      <div class="col form-group">
-                        <label >Air Disistribusikan - Air Terjual</label>
-                        <input required type="number" class="form-control" name="KalkulasiJumAir" id="KalkulasiJumAir">
-                      </div>
+                      
 
                       <div class="col form-group">
-                        <label>Jumlah Air Didistribusikan</label>
+                        <label>Air Didistribusikan</label>
                         <input required type="number" class="form-control" name="JmlAirDist" id="JmlAirDist">
+                      </div>
+                      <div class="col form-group">
+                        <label>Air Terjual</label>
+                        <input required type="number" class="form-control" name="drd" id="drd">
+                      </div>
+                      <div class="col form-group">
+                        <label >Air Tidak Berekening</label>
+                        <input required type="number"  class="form-control" name="KalkulasiJumAir" id="nrw">
+                      </div>
+                      <div class="col form-group">
+                        <label >NRW %</label>
+                        <input required type="number" step="any"   class="form-control" name="persen" id="persen">
                       </div>
                     </div>
                   </div>
@@ -235,9 +279,7 @@
                         <label>Jml Meter yg diganti/kalibrasi dalam setahun</label>
                         <input required type="number" class="form-control" name="MtrAirGnti" id="MtrAirGnti">
                       </div>
-
-                     
-
+                      
                       <div class="col form-group">
                         <label>Bulan</label>
                         <input required type="month" class="form-control" name="date" id="date">
@@ -246,6 +288,26 @@
                     </div>
                   </div>
                 </fieldset><br>
+
+                <fieldset class="border border-secondary rounded">
+                  <legend class="ml-2 w-auto px-3 border border-secondary rounded" style="display:flex; justify-content:flex-end; align-items:center;"><h6>Aduan Pelanggan</h6></legend>
+                    
+                  <div class="container">
+                      <div class="row">
+  
+                        <div class="col form-group">
+                          <label>Aduan Pelayanan</label>
+                          <input required type="number" class="form-control" name="" id="">
+                        </div>
+                        
+                        <div class="col form-group">
+                          <label>Aduan Teknik</label>
+                          <input required type="number" class="form-control" name="" id="">
+                        </div>
+  
+                      </div>
+                    </div>
+                  </fieldset><br>
               </div>
 
             <div class="modal-footer justify-content-between">

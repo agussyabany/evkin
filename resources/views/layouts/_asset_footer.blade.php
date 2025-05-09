@@ -34,6 +34,7 @@
 <script src="{{ asset('assets/dist/js/dashboard/operasional.js')}}"></script>
 <script src="{{ asset('assets/dist/js/dashboard/pelayanan.js')}}"></script>
 <script src="{{ asset('assets/dist/js/dashboard/home.js')}}"></script>
+
 <script>
     function moveIndicator(el, index) {
       let indicator = document.getElementById('indicator');
@@ -42,7 +43,7 @@
       el.classList.add('active');
       indicator.style.left = `${index * 75 + 15}px`; 
     }
-
+    // Kallkulasi Pertumbuhan Pelanggan Aspek Pelayanan
     $(document).ready(function() {
 
         $(document).on('click', '#tambah_pelayanan', function() {
@@ -57,9 +58,19 @@
         var tumbuh = ini - lalu;
         $('#kalKulasiJmlPlgn').val(tumbuh);
     });
+    //NRW
+    $('#JmlAirDist, #drd').on('keyup', function () {
+    var distribusi = parseInt($('#JmlAirDist').val()) || 0;
+    var drd = parseInt($('#drd').val()) || 0;
+    var nrw = distribusi - drd;
+    var persen = distribusi > 0 ? (nrw / distribusi) * 100 : 0;
     
-    })
-  </script>
+    $('#nrw').val(nrw);
+    $('#persen').val(persen.toFixed(2)); // dibulatkan 2 angka di belakang koma
+});
+    
+})
+</script>
 {{-- 
 
 

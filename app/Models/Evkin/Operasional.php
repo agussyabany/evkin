@@ -23,6 +23,11 @@ class Operasional extends Model
         'MtrAirGnti',
         'bulanTahun',
         'status',
-        'user'
+        'user',
+        'aduPel',
+        'airTerjual',
+        'persen',
+        'nrw'
+
     ];
 }

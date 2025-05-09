@@ -43,6 +43,10 @@ class ProduksiController extends Controller
             'PlgnAktiv' => $request->input('PlgnAktiv'),
             'MtrAirGnti' => $request->input('MtrAirGnti'),
             'bulanTahun' => $request->input('date'),
+            'aduPel'=> $request->input('aduPel'),
+            'airTerjual'=> $request->input('drd'),
+            'persen' => $request->input('persen'),
+            // 'nrw' => $request->input('nrw'),
             'status'=> 0,
             'user' => 1
         ];
