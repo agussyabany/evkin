@@ -146,6 +146,7 @@ Route::post('opSave', [ProduksiController::class, 'save']);
 Route::get('/dataOpBy/{id}',[ProduksiController::class, 'dataOpBy']);
 Route::post('/opEdit',[ProduksiController::class, 'edit']);
 Route::post('/delOps/{id}',[ProduksiController::class, 'del']);
+Route::get('aduLayan',[ProduksiController::class,'aduLayan']);
 
 });
 

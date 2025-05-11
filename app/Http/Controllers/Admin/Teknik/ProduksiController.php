@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Teknik;
 
 use App\Http\Controllers\Controller;
 use App\Models\Evkin\Operasional;
+use App\Models\Evkin\Pelayanan;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\Constraint\Operator;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -22,11 +23,14 @@ class ProduksiController extends Controller
         $JmlWktPly = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('JmlWktPly');
         $MtrAirGnti = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('MtrAirGnti');
         $hari = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('hari');
-        return view('admin.evkin.evOperasional',compact('operasional','VolProdRil','KpstsTrpsng','KalkulasiJumAir','JmlAirDist','JmlWktPly','MtrAirGnti','hari'));
+        $aduLayan = Pelayanan::select('JmlAduan','bulanTahun')->whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->get();
+        return view('admin.evkin.evOperasional',compact('operasional','VolProdRil','KpstsTrpsng','KalkulasiJumAir','JmlAirDist','JmlWktPly','MtrAirGnti','hari','aduLayan'));
     }
     public function index ()
     {
+        $tahun= session('tahun');
         $operasional = Operasional::orderBy('bulanTahun','ASC')->get();
+        
 
         return view('admin.teknik.produksi',compact('operasional'));
     }
@@ -46,7 +50,7 @@ class ProduksiController extends Controller
             'aduPel'=> $request->input('aduPel'),
             'airTerjual'=> $request->input('drd'),
             'persen' => $request->input('persen'),
-            // 'nrw' => $request->input('nrw'),
+            'nrw' => $request->input('aduTek'),
             'status'=> 0,
             'user' => 1
         ];
@@ -103,5 +107,13 @@ class ProduksiController extends Controller
         Alert::success('Berhasil!', 'Data berhasil diVerifikasi.');
         return redirect('/evOp');
 
+    }
+
+    public function aduLayan ()
+    {
+        $tahun= session('tahun');
+        $aduLayan = Pelayanan::select('JmlAduan','bulanTahun')->whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->get();
+
+        return response()->json(['data' => $aduLayan]);
     }
 }

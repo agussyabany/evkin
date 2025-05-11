@@ -58,7 +58,9 @@
         var tumbuh = ini - lalu;
         $('#kalKulasiJmlPlgn').val(tumbuh);
     });
-    //NRW
+
+
+    //NRW(Operasioanal)
     $('#JmlAirDist, #drd').on('keyup', function () {
     var distribusi = parseInt($('#JmlAirDist').val()) || 0;
     var drd = parseInt($('#drd').val()) || 0;
@@ -67,7 +69,27 @@
     
     $('#nrw').val(nrw);
     $('#persen').val(persen.toFixed(2)); // dibulatkan 2 angka di belakang koma
+
+    //
+    
 });
+
+function updateTotal() {
+        var selectedValue = parseInt($('#adu_layan').val()) || 0; // Ganti 'yourSelectId' sesuai ID select-mu
+        var aduanTeknik = parseInt($('#aduan_teknik').val()) || 0;
+        var total = selectedValue + aduanTeknik;
+        $('#total_aduan').val(total);
+    }
+
+    // Trigger saat select berubah
+    $('#adu_layan').on('change', function() {
+        updateTotal();
+    });
+
+    // Trigger saat mengetik di aduan_teknik
+    $('#aduan_teknik').on('keyup', function() {
+        updateTotal();
+    });
     
 })
 </script>

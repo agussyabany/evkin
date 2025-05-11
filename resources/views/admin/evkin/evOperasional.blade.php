@@ -15,7 +15,7 @@
   <div class="content">
     <div class="float-right">
       @if (Auth::user()->hasAnyRole(['adminTeknik','agus']))
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_operasional" id="tambah_prod">TAMBAH</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_operasional" id="tambah_operasional">TAMBAH</button>
       @endif
     </div>
   <br><br>
@@ -297,12 +297,23 @@
   
                         <div class="col form-group">
                           <label>Aduan Pelayanan</label>
-                          <input required type="number" class="form-control" name="" id="">
+                          {{-- <input required type="number" class="form-control" name="" id="adu_layan"> --}}
+                          <select name="aduPel" id="adu_layan" class="form-control select2">
+                            @foreach ($aduLayan as $item )
+                            <option value="{{ $item->JmlAduan}}">{{ $item->JmlAduan}} | {{ $item->bulanTahun }}</option>
+                            @endforeach
+                            
+                          </select>
                         </div>
                         
                         <div class="col form-group">
                           <label>Aduan Teknik</label>
-                          <input required type="number" class="form-control" name="" id="">
+                          <input required type="number" class="form-control" name="aduTek" id="aduan_teknik">
+                        </div>
+
+                        <div class="col form-group">
+                          <label>Total Aduan</label>
+                          <input required type="number" class="form-control" name="" id="total_aduan">
                         </div>
   
                       </div>
