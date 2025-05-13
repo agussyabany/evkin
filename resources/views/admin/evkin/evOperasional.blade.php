@@ -42,6 +42,8 @@
                 
                 <th>Jumlah Pelanggan yang Dilayanai dengan Tekanan > 0,7 Bar</th>
                 <th>Jml Aduan Pelanggan di Distribusi & PKA</th>
+                <th>Aduan Pelayanan</th>
+                <th>Total Aduan</th>
                 <th class="text-wrap" style="width: 200px;">Jumlah Pelanggan Aktiv</th>
                 <th>Jml Meter yg diganti/kalibrasi dalam setahun</th>
                 
@@ -65,7 +67,8 @@
             <td>(jam/hari)</td>
             <td>(sl)</td>
             <td></td>
-            <td>(sl)</td>
+            <td></td>
+            <td></td>
             <td>(sl)</td>
             <td>(sl)</td>
           </tr>
@@ -80,15 +83,17 @@
            
            
             <td>{{ number_format($item->JmlAirDist, 0) }}</td>
-            <td>drd</td>
+            <td>{{ number_format($item->airTerjual, 0) }}</td>
             <td>{{ number_format($item->KalkulasiJumAir, 0) }}</td>
             
-            <td>0%</td>
+            <td>{{ $item->persen }}</td>
             <td>{{ number_format($item->JmlWktPly, 0) }}</td>
            
             
             <td>{{ number_format($item->Plgnlayan, 0) }}</td>
-            <td></td>
+            <td>{{ number_format($item->nrw, 0) }}</td>
+            <td>{{ $item->aduPel }}</td>
+            <td>{{ $item->totAdu }}</td>
             <td>{{ number_format($item->PlgnAktiv, 0) }}</td>
             <td>{{ number_format($item->MtrAirGnti, 0) }}</td>
             
@@ -143,15 +148,16 @@
             <td><strong>{{number_format($VolProdRil)}}</strong></td>
             <td><strong>{{number_format($KpstsTrpsng)}}</strong></td>
             <td><strong>{{number_format($JmlAirDist)}}</strong></td>
-            <td></td>
+            <td><strong>{{number_format($airTerjual)}}</strong></td>
             <td><strong>{{number_format($KalkulasiJumAir)}}</strong></td>
-            <td></td>
+            <td><strong>{{number_format($persen)}}</strong></td>
             <td><strong>{{number_format($JmlWktPly)}}</strong></td>
             <td></td>
+            <td>{{number_format($aduTek)}}</td>
+            <td>{{number_format($aduPel)}}</td>
+            <td>{{number_format($totAdu)}}</td>
             <td></td>
-            <td></td>
-            <td></td>
-            
+            <td><strong>{{ number_format($MtrAirGnti) }}</strong></td>
           </tr>
         </tbody>
     </table>
@@ -313,7 +319,7 @@
 
                         <div class="col form-group">
                           <label>Total Aduan</label>
-                          <input required type="number" class="form-control" name="" id="total_aduan">
+                          <input required type="number" class="form-control" name="totAdu" id="total_aduan">
                         </div>
   
                       </div>

@@ -27,7 +27,8 @@ class Operasional extends Model
         'aduPel',
         'airTerjual',
         'persen',
-        'nrw'
+        'nrw',
+        'totAdu'
 
     ];
 }

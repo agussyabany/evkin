@@ -23,8 +23,13 @@ class ProduksiController extends Controller
         $JmlWktPly = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('JmlWktPly');
         $MtrAirGnti = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('MtrAirGnti');
         $hari = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('hari');
+        $aduTek = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('nrw');
+        $totAdu = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('totAdu');
+        $aduPel = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('aduPel');
+        $persen = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('persen');
+        $airTerjual = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('airTerjual');
         $aduLayan = Pelayanan::select('JmlAduan','bulanTahun')->whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->get();
-        return view('admin.evkin.evOperasional',compact('operasional','VolProdRil','KpstsTrpsng','KalkulasiJumAir','JmlAirDist','JmlWktPly','MtrAirGnti','hari','aduLayan'));
+        return view('admin.evkin.evOperasional',compact('operasional','VolProdRil','KpstsTrpsng','KalkulasiJumAir','JmlAirDist','JmlWktPly','MtrAirGnti','hari','aduLayan','aduTek','totAdu','aduPel','persen','airTerjual'));
     }
     public function index ()
     {
@@ -51,6 +56,7 @@ class ProduksiController extends Controller
             'airTerjual'=> $request->input('drd'),
             'persen' => $request->input('persen'),
             'nrw' => $request->input('aduTek'),
+            'totAdu' => $request->input('totAdu'),
             'status'=> 0,
             'user' => 1
         ];
