@@ -7,7 +7,7 @@
 @section('content')
 <div class="content-wrapper">
   <div class="content-header">
-    <h1 class="m-0 text-center">ASPEK OPERASIONAL TAHUN {{ session('tahun') }}</h1>
+    <h1 class="m-0 text-center">ASPEK OPERASIONAL  {{ \App\Helpers\EvkinHelper::namaBulan(session('bulan_awal')) }} s/d {{ \App\Helpers\EvkinHelper::namaBulan(session('bulan_akhir')) }}  {{ session('tahun') }}</h1>
   </div>
   <div class="container">
     <div class="p-1 flex-fill" style="overflow: hidden"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
