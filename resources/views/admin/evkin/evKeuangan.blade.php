@@ -9,7 +9,7 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
-    <h1 class="m-0 text-center">ASPEK KEUANGAN TAHUN {{session('tahun')}}</h1>
+    <h1 class="m-0 text-center">ASPEK KEUANGAN {{ session('bulan_awal') }} s/d {{ session(' bulan_akhir') }} TAHUN {{session('tahun')}}</h1>
   </div>
   <!-- /.content-header -->
   <div class="content">

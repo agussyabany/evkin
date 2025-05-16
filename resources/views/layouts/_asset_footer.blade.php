@@ -92,6 +92,14 @@ function updateTotal() {
     });
     
 })
+
+//SELECT BULAN TAHUN\
+function changeBulanTahun() {
+    var tahun = document.getElementById('selectTahun').value;
+    var bulanAwal = document.getElementById('selectBulanAwal').value;
+    var bulanAkhir = document.getElementById('selectBulanAkhir').value;
+    window.location.href = '?tahun=' + tahun + '&bulan_awal=' + bulanAwal + '&bulan_akhir=' + bulanAkhir;
+}
 </script>
 {{-- 
 

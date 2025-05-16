@@ -63,47 +63,51 @@ class MobileController extends Controller
     public function keuangan ()
     {
             $tahun = session('tahun');
+            $awal = session('bulan_awal');//ini nilainya MM misal 01
+            $akhir = session('bulan_akhir');//ini nilainya MM misal 02
+            $bulanAwal = $tahun . '-' . $awal;
+            $bulanAkhir = $tahun . '-' . $akhir;
             $urutanBulan =evkinHelper::UrutanBulan();
             
             //RETURN OF EQUITY
-            $labaStlPjk = evkinHelper::labaStlPjk($tahun);
-            $jmlEkuitas = evkinHelper::jmlEkuitas($tahun);
-            $hitungRoe = evkinHelper::hitungRoe($tahun) ;
+            $labaStlPjk = evkinHelper::labaStlPjk($tahun,$bulanAwal,$bulanAkhir);
+            $jmlEkuitas = evkinHelper::jmlEkuitas($tahun,$bulanAwal,$bulanAkhir);
+            $hitungRoe = evkinHelper::hitungRoe($tahun,$bulanAwal,$bulanAkhir) ;
             $hasilRoe = round($hitungRoe, 2);
             $roeData = EvkinHelper::nilaiRoe($hasilRoe);
             $nilaiRoe = $roeData['nilaiRoe'];
             $clsRoe = $roeData['clsRoe'];
-            $persentaseBulananRoe = EvkinHelper::hitungRoeBulanan($tahun);
+            $persentaseBulananRoe = EvkinHelper::hitungRoeBulanan($tahun,$bulanAwal,$bulanAkhir);
 
             //RASIO OPERASIONAL
-            $biayaOps = evkinHelper::biayaOps($tahun);
-            $PndptnOps = evkinHelper::PndptnOps($tahun);
-            $hitungRop = evkinHelper::hitungRop($tahun);
+            $biayaOps = evkinHelper::biayaOps($tahun,$bulanAwal,$bulanAkhir);
+            $PndptnOps = evkinHelper::PndptnOps($tahun,$bulanAwal,$bulanAkhir);
+            $hitungRop = evkinHelper::hitungRop($tahun,$bulanAwal,$bulanAkhir);
             $hasilRop = round($hitungRop, 2);
             $ropData = evkinHelper::nilaiRop($hasilRop);
             $nilaiRop = $ropData['nilaiRop'];
             $clsRop = $ropData['clsRop'];
-            $persentaseRopBulanan = evkinHelper::hitungRopBulanan($tahun);
+            $persentaseRopBulanan = evkinHelper::hitungRopBulanan($tahun,$bulanAwal,$bulanAkhir);
             
             //RATIO KAS
-            $kaStrkas = evkinHelper::kaStrkas($tahun);
-            $HutangLancar = evkinHelper::HutangLancar($tahun);
-            $hitungRok = evkinHelper::hitungRok($tahun);
+            $kaStrkas = evkinHelper::kaStrkas($tahun,$bulanAwal,$bulanAkhir);
+            $HutangLancar = evkinHelper::HutangLancar($tahun,$bulanAwal,$bulanAkhir);
+            $hitungRok = evkinHelper::hitungRok($tahun,$bulanAwal,$bulanAkhir);
             $hasilRok = round($hitungRok, 2);
             $rokData = evkinHelper::nilaiRok($hasilRok);
             $nilaiRok = $rokData['nilaiRok'];
             $clsRok = $rokData['clsRok'];
-            $persentaseBulananRok = evkinHelper::persentaseBulananRok($tahun);
+            $persentaseBulananRok = evkinHelper::persentaseBulananRok($tahun,$bulanAwal,$bulanAkhir);
             
             //EFEKTIFITAS PENAGIHAN
-            $JmlPnrmRekAir = evkinHelper::JmlPnrmRekAir($tahun);
-            $jmlRekAir = evkinHelper::jmlRekAir($tahun);
-            $hitungEf = evkinHelper::hitungEf($tahun);
+            $JmlPnrmRekAir = evkinHelper::JmlPnrmRekAir($tahun,$bulanAwal,$bulanAkhir);
+            $jmlRekAir = evkinHelper::jmlRekAir($tahun,$bulanAwal,$bulanAkhir);
+            $hitungEf = evkinHelper::hitungEf($tahun,$bulanAwal,$bulanAkhir);
             $hasilEf = round($hitungEf, 2);
             $efData = evkinHelper::nilaiEf($hasilEf);
             $clsEf = $efData['clsEf'];
             $nilaiEf = $efData['nilaiEf'];
-            $persentaseBulananEf = evkinHelper::persentaseBulananEf($tahun);
+            $persentaseBulananEf = evkinHelper::persentaseBulananEf($tahun,$bulanAwal,$bulanAkhir);
 
             //SOLVABILITAS
             $TotalAktiva = evkinHelper::TotalAktiva($tahun);

@@ -8,7 +8,7 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
-    <h1 class="m-0 text-center">ASPEK KEUANGAN TAHUN {{$tahun}}</h1>
+    <h1 class="m-0 text-center">ASPEK KEUANGAN  {{ \App\Helpers\EvkinHelper::namaBulan(session('bulan_awal')) }} s/d {{ \App\Helpers\EvkinHelper::namaBulan(session('bulan_akhir')) }}  {{ session('tahun') }}</h1>
   </div>
   <!-- /.content-header -->
   <div class="container"><br>

@@ -12,16 +12,16 @@ class evkinHelper {
     //-------------------ASPEK KEUANGAN----------------//
 
     //Return Of Equity
-    public static function hitungRoe($tahun) {
-        $labaStlPjk = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->sum('labaStlPjk');
-        $jmlEkuitas = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->orderBy('bulanTahun', 'DESC')->value('jmlEkuitas');
+    public static function hitungRoe($tahun,$bulanAwal, $bulanAkhir) {
+        $labaStlPjk = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('labaStlPjk');
+        $jmlEkuitas = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->orderBy('bulanTahun', 'DESC')->value('jmlEkuitas');
         return $jmlEkuitas > 0 ? round(($labaStlPjk / $jmlEkuitas) * 100, 2) : 0;
     }
-    public static function labaStlPjk($tahun) {
-        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->sum('labaStlPjk');  // Mengambil jumlah labaStlPjk
+    public static function labaStlPjk($tahun,$bulanAwal, $bulanAkhir) {
+        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('labaStlPjk');  // Mengambil jumlah labaStlPjk
     }
-    public static function jmlEkuitas($tahun) {
-        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->orderBy('bulanTahun', 'DESC')->value('jmlEkuitas');  // Mengambil jumlah labaStlPjk
+    public static function jmlEkuitas($tahun,$bulanAwal, $bulanAkhir) {
+        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->orderBy('bulanTahun', 'DESC')->value('jmlEkuitas');  // Mengambil jumlah labaStlPjk
     }
     public static function nilaiRoe($hasilRoe) {
         // Logika untuk menentukan nilai dan kelas CSS berdasarkan ROE
@@ -37,13 +37,13 @@ class evkinHelper {
             return ['nilaiRoe' => 5, 'clsRoe' => 'bg-success'];
         }
     }
-    public static function hitungRoeBulanan($tahun) {
+    public static function hitungRoeBulanan($tahun,$bulanAwal, $bulanAkhir) {
         $persentaseBulananRoe = [];
         for ($bulanRoe = 1; $bulanRoe <= 12; $bulanRoe++) {
             $bulanRoeFormatted = str_pad($bulanRoe, 2, '0', STR_PAD_LEFT);
             
-            $labaStlPjkG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRoeFormatted)->where('status',1)->value('labaStlPjk') ?? 0;
-            $jmlEkuitasG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRoeFormatted)->where('status',1)->value('jmlEkuitas') ?? 0;
+            $labaStlPjkG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRoeFormatted)->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->value('labaStlPjk') ?? 0;
+            $jmlEkuitasG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRoeFormatted)->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->value('jmlEkuitas') ?? 0;
             
             if ($jmlEkuitasG > 0) {
                 $persentaseRoe = ($labaStlPjkG / $jmlEkuitasG) * 100;
@@ -64,16 +64,16 @@ class evkinHelper {
     }
 
     //Rasio Operasional
-    public static function hitungRop($tahun) {
-        $biayaOps = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->sum('biayaOps');
-        $PndptnOps = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->sum('PndptnOps');
+    public static function hitungRop($tahun,$bulanAwal,$bulanAkhir) {
+        $biayaOps = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('biayaOps');
+        $PndptnOps = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('PndptnOps');
         return $PndptnOps > 0 ? ($biayaOps / $PndptnOps) : 0;
     }
-    public static function biayaOps($tahun) {
-        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->sum('biayaOps');
+    public static function biayaOps($tahun,$bulanAwal,$bulanAkhir) {
+        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('biayaOps');
     }
-    public static function PndptnOps($tahun) {
-        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->sum('PndptnOps');
+    public static function PndptnOps($tahun,$bulanAwal,$bulanAkhir) {
+        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('PndptnOps');
     }
     public static function nilaiRop($hasilRop) 
     {
@@ -89,12 +89,12 @@ class evkinHelper {
             return ['nilaiRop' => 5, 'clsRop' => 'bg-success'];
         }
     }
-    public static function hitungRopBulanan($tahun) {
+    public static function hitungRopBulanan($tahun,$bulanAwal,$bulanAkhir) {
         $persentaseRopBulanan = [];
         for ($bulanRop = 1; $bulanRop <= 12; $bulanRop++) {
             $bulanRopFormatted = str_pad($bulanRop, 2, '0', STR_PAD_LEFT);
-            $biayaOpsG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRopFormatted)->where('status',1)->value('biayaOps') ?? 0;
-            $PndptnOpsG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRopFormatted)->where('status',1)->value('PndptnOps') ?? 0;
+            $biayaOpsG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRopFormatted)->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->value('biayaOps') ?? 0;
+            $PndptnOpsG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRopFormatted)->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->value('PndptnOps') ?? 0;
             if ($PndptnOpsG > 0) {
                 $persentaseRop = ($biayaOpsG / $PndptnOpsG);
             } else {
@@ -106,16 +106,16 @@ class evkinHelper {
     }
 
     //Rasio Kas
-    public static function hitungRok($tahun) {
-        $kaStrkas = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->orderBy('bulanTahun', 'DESC')->value('kaStrkas');
-        $HutangLancar = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->orderBy('bulanTahun', 'DESC')->value('HutangLancar');
+    public static function hitungRok($tahun,$bulanAwal,$bulanAkhir) {
+        $kaStrkas = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->orderBy('bulanTahun', 'DESC')->value('kaStrkas');
+        $HutangLancar = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->orderBy('bulanTahun', 'DESC')->value('HutangLancar');
         return $HutangLancar > 0 ? ($kaStrkas / $HutangLancar) * 100 : 0;
     }
-    public static function kaStrkas($tahun) {
-        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->orderBy('bulanTahun', 'DESC')->value('kaStrkas');
+    public static function kaStrkas($tahun,$bulanAwal,$bulanAkhir) {
+        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->orderBy('bulanTahun', 'DESC')->value('kaStrkas');
     }
-    public static function HutangLancar($tahun) {
-        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->orderBy('bulanTahun', 'DESC')->value('HutangLancar');
+    public static function HutangLancar($tahun,$bulanAwal,$bulanAkhir) {
+        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->orderBy('bulanTahun', 'DESC')->value('HutangLancar');
     }
     public static function nilaiRok($hasilRok) 
     {
@@ -131,12 +131,12 @@ class evkinHelper {
             return ['nilaiRok' => 0, 'clsRok' => 'bg-danger'];
         }
     }
-    public static function persentaseBulananRok ($tahun) {
+    public static function persentaseBulananRok ($tahun,$bulanAwal,$bulanAkhir) {
         $persentaseBulananRok = [];
             for ($bulanRok = 1; $bulanRok <= 12; $bulanRok++) {
                 $bulanRokFormatted = str_pad($bulanRok, 2, '0', STR_PAD_LEFT);
-                $kaStrkasG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRokFormatted)->where('status',1)->value('kaStrkas') ?? 0;
-                $HutangLancarG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRokFormatted)->where('status',1)->value('HutangLancar') ?? 0;
+                $kaStrkasG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRokFormatted)->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->value('kaStrkas') ?? 0;
+                $HutangLancarG = Keuangan::where('bulanTahun', $tahun . '-' . $bulanRokFormatted)->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->value('HutangLancar') ?? 0;
 
                 if ($HutangLancarG > 0) {
                     $persentaseRok = ($kaStrkasG / $HutangLancarG) * 100;
@@ -150,15 +150,15 @@ class evkinHelper {
     }
 
     //Eketifitas Penagihan
-    public static function hitungEf($tahun) {
+    public static function hitungEf($tahun,$bulanAwal,$bulanAkhir) {
         $JmlPnrmRekAir = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->sum('JmlPnrmRekAir');
         $jmlRekAir = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->sum('jmlRekAir');
         return $jmlRekAir > 0 ? ($JmlPnrmRekAir / $jmlRekAir) * 100 : 0;
     }
-    public static function JmlPnrmRekAir($tahun) {
+    public static function JmlPnrmRekAir($tahun,$bulanAwal,$bulanAkhir) {
         return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->sum('JmlPnrmRekAir');
     }
-    public static function jmlRekAir($tahun) {
+    public static function jmlRekAir($tahun,$bulanAwal,$bulanAkhir) {
         return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->sum('jmlRekAir');
     }
     public static function nilaiEf($hasilEf) 
@@ -175,7 +175,7 @@ class evkinHelper {
             return ['nilaiEf' => 1, 'clsEf' => 'bg-danger'];
         }
     }
-    public static function persentaseBulananEf($tahun) {
+    public static function persentaseBulananEf($tahun,$bulanAwal,$bulanAkhir) {
         $persentaseBulananEf = [];
 
             for ($bulanEf = 1; $bulanEf <= 12; $bulanEf++) {
@@ -910,6 +910,26 @@ public static function hasilAdu ($hasilAdu)
 
         return $persentaseBulananRbd;
     }
+
+
+    public static function namaBulan($mm) {
+        $map = [
+            '01' => 'Januari',
+            '02' => 'Februari',
+            '03' => 'Maret',
+            '04' => 'April',
+            '05' => 'Mei',
+            '06' => 'Juni',
+            '07' => 'Juli',
+            '08' => 'Agustus',
+            '09' => 'September',
+            '10' => 'Oktober',
+            '11' => 'November',
+            '12' => 'Desember',
+        ];
+        return $map[$mm] ?? $mm;
+    }
+    
     
 
 

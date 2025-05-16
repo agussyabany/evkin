@@ -19,40 +19,27 @@
   <ul class="navbar-nav ml-auto d-flex align-items-center">
     <!-- Navbar Search -->
     <li class="nav-item mx-2">  <!-- Added margin spacing -->
-      <select name="" id="" class="form-control select2" style="width: 100px;" disabled>  <!-- Removed select2-hidden-accessible, added fixed width -->
-        <option value="1">JANUARI</option>
-        <option value="2">FEBRUARI</option>
-        <option value="3">MARET</option>
-        <option value="4">APRIL</option>
-        <option value="5">MEI</option>
-        <option value="6">JUNI</option>
-        <option value="7">JULI</option>
-        <option value="8">AGUSTUS</option>
-        <option value="9">SEPETEMBER</option>
-        <option value="10">OKTOBER</option>
-        <option value="11">NOVEMBER</option>
-        <option value="12">DESEMEBER</option>
+      <select id="selectBulanAwal" class="form-control select2" style="width: 100px;" onchange="changeBulanTahun()">
+        @for ($i = 1; $i <= 12; $i++)
+          <option value="{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}" {{ session('bulan_awal', '01') == str_pad($i, 2, '0', STR_PAD_LEFT) ? 'selected' : '' }}>
+            {{ strtoupper(\Carbon\Carbon::create()->month($i)->translatedFormat('F')) }}
+          </option>
+        @endfor
       </select>
     </li>
 
     <li class="nav-item mx-2">  <!-- Added margin spacing -->
-      <select name="" id="" class="form-control select2" style="width: 100px;" disabled>  <!-- Removed select2-hidden-accessible, added fixed width -->
-        <option value="1">JANUARI</option>
-        <option value="2">FEBRUARI</option>
-        <option value="3">MARET</option>
-        <option value="4">APRIL</option>
-        <option value="5">MEI</option>
-        <option value="6">JUNI</option>
-        <option value="7">JULI</option>
-        <option value="8">AGUSTUS</option>
-        <option value="9">SEPETEMBER</option>
-        <option value="10">OKTOBER</option>
-        <option value="11">NOVEMBER</option>
-        <option value="12">DESEMEBER</option>
+      <select id="selectBulanAkhir" class="form-control select2" style="width: 100px;" onchange="changeBulanTahun()">
+        @for ($i = 1; $i <= 12; $i++)
+          <option value="{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}" {{ session('bulan_akhir', '12') == str_pad($i, 2, '0', STR_PAD_LEFT) ? 'selected' : '' }}>
+            {{ strtoupper(\Carbon\Carbon::create()->month($i)->translatedFormat('F')) }}
+          </option>
+        @endfor
       </select>
     </li>
+
     <li class="nav-item mx-2">  <!-- Added margin spacing -->
-      <select name="" id="" class="form-control select2" style="width: 100px;" onchange="window.location.href='?tahun='+this.value">  <!-- Removed select2-hidden-accessible, added fixed width -->
+      <select id="selectTahun" class="form-control select2" style="width: 100px;" onchange="changeBulanTahun()">
         <option value="2024" {{ session('tahun', date('Y')) == '2024' ? 'selected' : '' }}>2024</option>
         <option value="2025" {{ session('tahun', date('Y')) == '2025' ? 'selected' : '' }}>2025</option>
       </select>
