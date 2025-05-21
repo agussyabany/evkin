@@ -49,10 +49,10 @@ class ProduksiController extends Controller
     public function save (Request $request)
     {
         $data = [
-            'VolProdRil' => $request->input('VolProdRil'),
-            'KpstsTrpsng' => $request->input('KpstsTrpsng'),
-            'KalkulasiJumAir' => $request->input('KalkulasiJumAir'),
-            'JmlAirDist' => $request->input('JmlAirDist'),
+            'VolProdRil' => $request->input('VolProdRil'),//
+            'KpstsTrpsng' => $request->input('KpstsTrpsng'),//
+            'KalkulasiJumAir' => $request->input('KalkulasiJumAir'),//
+            'JmlAirDist' => $request->input('JmlAirDist'),//
             'JmlWktPly' => $request->input('JmlWktPly'),
             'hari' => $request->input('hari'),
             'Plgnlayan' => $request->input('Plgnlayan'),
@@ -60,7 +60,7 @@ class ProduksiController extends Controller
             'MtrAirGnti' => $request->input('MtrAirGnti'),
             'bulanTahun' => $request->input('date'),
             'aduPel'=> $request->input('aduPel'),
-            'airTerjual'=> $request->input('drd'),
+            'airTerjual'=> $request->input('drd'),//
             'persen' => $request->input('persen'),
             'nrw' => $request->input('aduTek'),
             'totAdu' => $request->input('totAdu'),

@@ -200,12 +200,12 @@
                     <div class="row">
                       <div class="col form-group">
                         <label >Volume Produksi Riil</label>
-                        <input required type="number" class="form-control" name="VolProdRil" id="VolProdRil">
+                        <input required type="number" step="any" class="form-control" name="VolProdRil" id="VolProdRil">
                       </div>
 
                       <div class="col form-group">
                         <label >Jumlah Kapasitas Terpasang</label>
-                        <input required type="number" class="form-control" name="KpstsTrpsng" id="KpstsTrpsng">
+                        <input required type="number" step="any" class="form-control" name="KpstsTrpsng" id="KpstsTrpsng">
                       </div>
                     </div>
                   </div>
@@ -220,15 +220,15 @@
 
                       <div class="col form-group">
                         <label>Air Didistribusikan</label>
-                        <input required type="number" class="form-control" name="JmlAirDist" id="JmlAirDist">
+                        <input required type="number" step="any" class="form-control" name="JmlAirDist" id="JmlAirDist">
                       </div>
                       <div class="col form-group">
                         <label>Air Terjual</label>
-                        <input required type="number" class="form-control" name="drd" id="drd">
+                        <input required type="number" step="any" class="form-control" name="drd" id="drd">
                       </div>
                       <div class="col form-group">
                         <label >Air Tidak Berekening</label>
-                        <input required type="number"  class="form-control" name="KalkulasiJumAir" id="nrw">
+                        <input required type="number" step="any"  class="form-control" name="KalkulasiJumAir" id="nrw">
                       </div>
                       <div class="col form-group">
                         <label >NRW %</label>
