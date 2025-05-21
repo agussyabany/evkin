@@ -33,8 +33,15 @@ class MobileController extends Controller
                 }
         //laba
         $labaSum = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('labaStlPjk');
-        //$laba = round($labaSum / pow(10, strlen(floor($labaSum)) - 2), 3);
-        $laba = number_format(round($labaSum / pow(10, strlen(floor($labaSum)) - 2), 3), 3, ',', '');
+        //$laba = number_format(round($labaSum / pow(10, strlen(floor($labaSum)) - 2), 3), 3, ',', '');
+                $miliar = 1000000000;
+                if ($labaSum < 10 * $miliar) {
+                // Di bawah 10 miliar -> format 0.00
+                $laba = number_format($labaSum / $miliar, 2, ',', '');
+            } else {
+                // 10 miliar ke atas -> format 00.00
+                $laba = number_format($labaSum / $miliar, 2, ',', '');
+            }
         $labaBulanan = Keuangan::select('labaStlPjk','bulanTahun')->whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->get();
         
         //nrw
