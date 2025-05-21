@@ -17,12 +17,17 @@ class KeuanganController extends Controller
     public function evkeu ()
     {
         $tahun = session('tahun');
-        $keuangan = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->orderBy('bulanTahun','ASC')->get();
-        $labaStlPjk = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('labaStlPjk');
-        $biayaOps = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('biayaOps');
-        $PndptnOps = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('PndptnOps');
-        $JmlPnrmRekAir = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('JmlPnrmRekAir');
-        $jmlRekAir = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('jmlRekAir');    
+        $awal = session('bulan_awal');//ini nilainya MM misal 01
+        $akhir = session('bulan_akhir');//ini nilainya MM misal 02
+        $bulanAwal = $tahun . '-' . $awal;
+        $bulanAkhir = $tahun . '-' . $akhir;
+        
+        $keuangan = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->orderBy('bulanTahun','ASC')->get();
+        $labaStlPjk = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('labaStlPjk');
+        $biayaOps = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('biayaOps');
+        $PndptnOps = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('PndptnOps');
+        $JmlPnrmRekAir = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('JmlPnrmRekAir');
+        $jmlRekAir = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('jmlRekAir');    
         return view('admin.evkin.evKeuangan',compact('keuangan','labaStlPjk','biayaOps','PndptnOps','JmlPnrmRekAir','jmlRekAir'));
     }
 

@@ -16,12 +16,17 @@ class PelayananController extends Controller
     public function evPel ()
     {
         $tahun = session('tahun');
-        $pelayanan = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->orderBy('bulanTahun','ASC')->get();
-        $AduanSlsai = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('AduanSlsai');
-        $JmlAduan = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('JmlAduan');
-        $UjiKualitas = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('UjiKualitas');
-        $titikUji = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('titikUji');
-        $JmlAirTrjualDom = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('JmlAirTrjualDom');
+        $awal = session('bulan_awal');//ini nilainya MM misal 01
+        $akhir = session('bulan_akhir');//ini nilainya MM misal 02
+        $bulanAwal = $tahun . '-' . $awal;
+        $bulanAkhir = $tahun . '-' . $akhir;
+
+        $pelayanan = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->orderBy('bulanTahun','ASC')->get();
+        $AduanSlsai = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('AduanSlsai');
+        $JmlAduan = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('JmlAduan');
+        $UjiKualitas = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('UjiKualitas');
+        $titikUji = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('titikUji');
+        $JmlAirTrjualDom = Pelayanan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('JmlAirTrjualDom');
         return view('admin.evkin.evPelayanan',compact('pelayanan','AduanSlsai','JmlAduan','UjiKualitas','titikUji','JmlAirTrjualDom'));
     }
     public function index ()

@@ -12,10 +12,15 @@ class SdmController extends Controller
     public function evSdm ()
     {
         $tahun = session('tahun');
-        $sdm = Sdm::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->orderBy('bulanTahun','ASC')->get();
-        $JmlPegDiklat = Sdm::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('JmlPegDiklat');
-        $RealByDiklat = Sdm::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('RealByDiklat');
-        $RealByPeg = Sdm::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('RealByPeg');
+        $awal = session('bulan_awal');//ini nilainya MM misal 01
+        $akhir = session('bulan_akhir');//ini nilainya MM misal 02
+        $bulanAwal = $tahun . '-' . $awal;
+        $bulanAkhir = $tahun . '-' . $akhir;
+
+        $sdm = Sdm::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->orderBy('bulanTahun','ASC')->get();
+        $JmlPegDiklat = Sdm::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('JmlPegDiklat');
+        $RealByDiklat = Sdm::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('RealByDiklat');
+        $RealByPeg = Sdm::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('RealByPeg');
         return view('admin.evkin.evSdm',compact('sdm','JmlPegDiklat','RealByDiklat','RealByPeg'));
     }
     public function index ()

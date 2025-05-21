@@ -15,20 +15,27 @@ class ProduksiController extends Controller
     public function  evOP ()
     {
         $tahun = session('tahun');
-        $operasional = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->orderBy('bulanTahun','ASC')->get();
-        $VolProdRil = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('VolProdRil');
-        $KpstsTrpsng = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('KpstsTrpsng');
-        $KalkulasiJumAir = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('KalkulasiJumAir');
-        $JmlAirDist = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('JmlAirDist');
-        $JmlWktPly = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('JmlWktPly');
-        $MtrAirGnti = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('MtrAirGnti');
-        $hari = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('hari');
-        $aduTek = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('nrw');
-        $totAdu = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('totAdu');
-        $aduPel = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('aduPel');
-        $persen = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('persen');
-        $airTerjual = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->sum('airTerjual');
-        $aduLayan = Pelayanan::select('JmlAduan','bulanTahun')->whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->get();
+        $awal = session('bulan_awal');//ini nilainya MM misal 01
+        $akhir = session('bulan_akhir');//ini nilainya MM misal 02
+        $bulanAwal = $tahun . '-' . $awal;
+        $bulanAkhir = $tahun . '-' . $akhir;
+
+        $operasional = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->orderBy('bulanTahun','ASC')->get();
+        
+        $VolProdRil = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('VolProdRil');
+        $KpstsTrpsng = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('KpstsTrpsng');
+        $KalkulasiJumAir = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('KalkulasiJumAir');
+        $JmlAirDist = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('JmlAirDist');
+        $JmlWktPly = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('JmlWktPly');
+        $MtrAirGnti = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('MtrAirGnti');
+        $hari = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('hari');
+        $aduTek = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('nrw');
+        $totAdu = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('totAdu');
+        $aduPel = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('aduPel');
+        $persen = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('persen');
+        $airTerjual = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('airTerjual');
+        $aduLayan = Pelayanan::select('JmlAduan','bulanTahun')->whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->get();
+        
         return view('admin.evkin.evOperasional',compact('operasional','VolProdRil','KpstsTrpsng','KalkulasiJumAir','JmlAirDist','JmlWktPly','MtrAirGnti','hari','aduLayan','aduTek','totAdu','aduPel','persen','airTerjual'));
     }
     public function index ()
