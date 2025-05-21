@@ -32,10 +32,10 @@ class MobileController extends Controller
                     $urutanBulan[] = str_pad($i, 2, '0', STR_PAD_LEFT);
                 }
         //laba
-        $labaSum = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->sum('labaStlPjk');
+        $labaSum = Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('labaStlPjk');
         //$laba = round($labaSum / pow(10, strlen(floor($labaSum)) - 2), 3);
         $laba = number_format(round($labaSum / pow(10, strlen(floor($labaSum)) - 2), 3), 3, ',', '');
-        $labaBulanan = Keuangan::select('labaStlPjk','bulanTahun')->whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->get();
+        $labaBulanan = Keuangan::select('labaStlPjk','bulanTahun')->whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->get();
         
         //nrw
         $KalkulasiJumAirM = evkinHelper::KalkulasiJumAir($tahun,$bulanAwal,$bulanAkhir);
