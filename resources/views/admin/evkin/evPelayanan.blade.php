@@ -163,7 +163,7 @@
                     <div class="row">
                       <div class="col form-group">
                         <label >Jumlah Penduduk Terlayani</label>
-                        <input required type="number" class="form-control" name="JmlPnddkTrlyni" id="">
+                        <input required type="number" class="form-control" name="JmlPnddkTrlyni" id="JmlPnddkTrlyni">
                       </div>
 
                       <div class="col form-group">

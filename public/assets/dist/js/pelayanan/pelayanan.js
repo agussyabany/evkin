@@ -22,6 +22,7 @@ $(document).ready(function() {
           $('#titikUji').val(item.titikUji);
           $('#JmlAirTrjualDom').val(item.JmlAirTrjualDom);
           $('#JmlPlgnDom').val(item.JmlPlgnDom);
+          $('#tahunIni').val(item.JmlPlgnDom);
           $('#form-pelayanan').attr('action', '/pelEdit');
           
           $('#date').val(item.bulanTahun.replace(/(\w+) (\d{4})/, function(_, bulan, tahun) {
