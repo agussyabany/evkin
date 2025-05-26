@@ -78,16 +78,17 @@
             <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
             <td>{{ number_format($item->hari, 0) }}</td>
            
-            <td>{{ number_format($item->KpstsTrpsng, 0) }}</td>
-            <td>{{ number_format($item->VolProdRil, 0) }}</td>
+           
+            <td>{{ number_format($item->VolProdRil, 2) }}</td>
+             <td>{{ number_format($item->KpstsTrpsng, 2) }}</td>
            
            
-            <td>{{ number_format($item->JmlAirDist, 0) }}</td>
-            <td>{{ number_format($item->airTerjual, 0) }}</td>
-            <td>{{ number_format($item->KalkulasiJumAir, 0) }}</td>
+            <td>{{ number_format($item->JmlAirDist, 2) }}</td>
+            <td>{{ number_format($item->airTerjual, 2) }}</td>
+            <td>{{ number_format($item->KalkulasiJumAir, 2) }}</td>
             
             <td>{{ $item->persen }}</td>
-            <td>{{ number_format($item->JmlWktPly, 0) }}</td>
+            <td>{{ $item->JmlWktPly }}</td>
            
             
             <td>{{ number_format($item->Plgnlayan, 0) }}</td>
@@ -145,13 +146,13 @@
             <td><strong>TOT</strong></td>
             <td></td>
             <td><strong>{{number_format($hari)}}</strong></td>
-            <td><strong>{{number_format($VolProdRil)}}</strong></td>
-            <td><strong>{{number_format($KpstsTrpsng)}}</strong></td>
-            <td><strong>{{number_format($JmlAirDist)}}</strong></td>
-            <td><strong>{{number_format($airTerjual)}}</strong></td>
-            <td><strong>{{number_format($KalkulasiJumAir)}}</strong></td>
-            <td><strong>{{number_format($persen)}}</strong></td>
-            <td><strong>{{number_format($JmlWktPly)}}</strong></td>
+            <td><strong>{{number_format($VolProdRil, 2)}}</strong></td>
+            <td><strong>{{number_format($KpstsTrpsng, 2)}}</strong></td>
+            <td><strong>{{number_format($JmlAirDist,2)}}</strong></td>
+            <td><strong>{{number_format($airTerjual,2)}}</strong></td>
+            <td><strong>{{number_format($KalkulasiJumAir,2)}}</strong></td>
+            <td><strong></strong></td>
+            <td><strong>{{number_format($JmlWktPly,2)}}</strong></td>
             <td></td>
             <td>{{number_format($aduTek)}}</td>
             <td>{{number_format($aduPel)}}</td>
