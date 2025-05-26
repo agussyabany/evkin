@@ -245,7 +245,7 @@
                     <div class="row">
                       <div class="col form-group">
                         <label >Jumlah Waktu Pelayanan/Distribusi Air ke Pelanggan dalam Setahun</label>
-                        <input required type="number" class="form-control" name="JmlWktPly" id="JmlWktPly">
+                        <input required type="number" step="any" class="form-control" name="JmlWktPly" id="JmlWktPly">
                       </div>
 
                       <div class="col form-group">
