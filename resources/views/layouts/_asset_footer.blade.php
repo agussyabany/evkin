@@ -62,12 +62,12 @@
 
     //NRW(Operasioanal)
     $('#JmlAirDist, #drd').on('keyup', function () {
-    var distribusi = parseInt($('#JmlAirDist').val()) || 0;
-    var drd = parseInt($('#drd').val()) || 0;
+    var distribusi = parseFloat($('#JmlAirDist').val()) || 0;
+    var drd = parseFloat($('#drd').val()) || 0;
     var nrw = distribusi - drd;
     var persen = distribusi > 0 ? (nrw / distribusi) * 100 : 0;
     
-    $('#nrw').val(nrw);
+    $('#nrw').val(nrw.toFixed(2));
     $('#persen').val(persen.toFixed(2)); // dibulatkan 2 angka di belakang koma
 
     //
