@@ -230,7 +230,7 @@
                       <div class="col form-group">
                         <label >Air Tidak Berekening</label>
                         <input required type="number" step="any"  class="form-control" name="KalkulasiJumAir" id="nrw">
-                        
+
                       </div>
                       <div class="col form-group">
                         <label >NRW %</label>
@@ -310,7 +310,6 @@
                             @foreach ($aduLayan as $item )
                             <option value="{{ $item->JmlAduan}}">{{ $item->JmlAduan}} | {{ $item->bulanTahun }}</option>
                             @endforeach
-                            
                           </select>
                         </div>
                         

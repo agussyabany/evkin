@@ -92,7 +92,8 @@ class ProduksiController extends Controller
             'KalkulasiJumAir' => $request->input('KalkulasiJumAir'),
             'persen' => $request->input('persen'),
             'nrw' =>$request->input('aduTek'),
-            'totAdu' =>$request->input('totAdu')
+            'totAdu' =>$request->input('totAdu'),
+            'aduPel' =>$request->input('aduPel')
         ]);
 
         Alert::success('Berhasil!', 'Data berhasil disimpan.');
