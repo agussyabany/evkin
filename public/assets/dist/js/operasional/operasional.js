@@ -21,6 +21,11 @@ $(document).ready(function() {
           $('#Plgnlayan').val(item.Plgnlayan);
           $('#PlgnAktiv').val(item.PlgnAktiv);
           $('#MtrAirGnti').val(item.MtrAirGnti);
+          $('#drd').val(item.airTerjual);
+          $('#nrw').val(item.KalkulasiJumAir);
+          $('#persen').val(item.persen);
+          $('#aduan_teknik').val(item.nrw);
+          $('#total_aduan').val(item.totAdu);
 
          
     

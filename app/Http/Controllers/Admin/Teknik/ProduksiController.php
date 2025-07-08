@@ -87,7 +87,12 @@ class ProduksiController extends Controller
             'Plgnlayan' => $request->input('Plgnlayan'),
             'PlgnAktiv' => $request->input('PlgnAktiv'),
             'MtrAirGnti' => $request->input('MtrAirGnti'),
-            'bulanTahun' => $request->input('date')
+            'bulanTahun' => $request->input('date'),
+            'airTerjual' => $request->input('drd'),
+            'KalkulasiJumAir' => $request->input('KalkulasiJumAir'),
+            'persen' => $request->input('persen'),
+            'nrw' =>$request->input('aduTek'),
+            'totAdu' =>$request->input('totAdu')
         ]);
 
         Alert::success('Berhasil!', 'Data berhasil disimpan.');

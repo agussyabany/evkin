@@ -230,6 +230,7 @@
                       <div class="col form-group">
                         <label >Air Tidak Berekening</label>
                         <input required type="number" step="any"  class="form-control" name="KalkulasiJumAir" id="nrw">
+                        
                       </div>
                       <div class="col form-group">
                         <label >NRW %</label>
