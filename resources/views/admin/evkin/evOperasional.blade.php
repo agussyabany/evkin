@@ -88,7 +88,7 @@
             <td>{{ number_format($item->KalkulasiJumAir, 2) }}</td>
             
             <td>{{ $item->persen }}</td>
-            <td>{{ $item->JmlWktPly }}</td>
+            <td>{{ number_format($item->JmlWktPly, 2, '.', '') }}</td>
            
             
             <td>{{ number_format($item->Plgnlayan, 0) }}</td>
