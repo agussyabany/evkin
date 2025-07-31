@@ -76,8 +76,11 @@ class PelayananController extends Controller
             'JmlPlgnDom' => $request->input('JmlPlgnDom'),
             'bulanTahun' => $request->input('date')
         ]);
+        
         Alert::success('Berhasil!', 'Data berhasil disimpan.');
         return redirect('/evPel');
+        
+
 
             
     }
