@@ -118,6 +118,7 @@ class MobileController extends Controller
             $efData = evkinHelper::nilaiEf($hasilEf);
             $clsEf = $efData['clsEf'];
             $nilaiEf = $efData['nilaiEf'];
+            
             $persentaseBulananEf = evkinHelper::persentaseBulananEf($tahun,$bulanAwal,$bulanAkhir);
 
             //SOLVABILITAS

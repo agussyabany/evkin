@@ -780,15 +780,15 @@ public static function hasilAdu ($hasilAdu)
     public static function  hasilRpl($hasilRpl)
     {
         if ($hasilRpl > 12.0) {
-            return ['nilaiRpl' => 1, 'clsRpl' => 'bg-danger'];
+            return ['nilaiRpl' => 1, 'clsRpl' => 'bg-danger','clsRplPie' => '#e74c3c'];
         } elseif ($hasilRpl > 10.0 && $hasilRpl <= 12.0) {
-            return ['nilaiRpl' => 2, 'clsRpl' => 'bg-warning'];
+            return ['nilaiRpl' => 2, 'clsRpl' => 'bg-warning','clsRplPie' => '#f1c40f'];
         } elseif ($hasilRpl > 8.0 && $hasilRpl <= 10.0) {
-            return ['nilaiRpl' => 3, 'clsRpl' => 'bg-primary'];
+            return ['nilaiRpl' => 3, 'clsRpl' => 'bg-primary','clsRplPie' => '#9b59b6'];
         } elseif ($hasilRpl > 6.0 && $hasilRpl <= 8.0) {
-            return ['nilaiRpl' => 4, 'clsRpl' => 'bg-primary'];
+            return ['nilaiRpl' => 4, 'clsRpl' => 'bg-primary','clsRplPie' => '#3498db'];
         } else {
-            return ['nilaiRpl' => 5, 'clsRpl' => 'bg-success'];
+            return ['nilaiRpl' => 5, 'clsRpl' => 'bg-success','clsRplPie' => '#2ecc71'];
         }
     }
     public static function persentaseBulananRpl ($tahun,$bulanAwal,$bulanAkhir)
@@ -829,15 +829,15 @@ public static function hasilAdu ($hasilAdu)
     public static function  hasilRdp ($hasilRdp)
     {
         if ($hasilRdp < 20) {
-            return ['nilaiRdp' => 1, 'clsRdp' => 'bg-danger'];
+            return ['nilaiRdp' => 1, 'clsRdp' => 'bg-danger','clsRdpPie' => '#e74c3c'];
         } elseif ($hasilRdp > 20 && $hasilRdp <= 40) {
-            return ['nilaiRdp' => 2, 'clsRdp' => 'bg-warning'];
+            return ['nilaiRdp' => 2, 'clsRdp' => 'bg-warning','clsRdpPie' => '#f1c40f'];
         } elseif ($hasilRdp > 40 && $hasilRdp <= 60) {
-            return ['nilaiRdp' => 3, 'clsRdp' => 'bg-primary'];
+            return ['nilaiRdp' => 3, 'clsRdp' => 'bg-primary','clsRdpPie' => '#9b59b6'];
         } elseif ($hasilRdp > 60 && $hasilRdp <= 80) {
-            return ['nilaiRdp' => 4, 'clsRdp' => 'bg-primary'];
+            return ['nilaiRdp' => 4, 'clsRdp' => 'bg-primary','clsRdpPie' => '#3498db'];
         } else {
-            return ['nilaiRdp' => 5, 'clsRdp' => 'bg-success'];
+            return ['nilaiRdp' => 5, 'clsRdp' => 'bg-success','clsRdpPie' => '#2ecc71'];
         }
     }
     public static function persentaseBulananRdp ($tahun,$bulanAwal,$bulanAkhir)
@@ -878,15 +878,15 @@ public static function hasilAdu ($hasilAdu)
     public static function hasilRbd ($hasilRbd)
     {
         if ($hasilRbd <= 2.5) {
-            return ['nilaiRbd' => 1, 'clsRbd' => 'bg-danger'];
+            return ['nilaiRbd' => 1, 'clsRbd' => 'bg-danger','clsRbdPie' => '#e74c3c'];
         } elseif ($hasilRbd > 2.5 && $hasilRbd <= 5) {
-            return ['nilaiRbd' => 2, 'clsRbd' => 'bg-warning'];
+            return ['nilaiRbd' => 2, 'clsRbd' => 'bg-warning','clsRbdPie' => '#f1c40f'];
         } elseif ($hasilRbd > 5 && $hasilRbd <= 7.5) {
-            return ['nilaiRbd' => 3, 'clsRbd' => 'bg-primary'];
+            return ['nilaiRbd' => 3, 'clsRbd' => 'bg-primary','clsRbdPie' => '#9b59b6'];
         } elseif ($hasilRbd > 7.5 && $hasilRbd <= 10) {
-            return ['nilaiRbd' => 4, 'clsRbd' => 'bg-primary'];
+            return ['nilaiRbd' => 4, 'clsRbd' => 'bg-primary','clsRbdPie' => '#3498db'];
         } else {
-            return ['nilaiRbd' => 5, 'clsRbd' => 'bg-success'];
+            return ['nilaiRbd' => 5, 'clsRbd' => 'bg-success','clsRbdPie' => '#2ecc71'];
         }
     }
 
