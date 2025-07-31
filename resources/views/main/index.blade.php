@@ -12,7 +12,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0 text-center">PERUMDAM TIRTA KENCANA KOTA SAMARINDA <br> DASHBOARD KINERJA TAHUN 2024</h1>
+            <h1 class="m-0 text-center">PERUMDAM TIRTA KENCANA KOTA SAMARINDA <br> DASHBOARD KINERJA TAHUN {{$tahun}}</h1>
           </div><!-- /.col -->
           
         </div><!-- /.row -->
