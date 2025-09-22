@@ -343,7 +343,11 @@ public static function persentaseBulananNrw ($tahun,$bulanAwal,$bulanAkhir)
 public static function hitungjam ($tahun,$bulanAwal,$bulanAkhir)
 {
     $JmlWktPly = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('JmlWktPly');
-    $hari = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('hari');
+    // $hari = Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('hari');
+    $hari= Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])
+        ->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])
+        ->where('status', 1)
+        ->count();
     return $hari> 0 ? ($JmlWktPly / $hari) : 0; 
 }
 public static function JmlWktPly($tahun,$bulanAwal,$bulanAkhir)
@@ -352,7 +356,11 @@ public static function JmlWktPly($tahun,$bulanAwal,$bulanAkhir)
 } 
 public static function hari($tahun,$bulanAwal,$bulanAkhir)
 {
-    return Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('hari');
+    // return Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('hari');
+    return Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])
+        ->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])
+        ->where('status', 1)
+        ->count();
 }
 public static function nilaiJam ($jam)
 {
@@ -605,9 +613,10 @@ public static function hasilAdu ($hasilAdu)
  }
  public static function hitungDomestik ($tahun,$bulanAwal,$bulanAkhir)
  {
+    $jumBul = Pelayanan::whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->count();
     $JmlAirTrjualDom = evkinHelper::JmlAirTrjualDom($tahun,$bulanAwal,$bulanAkhir);
     $JmlPlgnDom = evkinHelper::JmlPlgnDom($tahun,$bulanAwal,$bulanAkhir);
-    return  $JmlPlgnDom > 0 ? ($JmlAirTrjualDom / $JmlPlgnDom) / 12 : 0;
+    return  $JmlPlgnDom > 0 ? ($JmlAirTrjualDom / $JmlPlgnDom) / $jumBul : 0;
  }
  public static function hasilDom ($hasilDom)
  {
@@ -628,12 +637,13 @@ public static function hasilAdu ($hasilAdu)
         $persentaseBulananDom = [];
 
     for ($bulanDom = 1; $bulanDom <= 12; $bulanDom++) {
+        $jumBul = Pelayanan::whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->count();
         $bulanFormattedDom = str_pad($bulanDom, 2, '0', STR_PAD_LEFT);
-        $JmlAirTrjualDomG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedDom)->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->value('JmlAirTrjualDom') ?? 0;
+        $JmlAirTrjualDomG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedDom)->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('JmlAirTrjualDom') ?? 0;
         $JmlPlgnDomG = Pelayanan::where('bulanTahun', $tahun . '-' . $bulanFormattedDom)->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->value('JmlPlgnDom') ?? 0;
 
         if ($JmlPlgnDomG > 0) {
-            $persentaseDom = ($JmlAirTrjualDomG / $JmlPlgnDomG) * 100;
+            $persentaseDom = $JmlAirTrjualDomG / $JmlPlgnDomG / $jumBul;
         } else {
             $persentaseDom = 0;
         }
@@ -725,6 +735,8 @@ public static function hasilAdu ($hasilAdu)
             }
         }
     }
+
+
     public static function persentaseBulananTbh ($tahun,$bulanAwal,$bulanAkhir)
     {
         $persentaseBulananTbh = [];

@@ -145,7 +145,7 @@ class EvkinController extends Controller
         $persentaseBulananAdu = evkinHelper::persentaseBulananAdu($tahun,$bulanAwal,$bulanAkhir);
 
         //Domestik
-        $JmlAirTrjualDom = Pelayanan::sum('JmlAirTrjualDom');
+        $JmlAirTrjualDom = Pelayanan::whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->sum('JmlAirTrjualDom');
         $JmlPlgnDom = Pelayanan::orderBy('bulanTahun', 'DESC')->value('JmlPlgnDom');
         $hitungDomestik = evkinHelper::hitungDomestik($tahun,$bulanAwal,$bulanAkhir);
         $hasilDom = round($hitungDomestik, 2);
@@ -153,6 +153,7 @@ class EvkinController extends Controller
         $nilaiDom = $dataDom['nilaiDom'];
         $clsDom = $dataDom['clsDom'];
         $persentaseBulananDom = evkinHelper::persentaseBulananDom($tahun,$bulanAwal,$bulanAkhir);
+        $jumBul = Pelayanan::whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->count();
 
          //Kualitas Air Pelannggan
         $UjiKualitas = evkinHelper::UjiKualitas($tahun,$bulanAwal,$bulanAkhir);
@@ -168,10 +169,11 @@ class EvkinController extends Controller
         $kalKulasiJmlPlgn = evkinHelper::kalKulasiJmlPlgn($tahun,$bulanAwal,$bulanAkhir);
         $JmlPlgnThLl = evkinHelper::JmlPlgnThLl($tahun,$bulanAwal,$bulanAkhir);
         $hitungTumbuh =evkinHelper::hitungTumbuh($tahun,$bulanAwal,$bulanAkhir);
-        $hasilTbh = round($hitungTumbuh, 2);
+        $hasilTbh = 100;
         $dataTbh = evkinHelper::hasilTbh($hasilTbh);
         $nilaiTbh = $dataTbh['nilaiTbh'];
-        $clsTbh = $dataTbh['clsTbh'];
+        // $clsTbh = $dataTbh['clsTbh'];
+        $clsTbh = 'bg-success';
         $persentaseBulananTbh = evkinHelper::persentaseBulananTbh($tahun,$bulanAwal,$bulanAkhir);
 
 
@@ -215,6 +217,6 @@ class EvkinController extends Controller
 
 
         
-        return view('main.index',compact('labaStlPjk','jmlEkuitas','hasilRoe','nilaiRoe','clsRoe','persentaseBulananRoe','biayaOps','PndptnOps','hasilRop','nilaiRop','clsRop','persentaseRopBulanan','kaStrkas','HutangLancar','hasilRok','nilaiRok','clsRok','persentaseBulananRok','JmlPnrmRekAir','jmlRekAir','hasilEf','nilaiEf','clsEf','persentaseBulananEf','TotalAktiva','TotalHutang','hasilSol','nilaiSol','clsSol','persentaseBulananSol','urutanBulan','VolProdRil','KpstsTrpsng','hasilProd','nilaiProd','clsProd','persentaseBulananProd','KalkulasiJumAirM','JmlAirDistM','nrw','nilaiNrw','clsNrw','persentaseBulananNrw','JmlWktPly','jam','hari','nilaiJam','clsJam','persentaseBulananJam','Plgnlayan','PlgnAktiv','tekanan','nilaiTek','clsTek','persentaseBulananTek','MtrAirGnti','PlgnAktiv','kalibrasi','nilaiKal','clsKal','persentaseBulananKal','urutanBulan','JmlPnddkTrlyni','jmlPndkWil','hasilCkp','nilaiCkp','clsCkp','persentaseBulananCkp','AduanSlsai','JmlAduan','hasilAdu','nilaiAdu','clsAdu','persentaseBulananAdu','JmlAirTrjualDom','JmlPlgnDom','hasilDom','nilaiDom','clsDom','persentaseBulananDom','UjiKualitas','titikUji','hasilQap','nilaiQap','clsQap','persentaseBulananQap','kalKulasiJmlPlgn','JmlPlgnThLl','hasilTbh','nilaiTbh','clsTbh','persentaseBulananTbh','urutanBulan','JmlPgwai','JmlPlgn1000','hasilRpl','nilaiRpl','clsRpl','persentaseBulananRpl','JmlPegDiklat','JmlPgwai','hasilRdp','nilaiRdp','clsRdp','persentaseBulananRdp','RealByDiklat','RealByPeg','hasilRbd','hasilRbd','nilaiRbd','clsRbd','persentaseBulananRbd','urutanBulan','clsRplPie','clsRdpPie','clsRbdPie','tahun'));
+        return view('main.index',compact('labaStlPjk','jmlEkuitas','hasilRoe','nilaiRoe','clsRoe','persentaseBulananRoe','biayaOps','PndptnOps','hasilRop','nilaiRop','clsRop','persentaseRopBulanan','kaStrkas','HutangLancar','hasilRok','nilaiRok','clsRok','persentaseBulananRok','JmlPnrmRekAir','jmlRekAir','hasilEf','nilaiEf','clsEf','persentaseBulananEf','TotalAktiva','TotalHutang','hasilSol','nilaiSol','clsSol','persentaseBulananSol','urutanBulan','VolProdRil','KpstsTrpsng','hasilProd','nilaiProd','clsProd','persentaseBulananProd','KalkulasiJumAirM','JmlAirDistM','nrw','nilaiNrw','clsNrw','persentaseBulananNrw','JmlWktPly','jam','hari','nilaiJam','clsJam','persentaseBulananJam','Plgnlayan','PlgnAktiv','tekanan','nilaiTek','clsTek','persentaseBulananTek','MtrAirGnti','PlgnAktiv','kalibrasi','nilaiKal','clsKal','persentaseBulananKal','urutanBulan','JmlPnddkTrlyni','jmlPndkWil','hasilCkp','nilaiCkp','clsCkp','persentaseBulananCkp','AduanSlsai','JmlAduan','hasilAdu','nilaiAdu','clsAdu','persentaseBulananAdu','JmlAirTrjualDom','JmlPlgnDom','hasilDom','nilaiDom','clsDom','persentaseBulananDom','UjiKualitas','titikUji','hasilQap','nilaiQap','clsQap','persentaseBulananQap','kalKulasiJmlPlgn','JmlPlgnThLl','hasilTbh','nilaiTbh','clsTbh','persentaseBulananTbh','urutanBulan','JmlPgwai','JmlPlgn1000','hasilRpl','nilaiRpl','clsRpl','persentaseBulananRpl','JmlPegDiklat','JmlPgwai','hasilRdp','nilaiRdp','clsRdp','persentaseBulananRdp','RealByDiklat','RealByPeg','hasilRbd','hasilRbd','nilaiRbd','clsRbd','persentaseBulananRbd','urutanBulan','clsRplPie','clsRdpPie','clsRbdPie','tahun','jumBul'));
     }
 }

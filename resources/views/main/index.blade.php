@@ -199,7 +199,7 @@
                             <td>3.</td>
                             <td  style="text-align: left;"><a href="#" id="dom" data-toggle="modal" data-target="#modal-dom"><h5>KONSUMSI AIR DOMESTIK (lt/plg/bulan)</h5></a></td>
                            
-                            <td><span id="colDomestik" class="badge {{$clsDom}}"><h5 id="hasilDomestik">{{$hasilDom}}%</h5></span></td>
+                            <td><span id="colDomestik" class="badge {{$clsDom}}"><h5 id="hasilDomestik">{{$hasilDom}}</h5></span></td>
                             <td><h5 id="nilaiDomestik">{{$nilaiDom}}</h5></td>
                             <td><h5>5</h5></td>
                           </tr>

@@ -79,11 +79,23 @@ class UserSeeder extends Seeder
             //     'password' => bcrypt('tirtakencana24'),
             //     'role' => 'de-was',
             // ]
+            // [
+            //     'name' => 'PENELITIAN',
+            //     'email' => 'penelitian@evkin.smd',
+            //     'password' => bcrypt('tirtakencana25'),
+            //     'role' => 'de-was',
+            // ]
             [
-                'name' => 'PENELITIAN',
-                'email' => 'penelitian@evkin.smd',
+                'name' => 'FARADIBA',
+                'email' => 'faradiba@evkin.smd',
                 'password' => bcrypt('tirtakencana25'),
-                'role' => 'de-was',
+                'role' => 'dirut',
+            ],
+            [
+                'name' => 'ALFI',
+                'email' => 'alfi@evkin.smd',
+                'password' => bcrypt('tirtakencana25'),
+                'role' => 'dirut',
             ]
         ];
 

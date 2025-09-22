@@ -18,7 +18,7 @@
                           <tr>
                               <td id="a">Jml air yg terjual pada pel.domestik</h2></td>
                               <td id="a_nilai" style="text-align: right; text-size-adjust: 10px;">{{ number_format( $JmlAirTrjualDom, 0)}}</h2></td>
-                              <td rowspan="2" class="text-center mt-2" id="persen" style="width: 100%; text-align: center;">/ 11</h2></td>
+                              <td rowspan="2" class="text-center mt-2" id="persen" style="width: 100%; text-align: center;">/ {{$jumBul}}</h2></td>
                           </tr>
                           <tr>
                               <td id="b">Jumlah Pelanggan Domestik</h2></td>
@@ -38,7 +38,7 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td id="hasil">{{ $hasilDom }} %</h4></td>
+                              <td id="hasil">{{ $hasilDom }} </h4></td>
                               <td id="nilai">{{ $nilaiDom}}</h4></td>
                               <td id="target">5</h4></td>
                             </tr>

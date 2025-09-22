@@ -237,6 +237,7 @@ class MobileController extends Controller
         $nilaiDom = $dataDom['nilaiDom'];
         $clsDom = $dataDom['clsDom'];
         $persentaseBulananDom = evkinHelper::persentaseBulananDom($tahun,$bulanAwal,$bulanAkhir);
+        $jumBul = Pelayanan::whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->count();
         
         //Kualitas Air Pelannggan
         $UjiKualitas = evkinHelper::UjiKualitas($tahun,$bulanAwal,$bulanAkhir);
@@ -258,7 +259,7 @@ class MobileController extends Controller
         $clsTbh = $dataTbh['clsTbh'];
         $persentaseBulananTbh = evkinHelper::persentaseBulananTbh($tahun,$bulanAwal,$bulanAkhir);
         
-        return view('mobile.pelayanan',compact('JmlPnddkTrlyni','jmlPndkWil','hasilCkp','nilaiCkp','clsCkp','persentaseBulananCkp','AduanSlsai','JmlAduan','hasilAdu','nilaiAdu','clsAdu','persentaseBulananAdu','JmlAirTrjualDom','JmlPlgnDom','hasilDom','nilaiDom','clsDom','persentaseBulananDom','UjiKualitas','titikUji','hasilQap','hitungUji','nilaiQap','clsQap','persentaseBulananQap','kalKulasiJmlPlgn','JmlPlgnThLl','hasilTbh','nilaiTbh','clsTbh','persentaseBulananTbh','urutanBulan'));
+        return view('mobile.pelayanan',compact('JmlPnddkTrlyni','jmlPndkWil','hasilCkp','nilaiCkp','clsCkp','persentaseBulananCkp','AduanSlsai','JmlAduan','hasilAdu','nilaiAdu','clsAdu','persentaseBulananAdu','JmlAirTrjualDom','JmlPlgnDom','hasilDom','nilaiDom','clsDom','persentaseBulananDom','UjiKualitas','titikUji','hasilQap','hitungUji','nilaiQap','clsQap','persentaseBulananQap','kalKulasiJmlPlgn','JmlPlgnThLl','hasilTbh','nilaiTbh','clsTbh','persentaseBulananTbh','urutanBulan','jumBul'));
     }
 
     public function sdm ()

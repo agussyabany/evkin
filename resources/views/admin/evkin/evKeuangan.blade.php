@@ -119,13 +119,13 @@
                   <td><strong>TOT</strong></td>
                   <td></td>
                   <td><strong>{{number_format($labaStlPjk, 0)}}</strong></td>
+                  <td></td>
                   <td><strong>{{number_format($biayaOps, 0)}}</strong></td>
                   <td><strong>{{number_format($PndptnOps, 0)}}</strong></td>
                   <td></td>
                   <td></td>
                   <td><strong>{{number_format($JmlPnrmRekAir, 0)}}</strong></td>
                   <td><strong>{{number_format($jmlRekAir, 0)}}</strong></td>
-                  <td></td>
                   <td></td>   
                 </tr>
               </tbody>
@@ -178,7 +178,7 @@
                       </div>
 
                       <div class="col form-group">
-                        <label >Jumlah Kualitas</label>
+                        <label >Jumlah Ekuitas</label>
                         <input required type="number" class="form-control" name="jmlEkuitas" id="jmlEkuitas">
                       </div>
                     </div>
