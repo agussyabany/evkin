@@ -47,7 +47,7 @@
                 <td>{{ $loop->iteration}}</td>
                 <td>{{ \Carbon\Carbon::parse($item->bulanTahun)->translatedFormat('F Y') }}</td>
                 <td>{{ number_format($item->JmlPgwai, 0) }}</td>
-                <td>{{ number_format($item->JmlPlgn1000, 0) }}</td>
+                <td>{{ $item->JmlPlgn1000 }}</td>
                 <td>{{ number_format($item->JmlPegDiklat, 0) }}</td>
                 <td>{{ number_format($item->RealByDiklat, 0) }}</td>
                 <td>{{ number_format($item->RealByPeg, 0) }}</td>
@@ -147,7 +147,7 @@
 
                       <div class="col form-group">
                         <label >(Jumlah Seluruh Pelanggan / 1000 )</label>
-                        <input required type="number" class="form-control" name="JmlPlgn1000" id="JmlPlgn1000">
+                        <input required type="number" class="form-control" name="JmlPlgn1000" id="JmlPlgn1000" step="any">
                       </div>
                     </div>
                   </div>

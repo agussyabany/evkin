@@ -22,7 +22,7 @@
                           </tr>
                           <tr>
                               <td id="b">Jumlah Seluruh Pelanggan / 1000 </h2></td>
-                              <td id="b_nilai" style="text-align: right;">{{number_format ($JmlPlgn1000, 0)}}</h2></td>
+                              <td id="b_nilai" style="text-align: right;">{{$JmlPlgn1000}}</h2></td>
                           </tr>
                        </table>
   

@@ -42,7 +42,12 @@ class MobileController extends Controller
                 // 10 miliar ke atas -> format 00.00
                 $laba = number_format($labaSum / $miliar, 2, ',', '');
             }
-        $labaBulanan = Keuangan::select('labaStlPjk','bulanTahun')->whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->get();
+        $labaBulanan = Keuangan::select('labaStlPjk', 'bulanTahun')
+        ->whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])
+        ->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])
+        ->where('status', 1)
+        ->orderBy('bulanTahun', 'asc') // urutkan naik
+        ->get();
         
         //nrw
         $KalkulasiJumAirM = evkinHelper::KalkulasiJumAir($tahun,$bulanAwal,$bulanAkhir);
@@ -250,13 +255,24 @@ class MobileController extends Controller
         $persentaseBulananQap = evkinHelper::persentaseBulananQap($tahun,$bulanAwal,$bulanAkhir);
         
         //Pertumbuan pelanggan
+        // $kalKulasiJmlPlgn = evkinHelper::kalKulasiJmlPlgn($tahun,$bulanAwal,$bulanAkhir);
+        // $JmlPlgnThLl = evkinHelper::JmlPlgnThLl($tahun,$bulanAwal,$bulanAkhir);
+        // $hitungTumbuh =evkinHelper::hitungTumbuh($tahun,$bulanAwal,$bulanAkhir);
+        // $hasilTbh = round($hitungTumbuh, 2);
+        // $dataTbh = evkinHelper::hasilTbh($hasilTbh);
+        // $nilaiTbh = $dataTbh['nilaiTbh'];
+        // $clsTbh = $dataTbh['clsTbh'];
+        // $persentaseBulananTbh = evkinHelper::persentaseBulananTbh($tahun,$bulanAwal,$bulanAkhir);
+        
+        //Pertumbuan pelanggan
         $kalKulasiJmlPlgn = evkinHelper::kalKulasiJmlPlgn($tahun,$bulanAwal,$bulanAkhir);
         $JmlPlgnThLl = evkinHelper::JmlPlgnThLl($tahun,$bulanAwal,$bulanAkhir);
         $hitungTumbuh =evkinHelper::hitungTumbuh($tahun,$bulanAwal,$bulanAkhir);
-        $hasilTbh = round($hitungTumbuh, 2);
+        $hasilTbh = 100;
         $dataTbh = evkinHelper::hasilTbh($hasilTbh);
         $nilaiTbh = $dataTbh['nilaiTbh'];
-        $clsTbh = $dataTbh['clsTbh'];
+        // $clsTbh = $dataTbh['clsTbh'];
+        $clsTbh = 'bg-success';
         $persentaseBulananTbh = evkinHelper::persentaseBulananTbh($tahun,$bulanAwal,$bulanAkhir);
         
         return view('mobile.pelayanan',compact('JmlPnddkTrlyni','jmlPndkWil','hasilCkp','nilaiCkp','clsCkp','persentaseBulananCkp','AduanSlsai','JmlAduan','hasilAdu','nilaiAdu','clsAdu','persentaseBulananAdu','JmlAirTrjualDom','JmlPlgnDom','hasilDom','nilaiDom','clsDom','persentaseBulananDom','UjiKualitas','titikUji','hasilQap','hitungUji','nilaiQap','clsQap','persentaseBulananQap','kalKulasiJmlPlgn','JmlPlgnThLl','hasilTbh','nilaiTbh','clsTbh','persentaseBulananTbh','urutanBulan','jumBul'));
