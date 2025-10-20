@@ -72,6 +72,7 @@ class EvkinController extends Controller
             $clsSol = $solData['clsSol'];
             $persentaseBulananSol = evkinHelper::persentaseBulananSol($tahun,$bulanAwal,$bulanAkhir);
 
+            $NilaiKeuangan = $nilaiRoe + $nilaiRop + $nilaiRok + $nilaiEf + $nilaiSol;
 
                                         //OPERASIONAL
             //Rasio Produksi
@@ -123,6 +124,7 @@ class EvkinController extends Controller
         $clsKal  =$dataKalibrasi['clsKal'];
         $persentaseBulananKal = evkinHelper::persentaseBulananKal($tahun,$bulanAwal,$bulanAkhir);
 
+        
                                 //PELLAYANNAN
         //Cakupan Pelayanan Teknis
         $JmlPnddkTrlyni = evkinHelper::JmlPnddkTrlyni($tahun,$bulanAwal,$bulanAkhir);
@@ -176,7 +178,7 @@ class EvkinController extends Controller
         $clsTbh = 'bg-success';
         $persentaseBulananTbh = evkinHelper::persentaseBulananTbh($tahun,$bulanAwal,$bulanAkhir);
 
-
+        $NilaiOperasional = $nilaiProd + $nilaiNrw + $nilaiJam + $nilaiTek + $nilaiKal + $nilaiCkp + $nilaiAdu + $nilaiDom + $nilaiQap + $nilaiTbh ;
                                         //SDM
         //Rasio Pegawai Terhadap pelanggan
         $JmlPgwai =evkinHelper::JmlPgwai($tahun,$bulanAwal,$bulanAkhir);
@@ -200,7 +202,7 @@ class EvkinController extends Controller
         $clsRdpPie = $dataRdp['clsRdpPie'];
         $persentaseBulananRdp = evkinHelper::persentaseBulananRdp($tahun,$bulanAwal,$bulanAkhir);
 
-        //Rasoio Biaya Diklat
+        //Rasio Biaya Diklat
         $RealByDiklat = evkinHelper::RealByDiklat($tahun,$bulanAwal,$bulanAkhir);
         $RealByPeg = evkinHelper::RealByPeg($tahun,$bulanAwal,$bulanAkhir);
         $hitungRasby = evkinHelper::hitungRasby($tahun,$bulanAwal,$bulanAkhir);
@@ -211,12 +213,15 @@ class EvkinController extends Controller
         $clsRbdPie = $dataRbd['clsRbdPie'];
         $persentaseBulananRbd = evkinHelper::persentaseBulananRbd($tahun,$bulanAwal,$bulanAkhir);
 
+        $NilaiSdm = $nilaiRpl + $nilaiRdp + $nilaiRbd ;
 
-
-
+        $keuangan = ($NilaiKeuangan * 45) / 60;
+        $operasional = ($NilaiOperasional * 40) / 47;
+        $administrasi = ($NilaiSdm * 15) / 36; 
+        $bpKp = $keuangan + $operasional + $administrasi;
 
 
         
-        return view('main.index',compact('labaStlPjk','jmlEkuitas','hasilRoe','nilaiRoe','clsRoe','persentaseBulananRoe','biayaOps','PndptnOps','hasilRop','nilaiRop','clsRop','persentaseRopBulanan','kaStrkas','HutangLancar','hasilRok','nilaiRok','clsRok','persentaseBulananRok','JmlPnrmRekAir','jmlRekAir','hasilEf','nilaiEf','clsEf','persentaseBulananEf','TotalAktiva','TotalHutang','hasilSol','nilaiSol','clsSol','persentaseBulananSol','urutanBulan','VolProdRil','KpstsTrpsng','hasilProd','nilaiProd','clsProd','persentaseBulananProd','KalkulasiJumAirM','JmlAirDistM','nrw','nilaiNrw','clsNrw','persentaseBulananNrw','JmlWktPly','jam','hari','nilaiJam','clsJam','persentaseBulananJam','Plgnlayan','PlgnAktiv','tekanan','nilaiTek','clsTek','persentaseBulananTek','MtrAirGnti','PlgnAktiv','kalibrasi','nilaiKal','clsKal','persentaseBulananKal','urutanBulan','JmlPnddkTrlyni','jmlPndkWil','hasilCkp','nilaiCkp','clsCkp','persentaseBulananCkp','AduanSlsai','JmlAduan','hasilAdu','nilaiAdu','clsAdu','persentaseBulananAdu','JmlAirTrjualDom','JmlPlgnDom','hasilDom','nilaiDom','clsDom','persentaseBulananDom','UjiKualitas','titikUji','hasilQap','nilaiQap','clsQap','persentaseBulananQap','kalKulasiJmlPlgn','JmlPlgnThLl','hasilTbh','nilaiTbh','clsTbh','persentaseBulananTbh','urutanBulan','JmlPgwai','JmlPlgn1000','hasilRpl','nilaiRpl','clsRpl','persentaseBulananRpl','JmlPegDiklat','JmlPgwai','hasilRdp','nilaiRdp','clsRdp','persentaseBulananRdp','RealByDiklat','RealByPeg','hasilRbd','hasilRbd','nilaiRbd','clsRbd','persentaseBulananRbd','urutanBulan','clsRplPie','clsRdpPie','clsRbdPie','tahun','jumBul'));
+        return view('main.index',compact('labaStlPjk','jmlEkuitas','hasilRoe','nilaiRoe','clsRoe','persentaseBulananRoe','biayaOps','PndptnOps','hasilRop','nilaiRop','clsRop','persentaseRopBulanan','kaStrkas','HutangLancar','hasilRok','nilaiRok','clsRok','persentaseBulananRok','JmlPnrmRekAir','jmlRekAir','hasilEf','nilaiEf','clsEf','persentaseBulananEf','TotalAktiva','TotalHutang','hasilSol','nilaiSol','clsSol','persentaseBulananSol','urutanBulan','VolProdRil','KpstsTrpsng','hasilProd','nilaiProd','clsProd','persentaseBulananProd','KalkulasiJumAirM','JmlAirDistM','nrw','nilaiNrw','clsNrw','persentaseBulananNrw','JmlWktPly','jam','hari','nilaiJam','clsJam','persentaseBulananJam','Plgnlayan','PlgnAktiv','tekanan','nilaiTek','clsTek','persentaseBulananTek','MtrAirGnti','PlgnAktiv','kalibrasi','nilaiKal','clsKal','persentaseBulananKal','urutanBulan','JmlPnddkTrlyni','jmlPndkWil','hasilCkp','nilaiCkp','clsCkp','persentaseBulananCkp','AduanSlsai','JmlAduan','hasilAdu','nilaiAdu','clsAdu','persentaseBulananAdu','JmlAirTrjualDom','JmlPlgnDom','hasilDom','nilaiDom','clsDom','persentaseBulananDom','UjiKualitas','titikUji','hasilQap','nilaiQap','clsQap','persentaseBulananQap','kalKulasiJmlPlgn','JmlPlgnThLl','hasilTbh','nilaiTbh','clsTbh','persentaseBulananTbh','urutanBulan','JmlPgwai','JmlPlgn1000','hasilRpl','nilaiRpl','clsRpl','persentaseBulananRpl','JmlPegDiklat','JmlPgwai','hasilRdp','nilaiRdp','clsRdp','persentaseBulananRdp','RealByDiklat','RealByPeg','hasilRbd','hasilRbd','nilaiRbd','clsRbd','persentaseBulananRbd','urutanBulan','clsRplPie','clsRdpPie','clsRbdPie','tahun','jumBul','bpKp'));
     }
 }

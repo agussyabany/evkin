@@ -24,6 +24,69 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Info boxes -->
+        <fieldset class=" border border-primary rounded text-center">
+          <legend class="ml-2 w-auto px-3 border border-primary rounded"><h5 class="mt-2">PENILAIAN</h5></legend>
+        <div class="content ml-2 mr-2">
+          <div class="row">
+            
+          <div class="col">
+          <a href="#"><div class="info-box">
+             <span class="info-box-icon {{$clsRoe}} elevation-1 d-flex align-items-center justify-content-center">
+              <img src="{{ asset('assets/img/bpkp.jpg') }}" alt="ROE" style="width:80px; height:80px; object-fit:contain;">
+            </span>
+              <div class="info-box-content">
+
+                <div class="row">
+                  <div class="col col-md-9">
+                    <span class="info-box-text text-center"><h3><strong>BAIK</strong></h3></span>
+                      <span class="info-box-number">
+                       
+                        <small></small>
+                      </span>
+                    </div>
+
+                  <div class="col border-left">
+                    <h3 class="text-center mt-3 ml-2"></h3>
+                  </div>
+                </div>
+                
+              </div>
+            </div></a>
+          </div>
+
+          <div class="col">
+            <a href="#"><div class="info-box mb-3">
+              <span class="info-box-icon {{$clsRoe}} elevation-1 d-flex align-items-center justify-content-center">
+              <img src="{{ asset('assets/img/pu.png') }}" alt="ROE" style="width:80px; height:80px; object-fit:contain;">
+            </span>
+
+              <div class="info-box-content">
+                <div class="row">
+                  <div class="col col-md-9">
+                    <span class="info-box-text"><h3><strong>SEHAT</strong></h3></span>
+                      {{-- <span class="info-box-number">{{$hasilRop}}
+                        <small>%</small>
+                      </span> --}}
+                    </div>
+
+                    {{-- <div class="col border-left">
+                      <h3 class="text-center mt-3 ml-2"></h3>
+                    </div> --}}
+                  </div>
+                  
+                
+              </div>
+              <!-- /.info-box-content -->
+            </div></a>
+
+          </div>
+          
+          
+          
+          
+        </div>
+      </div>
+    </fieldset><br>
        
         <fieldset class=" border border-primary rounded text-center">
           <legend class="ml-2 w-auto px-3 border border-primary rounded"><h5 class="mt-2">ASPEK KEUANGAN </h5></legend>
