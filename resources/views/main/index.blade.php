@@ -31,7 +31,7 @@
             
           <div class="col">
           <a href="#"><div class="info-box">
-             <span class="info-box-icon {{$clsRoe}} elevation-1 d-flex align-items-center justify-content-center">
+             <span class="info-box-icon bg-white elevation-1 d-flex align-items-center justify-content-center">
               <img src="{{ asset('assets/img/bpkp.jpg') }}" alt="ROE" style="width:80px; height:80px; object-fit:contain;">
             </span>
               <div class="info-box-content">
@@ -45,9 +45,9 @@
                       </span>
                     </div>
 
-                  <div class="col border-left">
+                  {{-- <div class="col border-left">
                     <h3 class="text-center mt-3 ml-2"></h3>
-                  </div>
+                  </div> --}}
                 </div>
                 
               </div>
@@ -56,8 +56,8 @@
 
           <div class="col">
             <a href="#"><div class="info-box mb-3">
-              <span class="info-box-icon {{$clsRoe}} elevation-1 d-flex align-items-center justify-content-center">
-              <img src="{{ asset('assets/img/pu.png') }}" alt="ROE" style="width:80px; height:80px; object-fit:contain;">
+              <span class="info-box-icon bg-warning elevation-1 d-flex align-items-center justify-content-center">
+              <img src="{{ asset('assets/img/pu.png') }}" alt="ROE" style="width:60px; height:80px; object-fit:contain;">
             </span>
 
               <div class="info-box-content">
@@ -684,6 +684,11 @@
   window.dataRplPie = @json($clsRplPie);
   window.dataRdpPie = @json($clsRdpPie);
   window.dataRbdPie = @json($clsRbdPie);
+
+  // Reload halaman setiap 30 menit secara terus menerus
+  setInterval(function() {
+    location.reload();
+  }, 1800000); // 30 menit = 30 * 60 * 1000
 
  </script>
   @include('mobile.modal_keu.roe')
