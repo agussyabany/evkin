@@ -242,7 +242,7 @@
 
                       <div class="col form-group">
                         <label>Tahun Ini</label>
-                        <input required type="text" class="form-control" name="JmlPnddkTrlyni" id="tahunIni">
+                        <input required type="text" class="form-control" name="tahunIni" id="tahunIni">
                       </div>
 
                       <div class="col form-group">
