@@ -177,7 +177,7 @@
 
         {{-- DIREKSI --}}
         @if (Auth::user()->hasAnyRole(['adminUtama','de-was','dirut','dirum','spi','agus']))
-        <li class="nav-item menu-close">
+        {{-- <li class="nav-item menu-close">
           <a href="#" class="nav-link active">
             <p>
               UTAMA
@@ -198,12 +198,12 @@
               </a>
             </li>
           </ul>
-        </li>
+        </li> --}}
         @endif
 
 
         @if (Auth::user()->hasAnyRole(['adminUmum','de-was','dirut','dirum','spi','agus']))
-        <li class="nav-item menu-close">
+        {{-- <li class="nav-item menu-close">
           <a href="#" class="nav-link active">
             <p>
               UMUM
@@ -236,11 +236,11 @@
               </a>
             </li>
           </ul>
-        </li>
+        </li> --}}
         @endif
         
         @if (Auth::user()->hasAnyRole(['adminTeknik','de-was','dirut','dirum','dirtek','spi','agus']))
-        <li class="nav-item menu-close">
+        {{-- <li class="nav-item menu-close">
           <a href="#" class="nav-link active">
             <p>
               TEKNIK
@@ -267,11 +267,11 @@
               </a>
             </li>
           </ul>
-        </li>
+        </li> --}}
         @endif
 
         @if (Auth::user()->hasAnyRole(['adminLayan','de-was','dirut','dirum','dirpel','spi','agus']))
-        <li class="nav-item menu-close">
+        {{-- <li class="nav-item menu-close">
           <a href="#" class="nav-link active">
             <p>
               PELAYANAN
@@ -291,6 +291,31 @@
                 <p>Kepatuhan</p>
               </a>
             </li>
+          </ul>
+        </li> --}}
+        @endif
+
+        @if (Auth::user()->hasAnyRole(['agus']))
+        <li class="nav-item menu-close">
+          <a href="#" class="nav-link active">
+            <p>
+              SETTING
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/guna" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>User</p>
+              </a>
+            </li>
+            {{-- <li class="nav-item">
+              <a href="/kepatuhan" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Kepatuhan</p>
+              </a>
+            </li> --}}
           </ul>
         </li>
         @endif

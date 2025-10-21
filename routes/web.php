@@ -16,6 +16,7 @@ use App\Http\Controllers\Dashboard\PelayananController as DashboardPelayananCont
 use App\Http\Controllers\Dashboard\SdmController as DashboardSdmController;
 use App\Http\Controllers\Evkin\EvkinController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Models\Evkin\Pelayanan;
 use Illuminate\Support\Facades\Route;
 
@@ -169,7 +170,6 @@ Route::get('/lalu',[PelayananController::class, 'lalu']);
 Route::middleware('auth','verified','role:spi|agus')->group(function () {
     Route::get('/', function () {
         return redirect('/evkin');
-
     });
 
     Route::post('verSdm/{id}', [SdmController::class, 'ver']);
@@ -177,6 +177,14 @@ Route::middleware('auth','verified','role:spi|agus')->group(function () {
     Route::post('/verPel/{id}',[PelayananController::class, 'ver']);
     Route::post('verKeu/{id}', [KeuanganController::class, 'verifiksi']);
     
+});
+
+Route::middleware('auth','verified','role:agus')->group(function () {
+    Route::get('/', function () {
+        return redirect('/evkin');
+    });
+    Route::get('guna', [UserController::class, 'index'])->name('guna');
+    Route::post('save', [UserController::class, 'store']);
 });
 
 
