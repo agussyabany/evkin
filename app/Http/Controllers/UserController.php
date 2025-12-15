@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ipa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -16,7 +17,8 @@ class UserController extends Controller
     {   
         $roles = Role::all();
         $users = User::with('roles')->get();
-        return view('setting.user',compact('users','roles'));
+        $ipa = Ipa::select('id','nama_ipa')->get();
+        return view('setting.user',compact('users','roles','ipa'));
     }
 
     /**
@@ -36,6 +38,9 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'nipp'=> $request->nipp,
+            'jabatan'=>$request->jabatan,
+            'ipa'=>$request->ipa
         ]);
 
         $user->assignRole($request->role);

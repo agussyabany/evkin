@@ -104,11 +104,34 @@
                       <div class="col form-group">
                         <label >Nama</label>
                         <input required type="text" class="form-control" name="name" >
+                         <label>NIPP</label>
+                        <input required type="text" class="form-control" name="nipp" >
+                        <label>Jabatan</label>
+                        <select name="jabatan" class="form-control" required>
+                                <option value="1">Staf</option>
+                                <option value="2">Asisten Manajer</option>
+                                <option value="2">Manajer</option>
+                        </select>
+                        <label>Penempatan</label>
+                         <select name="role" class="form-control" required>
+                            @foreach($ipa as $ipas)
+                                <option value="{{ $ipas->id }}">{{ $ipas->nama_ipa }}</option>
+                            @endforeach
+                        </select>
+                        
                       </div>
 
                       <div class="col form-group">
                         <label >eMail</label>
                         <input required type="email" class="form-control" name="email" >
+                        <label >Password</label>
+                        <input required type="text" class="form-control" name="password">
+                         <label>Role</label>
+                          <select name="role" class="form-control" required>
+                            @foreach($roles as $role)
+                                <option value="{{ $role->name }}">{{ strtoupper($role->name) }}</option>
+                            @endforeach
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -120,18 +143,11 @@
                 <div class="container">
                     <div class="row">
                       <div class="col form-group">
-                        <label >Password</label>
-                        <input required type="text" class="form-control" name="password">
+                        
                       </div>
 
                       <div class="col form-group">
-                        <label>Role</label>
-
-                        <select name="role" class="form-control" required>
-                            @foreach($roles as $role)
-                                <option value="{{ $role->name }}">{{ strtoupper($role->name) }}</option>
-                            @endforeach
-                        </select>
+                       
 
                       </div>
                     </div>
