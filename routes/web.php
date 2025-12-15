@@ -15,6 +15,7 @@ use App\Http\Controllers\Dashboard\MobileController;
 use App\Http\Controllers\Dashboard\PelayananController as DashboardPelayananController;
 use App\Http\Controllers\Dashboard\SdmController as DashboardSdmController;
 use App\Http\Controllers\Evkin\EvkinController;
+use App\Http\Controllers\Ipa\IpaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Models\Evkin\Pelayanan;
@@ -45,7 +46,7 @@ Route::get('/', function () {
     //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // });
 
-Route::middleware('auth','verified')->group( function () {
+Route::middleware('auth','verified','role:de-was|dirut|dirpel|dirtek|agus|adminUmum|adminTeknik|adminLayan|adminUtama')->group( function () {
 
             Route::get('/perumdam',[MobileController::class, 'kinerja']);//HOME
 
@@ -185,6 +186,13 @@ Route::middleware('auth','verified','role:agus')->group(function () {
     });
     Route::get('guna', [UserController::class, 'index'])->name('guna');
     Route::post('save', [UserController::class, 'store']);
+});
+
+Route::middleware('auth','verified','role:ipa')->group(function () {
+    Route::get('/ipa', function () {
+        return redirect('/dataIpa');
+    });
+    Route::get('dataIpa', [IpaController::class, 'index']);
 });
 
 

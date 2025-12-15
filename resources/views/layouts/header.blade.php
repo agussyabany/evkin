@@ -96,6 +96,42 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
+             @if (Auth::user()->hasAnyRole(['agus','ipa']))
+               
+            
+             <li class="nav-item menu-close">
+              <a href="#" class="nav-link active">
+                
+                <p>
+                 CENDANA
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Operator</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Labratorium</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Bahan Kimia</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          @endif
+@if (Auth::user()->hasAnyRole(['adminUmum','de-was','dirut','dirum','spi','agus','adminUtama','adminUmum','adminTeknik','adminLayan','dirtek','dirpel']))
+  
+
              <li class="nav-item menu-close">
               <a href="#" class="nav-link active">
                 
@@ -119,6 +155,7 @@
                 </li>
               </ul>
             </li>
+
         <li class="nav-item menu-close">
           <a href="#" class="nav-link active">
             
@@ -174,6 +211,8 @@
            
           </ul>
         </li>
+
+        @endif
 
         {{-- DIREKSI --}}
         @if (Auth::user()->hasAnyRole(['adminUtama','de-was','dirut','dirum','spi','agus']))

@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if (Auth::user()->hasRole(['de-was','dirut','dirtek','dirpel'])) {
+        if (Auth::user()->hasRole(['de-was','dirut','dirtek','dirpel','agus'])) {
             return redirect()->to('/perumdam');
         }
         if (Auth::user()->hasRole(['adminUtama'])) {
@@ -50,6 +50,10 @@ class AuthenticatedSessionController extends Controller
 
         if (Auth::user()->hasRole(['spi'])) {
             return redirect()->to('/evkin');
+        }
+
+        if (Auth::user()->hasRole(['ipa'])) {
+            return redirect()->to('/ipa');
         }
 
         return redirect()->intended(RouteServiceProvider::HOME);
