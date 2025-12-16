@@ -41,7 +41,7 @@
     
 
       <div class="modal fade" id="modal_evkeu">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title"  id="judul_evkeu">Input Data Keuangan</h4>
@@ -55,23 +55,286 @@
               <form action="/keuSave" method="POST" id="form-keuangan">
                 @csrf
                 <input required type="hidden" id="idKeu" name="idKeu" class="form-control">
+                <div class="row">
+            <div class="col">
               <fieldset class="border border-primary rounded">
-                <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>Retun Of Equity</h6></legend>
+                <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>Intake Teluk Lerong</h6></legend>
                   
                 <div class="container">
-                    <div class="row">
-                      <div class="col form-group">
-                        <label >Laba Setelah Pajak</label>
-                        <input required type="number" class="form-control" name="labaStlPjk" id="labaStlPjk">
-                      </div>
+                    
+                      <div class="form-group">
+                        <label>Pilih Pompa</label>
+                        <br>
 
-                      <div class="col form-group">
-                        <label >Jumlah Ekuitas</label>
-                        <input required type="number" class="form-control" name="jmlEkuitas" id="jmlEkuitas">
-                      </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="ipa[]" value="cendana" id="ipa_cendana">
+                            <label class="form-check-label" for="ipa_cendana">Pompa 1</label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="ipa[]" value="tirta_kencana" id="ipa_tirta_kencana">
+                            <label class="form-check-label" for="ipa_tirta_kencana">Pompa 2</label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="ipa[]" value="karang_asam" id="ipa_karang_asam">
+                            <label class="form-check-label" for="ipa_karang_asam">Pompa 3</label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="ipa[]" value="teluk_lerong" id="ipa_teluk_lerong">
+                            <label class="form-check-label" for="ipa_teluk_lerong">Pompa 4</label>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead class="thead-dark">
+                                    <tr class="text-center">
+                                       
+                                        <th style="width:110px;">Pompa</th>
+                                        <th style="width:110px;">Frekuensi</th>
+                                        <th style="width:110px;">Ampere</th>
+                                        <th style="width:110px;">Volt</th>
+                                        <th style="width:110px;">Durasi</th>
+                                        <th style="width:110px;">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        
+                                        <td>1</td>
+
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <select class="form-control form-control-sm">
+                                                <option>ON</option>
+                                                <option>OFF</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead class="thead-dark">
+                                    <tr class="text-center">
+                                        
+                                        <th style="width:110px;">Pompa</th>
+                                        <th style="width:110px;">Frekuensi</th>
+                                        <th style="width:110px;">Ampere</th>
+                                        <th style="width:110px;">Volt</th>
+                                        <th style="width:110px;">Durasi</th>
+                                        <th style="width:110px;">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        
+                                        <td>2</td>
+
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <select class="form-control form-control-sm">
+                                                <option>ON</option>
+                                                <option>OFF</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead class="thead-dark">
+                                    <tr class="text-center">
+                                        
+                                        <th style="width:110px;">Pompa</th>
+                                        <th style="width:110px;">Frekuensi</th>
+                                        <th style="width:110px;">Ampere</th>
+                                        <th style="width:110px;">Volt</th>
+                                        <th style="width:110px;">Durasi</th>
+                                        <th style="width:110px;">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        
+                                        <td>3</td>
+
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <select class="form-control form-control-sm">
+                                                <option>ON</option>
+                                                <option>OFF</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead class="thead-dark">
+                                    <tr class="text-center">
+                                       
+                                        <th style="width:110px;">Pompa</th>
+                                        <th style="width:110px;">Frekuensi</th>
+                                        <th style="width:110px;">Ampere</th>
+                                        <th style="width:110px;">Volt</th>
+                                        <th style="width:110px;">Durasi</th>
+                                        <th style="width:110px;">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        
+                                        <td>4</td>
+
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <select class="form-control form-control-sm">
+                                                <option>ON</option>
+                                                <option>OFF</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+
+                    
+                    
                   </div>
-                </fieldset><br>
+                  
+                </fieldset>
+                  </div>
+
+                  <div class="col">
+              <fieldset class="border border-primary rounded">
+                <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>Intake Teluk Lerong</h6></legend>
+                  
+                <div class="container">
+                    
+                      <div class="form-group">
+                        <label>Pilih Pompa</label>
+                        <br>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="ipa[]" value="cendana" id="ipa_cendana">
+                            <label class="form-check-label" for="ipa_cendana">Pompa 1</label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="ipa[]" value="tirta_kencana" id="ipa_tirta_kencana">
+                            <label class="form-check-label" for="ipa_tirta_kencana">Pompa 2</label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="ipa[]" value="karang_asam" id="ipa_karang_asam">
+                            <label class="form-check-label" for="ipa_karang_asam">Pompa 3</label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="ipa[]" value="teluk_lerong" id="ipa_teluk_lerong">
+                            <label class="form-check-label" for="ipa_teluk_lerong">Pompa 4</label>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead class="thead-dark">
+                                    <tr class="text-center">
+                                        <th style="width:50px;">No</th>
+                                        <th style="width:110px;">Nama Pompa</th>
+                                        <th style="width:110px;">Frekuensi</th>
+                                        <th style="width:110px;">Ampere</th>
+                                        <th style="width:110px;">Volt</th>
+                                        <th style="width:110px;">Durasi</th>
+                                        <th style="width:110px;">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td>Pompa 1</td>
+
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm text-center">
+                                        </td>
+                                        <td>
+                                            <select class="form-control form-control-sm">
+                                                <option>ON</option>
+                                                <option>OFF</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+
+                    
+                    
+                  </div>
+                  
+                </fieldset>
+                  </div>
+                </div>
+                <br>
 
                 <fieldset class="border border-success rounded">
                 <legend class="ml-2 w-auto px-3 border border-success rounded"><h6>Ratio Operasional</h6></legend>
