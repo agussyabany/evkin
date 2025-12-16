@@ -125,6 +125,10 @@
         font-size: 20px;
     }
 }
+#pompa1, #pompa2, #pompa3, #pompa4 {
+        display: none;
+        margin-top: 10px;
+    }
 
 </style>
 
