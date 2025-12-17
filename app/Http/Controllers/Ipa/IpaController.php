@@ -11,4 +11,9 @@ class IpaController extends Controller
     {
         return view('ipa.monitor');
     }
+
+    public function store(Request $request)
+    {
+        return $request;
+    }
 }

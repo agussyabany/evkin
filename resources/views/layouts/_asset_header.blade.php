@@ -130,6 +130,14 @@
         margin-top: 10px;
     }
 
+    .pompa-table {
+        margin-bottom: 6px !important;
+    }
+
+    .pompa-table table {
+        margin-bottom: 0 !important;
+    }
+
 </style>
 
 

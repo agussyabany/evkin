@@ -193,6 +193,7 @@ Route::middleware('auth','verified','role:ipa')->group(function () {
         return redirect('/dataIpa');
     });
     Route::get('dataIpa', [IpaController::class, 'index']);
+    Route::post('save', [IpaController::class, 'store']);
 });
 
 
