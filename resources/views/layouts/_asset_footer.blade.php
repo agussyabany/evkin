@@ -34,6 +34,7 @@
 <script src="{{ asset('assets/dist/js/dashboard/operasional.js')}}"></script>
 <script src="{{ asset('assets/dist/js/dashboard/pelayanan.js')}}"></script>
 <script src="{{ asset('assets/dist/js/dashboard/home.js')}}"></script>
+<script src="{{ asset('assets/dist/js/dashboard/ipa.js')}}"></script>
 
 <script>
     function moveIndicator(el, index) {
