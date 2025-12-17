@@ -14,7 +14,7 @@
   <!-- /.content-header -->
   <div class="content">
     <div class="float-right">
-      @if (Auth::user()->hasAnyRole(['adminLayan','agus']))
+      @if (Auth::user()->hasAnyRole(['adminLayan','agus','spi']))
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_pelayanan" id="tambah_pelayanan">TAMBAH</button>
       @endif
     </div>

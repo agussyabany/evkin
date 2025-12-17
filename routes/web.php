@@ -46,7 +46,7 @@ Route::get('/', function () {
     //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // });
 
-Route::middleware('auth','verified','role:de-was|dirut|dirpel|dirtek|agus|adminUmum|adminTeknik|adminLayan|adminUtama')->group( function () {
+Route::middleware('auth','verified','role:de-was|dirut|dirpel|dirtek|agus|adminUmum|adminTeknik|adminLayan|adminUtama|spi')->group( function () {
 
             Route::get('/perumdam',[MobileController::class, 'kinerja']);//HOME
 
@@ -101,7 +101,7 @@ Route::middleware('auth','verified','role:de-was|dirut|dirpel|dirtek|agus|adminU
 
 });
 
-Route::middleware('auth','verified','role:de-was|dirut|dirpel|dirtek|agus')->group(function () {
+Route::middleware('auth','verified','role:de-was|dirut|dirpel|dirtek|agus|spi')->group(function () {
     Route::get('/', function () {
         return redirect('/perumdam');
     });
