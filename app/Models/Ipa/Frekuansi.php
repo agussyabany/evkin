@@ -11,7 +11,7 @@ class Frekuansi extends Model
     protected $table = 'frekuensi';
 
     protected $fillable = [
-        'frekuensi',
+        'frek',
         'id_pompa',
         'id_ipa',
         'id_user'

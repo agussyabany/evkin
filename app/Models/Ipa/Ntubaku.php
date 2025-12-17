@@ -12,7 +12,7 @@ class Ntubaku extends Model
 
     protected $fillable = [
         'ntu',
-        'id_resv',
+        'id_intake',
         'id_ipa',
         'id_user'
     ];

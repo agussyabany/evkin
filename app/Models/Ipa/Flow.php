@@ -12,6 +12,7 @@ class Flow extends Model
 
     protected $fillable = [
         'flow',
+        'totaliz',
         'id_flow',
         'id_ipa',
         'id_user'
