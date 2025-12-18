@@ -438,7 +438,210 @@
 
                                     
                                   </div>
-                                </fieldset>
+                                </fieldset><br>
+
+
+                                <div class="row">
+                                    <div class="col">
+                                       <fieldset class="border border-warning rounded">
+                                  <legend class="ml-2 w-auto px-3 border border-warning rounded"><h6>RESERVOAR 1</h6></legend>
+                                  <div class="container">
+                                    
+
+                                          <!-- ================= PILIH POMPA RESERVOAR 1 ================= -->
+                                          <div class="form-group">
+                                              <label>Pilih Pompa</label><br>
+
+                                              <!-- Pompa 1 RESERVOAR 1 -->
+                                              <div class="form-check form-check-inline">
+                                                  <input type="hidden" name="pompa[9][id_pompa]" value="9">
+                                                  <input type="hidden" name="pompa[9][status]" value="0">
+
+                                                  <input class="form-check-input cek-pompa"
+                                                        type="checkbox"
+                                                        id="cek_pompa9"
+                                                        data-target="pompa9"
+                                                        name="pompa[9][status]"
+                                                        value="1">
+
+                                                  <label class="form-check-label" for="cek_pompa9">Pompa 1</label>
+                                              </div>
+
+                                              <!-- Pompa 2 RESERVAOR 1 -->
+                                              <div class="form-check form-check-inline">
+                                                  <input type="hidden" name="pompa[10][id_pompa]" value="10">
+                                                  <input type="hidden" name="pompa[10][status]" value="0">
+
+                                                  <input class="form-check-input cek-pompa"
+                                                        type="checkbox"
+                                                        id="cek_pompa10"
+                                                        data-target="pompa10"
+                                                        name="pompa[10][status]"
+                                                        value="1">
+
+                                                  <label class="form-check-label" for="cek_pompa10">Pompa 2</label>
+                                              </div>
+
+                                              <!-- Pompa 3 RESERVAOR 1 -->
+                                              <div class="form-check form-check-inline">
+                                                  <input type="hidden" name="pompa[11][id_pompa]" value="11">
+                                                  <input type="hidden" name="pompa[11][status]" value="0">
+
+                                                  <input class="form-check-input cek-pompa"
+                                                        type="checkbox"
+                                                        id="cek_pompa11"
+                                                        data-target="pompa11"
+                                                        name="pompa[11][status]"
+                                                        value="1">
+
+                                                  <label class="form-check-label" for="cek_pompa11">Pompa 3</label>
+                                              </div>
+
+                                              <!-- Pompa 4 RESERVAOR 1 -->
+                                              <div class="form-check form-check-inline">
+                                                  <input type="hidden" name="pompa[12][id_pompa]" value="12">
+                                                  <input type="hidden" name="pompa[12][status]" value="0">
+
+                                                  <input class="form-check-input cek-pompa"
+                                                        type="checkbox"
+                                                        id="cek_pompa12"
+                                                        data-target="pompa12"
+                                                        name="pompa[12][status]"
+                                                        value="1">
+
+                                                  <label class="form-check-label" for="cek_pompa12">Pompa 4</label>
+                                              </div>
+                                          </div>
+
+                                          <!-- ================= TABLE POMPA 1 RESERVOAR 1 ================= -->
+                                          <div class="table-responsive pompa-table" id="pompa9" style="display:none;">
+                                              <table class="table table-bordered table-striped table-sm">
+                                                  <thead class="thead-dark text-center">
+                                                      <tr>
+                                                          <th>Pompa</th>
+                                                          <th>Frekuensi</th>
+                                                          <th>Ampere</th>
+                                                          <th>Volt</th>
+                                                          <th>Durasi</th>
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                      <tr>
+                                                          <td class="text-center">1</td>
+                                                          <td><input type="number" name="pompa[9][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.5" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[9][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.5" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[9][volt]"     class="form-control form-control-sm text-center" step="any" value="220.5" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="40" name="pompa[9][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                      </tr>
+                                                  </tbody>
+                                              </table>
+                                          </div>
+
+                                          <!-- ================= TABLE POMPA 2 RESERVOAR 1 ================= -->
+                                          <div class="table-responsive pompa-table" id="pompa10" style="display:none;">
+                                              <table class="table table-bordered table-striped table-sm">
+                                                  <thead class="thead-dark text-center">
+                                                      <tr>
+                                                          <th>Pompa</th>
+                                                          <th>Frekuensi</th>
+                                                          <th>Ampere</th>
+                                                          <th>Volt</th>
+                                                          <th>Durasi</th>
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                      <tr>
+                                                          <td class="text-center">2</td>
+                                                          <td><input type="number" name="pompa[10][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.6" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[10][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.6" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="220.6" name="pompa[10][volt]"     class="form-control form-control-sm text-center" step="any" value="220" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="34" name="pompa[10][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                      </tr>
+                                                  </tbody>
+                                              </table>
+                                          </div>
+
+                                          <!-- ================= TABLE POMPA 3 RESEVOAR 1 ================= -->
+                                          <div class="table-responsive pompa-table" id="pompa11" style="display:none;">
+                                              <table class="table table-bordered table-striped table-sm">
+                                                  <thead class="thead-dark text-center">
+                                                      <tr>
+                                                          <th>Pompa</th>
+                                                          <th>Frekuensi</th>
+                                                          <th>Ampere</th>
+                                                          <th>Volt</th>
+                                                          <th>Durasi</th>
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                      <tr>
+                                                          <td class="text-center">3</td>
+                                                          <td><input type="number" name="pompa[11][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.7" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[11][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.7" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[11][volt]"     class="form-control form-control-sm text-center" step="any" value="220.7" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="90" name="pompa[11][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                      </tr>
+                                                  </tbody>
+                                              </table>
+                                          </div>
+
+                                          <!-- ================= TABLE POMPA 4 RESERVOAR 1 ================= -->
+                                          <div class="table-responsive pompa-table" id="pompa12" style="display:none;">
+                                              <table class="table table-bordered table-striped table-sm">
+                                                  <thead class="thead-dark text-center">
+                                                      <tr>
+                                                          <th>Pompa</th>
+                                                          <th>Frekuensi</th>
+                                                          <th>Ampere</th>
+                                                          <th>Volt</th>
+                                                          <th>Durasi</th>
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                      <tr>
+                                                          <td class="text-center">4</td>
+                                                          <td><input type="number" name="pompa[12][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.8" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[12][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.8" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="220.8" name="pompa[12][volt]"     class="form-control form-control-sm text-center" step="any" value="220." placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="90" name="pompa[12][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                      </tr>
+                                                  </tbody>
+                                              </table>
+                                          </div>
+
+                                           <div class="table-responsive" id="">
+                                              <table class="table table-bordered table-striped table-sm">
+                                                  <thead class="thead-dark text-center">
+                                                      <tr>
+                                                          <th>FLOW METER</th>
+                                                          <th>FLOW/DEBIT</th>
+                                                          <th>TOTALIZER</th>
+                                                          
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                      <tr>
+                                                          <input type="hidden" value="2" name="id_flow[1]">
+                                                           <td>1 ACP</td>
+                                                          <td><input type="number" name="flow[3]"   class="form-control form-control-sm text-center" step="any" value="150.2" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="98765443" name="total[3]"     class="form-control form-control-sm text-center"></td>
+                                                      </tr>
+                                                      <tr>
+                                                          <input type="hidden" value="2" name="id_reserv[1]">
+                                                           <td>2 GRP</td>
+                                                          <td><input type="number" name="flow[4]"   class="form-control form-control-sm text-center" step="any" value="150.2" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="98765443" name="total[4]"     class="form-control form-control-sm text-center"></td>
+                                                      </tr>
+                                                  </tbody>
+                                              </table>
+                                          </div>
+
+                                    
+                                  </div>
+                                </fieldset> 
+
+                                    </div>
+                                </div>
                               </div>
                             </div>
                           </div>

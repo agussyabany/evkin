@@ -188,7 +188,7 @@ Route::middleware('auth','verified','role:agus')->group(function () {
     Route::post('save', [UserController::class, 'store']);
 });
 
-Route::middleware('auth','verified','role:ipa')->group(function () {
+Route::middleware('auth','verified','role:ipa|agus')->group(function () {
     Route::get('/ipa', function () {
         return redirect('/dataIpa');
     });
