@@ -138,6 +138,10 @@
         margin-bottom: 0 !important;
     }
 
+    .modal-xxl-custom {
+    max-width: 95vw;   /* bisa 90–98vw */
+}
+
 </style>
 
 

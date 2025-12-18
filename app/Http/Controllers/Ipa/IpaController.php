@@ -113,22 +113,22 @@ class IpaController extends Controller
             /* =====================================================
              |  NTU (BERDASARKAN INTAKE)
              =====================================================*/
-            if ($request->has('ntu') && $request->has('id_intake')) {
+            // if ($request->has('ntu') && $request->has('id_intake')) {
 
-                foreach ($request->ntu as $key => $ntuValue) {
+            //     foreach ($request->ntu as $key => $ntuValue) {
 
-                    if (is_null($ntuValue)) {
-                        continue;
-                    }
+            //         if (is_null($ntuValue)) {
+            //             continue;
+            //         }
 
-                    Ntubaku::create([
-                        'ntu'        => $ntuValue,
-                        'id_intake'  => $request->id_intake[$key],
-                        'id_ipa'     => $idIpa,
-                        'id_user'    => $idUser,
-                    ]);
-                }
-            }
+            //         Ntubaku::create([
+            //             'ntu'        => $ntuValue,
+            //             'id_intake'  => $request->id_intake[$key],
+            //             'id_ipa'     => $idIpa,
+            //             'id_user'    => $idUser,
+            //         ]);
+            //     }
+            // }
 
         });
 
