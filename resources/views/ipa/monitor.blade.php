@@ -441,7 +441,7 @@
 
 
                                 
-                    </div>
+                              </div>
                 </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-6 mb-3">
@@ -626,8 +626,11 @@
                                                       <tr>
                                                           <input type="hidden" value="3" name="id_flow[1]">
                                                            <td>1 ACP</td>
+                                                           {{-- FLOW --}}
                                                           <td><input type="number" name="flow[3]"   class="form-control form-control-sm text-center" step="any" value="150.2" placeholder="contoh: 40.7"></td>
+                                                          {{-- TOTALIZE --}}
                                                           <td><input type="number" value="98765443" name="total[3]"     class="form-control form-control-sm text-center"></td>
+                                                          {{-- MANO --}}
                                                           <input type="hidden" value="1" name="id_mano[1]">
                                                           <td><input type="number" value="3.10" name="mano[1]" class="form-control form-control-sm text-center"></td>
                                                       </tr>

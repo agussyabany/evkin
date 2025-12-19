@@ -7,6 +7,8 @@ use App\Models\Ipa\Amper;
 use App\Models\Ipa\Durasi;
 use App\Models\Ipa\Flow;
 use App\Models\Ipa\Frekuansi;
+use App\Models\Ipa\Level;
+use App\Models\Ipa\Mano;
 use App\Models\Ipa\Ntubaku;
 use App\Models\Ipa\status;
 use App\Models\Ipa\Volt;
@@ -106,6 +108,46 @@ class IpaController extends Controller
                         'id_flow'   => $key,
                         'id_ipa'    => $idIpa,
                         'id_user'   => $idUser,
+                    ]);
+                }
+            }
+
+             /* =====================================================
+             |  MANO METER
+             =====================================================*/
+            if ($request->has('mano') && $request->has('id_mano')) {
+
+                foreach ($request->mano as $key => $manoValue) {
+
+                    if (is_null($manoValue)) {
+                        continue;
+                    }
+
+                    Mano::create([
+                        'ntu'        => $manoValue,
+                        'id_mano'  => $request->id_mano[$key],
+                        'id_ipa'     => $idIpa,
+                        'id_user'    => $idUser,
+                    ]);
+                }
+            }
+
+            /* =====================================================
+             |  RESERVAOR 
+             =====================================================*/
+            if ($request->has('resv') && $request->has('id_resv')) {
+
+                foreach ($request->resv as $key => $resvValue) {
+
+                    if (is_null($resvValue)) {
+                        continue;
+                    }
+
+                    Level::create([
+                        'ntu'        => $manoValue,
+                        'id_mano'  => $request->id_mano[$key],
+                        'id_ipa'     => $idIpa,
+                        'id_user'    => $idUser,
                     ]);
                 }
             }
