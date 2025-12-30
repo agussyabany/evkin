@@ -8,6 +8,7 @@ use App\Models\Ipa\Kimia\Permintaan;
 use App\Models\Ipa\Kimia\PermintaanDetail;
 use App\Models\Ipa\Kimia\PermintaanLog;
 use App\Models\Ipa\Kimia\StokLog;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -185,4 +186,41 @@ public function kirim(Request $request, $id)
         'message' => 'Barang Siap dikirim'
     ]);
 }
+
+            public function suratJalan($id)
+{
+    $permintaan = Permintaan::with([
+        'details.bahan.satuan',
+        'ipa',
+        'user',
+        'logs.user',
+        'logs.statusRelasi'
+    ])->findOrFail($id);
+
+    // Ambil penandatangan dari LOG
+    $asmenIpa = $permintaan->logs
+        ->where('status', 2) // DISSETUJUI ASMEN IPA
+        ->last();
+
+    $asmenGudang = $permintaan->logs
+        ->where('status', 3) // DISSETUJUI ASMEN GUDANG
+        ->last();
+
+    $petugasGudang = $permintaan->logs
+        ->whereIn('status', [4,5]) // DIMUAT / DIKIRIM
+        ->last();
+
+    $pdf = Pdf::loadView('gudang.surat_jalan', [
+        'permintaan'     => $permintaan,
+        'asmenIpa'       => $asmenIpa,
+        'asmenGudang'    => $asmenGudang,
+        'petugasGudang'  => $petugasGudang,
+    ])->setPaper('A4', 'portrait');
+
+    return $pdf->stream(
+        'Surat-Jalan-'.$permintaan->no_permintaan.'.pdf'
+    );
+}
+
+
 }

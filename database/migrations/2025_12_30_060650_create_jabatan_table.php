@@ -11,7 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::rename('ipa_trx_masuks', 'gudang_ipatrx_masuk');
+        Schema::create('jabatan', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_jabatan')->nullable(true);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::rename('gudang_ipatrx_masuk','ipa_trx_masuks');
+        Schema::dropIfExists('jabatan');
     }
 };

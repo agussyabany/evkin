@@ -316,6 +316,7 @@ $(document).on('click', '.btn-info-minta', function () {
                         : 0;
 
                     $('.th-gudang').removeClass('d-none');
+                    
 
                     // =============================
                     // 🔥 JIKA STATUS BUKAN(SELAIN) 3(SUDAH DISETUJUI ASMEN GUDANG) MAKA BIDANG DETAIL NORMAL
@@ -335,6 +336,8 @@ $(document).on('click', '.btn-info-minta', function () {
                             ${stokGudang}
                         </td>
                     `;
+
+                    $('#btn-submit-kirim').prop('disabled', true);  
                     
                 } else {
                      // =============================
@@ -411,6 +414,8 @@ $(document).on('click', '.btn-info-minta', function () {
                         <td class="text-center text-info font-weight-bold">${item.real}
                         </td>
                     `;
+
+                    $('#btn-submit-kirim').remove();
                 }
 
                 
@@ -509,6 +514,11 @@ $.ajax({
     },
     success: function (res) {
         alert(res.message);
+
+        window.open(
+            '/permintaan/' + currentPermintaanId + '/surat-jalan',
+            '_blank'
+        );
         location.reload();
     }
 });

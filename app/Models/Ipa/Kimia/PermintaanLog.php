@@ -3,6 +3,7 @@
 namespace App\Models\Ipa\Kimia;
 
 use App\Models\Ipa;
+use App\Models\Ipa\Jabatan;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class PermintaanLog extends Model
 {
     use HasFactory;
-     protected $table = 'gudang_permintaan_log';
+    protected $table = 'gudang_permintaan_log';
     protected $fillable = [
         'permintaan_id',
         'status',
@@ -42,5 +43,10 @@ class PermintaanLog extends Model
     public function ipa()
     {
         return $this->belongsTo(Ipa::class, 'id_ipa');
+    }
+
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class, 'id_jabatan');
     }
 }

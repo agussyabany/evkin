@@ -46,4 +46,6 @@ class Permintaan extends Model
     {
         return $this->belongsTo(Ipa::class, 'id_ipa');
     }
+
+
 }

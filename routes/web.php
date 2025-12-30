@@ -221,6 +221,9 @@ Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
 
     Route::post('/permintaan/{id}/kirim', [PermintaanController::class, 'kirim']);
 
+    Route::get('/permintaan/{id}/surat-jalan',[PermintaanController::class, 'suratJalan'])->name('permintaan.suratjalan');
+
+
 
 
 });
