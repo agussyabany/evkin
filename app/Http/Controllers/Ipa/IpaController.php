@@ -12,6 +12,8 @@ use App\Models\Ipa\Mano;
 use App\Models\Ipa\Ntubaku;
 use App\Models\Ipa\status;
 use App\Models\Ipa\Volt;
+use App\Models\Ipa\Lumpur;
+use App\Models\Ipa\Cucifilter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -124,7 +126,7 @@ class IpaController extends Controller
                     }
 
                     Mano::create([
-                        'ntu'        => $manoValue,
+                        'mano'        => $manoValue,
                         'id_mano'  => $request->id_mano[$key],
                         'id_ipa'     => $idIpa,
                         'id_user'    => $idUser,
@@ -144,13 +146,33 @@ class IpaController extends Controller
                     }
 
                     Level::create([
-                        'ntu'        => $manoValue,
-                        'id_mano'  => $request->id_mano[$key],
+                        'lvl'        => $resvValue,
+                        'id_resv'  => $request->id_resv[$key],
                         'id_ipa'     => $idIpa,
                         'id_user'    => $idUser,
                     ]);
                 }
             }
+
+            // ================= BUANG LUMPUR =================
+                if ($request->filled('menit_lumpur')) {
+                    Lumpur::create([
+                        'menit'   => $request->menit_lumpur,
+                        'ipa_lumpur'  => $request->ipa_lumpur,
+                        'id_ipa' =>$idIpa,
+                        'user' => $idUser,
+                    ]);
+                }
+
+                // ================= CUCI FILTER =================
+                if ($request->filled('menit_cuci')) {
+                    Cucifilter::create([
+                        'menit'     => $request->menit_cuci,
+                        'id_filter' => $request->atFilter,
+                        'id_ipa'    => $idIpa,
+                        'user'   => $idUser,
+                    ]);
+                }
 
             /* =====================================================
              |  NTU (BERDASARKAN INTAKE)

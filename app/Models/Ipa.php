@@ -17,4 +17,9 @@ class Ipa extends Model
         'jalur',
         'reservoar'
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'ipa');
+    }
 }

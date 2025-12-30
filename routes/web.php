@@ -15,7 +15,13 @@ use App\Http\Controllers\Dashboard\MobileController;
 use App\Http\Controllers\Dashboard\PelayananController as DashboardPelayananController;
 use App\Http\Controllers\Dashboard\SdmController as DashboardSdmController;
 use App\Http\Controllers\Evkin\EvkinController;
+use App\Http\Controllers\Gudang\Gudangcontroller;
+use App\Http\Controllers\Gudang\GudangMasukController;
+use App\Http\Controllers\Gudang\LaporanMasukController;
 use App\Http\Controllers\Ipa\IpaController;
+use App\Http\Controllers\Ipa\Kimia\ApprovalController;
+use App\Http\Controllers\Ipa\Kimia\PermintaanController;
+use App\Http\Controllers\Ipa\KimiaIpaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Models\Evkin\Pelayanan;
@@ -188,15 +194,52 @@ Route::middleware('auth','verified','role:agus')->group(function () {
     Route::post('save', [UserController::class, 'store']);
 });
 
-Route::middleware('auth','verified','role:ipa|agus')->group(function () {
+Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
     Route::get('/ipa', function () {
         return redirect('/dataIpa');
     });
     Route::get('dataIpa', [IpaController::class, 'index']);
-    Route::post('save', [IpaController::class, 'store']);
+    //Route::post('save', [IpaController::class, 'store']);
+    Route::get('kimiaIpa', [KimiaIpaController::class, 'index']);
+
+    Route::get('/stok', [PermintaanController::class, 'index']);
+    Route::post('/permintaan/cart/add', [PermintaanController::class, 'addCart']);
+    Route::put('/permintaan/cart/update', [PermintaanController::class, 'updateCart']);
+    Route::delete('/permintaan/cart/delete', [PermintaanController::class, 'deleteCart']);
+    Route::get('/permintaan/draft', [PermintaanController::class, 'getDraft']);
+
+    Route::delete('/permintaan/draft/{id}', [PermintaanController::class, 'destroyDraft']);
+
+
+    // submit permintaan
+    Route::post('/permintaan/submit', [PermintaanController::class, 'submit']);
+
+    Route::get('/dataMinta', [ApprovalController::class, 'index']);
+    Route::get('/permintaan/detail/{id}',[ApprovalController::class, 'detail']);
+
+    Route::post('/permintaan/{id}/approve',[ApprovalController::class, 'approve'])->middleware(['auth']);
+
+    Route::post('/permintaan/{id}/kirim', [PermintaanController::class, 'kirim']);
+
+
+
 });
 
 
+Route::middleware('auth','verified','role:agus|gudang')->group(function () {
+    Route::get('/', function () {
+        return redirect('/gudang');
+    });
+    Route::get('gudang', [Gudangcontroller::class, 'index']);
+    Route::post('/gudang-masuk/add-item', [GudangMasukController::class, 'addItem']);
+    Route::delete('/gudang-masuk/item/{id}', [GudangMasukController::class, 'deleteItem']);
+    Route::post('/gudang-masuk/final/{id}', [GudangMasukController::class, 'finalisasi']);
+    Route::get('/gudang-masuk/no-transaksi', [GudangMasukController::class, 'noTransaksi']);
+    Route::delete('/gudang-masuk/cancel/{id}', [GudangMasukController::class, 'cancel']);
+
+    Route::get('masuk', [LaporanMasukController::class, 'index']);
+    Route::get('/gudang-masuk/detail/{id}',[LaporanMasukController::class, 'detail']);
+});
 
 
 

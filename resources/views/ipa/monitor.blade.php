@@ -21,7 +21,7 @@
   <br><br>
 
   <fieldset class="border border-primary rounded">
-    <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>ASPEK KEUANGAN</h6></legend>
+    <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>INTALASI PENGOLAHAN AIR</h6></legend>
 
 
 </fieldset><br>
@@ -530,10 +530,10 @@
                                                   <tbody>
                                                       <tr>
                                                           <td class="text-center">1</td>
-                                                          <td><input type="number" name="pompa[9][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.5" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[9][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.5" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[9][volt]"     class="form-control form-control-sm text-center" step="any" value="220.5" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="40" name="pompa[9][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="pompa[9][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.9" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[9][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.9" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[9][volt]"     class="form-control form-control-sm text-center" step="any" value="220.9" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="9" name="pompa[9][durasi]"   class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                   </tbody>
                                               </table>
@@ -554,10 +554,10 @@
                                                   <tbody>
                                                       <tr>
                                                           <td class="text-center">2</td>
-                                                          <td><input type="number" name="pompa[10][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.6" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[10][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.6" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="220.6" name="pompa[10][volt]"     class="form-control form-control-sm text-center" step="any" value="220" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="34" name="pompa[10][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="pompa[10][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.10" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[10][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.10" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="220.6" name="pompa[10][volt]"     class="form-control form-control-sm text-center" step="any" value="220.10" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="10" name="pompa[10][durasi]"   class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                   </tbody>
                                               </table>
@@ -578,10 +578,10 @@
                                                   <tbody>
                                                       <tr>
                                                           <td class="text-center">3</td>
-                                                          <td><input type="number" name="pompa[11][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.7" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[11][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.7" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[11][volt]"     class="form-control form-control-sm text-center" step="any" value="220.7" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="90" name="pompa[11][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="pompa[11][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.11" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[11][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.11" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[11][volt]"     class="form-control form-control-sm text-center" step="any" value="220.11" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="11" name="pompa[11][durasi]"   class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                   </tbody>
                                               </table>
@@ -602,10 +602,10 @@
                                                   <tbody>
                                                       <tr>
                                                           <td class="text-center">4</td>
-                                                          <td><input type="number" name="pompa[12][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.8" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[12][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.8" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="220.8" name="pompa[12][volt]"     class="form-control form-control-sm text-center" step="any" value="220." placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="90" name="pompa[12][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="pompa[12][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.12" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[12][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.12" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="220.12" name="pompa[12][volt]"     class="form-control form-control-sm text-center" step="any" value="220." placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="12" name="pompa[12][durasi]"   class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                   </tbody>
                                               </table>
@@ -627,20 +627,20 @@
                                                           <input type="hidden" value="3" name="id_flow[1]">
                                                            <td>1 ACP</td>
                                                            {{-- FLOW --}}
-                                                          <td><input type="number" name="flow[3]"   class="form-control form-control-sm text-center" step="any" value="150.2" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="flow[3]"   class="form-control form-control-sm text-center" step="any" value="150.3" placeholder="contoh: 40.7"></td>
                                                           {{-- TOTALIZE --}}
-                                                          <td><input type="number" value="98765443" name="total[3]"     class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" value="33333333" name="total[3]"     class="form-control form-control-sm text-center"></td>
                                                           {{-- MANO --}}
                                                           <input type="hidden" value="1" name="id_mano[1]">
-                                                          <td><input type="number" value="3.10" name="mano[1]" class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" value="3.1" name="mano[1]" class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                       <tr>
                                                           <input type="hidden" value="4" name="id_flow[2]">
                                                            <td>2 GRP</td>
-                                                          <td><input type="number" name="flow[4]"   class="form-control form-control-sm text-center" step="any" value="150.2" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="98765443" name="total[4]"     class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="flow[4]"   class="form-control form-control-sm text-center" step="any" value="150.4" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="44444444" name="total[4]"     class="form-control form-control-sm text-center"></td>
                                                           <input type="hidden" value="2" name="id_mano[2]">
-                                                          <td><input type="number" value="3.20" name="mano[2]" class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" value="3.2" name="mano[2]" class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                   </tbody>
                                               </table>
@@ -649,7 +649,7 @@
                                                     <span class="input-group-text">Level Reservoar</span>
                                                 </div>
                                                 <input type="hidden" value="1" name="id_resv[1]">
-                                                <input name="resv[1]" type="number" step="any" value="5.2" class="form-control" placeholder="Username">
+                                                <input name="resv[1]" type="number" step="any" value="5.1" class="form-control" placeholder="Username">
                                             </div>
                                           </div>
                                         </div>
@@ -668,7 +668,7 @@
 
                                               <!-- Pompa 1 RESERVOAR 2 -->
                                               <div class="form-check form-check-inline">
-                                                  <input type="hidden" name="pompa[13][id_pompa]" value="9">
+                                                  <input type="hidden" name="pompa[13][id_pompa]" value="13">
                                                   <input type="hidden" name="pompa[13][status]" value="0">
 
                                                   <input class="form-check-input cek-pompa"
@@ -770,10 +770,10 @@
                                                   <tbody>
                                                       <tr>
                                                           <td class="text-center">1</td>
-                                                          <td><input type="number" name="pompa[13][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.5" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[13][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.5" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[13][volt]"     class="form-control form-control-sm text-center" step="any" value="220.5" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="40" name="pompa[13][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="pompa[13][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.13" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[13][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.13" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[13][volt]"     class="form-control form-control-sm text-center" step="any" value="220.13" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="13" name="pompa[13][durasi]"   class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                   </tbody>
                                               </table>
@@ -794,10 +794,10 @@
                                                   <tbody>
                                                       <tr>
                                                           <td class="text-center">2</td>
-                                                          <td><input type="number" name="pompa[14][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.6" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[14][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.6" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="220.6" name="pompa[14][volt]"     class="form-control form-control-sm text-center" step="any" value="220" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="34" name="pompa[14][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="pompa[14][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.14" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[14][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.14" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="220.6" name="pompa[14][volt]"     class="form-control form-control-sm text-center" step="any" value="220.14" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="14" name="pompa[14][durasi]"   class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                   </tbody>
                                               </table>
@@ -818,10 +818,10 @@
                                                   <tbody>
                                                       <tr>
                                                           <td class="text-center">3</td>
-                                                          <td><input type="number" name="pompa[15][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.7" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[15][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.7" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[15][volt]"     class="form-control form-control-sm text-center" step="any" value="220.7" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="90" name="pompa[15][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="pompa[15][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.15" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[15][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.15" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[15][volt]"     class="form-control form-control-sm text-center" step="any" value="220.15" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="15" name="pompa[15][durasi]"   class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                   </tbody>
                                               </table>
@@ -842,10 +842,10 @@
                                                   <tbody>
                                                       <tr>
                                                           <td class="text-center">4</td>
-                                                          <td><input type="number" name="pompa[16][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.8" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[16][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.8" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="220.8" name="pompa[16][volt]"     class="form-control form-control-sm text-center" step="any" value="220." placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="90" name="pompa[16][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="pompa[16][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.16" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[16][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.16" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="220.16" name="pompa[16][volt]"     class="form-control form-control-sm text-center" step="any" value="220." placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="16" name="pompa[16][durasi]"   class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                   </tbody>
                                               </table>
@@ -865,10 +865,10 @@
                                                   <tbody>
                                                       <tr>
                                                           <td class="text-center">5</td>
-                                                          <td><input type="number" name="pompa[17][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.8" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[17][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.8" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="220.8" name="pompa[17][volt]"     class="form-control form-control-sm text-center" step="any" value="220." placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="90" name="pompa[17][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="pompa[17][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.17" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[17][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.17" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="220.17" name="pompa[17][volt]"     class="form-control form-control-sm text-center" step="any" value="220." placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="17" name="pompa[17][durasi]"   class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                   </tbody>
                                               </table>
@@ -888,10 +888,10 @@
                                                   <tbody>
                                                       <tr>
                                                           <td class="text-center">6</td>
-                                                          <td><input type="number" name="pompa[18][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.8" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[18][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.8" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="220.8" name="pompa[18][volt]"     class="form-control form-control-sm text-center" step="any" value="220." placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="90" name="pompa[18][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="pompa[18][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.18" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[18][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.18" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="220.18" name="pompa[18][volt]"     class="form-control form-control-sm text-center" step="any" value="220.18" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="18" name="pompa[18][durasi]"   class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                   </tbody>
                                               </table>
@@ -912,26 +912,26 @@
                                                       <tr>
                                                           <input type="hidden" value="5" name="id_flow[3]">
                                                            <td>1 KOREM</td>
-                                                          <td><input type="number" name="flow[5]"   class="form-control form-control-sm text-center" step="any" value="150.2" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="98765443" name="total[5]"     class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="flow[5]"   class="form-control form-control-sm text-center" step="any" value="150.5" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="55555555" name="total[5]"     class="form-control form-control-sm text-center"></td>
                                                           <input type="hidden" value="3" name="id_mano[3]">
-                                                          <td><input type="number" value="3.10" name="mano[3]" class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" value="3.3" name="mano[3]" class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                       <tr>
                                                           <input type="hidden" value="6" name="id_flow[4]">
                                                            <td>2 AWS</td>
-                                                          <td><input type="number" name="flow[6]"   class="form-control form-control-sm text-center" step="any" value="150.2" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="98765443" name="total[6]"     class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="flow[6]"   class="form-control form-control-sm text-center" step="any" value="150.6" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="66666666" name="total[6]"     class="form-control form-control-sm text-center"></td>
                                                           <input type="hidden" value="4" name="id_mano[4]">
-                                                          <td><input type="number" value="3.20" name="mano[4]" class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" value="3.40" name="mano[4]" class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                       <tr>
                                                           <input type="hidden" value="7" name="id_flow[5]">
                                                            <td>3 K.GADING</td>
-                                                          <td><input type="number" name="flow[7]"   class="form-control form-control-sm text-center" step="any" value="150.2" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="98765443" name="total[7]"     class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="flow[7]"   class="form-control form-control-sm text-center" step="any" value="150.7" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="77777777" name="total[7]"     class="form-control form-control-sm text-center"></td>
                                                           <input type="hidden" value="5" name="id_mano[5]">
-                                                          <td><input type="number" value="3.20" name="mano[5]" class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" value="3.50" name="mano[5]" class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                   </tbody>
                                               </table>
@@ -956,7 +956,7 @@
                                           <div class="form-group">
                                               <label>Pilih Pompa</label><br>
 
-                                              <!-- Pompa 1 RESERVOAR 2 -->
+                                              <!-- Pompa 1 RESERVOAR 3 -->
                                               <div class="form-check form-check-inline">
                                                   <input type="hidden" name="pompa[19][id_pompa]" value="19">
                                                   <input type="hidden" name="pompa[19][status]" value="0">
@@ -971,7 +971,7 @@
                                                   <label class="form-check-label" for="cek_pompa19">Pompa 1</label>
                                               </div>
 
-                                              <!-- Pompa 2 RESERVAOR 1 -->
+                                              <!-- Pompa 2 RESERVAOR 3 -->
                                               <div class="form-check form-check-inline">
                                                   <input type="hidden" name="pompa[20][id_pompa]" value="20">
                                                   <input type="hidden" name="pompa[20][status]" value="0">
@@ -986,7 +986,7 @@
                                                   <label class="form-check-label" for="cek_pompa20">Pompa 2</label>
                                               </div>
 
-                                              <!-- Pompa 3 RESERVAOR 1 -->
+                                              <!-- Pompa 3 RESERVAOR 3 -->
                                               <div class="form-check form-check-inline">
                                                   <input type="hidden" name="pompa[21][id_pompa]" value="21">
                                                   <input type="hidden" name="pompa[21][status]" value="0">
@@ -1004,7 +1004,7 @@
                                               
                                           </div>
 
-                                          <!-- ================= TABLE POMPA 1 RESERVOAR 1 ================= -->
+                                          <!-- ================= TABLE POMPA 1 RESERVOAR 3 ================= -->
                                           <div class="table-responsive pompa-table" id="pompa19" style="display:none;">
                                               <table class="table table-bordered table-striped table-sm">
                                                   <thead class="thead-dark text-center">
@@ -1019,16 +1019,16 @@
                                                   <tbody>
                                                       <tr>
                                                           <td class="text-center">1</td>
-                                                          <td><input type="number" name="pompa[19][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.5" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[19][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.5" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[19][volt]"     class="form-control form-control-sm text-center" step="any" value="220.5" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="40" name="pompa[19][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="pompa[19][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.19" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[19][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.19" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[19][volt]"     class="form-control form-control-sm text-center" step="any" value="220.19" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="19" name="pompa[19][durasi]"   class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                   </tbody>
                                               </table>
                                           </div>
 
-                                          <!-- ================= TABLE POMPA 2 RESERVOAR 1 ================= -->
+                                          <!-- ================= TABLE POMPA 2 RESERVOAR 3 ================= -->
                                           <div class="table-responsive pompa-table" id="pompa20" style="display:none;">
                                               <table class="table table-bordered table-striped table-sm">
                                                   <thead class="thead-dark text-center">
@@ -1043,16 +1043,16 @@
                                                   <tbody>
                                                       <tr>
                                                           <td class="text-center">2</td>
-                                                          <td><input type="number" name="pompa[20][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.6" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[20][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.6" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="220.6" name="pompa[20][volt]"     class="form-control form-control-sm text-center" step="any" value="220" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="34" name="pompa[20][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="pompa[20][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.20" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[20][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.20" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="220.6" name="pompa[20][volt]"     class="form-control form-control-sm text-center" step="any" value="220.20" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="20" name="pompa[20][durasi]"   class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                   </tbody>
                                               </table>
                                           </div>
 
-                                          <!-- ================= TABLE POMPA 3 RESEVOAR 1 ================= -->
+                                          <!-- ================= TABLE POMPA 3 RESEVOAR 3 ================= -->
                                           <div class="table-responsive pompa-table" id="pompa21" style="display:none;">
                                               <table class="table table-bordered table-striped table-sm">
                                                   <thead class="thead-dark text-center">
@@ -1067,10 +1067,10 @@
                                                   <tbody>
                                                       <tr>
                                                           <td class="text-center">3</td>
-                                                          <td><input type="number" name="pompa[21][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.7" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[21][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.7" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" name="pompa[21][volt]"     class="form-control form-control-sm text-center" step="any" value="220.7" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="90" name="pompa[21][durasi]"   class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="pompa[21][frekuensi]" class="form-control form-control-sm text-center" step="any" value="40.21" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[21][ampere]"   class="form-control form-control-sm text-center" step="any" value="6.21" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" name="pompa[21][volt]"     class="form-control form-control-sm text-center" step="any" value="220.21" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="21" name="pompa[21][durasi]"   class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                   </tbody>
                                               </table>
@@ -1093,10 +1093,10 @@
                                                       <tr>
                                                           <input type="hidden" value="8" name="id_flow[6]">
                                                            <td>1 SEGIRI</td>
-                                                          <td><input type="number" name="flow[3]"   class="form-control form-control-sm text-center" step="any" value="150.2" placeholder="contoh: 40.7"></td>
-                                                          <td><input type="number" value="98765443" name="total[3]"     class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" name="flow[8]"   class="form-control form-control-sm text-center" step="any" value="150.8" placeholder="contoh: 40.7"></td>
+                                                          <td><input type="number" value="88888888" name="total[8]"     class="form-control form-control-sm text-center"></td>
                                                           <input type="hidden" value="6" name="id_mano[6]">
-                                                          <td><input type="number" value="3.10" name="mano[6]" class="form-control form-control-sm text-center"></td>
+                                                          <td><input type="number" value="3.6" name="mano[6]" class="form-control form-control-sm text-center"></td>
                                                       </tr>
                                                       
                                                   </tbody>
@@ -1105,8 +1105,8 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">Level Reservoar</span>
                                                 </div>
-                                                <input type="hidden" value="1" name="id_resv[3]">
-                                                <input name="resv[3]" type="number" step="any" value="5.2" class="form-control" placeholder="Username">
+                                                <input type="hidden" value="3" name="id_resv[3]">
+                                                <input name="resv[3]" type="number" step="any" value="3.3" class="form-control" placeholder="Username">
                                             </div>
                                           </div>
                                         </div>
@@ -1125,18 +1125,16 @@
                                                     <span class="input-group-text">Buang Lumpur</span>
                                                 </div>
                                                 
-                                                <input name="resv[3]" type="number" step="any" value="5.2" class="form-control" placeholder="Username">
+                                                <input name="menit_lumpur" type="number" step="any" value="60" class="form-control" placeholder="Username">
                                             </div>
                                             
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <select class="form-control">
-                                                    <option>option 1</option>
-                                                    <option>option 2</option>
-                                                    <option>option 3</option>
-                                                    <option>option 4</option>
-                                                    <option>option 5</option>
+                                                    <select name="ipa_lumpur" class="form-control">
+                                                        <option value="1">IPA 1</option>
+                                                        <option value="2">IPA 2</option>
+                                                        <option value="3">IPA 3</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -1148,18 +1146,18 @@
                                                     <span class="input-group-text">Cuci Filter</span>
                                                 </div>
                                                 
-                                                <input name="resv[3]" type="number" step="any" value="5.2" class="form-control" placeholder="Username">
+                                                <input name="menit_cuci" type="number" step="any" value="70" class="form-control" placeholder="Username">
                                             </div>
                                             
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <select class="form-control">
-                                                    <option>option 1</option>
-                                                    <option>option 2</option>
-                                                    <option>option 3</option>
-                                                    <option>option 4</option>
-                                                    <option>option 5</option>
+                                                    <select name="atFilter" class="form-control">
+                                                        <option value="1">Filter 1</option>
+                                                        <option value="2">Filter 2</option>
+                                                        <option value="3">Filter 3</option>
+                                                        <option value="4">Filter 4</option>
+                                                        <option value="5">Filter 5</option>
                                                     </select>
                                                 </div>
                                             </div>

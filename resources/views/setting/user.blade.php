@@ -113,7 +113,7 @@
                                 <option value="2">Manajer</option>
                         </select>
                         <label>Penempatan</label>
-                         <select name="role" class="form-control" required>
+                         <select name="ipa" class="form-control" required>
                             @foreach($ipa as $ipas)
                                 <option value="{{ $ipas->id }}">{{ $ipas->nama_ipa }}</option>
                             @endforeach
