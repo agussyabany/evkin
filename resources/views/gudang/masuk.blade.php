@@ -123,9 +123,9 @@
                 </fieldset><br>
               </div>
             <div class="modal-footer">
-                <div class="float-end">
+                {{-- <div class="float-end">
                     <button class="btn btn-primary" id="btnFinal">SUBMIT</button>
-                </div>
+                </div> --}}
                 
             </div>
           <!-- /.modal-content -->

@@ -147,6 +147,14 @@
     border-color: #dc3545;
 }
 
+
+.table-head-white th {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-weight: 600;
+}
+</style>
+
 </style>
 
 

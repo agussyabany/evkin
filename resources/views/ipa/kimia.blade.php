@@ -13,11 +13,11 @@
   </div>
   <!-- /.content-header -->
   <div class="content">
-    <div class="float-right">
+    {{-- <div class="float-right">
       @if (Auth::user()->hasAnyRole(['ipa','agus']))
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_ipa" id="tambah_ipa">TAMBAH</button>
       @endif
-    </div>
+    </div> --}}
   <br><br>
 
  {{-- ===================== TABEL STOK IPA ===================== --}}
@@ -35,7 +35,11 @@
                     <th>Stok</th>
                     <th>Satuan</th>
                     <th>Total Kg</th>
+                    @role(['agus','ipa'])
+                          @if(Auth::user()->jabatan == 1)
                     <th>Tambah</th>
+                    @endif
+                    @endrole
                 </tr>
             </thead>
             <tbody>
@@ -48,16 +52,20 @@
                     <td class="text-center">
                         {{ $item->stok * $item->bahan->ukuran }}
                     </td>
-                    <td class="text-center">
-                      <button class="btn btn-outline-success btn-sm btn-add"
-                        data-id="{{ $item->bahan->id }}"
-                        data-nama="{{ $item->bahan->nama_bahan }}"
-                        data-satuan="{{ $item->bahan->satuan->nama_satuan }}"
-                        data-ukuran="{{ $item->bahan->ukuran }}"
-                        data-stok="{{ $item->stok }}">
-                        <i class="fa fa-plus"></i>
-                    </button>
-                    </td>
+                     @role(['agus','ipa'])
+                          @if(Auth::user()->jabatan == 1)
+                            <td class="text-center">
+                                <button class="btn btn-outline-success btn-sm btn-add"
+                                    data-id="{{ $item->bahan->id }}"
+                                    data-nama="{{ $item->bahan->nama_bahan }}"
+                                    data-satuan="{{ $item->bahan->satuan->nama_satuan }}"
+                                    data-ukuran="{{ $item->bahan->ukuran }}"
+                                    data-stok="{{ $item->stok }}">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </td>
+                            @endif
+                    @endrole
                 </tr>
                 @endforeach
             </tbody>

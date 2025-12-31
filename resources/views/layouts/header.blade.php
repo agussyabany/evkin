@@ -104,7 +104,7 @@
               <a href="#" class="nav-link active">
                 
                 <p>
-                 CENDANA
+                 IPA {{Auth::user()->ipaRelasi->nama_ipa}}
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>

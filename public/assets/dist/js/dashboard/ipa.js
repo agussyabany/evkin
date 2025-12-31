@@ -152,7 +152,7 @@ $(document).on('click', '.btn-remove', function () {
             
 });
 //SUBMIT DRAFT
-            $('#btn-kirim').on('click', function () {
+        $('#btn-kirim').on('click', function () {
 
             if (!noPermintaan) {
                 alert('Belum ada bahan yang diminta');
@@ -164,7 +164,8 @@ $(document).on('click', '.btn-remove', function () {
                 no_permintaan: noPermintaan
             }, function (res) {
                 alert('Permintaan berhasil diajukan');
-                location.reload();
+                // 🔥 REDIRECT KE HALAMAN DATA PERMINTAAN
+                window.location.href = '/dataMinta';
             });
         });       
 
@@ -309,6 +310,9 @@ $(document).on('click', '.btn-info-minta', function () {
 
                 let ket = item.ket;
 
+                    // =============================
+                    // 🔥 JIKA ROLE PETUGAS GUDANG
+                    // =============================
                 if (window.isGudangOperator) {
 
                     stokGudang = item.bahan.stok_gudang
@@ -396,6 +400,8 @@ $(document).on('click', '.btn-info-minta', function () {
 
                     
                     }
+
+                     $('#btn-submit-kirim').prop('disabled', false);  
                 }
 
                    

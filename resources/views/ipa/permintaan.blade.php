@@ -92,7 +92,7 @@
 
                     <div class="row">
                       <div class="col">
-                        <table class="table table-sm table-bordered">
+                        <table class="table table-sm table-bordered table-head-white">
                         <tr>
                             <th width="20%">NO</th>
                             <td id="m_no_transaksi"></td>
@@ -109,7 +109,7 @@
 
                       </div>
                       <div class="col">
-                        <table class="table table-sm table-bordered">
+                        <table class="table table-sm table-bordered table-head-white">
                         <tr>
                             <th>STATUS</th>
                             <td id="m_status"></td>
@@ -137,7 +137,7 @@
                       @role(['agus','gudang'])
                           @if(Auth::user()->jabatan == 2)
                               <tr>
-                                  <th>PERSETUJUAN ASMEN GUDANG</th>
+                                  <th>PERSETUJUAN <br> ASMAN GUDANG</th>
                                   <td>
                                    
                                       
@@ -187,7 +187,7 @@
                     <table class="table table-sm table-bordered">
                     <thead class="thead-dark text-center">
                         <tr>
-                           <table class="table table-bordered table-sm text-center">
+                           <table class="table table-bordered table-sm text-center ">
                               <thead class="bg-light">
                                   <tr>
                                       <th rowspan="2">NO</th>
