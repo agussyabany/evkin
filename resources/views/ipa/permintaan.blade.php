@@ -198,6 +198,11 @@
                                       <th rowspan="2">SATUAN</th>
                                       <th rowspan="2" class="th-gudang d-none bg-warning">Stok Gudang</th>
                                       <th rowspan="2">KET</th>
+                                      @role(['agus','ipa'])
+                                        @if(Auth::user()->jabatan == 1)
+                                          <th rowspan="2">JUMLAH DIKIRIM</th>
+                                        @endif
+                                      @endrole
                                   </tr>
                                   <tr>
                                       <th>JUMLAH</th>
@@ -220,6 +225,13 @@
                 <div class="float-end">
                     <button class="btn btn-primary" id="btn-submit-kirim">SUBMIT</button>
                 </div>
+                @role(['agus','ipa'])
+                    @if(Auth::user()->jabatan == 1)
+                      <div class="float-end ">
+                          <button class="btn btn-primary" id="btn-submit-terima-ipa">KIRIM</button>
+                      </div>
+                    @endif
+                @endrole
                 
             </div>
           <!-- /.modal-content -->
@@ -233,6 +245,10 @@
 <script>
     window.isGudangOperator = @json(
         auth()->user()->jabatan == 1 && auth()->user()->hasAnyRole(['agus','gudang'])
+    );
+
+     window.isIpaOperator = @json(
+        auth()->user()->jabatan == 1 && auth()->user()->hasAnyRole(['agus','ipa'])
     );
 </script>
 @endsection

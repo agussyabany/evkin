@@ -22,4 +22,12 @@ class PermintaanDetail extends Model
     {
         return $this->belongsTo(Bahan::class, 'id_bahan');
     }
+
+    public function keterangans()
+        {
+            return $this->hasMany(
+                GudangPermintaanKeterangan::class,
+                'permintaan_detail_id'
+            );
+        }
 }

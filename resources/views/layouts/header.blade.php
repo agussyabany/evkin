@@ -235,7 +235,7 @@
           @endif
 
           <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/ipaGudang" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>Stok IPA</p>
               </a>

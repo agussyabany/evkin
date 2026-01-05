@@ -58,7 +58,7 @@ class ApprovalController extends Controller
                 'permintaan_id' => $permintaan->id,
                 'status'        => $request->status,
                 'user_id'       => auth()->id(),
-                'id_ipa'        => auth()->user()->id_ipa, // ⬅️ PENTING
+                'id_ipa'        => auth()->user()->ipa, // ⬅️ PENTING
                 'id_jabatan'    => auth()->user()->jabatan
             ]);
         });

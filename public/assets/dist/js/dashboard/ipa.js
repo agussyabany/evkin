@@ -417,18 +417,46 @@ $(document).on('click', '.btn-info-minta', function () {
                     `;
 
                     tdReal = `
-                        <td class="text-center text-info font-weight-bold">${item.real}
+                        <td class="text-center td-real" data-detail="${item.id}">
+                            <span class="real-text">${item.real}</span>
                         </td>
                     `;
 
                     $('#btn-submit-kirim').remove();
                 }
 
-                
+                if (window.isIpaOperator) {
 
-               
-                    html += `
-                    <tr data-detail-id="${item.id}" data-qty-awal="${item.qty}">
+                    if (statusId !== 4) {
+
+                        tdSelOpt = `
+                        <td class="text-center">
+                            -
+                        </td>
+                    `;
+                        
+                    }else{
+
+                        tdSelOpt = `
+                        <td class="text-center">
+                            <select class="form-control form-control-sm sel-kondisi"
+                                    data-detail="${item.id}"
+                                    data-real="${item.real}"
+                                    data-ukuran="${item.bahan.ukuran}">
+                                <option value="sesuai" selected>Sesuai</option>
+                                <option value="lebih">Lebih</option>
+                                <option value="kurang">Kurang</option>
+                            </select>
+                        </td>
+                    `;
+
+                    }
+
+                    
+                    
+                }
+                html += `
+                    <tr data-detail-id="${item.id}" data-qty-awal="${item.qty}" data-real-awal="${item.real}">
                         <td class="text-center">${i + 1}</td>
                         <td>${item.bahan.nama_bahan}</td>
                         ${tdJumlah}
@@ -443,12 +471,10 @@ $(document).on('click', '.btn-info-minta', function () {
                             </span>
                         </td>
                         ${window.isGudangOperator ? tdStokGudang : ``}
-                         ${tdKet}
+                        ${tdKet}
+                        ${window.isIpaOperator ? tdSelOpt : ``}
                     </tr>
                 `;
-
-                
-                
             });
         }
 
@@ -456,27 +482,77 @@ $(document).on('click', '.btn-info-minta', function () {
         $('#modalDetailMinta').modal('show');
     });
 
-    $(document).on('input', '.qty-adjust', function () {
+                $(document).on('input', '.qty-adjust', function () {
 
-    let qty = parseFloat($(this).val()) || 0;
-    let max = parseFloat($(this).attr('max'));
-    let ukuran = $(this).data('ukuran');
+                let qty = parseFloat($(this).val()) || 0;
+                let max = parseFloat($(this).attr('max'));
+                let ukuran = $(this).data('ukuran');
 
-    // 🔒 AMANKAN JIKA LEBIH
-    if (qty > max) {
-        qty = max;
-        $(this).val(max);
-    }
+                // 🔒 AMANKAN JIKA LEBIH
+                if (qty > max) {
+                    qty = max;
+                    $(this).val(max);
+                }
 
-    let kg = qty * ukuran;
+                let kg = qty * ukuran;
 
-    $(this)
-        .closest('tr')
-        .find('.kg-text')
-        .text(kg);
+                $(this)
+                    .closest('tr')
+                    .find('.kg-text')
+                    .text(kg);
+            });
+
+            $(document).on('change', '.sel-kondisi', function () {
+
+                        let kondisi   = $(this).val();          // sesuai | kurang | lebih
+                        let detailId  = $(this).data('detail');
+                        let realAwal  = $(this).data('real');
+                        let ukuran    = $(this).data('ukuran');
+
+                        let tdReal = $(`.td-real[data-detail="${detailId}"]`);
+                        let tdKg   = tdReal.closest('tr').find('.kg-text');
+
+                        if (kondisi === 'sesuai') {
+
+                            // 🔁 BALIK KE TEXT
+                            tdReal.html(`<span class="real-text">${realAwal}</span>`);
+                            tdKg.text(realAwal * ukuran);
+
+                        } else {
+
+                            // 🔥 JADI INPUT NUMBER
+                            tdReal.html(`
+                                <input type="number"
+                                    class="form-control form-control-sm input-real"
+                                    data-detail="${detailId}"
+                                    data-ukuran="${ukuran}"
+                                    value="${realAwal}"
+                                    min="0">
+                            `);
+                        }
+                    });
+
+                    $(document).on('input', '.input-real', function () {
+
+                        let real   = parseFloat($(this).val()) || 0;
+                        let ukuran = $(this).data('ukuran');
+
+                        let kg = real * ukuran;
+
+                        $(this)
+                            .closest('tr')
+                            .find('.kg-text')
+                            .text(kg);
+                    });
+
+
+
+
+
 });
-});
-
+                    // =============================
+                    // 🔥 KIRIM GUNDANG UTAMA
+                    // =============================
 $(document).on('click', '#btn-submit-kirim', function () {
 
     if (!currentPermintaanId) {
@@ -531,6 +607,48 @@ $.ajax({
 
 
 });
+
+                    // =============================
+                    // 🔥 KIRIM GUDANG IPA
+                    // =============================
+$('#btn-submit-terima-ipa').on('click', function () {
+
+    if (!confirm('Yakin terima barang ini?')) return;
+
+    let items = [];
+
+    $('#tblDetailMinta tr').each(function () {
+
+        let detailId = $(this).data('detail-id');
+        if (!detailId) return;
+
+        let kondisi = $(this).find('.sel-kondisi').val();
+
+        let qtyReal = $(this).find('.input-real').length
+            ? parseInt($(this).find('.input-real').val())
+            : parseInt($(this).data('real-awal'));
+
+        items.push({
+            detail_id: detailId,
+            kondisi: kondisi,
+            qty: qtyReal
+        });
+    });
+
+    $.ajax({
+        url: '/permintaan/' + currentPermintaanId + '/terima-ipa',
+        type: 'POST',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            items: items
+        },
+        success: function (res) {
+            alert(res.message);
+            location.reload();
+        }
+    });
+});
+
 
 
 })

@@ -201,6 +201,7 @@ Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
     Route::get('dataIpa', [IpaController::class, 'index']);
     //Route::post('save', [IpaController::class, 'store']);
     Route::get('kimiaIpa', [KimiaIpaController::class, 'index']);
+    Route::get('ipaGudang', [KimiaIpaController::class, 'ipaGudang']);
 
     Route::get('/stok', [PermintaanController::class, 'index']);
     Route::post('/permintaan/cart/add', [PermintaanController::class, 'addCart']);
@@ -222,6 +223,9 @@ Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
     Route::post('/permintaan/{id}/kirim', [PermintaanController::class, 'kirim']);
 
     Route::get('/permintaan/{id}/surat-jalan',[PermintaanController::class, 'suratJalan'])->name('permintaan.suratjalan');
+
+    //Terima IPA
+    Route::post('/permintaan/{id}/terima-ipa', [PermintaanController::class, 'terimaIpa']);
 
 
 

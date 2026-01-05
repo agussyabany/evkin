@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Ipa\Kimia;
 
 use App\Http\Controllers\Controller;
 use App\Models\Gudang\Stok;
+use App\Models\Gudang\StokIpa;
+use App\Models\Ipa\Kimia\GudangPermintaanKeterangan;
 use App\Models\Ipa\Kimia\Permintaan;
 use App\Models\Ipa\Kimia\PermintaanDetail;
 use App\Models\Ipa\Kimia\PermintaanLog;
@@ -135,13 +137,16 @@ public function kirim(Request $request, $id)
         foreach ($request->items as $item) {
 
             $detail = PermintaanDetail::findOrFail($item['detail_id']);
+            $qtyKirim = (int) $item['qty'];
+            $kondisi  = $item['kondisi'] ?? 'sesuai';
 
             $stokGudang = Stok::where('id_bahan', $detail->id_bahan)
                 ->lockForUpdate() // 🔒 PENTING (anti race condition)
                 ->first();
 
             $stokAwal = $stokGudang->stok;
-            $realisasi = min($item['qty'], $stokAwal);
+            // realisasi tidak boleh melebihi stok gudang
+            $realisasi = min($qtyKirim, $stokAwal);
 
             // 1️⃣ LOG STOK
             StokLog::create([
@@ -160,11 +165,22 @@ public function kirim(Request $request, $id)
 
             // 3️⃣ UPDATE DETAIL PERMINTAAN
             $detail->update([
-                'real' => $realisasi,
-                'ket' => $realisasi < $detail->qty
-                    ? 'Stok Kurang'
-                    : 'Sesuai'
+                'real' => $realisasi
             ]);
+
+            // =====================
+            // 4️⃣ LOG KETERANGAN (MUAT GUDANG)
+            // =====================
+            GudangPermintaanKeterangan::create([
+                'permintaan_detail_id' => $detail->id,
+                'tahap'   => 'muat_gudang',
+                'kondisi' => $kondisi,           // sesuai | kurang
+                'qty'     => $realisasi,
+                'user_id' => auth()->id(),
+                'sumber'  => 1                   // 1 = gudang
+            ]);
+
+            
         }
 
         // 4️⃣ UPDATE STATUS PERMINTAAN
@@ -177,7 +193,7 @@ public function kirim(Request $request, $id)
             'permintaan_id' => $permintaan->id,
             'status'        => 4,
             'user_id'       => auth()->id(),
-            'id_ipa'        => auth()->user()->id_ipa,
+            'id_ipa'        => auth()->user()->ipa,
             'id_jabatan'    => auth()->user()->jabatan
         ]);
     });
@@ -221,6 +237,116 @@ public function kirim(Request $request, $id)
         'Surat-Jalan-'.$permintaan->no_permintaan.'.pdf'
     );
 }
+
+
+public function terimaIpa(Request $request, $id)
+{
+    $request->validate([
+        'items' => 'required|array'
+    ]);
+
+    DB::transaction(function () use ($request, $id) {
+
+        $permintaan = Permintaan::with('details')->findOrFail($id);
+
+        foreach ($request->items as $item) {
+
+            $detail = PermintaanDetail::findOrFail($item['detail_id']);
+
+            $qtyTerima = (int) $item['qty'];
+            $kondisi   = $item['kondisi']; // sesuai | kurang | lebih
+
+            // ===============================
+            // 1️⃣ SIMPAN KETERANGAN PER ITEM
+            // ===============================
+            GudangPermintaanKeterangan::create([
+                'permintaan_detail_id' => $detail->id,
+                'tahap'      => 'terima_ipa',
+                'kondisi'    => $kondisi,
+                'qty'        => $qtyTerima,
+                'user_id'    => auth()->id(),
+                'sumber'     => 2
+            ]);
+
+            // ===============================
+            // 2️⃣ UPDATE REALISASI DI DETAIL
+            // ===============================
+            $detail->update([
+                'real' => $qtyTerima
+            ]);
+
+            // ===============================
+            // 3️⃣ TAMBAH STOK GUDANG IPA
+            // ===============================
+            $stokIpa = StokIpa::where('id_ipa', $permintaan->id_ipa)
+                ->where('id_bahan', $detail->id_bahan)
+                ->lockForUpdate()
+                ->first();
+
+            if ($stokIpa) {
+                // UPDATE (aman pakai stok + qty)
+                $stokIpa->increment('stok', $qtyTerima);
+            } else {
+                // INSERT (stok awal = qty diterima)
+                StokIpa::create([
+                    'id_ipa'   => $permintaan->id_ipa,
+                    'id_bahan'=> $detail->id_bahan,
+                    'stok'    => $qtyTerima
+                ]);
+            }
+
+            // ===============================
+            // 4️⃣ JIKA KONDISI = LEBIH
+            // ===============================
+            if ($kondisi === 'lebih') {
+
+                $stokGudang = Stok::where('id_bahan', $detail->id_bahan)
+                    ->lockForUpdate()
+                    ->firstOrFail();
+
+                $stokAwal = $stokGudang->stok;
+
+                // kurangi stok gudang utama
+                $stokGudang->update([
+                    'stok' => $stokAwal - $qtyTerima
+                ]);
+
+                // log stok gudang
+                StokLog::create([
+                    'id_bahan'      => $detail->id_bahan,
+                    'awal'          => $stokAwal,
+                    'keluar'        => $qtyTerima,
+                    'akhir'         => $stokAwal - $qtyTerima,
+                    'permintaan_id' => $permintaan->id,
+                    'user_id'       => auth()->id(),
+                ]);
+            }
+        }
+
+        // ===============================
+        // 5️⃣ UPDATE STATUS PERMINTAAN
+        // ===============================
+        $permintaan->update([
+            'status' => 5 // DITERIMA IPA
+        ]);
+
+        // ===============================
+        // 6️⃣ LOG STATUS PERMINTAAN
+        // ===============================
+        PermintaanLog::create([
+            'permintaan_id' => $permintaan->id,
+            'status'        => 5,
+            'user_id'       => auth()->id(),
+            'id_ipa'        => $permintaan->id_ipa,
+            'id_jabatan'    => auth()->user()->jabatan
+        ]);
+    });
+
+    return response()->json([
+        'message' => 'Penerimaan barang IPA berhasil diproses'
+    ]);
+}
+
 
 
 }
