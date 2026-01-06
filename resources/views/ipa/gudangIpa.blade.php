@@ -9,7 +9,7 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
-    <h1 class="m-0 text-center">GUDANG</h1>
+    <h1 class="m-0 text-center">GUDANG IPA {{Auth::user()->ipaRelasi->nama_ipa}}</h1>
   </div>
   <!-- /.content-header -->
   <div class="content">
@@ -117,6 +117,7 @@
                                                           <td> 
                                                             <input type="hidden" id="id_masuk">
                                                             <select name="" id="id_bahan" class="form-control form-control-sm">
+                                                              <option value="">-PILIH BAHAN-</option>
                                                                  @foreach ($bahan as $item)
                                                                     <option 
                                                                         value="{{ $item->id }}"

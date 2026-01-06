@@ -9,7 +9,7 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
-    <h1 class="m-0 text-center">GUDANG IPA ...</h1>
+    <h1 class="m-0 text-center">PERMINTAAN BAHAN KIMIA </h1>
   </div>
   <!-- /.content-header -->
   <div class="content">

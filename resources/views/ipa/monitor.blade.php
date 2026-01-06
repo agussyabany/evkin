@@ -21,7 +21,7 @@
   <br><br>
 
   <fieldset class="border border-primary rounded">
-    <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>ASPEK KEUANGAN</h6></legend>
+    <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>LOG SHEET IPA</h6></legend>
 
 
 </fieldset><br>

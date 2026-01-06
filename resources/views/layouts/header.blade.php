@@ -236,7 +236,7 @@
 
           <li class="nav-item">
               <a href="/ipaGudang" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <i class="far fa-circle nav-icon"></i>
                 <p>Stok IPA</p>
               </a>
           </li>
@@ -250,7 +250,7 @@
         @if (Auth::user()->hasAnyRole(['agus','ipa']))
         <li class="nav-item">
               <a href="/stok" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <i class="far fa-circle nav-icon"></i>
                 <p>Stok Gudang</p>
               </a>
             </li>

@@ -434,6 +434,8 @@ $(document).on('click', '.btn-info-minta', function () {
                             -
                         </td>
                     `;
+
+                    $('#btn-submit-terima-ipa').remove();
                         
                     }else{
 
