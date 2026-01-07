@@ -15,7 +15,8 @@ class PermintaanDetail extends Model
         'id_bahan',
         'qty',
         'real',
-        'ket'
+        'ket',
+        'terima'
     ];
 
     public function bahan()

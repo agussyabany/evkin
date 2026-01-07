@@ -436,6 +436,18 @@ $(document).on('click', '.btn-info-minta', function () {
                     `;
 
                     $('#btn-submit-terima-ipa').remove();
+                    tdTerima = 
+                        `
+                        <td class="text-center td-terima" data-detail="${item.id}">
+                            <span class="real-text">${item.terima}</span>
+                        </td>
+                    `;
+
+                    tdKlTerima = `
+                        <td class="text-center kg-text-terima">
+                            ${item.terima * item.bahan.ukuran}
+                        </td>
+                    `;
                         
                     }else{
 
@@ -452,10 +464,41 @@ $(document).on('click', '.btn-info-minta', function () {
                         </td>
                     `;
 
+                    tdTerima = 
+                        `
+                        <td class="text-center td-terima" data-detail="${item.id}">
+                            <span class="real-text">${item.real}</span>
+                        </td>
+                    `;
+
+                    tdKlTerima = `
+                        <td class="text-center kg-text-terima">
+                            ${item.real * item.bahan.ukuran}
+                        </td>
+                    `;
+
                     }
 
                     
+
+
+
                     
+                    
+                }else{
+
+                    tdTerima = `
+                        <td class="text-center">
+                            ${item.terima}
+                        </td>
+                    `;
+
+                    tdKlTerima = `
+                        <td class="text-center kg-text-terima">
+                            ${item.terima * item.bahan.ukuran}
+                        </td>
+                    `;
+
                 }
                 html += `
                     <tr data-detail-id="${item.id}" data-qty-awal="${item.qty}" data-real-awal="${item.real}">
@@ -467,6 +510,11 @@ $(document).on('click', '.btn-info-minta', function () {
                         <td class="text-center">
                            ${item.real * item.bahan.ukuran } 
                         </td>
+
+                        ${tdTerima}
+                        ${tdKlTerima} 
+                        
+
                         <td class="text-center">
                             <span class="kg-text">
                                ${item.bahan.satuan?.nama_satuan ?? '-'} 
@@ -511,8 +559,8 @@ $(document).on('click', '.btn-info-minta', function () {
                         let realAwal  = $(this).data('real');
                         let ukuran    = $(this).data('ukuran');
 
-                        let tdReal = $(`.td-real[data-detail="${detailId}"]`);
-                        let tdKg   = tdReal.closest('tr').find('.kg-text');
+                        let tdReal = $(`.td-terima[data-detail="${detailId}"]`);
+                        let tdKg   = tdReal.closest('tr').find('.kg-text-terima');
 
                         if (kondisi === 'sesuai') {
 
@@ -525,7 +573,7 @@ $(document).on('click', '.btn-info-minta', function () {
                             // 🔥 JADI INPUT NUMBER
                             tdReal.html(`
                                 <input type="number"
-                                    class="form-control form-control-sm input-real"
+                                    class="form-control form-control-sm input-terima"
                                     data-detail="${detailId}"
                                     data-ukuran="${ukuran}"
                                     value="${realAwal}"
@@ -534,7 +582,7 @@ $(document).on('click', '.btn-info-minta', function () {
                         }
                     });
 
-                    $(document).on('input', '.input-real', function () {
+                    $(document).on('input', '.input-terima', function () {
 
                         let real   = parseFloat($(this).val()) || 0;
                         let ukuran = $(this).data('ukuran');
@@ -543,7 +591,7 @@ $(document).on('click', '.btn-info-minta', function () {
 
                         $(this)
                             .closest('tr')
-                            .find('.kg-text')
+                            .find('.kg-text-terima')
                             .text(kg);
                     });
 
@@ -626,14 +674,14 @@ $('#btn-submit-terima-ipa').on('click', function () {
 
         let kondisi = $(this).find('.sel-kondisi').val();
 
-        let qtyReal = $(this).find('.input-real').length
-            ? parseInt($(this).find('.input-real').val())
-            : parseInt($(this).data('real-awal'));
+        let qtyTerima = $(this).find('.input-terima').length
+            ? parseInt($(this).find('.input-terima').val())
+            : parseInt($(this).find('.td-terima .real-text').text()) || 0;
 
         items.push({
             detail_id: detailId,
             kondisi: kondisi,
-            qty: qtyReal
+            qty: qtyTerima
         });
     });
 

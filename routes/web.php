@@ -226,10 +226,6 @@ Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
 
     //Terima IPA
     Route::post('/permintaan/{id}/terima-ipa', [PermintaanController::class, 'terimaIpa']);
-
-
-
-
 });
 
 

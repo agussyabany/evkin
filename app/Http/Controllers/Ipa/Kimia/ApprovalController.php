@@ -29,7 +29,7 @@ class ApprovalController extends Controller
             
             $header = Permintaan::with(['statusRelasi','ipa'])->findOrFail($id);
 
-            $detail = PermintaanDetail::with(['bahan.satuan','bahan.stokGudang'])
+            $detail = PermintaanDetail::with(['bahan.satuan','bahan.stokGudang','keterangans'])
                 ->where('permintaan_id', $id)
                 ->get();
 

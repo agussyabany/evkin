@@ -272,7 +272,7 @@ public function terimaIpa(Request $request, $id)
             // 2️⃣ UPDATE REALISASI DI DETAIL
             // ===============================
             $detail->update([
-                'real' => $qtyTerima
+                'terima' => $qtyTerima
             ]);
 
             // ===============================

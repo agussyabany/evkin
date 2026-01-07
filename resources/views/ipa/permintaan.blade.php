@@ -193,7 +193,8 @@
                                       <th rowspan="2">NO</th>
                                       <th rowspan="2">BAHAN</th>
                                       <th colspan="2" class="bg-primary">PERMINTAAN</th>
-                                      <th colspan="2" class="bg-success">REALISASI</th>
+                                      <th colspan="2" class="bg-success">DIKIRIM</th>
+                                      <th colspan="2" class="bg-info">DITERIMA</th>
                                       
                                       <th rowspan="2">SATUAN</th>
                                       <th rowspan="2" class="th-gudang d-none bg-warning">Stok Gudang</th>
@@ -205,6 +206,8 @@
                                       @endrole
                                   </tr>
                                   <tr>
+                                      <th>JUMLAH</th>
+                                      <th>KILO</th>
                                       <th>JUMLAH</th>
                                       <th>KILO</th>
                                       <th>JUMLAH</th>
