@@ -20,6 +20,7 @@ use App\Http\Controllers\Gudang\GudangMasukController;
 use App\Http\Controllers\Gudang\LaporanMasukController;
 use App\Http\Controllers\Ipa\IpaController;
 use App\Http\Controllers\Ipa\Kimia\ApprovalController;
+use App\Http\Controllers\Ipa\Kimia\IpaKeluarController;
 use App\Http\Controllers\Ipa\Kimia\PermintaanController;
 use App\Http\Controllers\Ipa\KimiaIpaController;
 use App\Http\Controllers\ProfileController;
@@ -226,6 +227,10 @@ Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
 
     //Terima IPA
     Route::post('/permintaan/{id}/terima-ipa', [PermintaanController::class, 'terimaIpa']);
+
+    Route::get('/ipa/keluar', [IpaKeluarController::class, 'index']);
+    Route::post('/ipa/keluar', [IpaKeluarController::class, 'store']);
+
 });
 
 

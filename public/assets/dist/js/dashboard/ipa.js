@@ -210,7 +210,7 @@ $(document).on('click', '.btn-info-minta', function () {
     `);
 
     $.get('/permintaan/detail/' + currentPermintaanId, function (res) {
-
+            window.detailPermintaanCache = res.detail;
         // ===============================
         // ISI IDENTITAS TRANSAKSI
         // ===============================
@@ -331,7 +331,7 @@ $(document).on('click', '.btn-info-minta', function () {
                     `;
 
                      tdReal = `
-                        <td class="text-center text-info font-weight-bold">${item.real}
+                        <td class="text-center text-success font-weight-bold">${item.real}
                         </td>
                     `;
 
@@ -368,7 +368,7 @@ $(document).on('click', '.btn-info-minta', function () {
                         </td>
                     `;
                      tdReal = `
-                        <td class="text-center text-info font-weight-bold">${item.real}
+                        <td class="text-center text-success font-weight-bold">${item.real}
                         </td>
                     `;
 
@@ -383,7 +383,7 @@ $(document).on('click', '.btn-info-minta', function () {
                     `;
 
                      tdReal = `
-                        <td class="text-center text-info font-weight-bold">${item.real}
+                        <td class="text-center text-success font-weight-bold">${item.real}
                         </td>
                     `;
 
@@ -412,12 +412,12 @@ $(document).on('click', '.btn-info-minta', function () {
                     `;
 
                     tdKet = `
-                        <td class="text-center text-info font-weight-bold">${ket}
+                        <td class="text-center text-info font-weight-bold"><button class="btn btn-sm btn-primary btn-lihat-ket" data-detail-id="${item.id}"><i class="fa fa-eye"></i></button>
                         </td>
                     `;
 
                     tdReal = `
-                        <td class="text-center td-real" data-detail="${item.id}">
+                        <td class="text-center text-success font-weight-bold td-real" data-detail="${item.id}">
                             <span class="real-text">${item.real}</span>
                         </td>
                     `;
@@ -438,13 +438,13 @@ $(document).on('click', '.btn-info-minta', function () {
                     $('#btn-submit-terima-ipa').remove();
                     tdTerima = 
                         `
-                        <td class="text-center td-terima" data-detail="${item.id}">
+                        <td class="text-center text-warning font-weight-bold td-terima" data-detail="${item.id}">
                             <span class="real-text">${item.terima}</span>
                         </td>
                     `;
 
                     tdKlTerima = `
-                        <td class="text-center kg-text-terima">
+                        <td class="text-center text-warning font-weight-bold kg-text-terima">
                             ${item.terima * item.bahan.ukuran}
                         </td>
                     `;
@@ -466,13 +466,13 @@ $(document).on('click', '.btn-info-minta', function () {
 
                     tdTerima = 
                         `
-                        <td class="text-center td-terima" data-detail="${item.id}">
+                        <td class="text-center td-terima text-warning font-weight-bold" data-detail="${item.id}">
                             <span class="real-text">${item.real}</span>
                         </td>
                     `;
 
                     tdKlTerima = `
-                        <td class="text-center kg-text-terima">
+                        <td class="text-center text-warning font-weight-bold kg-text-terima">
                             ${item.real * item.bahan.ukuran}
                         </td>
                     `;
@@ -488,13 +488,13 @@ $(document).on('click', '.btn-info-minta', function () {
                 }else{
 
                     tdTerima = `
-                        <td class="text-center">
+                        <td class="text-center text-warning font-weight-bold">
                             ${item.terima}
                         </td>
                     `;
 
                     tdKlTerima = `
-                        <td class="text-center kg-text-terima">
+                        <td class="text-center text-warning font-weight-bold kg-text-terima">
                             ${item.terima * item.bahan.ukuran}
                         </td>
                     `;
@@ -507,7 +507,7 @@ $(document).on('click', '.btn-info-minta', function () {
                         ${tdJumlah}
                         <td>${item.qty * item.bahan.ukuran }</td>
                         ${tdReal}
-                        <td class="text-center">
+                        <td class="text-center text-success font-weight-bold">
                            ${item.real * item.bahan.ukuran } 
                         </td>
 
@@ -594,6 +594,113 @@ $(document).on('click', '.btn-info-minta', function () {
                             .find('.kg-text-terima')
                             .text(kg);
                     });
+                    // =============================
+                    // 🔥 LIHAT KETERANGAN DETAIL
+                    // =============================
+                    function formatKeteranganByTahap(ket, detail) {
+                                // tahap dari kolom `sumber`
+                                // 1 = Gudang, 2 = IPA
+
+                                // =========================
+                                // GUDANG
+                                // =========================
+                                if (ket.sumber == 1) {
+                                    const selisih = detail.qty - detail.real;
+
+                                    if (selisih > 0) {
+                                        return `Kurang ${selisih}, stok gudang kurang`;
+                                    }
+
+                                    return 'Sesuai';
+                                }
+
+                                // =========================
+                                // IPA
+                                // =========================
+                                if (ket.sumber == 2) {
+                                    const selisih = ket.qty - detail.real;
+
+                                    if (selisih > 0) {
+                                        return `Lebih ${selisih}, masuk stok IPA`;
+                                    }
+
+                                    if (selisih < 0) {
+                                        return `Kurang ${Math.abs(selisih)} saat pengantaran`;
+                                    }
+
+                                    return 'Sesuai';
+                                }
+
+                                return '-';
+                            }
+
+                            function labelTahap(val) {
+                                return val == 1 ? 'Gudang' : 'IPA';
+                            }
+
+                    $(document).on('click', '.btn-lihat-ket', function () {
+
+    let detailId = $(this).data('detail-id');
+
+    let detail = window.detailPermintaanCache.find(d => d.id == detailId);
+
+    if (!detail) return;
+
+    $('#ket-nama-bahan').text(detail.bahan.nama_bahan);
+
+    let html = '';
+
+    if (!detail.keterangans || detail.keterangans.length === 0) {
+        html = `
+            <tr>
+                <td colspan="6" class="text-center text-muted">
+                    Tidak ada keterangan
+                </td>
+            </tr>
+        `;
+    } else {
+
+        $.each(detail.keterangans, function (i, ket) {
+
+            const keteranganText = formatKeteranganByTahap(ket, detail);
+
+            html += `
+                <tr>
+                    <td class="text-center">${i + 1}</td>
+
+                    <td class="text-center">
+                        ${labelTahap(ket.sumber)}
+                    </td>
+
+                    <td class="text-center">
+                        <span class="badge badge-${
+                            ket.kondisi === 'sesuai'
+                                ? 'success'
+                                : (ket.kondisi === 'lebih'
+                                    ? 'warning'
+                                    : 'danger')
+                        }">
+                            ${ket.kondisi.toUpperCase()}
+                        </span>
+                    </td>
+
+                    <td class="text-center">${ket.qty}</td>
+
+                    <td>${ket.user?.name ?? '-'}</td>
+
+                    <td>
+                        ${keteranganText}
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+    $('#tblKeterangan').html(html);
+    $('#fieldset-keterangan').removeClass('d-none');
+});
+
+
 
 
 

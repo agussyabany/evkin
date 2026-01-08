@@ -14,7 +14,7 @@
   <!-- /.content-header -->
   <div class="content">
     <div class="float-right">
-      @if (Auth::user()->hasAnyRole(['gudang','agus']))
+      @if (Auth::user()->hasAnyRole(['gudang','agus','ipa']))
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMasuk" id="tambah_ipa">TAMBAH</button>
       @endif
     </div>
@@ -74,101 +74,54 @@
         <div class="modal-dialog modal-lg ">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title"  id="judul_ipa">Input Bahan Kimia Masuk</h4>
+              <h4 class="modal-title"  id="judul_ipa">Input Bahan Kimia Keluar</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-                <fieldset class="border border-primary rounded">
-                <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>IDENTITAS TRANSAKSI</h6></legend>
-                    <div class="container">
-                        <!-- ================= TABLE HEADER BAHAN MASUK ================= -->
-                                          <div class="table-responsive pompa-table">
-                                              <table class="table table-bordered table-striped table-sm">
-                                                  <thead class="thead-dark text-center">
-                                                      <tr>
-                                                          
-                                                          <th>ID Transaksi</th>
-                                                          <th>Faktur/Surat Jalan</th>
-                                                          <th>Tgl</th>
-                                                          <th>Suplier</th>
-                                                      </tr>
-                                                  </thead>
-                                                  <tbody>
-                                                      <tr>
-                                                          <td><input id="no_transaksi" type="text" name="no_transaksi" class="form-control form-control-sm text-center"  value="" placeholder="GD-011225" readonly></td>
-                                                          <td><input id="faktur" type="text" name="faktur" class="form-control form-control-sm text-center" value="" placeholder="No Faktur Surat Jalan" required></td>
-                                                          <td><input id="tgl_faktur" type="date" name="tgl_faktur" class="form-control form-control-sm text-center" step="any" value="" required></td>
-                                                          <td><input id="supplier" type="text" value="" name="supplier" class="form-control form-control-sm text-center" placeholder="KT 1234 BU" required></td>
-                                                      </tr>
-                                                  </tbody>
-                                              </table>
-                                          </div>
+                <form id="formKeluar">
+                  <table class="table table-bordered">
+                      <thead>
+                          <tr>
+                              <th>No</th>
+                              <th>Bahan</th>
+                              <th>Stok</th>
+                              <th>Satuan</th>
+                              <th>Keluar</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          @foreach($stok as $i => $s)
+                          <tr>
+                              <td>{{ $i+1 }}</td>
+                              <td>{{ $s->bahan->nama_bahan }}</td>
+                              <td>{{ $s->stok }}</td>
+                              <td>{{ $s->bahan->satuan->nama_satuan }}</td>
+                              <td>
+                                  <input type="number"
+                                      class="form-control qty"
+                                      data-id_bahan="{{ $s->id_bahan }}"
+                                      data-id_satuan="{{ $s->bahan->id_satuan }}"
+                                      max="{{ $s->stok }}"
+                                      min="0"
+                                  >
+                              </td>
+                          </tr>
+                          @endforeach
+                      </tbody>
+                  </table>
 
-                    </div>
-                </fieldset><br>
-                <fieldset class="border border-primary rounded">
-                <legend class="ml-2 w-auto px-3 border border-primary rounded"><h6>BAHAN</h6></legend>
-                    <div class="container">
-                        <table class="table table-bordered table-striped table-sm">
-                                                  <tbody>
-                                                      <tr>
-                                                          <td> 
-                                                            <input type="hidden" id="id_masuk">
-                                                            <select name="" id="id_bahan" class="form-control form-control-sm">
-                                                              <option value="">-PILIH BAHAN-</option>
-                                                                 @foreach ($bahan as $item)
-                                                                    <option 
-                                                                        value="{{ $item->id }}"
-                                                                        data-satuan="{{ $item->satuan->nama_satuan }}"
-                                                                        data-ukuran="{{ $item->ukuran }}"
-                                                                    >
-                                                                        {{ $item->nama_bahan }}
-                                                                    </option>
-                                                                @endforeach
-                                                          </td>
-                                                          <td>
-                                                            <input type="number" id="jumlah" name="jumlah" class="form-control form-control-sm text-center" value="" placeholder="jumlah" >
-                                                          </td>
-                                                          <td>
-                                                                <input type="text" id="satuan" name="satuan" class="form-control form-control-sm text-center" value="" placeholder="SATUAN" readonly>
-                                                          </td>
-                                                          <td>
-                                                             <input type="number" id="kilo" name="kilo" class="form-control form-control-sm text-center" value="" placeholder="KILOGRAM">
-                                                          </td>
-                                                          <td>
-                                                             <button class="btn btn-primary btn-sm" id="btnTambah">Tambah</button>
-                                                          </td>
-                                                      </tr>
-                                                  </tbody>
-                                              </table>
-                        
-                        <div class="table-responsive pompa-table text-center">
-                                              <table class="table table-bordered table-striped table-sm" id="tblBahan">
-                                                  <thead class="thead-dark text-center">
-                                                      <tr>
-                                                          
-                                                          <th>NO</th>
-                                                          <th>Nama Bahan</th>
-                                                          <th>Jumlah</th>
-                                                          <th>Satuan</th>
-                                                          <th>Kilogram</th>
-                                                          <th>Aksi</th>
-                                                      </tr>
-                                                  </thead>
-                                                  <tbody id="tblBahan"></tbody>
-                                              </table>
-                                          </div>
-                    </div>
-                </fieldset>
+
+
+
 
             </div>
             <div class="modal-footer">
                 <div class="float-end">
-                    <button class="btn btn-primary" id="btnFinal">SUBMIT</button>
+                    <button type="button" id="btn-submit" class="btn btn-success">SIMPAN</button>
                 </div>
-                
+          </form>
             </div>
           <!-- /.modal-content -->
         </div>

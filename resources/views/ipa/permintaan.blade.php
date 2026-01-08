@@ -192,12 +192,12 @@
                                   <tr>
                                       <th rowspan="2">NO</th>
                                       <th rowspan="2">BAHAN</th>
-                                      <th colspan="2" class="bg-primary">PERMINTAAN</th>
+                                      <th colspan="2" >PERMINTAAN</th>
                                       <th colspan="2" class="bg-success">DIKIRIM</th>
-                                      <th colspan="2" class="bg-info">DITERIMA</th>
+                                      <th colspan="2" class="bg-warning">DITERIMA</th>
                                       
                                       <th rowspan="2">SATUAN</th>
-                                      <th rowspan="2" class="th-gudang d-none bg-warning">Stok Gudang</th>
+                                      <th rowspan="2" class="th-gudang d-none bg-info">STOK</th>
                                       <th rowspan="2">KET</th>
                                       @role(['agus','ipa'])
                                         @if(Auth::user()->jabatan == 1)
@@ -208,10 +208,10 @@
                                   <tr>
                                       <th>JUMLAH</th>
                                       <th>KILO</th>
-                                      <th>JUMLAH</th>
-                                      <th>KILO</th>
-                                      <th>JUMLAH</th>
-                                      <th>KILO</th>
+                                      <th class="text-success">JUMLAH</th>
+                                      <th class="text-success">KILO</th>
+                                      <th class="text-warning">JUMLAH</th>
+                                      <th class="text-warning">KILO</th>
                                   </tr>
                               </thead>
                            
@@ -223,6 +223,36 @@
                     </tbody>
                 </table>
                 </fieldset><br>
+                <fieldset class="border border-primary rounded p-2 mb-3">
+                <legend class="w-auto px-3"><h6>Detail Keterangan</h6></legend>
+                  <div class="mb-2">
+                    <strong>Bahan:</strong>
+                    <span id="ket-nama-bahan" class="text-warning">-</span>
+                </div>
+                   <table class="table table-sm table-bordered">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th>No</th>
+                            <th>Tahap</th>
+                            <th>Kondisi</th>
+                            <th>Jumlah</th>
+                            <th>User</th>
+                            <th>Keterangan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblKeterangan">
+                        <!-- diisi via JS -->
+                    </tbody>
+    </table>
+        <tbody id="tblKeterangan">
+            <!-- diisi via JS -->
+        </tbody>
+    </table>
+        <tbody id="tblKeterangan">
+            <!-- diisi via JS -->
+        </tbody>
+    </table>
+                </fieldset>
               </div>
             <div class="modal-footer">
                 <div class="float-end">
