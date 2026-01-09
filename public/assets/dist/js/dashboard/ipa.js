@@ -699,13 +699,6 @@ $(document).on('click', '.btn-info-minta', function () {
     $('#tblKeterangan').html(html);
     $('#fieldset-keterangan').removeClass('d-none');
 });
-
-
-
-
-
-
-
 });
                     // =============================
                     // 🔥 KIRIM GUNDANG UTAMA
