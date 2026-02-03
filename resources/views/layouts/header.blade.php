@@ -75,7 +75,7 @@
         <img src="{{ asset('assets/dist/img/logo.png') }}" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">{{Auth::user()->name}}</a>
+        <a href="/logout" class="d-block">{{Auth::user()->name}}</a>
       </div>
     </div>
 
@@ -96,6 +96,7 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
+             
              @if (Auth::user()->hasAnyRole(['agus','ipa']))
                
             
@@ -103,7 +104,7 @@
               <a href="#" class="nav-link active">
                 
                 <p>
-                 CENDANA
+                 IPA {{Auth::user()->ipaRelasi->nama_ipa}}
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -115,15 +116,9 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="" class="nav-link">
+                  <a href="/masuk" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Labratorium</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Bahan Kimia</p>
+                    <p>Laboratorium</p>
                   </a>
                 </li>
               </ul>
@@ -214,126 +209,63 @@
 
         @endif
 
-        {{-- DIREKSI --}}
-        @if (Auth::user()->hasAnyRole(['adminUtama','de-was','dirut','dirum','spi','agus']))
-        {{-- <li class="nav-item menu-close">
+        {{-- IPA --}}
+        @if (Auth::user()->hasAnyRole(['agus','ipa','gudang']))
+        <li class="nav-item menu-close">
           <a href="#" class="nav-link active">
             <p>
-              UTAMA
+              BAHAN KIMIA
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
+          @if (Auth::user()->hasAnyRole(['agus','gudang']))
             <li class="nav-item">
-              <a href="/perencanaanPenelitian" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>Perencanaan Dan Penelitian</p>
+              <a href="/gudang" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Stok</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="/masuk" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Bahan Masuk</p>
+              </a>
+            </li>
+          @endif
+
+          <li class="nav-item">
+              <a href="/ipaGudang" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Stok IPA</p>
+              </a>
+          </li>
+          <li class="nav-item">
+              <a href="/dataMinta" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Permintaan</p>
+              </a>
+            </li>
+
+        @if (Auth::user()->hasAnyRole(['agus','ipa']))
+        <li class="nav-item">
+              <a href="/stok" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Stok Gudang</p>
+              </a>
+            </li>
+            
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Satuan Pengawas Internal</p>
+                <p>Bahan Keluar</p>
               </a>
             </li>
-          </ul>
-        </li> --}}
         @endif
-
-
-        @if (Auth::user()->hasAnyRole(['adminUmum','de-was','dirut','dirum','spi','agus']))
-        {{-- <li class="nav-item menu-close">
-          <a href="#" class="nav-link active">
-            <p>
-              UMUM
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="/umkes" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Umum Dan Kesekretariatan </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/keuangan" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Keuangan</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/sdm" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Sumber Daya Manusia</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/adm" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Aspek Adminsitrasi</p>
-              </a>
-            </li>
           </ul>
-        </li> --}}
+        </li>
         @endif
         
-        @if (Auth::user()->hasAnyRole(['adminTeknik','de-was','dirut','dirum','dirtek','spi','agus']))
-        {{-- <li class="nav-item menu-close">
-          <a href="#" class="nav-link active">
-            <p>
-              TEKNIK
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="/produksi" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Produksi</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/distribusi" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Distribusi</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/perawatan" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Perawatan</p>
-              </a>
-            </li>
-          </ul>
-        </li> --}}
-        @endif
-
-        @if (Auth::user()->hasAnyRole(['adminLayan','de-was','dirut','dirum','dirpel','spi','agus']))
-        {{-- <li class="nav-item menu-close">
-          <a href="#" class="nav-link active">
-            <p>
-              PELAYANAN
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="/pelayanan" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Hubungan Pelanggan</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/kepatuhan" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Kepatuhan</p>
-              </a>
-            </li>
-          </ul>
-        </li> --}}
-        @endif
-
         @if (Auth::user()->hasAnyRole(['agus']))
         <li class="nav-item menu-close">
           <a href="#" class="nav-link active">
@@ -349,13 +281,6 @@
                 <p>User</p>
               </a>
             </li>
-            {{-- <li class="nav-item">
-              <a href="/kepatuhan" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Kepatuhan</p>
-              </a>
-            </li> --}}
-          </ul>
         </li>
         @endif
         

@@ -12,7 +12,7 @@ class Mano extends Model
 
     protected $fillable = [
         'mano',
-        'id_pompa',
+        'id_mano',
         'id_ipa',
         'id_user'
     ];

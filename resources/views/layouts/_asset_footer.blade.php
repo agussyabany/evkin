@@ -35,6 +35,39 @@
 <script src="{{ asset('assets/dist/js/dashboard/pelayanan.js')}}"></script>
 <script src="{{ asset('assets/dist/js/dashboard/home.js')}}"></script>
 <script src="{{ asset('assets/dist/js/dashboard/ipa.js')}}"></script>
+<script src="{{ asset('assets/dist/js/dashboard/gudang.js')}}"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+$(document).ready(function () {
+
+    $('.masuk').DataTable({
+        pageLength: 10,
+        lengthMenu: [10, 25, 50, 100],
+        ordering: true,
+        searching: true,
+        responsive: true,
+        autoWidth: false,
+        language: {
+            search: "Cari:",
+            lengthMenu: "Tampilkan _MENU_ data",
+            info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+            infoEmpty: "Tidak ada data",
+            zeroRecords: "Data tidak ditemukan",
+            paginate: {
+                previous: "‹",
+                next: "›"
+            }
+        },
+        columnDefs: [
+            { orderable: false, targets: 0 } // kolom NO tidak ikut sort
+        ]
+    });
+
+});
+</script>
+
 
 <script>
     function moveIndicator(el, index) {
@@ -102,11 +135,4 @@ function changeBulanTahun() {
     window.location.href = '?tahun=' + tahun + '&bulan_awal=' + bulanAwal + '&bulan_akhir=' + bulanAkhir;
 }
 </script>
-{{-- 
-
-
-
-
-<script src="{{ asset('assets/dist/js/dashboard/adm.js')}}"></script>
-<script src="{{ asset('assets/dist/js/dashboard/fungsi.js')}}"></script> --}}
 
