@@ -42,6 +42,7 @@
       <select id="selectTahun" class="form-control select2" style="width: 100px;" onchange="changeBulanTahun()">
         <option value="2024" {{ session('tahun', date('Y')) == '2024' ? 'selected' : '' }}>2024</option>
         <option value="2025" {{ session('tahun', date('Y')) == '2025' ? 'selected' : '' }}>2025</option>
+        <option value="2026" {{ session('tahun', date('Y')) == '2026' ? 'selected' : '' }}>2026</option>
       </select>
     </li>
 
