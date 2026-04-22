@@ -159,7 +159,7 @@ class evkinHelper {
         return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('JmlPnrmRekAir');
     }
     public static function jmlRekAir($tahun,$bulanAwal,$bulanAkhir) {
-        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->sum('jmlRekAir');
+        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('jmlRekAir');
     }
     public static function nilaiEf($hasilEf) 
     {
