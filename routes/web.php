@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Umum\KeuanganController;
 use App\Http\Controllers\Admin\Umum\SdmController;
 use App\Http\Controllers\Admin\Umum\UmkesController;
 use App\Http\Controllers\Admin\Utama\PpController;
+use App\Http\Controllers\Agenda\AgendaController;
 use App\Http\Controllers\Dashboard\KeuController;
 use App\Http\Controllers\Dashboard\MainController;
 use App\Http\Controllers\Dashboard\MobileController;
@@ -195,6 +196,7 @@ Route::middleware('auth','verified','role:agus')->group(function () {
     Route::post('save', [UserController::class, 'store']);
 });
 
+//------------------GUDANG IPA-----------------//
 Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
     Route::get('/ipa', function () {
         return redirect('/dataIpa');
@@ -249,6 +251,13 @@ Route::middleware('auth','verified','role:agus|gudang')->group(function () {
     Route::get('/gudang-masuk/detail/{id}',[LaporanMasukController::class, 'detail']);
 });
 
+//-----------------AGENDA----------------------/
+Route::middleware('auth','verified','role:agus|gudang')->group(function () {
+    Route::get('/', function () {
+        return redirect('/agenda');
+    });
+    Route::get('agenda', [AgendaController::class, 'index']);
+});
 
 
 
