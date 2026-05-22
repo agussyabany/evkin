@@ -108,7 +108,7 @@
           <td></td> 
           <td></td>
           <td></td>
-          <td><strong>{{number_format($AduanSlsai,0)}}</strong></td>
+          <td></td>
           <td><strong>{{number_format($JmlAduan,0)}}</strong></td>
           <td><strong>{{number_format($UjiKualitas,0)}}</strong></td>
           <td></td>

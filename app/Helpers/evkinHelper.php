@@ -7,6 +7,7 @@ use App\Models\Evkin\Operasional;
 use App\Models\Evkin\Pelayanan;
 use App\Models\Evkin\Sdm;
 use Psy\Test\CodeCleaner\FinalClassPassTest;
+use Carbon\Carbon;
 
 class evkinHelper {
     //-------------------ASPEK KEUANGAN----------------//
@@ -159,7 +160,7 @@ class evkinHelper {
         return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('JmlPnrmRekAir');
     }
     public static function jmlRekAir($tahun,$bulanAwal,$bulanAkhir) {
-        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->where('status',1)->sum('jmlRekAir');
+        return Keuangan::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('jmlRekAir');
     }
     public static function nilaiEf($hasilEf) 
     {
@@ -357,10 +358,21 @@ public static function JmlWktPly($tahun,$bulanAwal,$bulanAkhir)
 public static function hari($tahun,$bulanAwal,$bulanAkhir)
 {
     // return Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])->where('status',1)->sum('hari');
-    return Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])
-        ->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])
-        ->where('status', 1)
-        ->count();
+    // return Operasional::whereRaw('SUBSTRING("bulanTahun", 1, 4) = ?', [$tahun])
+    //     ->whereBetween('bulanTahun', [$bulanAwal, $bulanAkhir])
+    //     ->where('status', 1)
+    //     ->count();
+    $totalHari = 0;
+
+    // Ambil bulan dari parameter jika formatnya YYYYMM / YYYY-MM
+    $bulanMulai = (int) substr(preg_replace('/[^0-9]/', '', $bulanAwal), -2);
+    $bulanSelesai = (int) substr(preg_replace('/[^0-9]/', '', $bulanAkhir), -2);
+
+    for ($bulan = $bulanMulai; $bulan <= $bulanSelesai; $bulan++) {
+        $totalHari += Carbon::create($tahun, $bulan, 1)->daysInMonth;
+    }
+
+    return $totalHari;
 }
 public static function nilaiJam ($jam)
 {

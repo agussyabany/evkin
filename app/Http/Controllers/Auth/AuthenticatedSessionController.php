@@ -45,7 +45,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         if (Auth::user()->hasRole(['adminLayan'])) {
-            return redirect()->to('/pelayanan');
+            return redirect()->to('/evPel');
         }
 
         if (Auth::user()->hasRole(['spi'])) {
