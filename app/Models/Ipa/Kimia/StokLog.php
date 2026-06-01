@@ -15,7 +15,8 @@ class StokLog extends Model
         'keluar',
         'akhir',
         'permintaan_id',
-        'user_id'
+        'user_id',
+        'masuk'
 
     ];
 }

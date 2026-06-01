@@ -7,8 +7,10 @@ use App\Models\Gudang\Bahan;
 use App\Models\Gudang\GudangMasuk;
 use App\Models\Gudang\GudangTrxMasuk;
 use App\Models\Gudang\Stok;
+use App\Models\Ipa\Kimia\StokLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class GudangMasukController extends Controller
 {
@@ -144,17 +146,42 @@ class GudangMasukController extends Controller
 
             $stok = Stok::where('id_bahan', $i->id_bahan)->first();
 
+            // ==========================
+            // JIKA STOK SUDAH ADA
+            // ==========================
             if ($stok) {
-                // 🔄 UPDATE
-                $stok->stok += $i->jumlah;
-                $stok->save();
+
+                $stokAwal = $stok->stok;
+                $stokAkhir = $stokAwal + $i->jumlah;
+
+                // UPDATE stok realtime
+                $stok->update([
+                    'stok' => $stokAkhir
+                ]);
+
             } else {
-                // ➕ INSERT BARU
+
+                // JIKA BELUM ADA
+                $stokAwal = 0;
+                $stokAkhir = $i->jumlah;
+
                 Stok::create([
                     'id_bahan' => $i->id_bahan,
-                    'stok' => $i->jumlah
+                    'stok'     => $stokAkhir
                 ]);
             }
+             // ==========================
+            // 1️⃣ LOG STOK MASUK
+            // ==========================
+            StokLog::create([
+                'id_bahan'      => $i->id_bahan,
+                'awal'          => $stokAwal,
+                'masuk'         => $i->jumlah,
+                'keluar'        => 0,
+                'akhir'         => $stokAkhir,
+                'permintaan_id' => null,
+                'user_id'       => auth()->id(),
+            ]);
         }
 
         $header->update(['status' => 1]);

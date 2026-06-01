@@ -259,9 +259,9 @@
                     <button class="btn btn-primary" id="btn-submit-kirim">SUBMIT</button>
                 </div>
                 @role(['agus','ipa'])
-                    @if(Auth::user()->jabatan == 1)
+                    @if(Auth::user()->jabatan == 2)
                       <div class="float-end ">
-                          <button class="btn btn-primary" id="btn-submit-terima-ipa">KIRIM</button>
+                          <button class="btn btn-primary" id="btn-submit-terima-ipa">TERIMA</button>
                       </div>
                     @endif
                 @endrole
@@ -281,7 +281,7 @@
     );
 
      window.isIpaOperator = @json(
-        auth()->user()->jabatan == 1 && auth()->user()->hasAnyRole(['agus','ipa'])
+        auth()->user()->jabatan == 2 && auth()->user()->hasAnyRole(['agus','ipa'])
     );
 </script>
 @endsection

@@ -286,7 +286,7 @@ $(document).on('click', '.btn-info-minta', function () {
                 .text('PROSES');
         }
 
-        //$('#d_supplier').text(res.header.supplier ?? '-');
+        
 
         // ===============================
         // ISI DETAIL BAHAN
@@ -347,8 +347,8 @@ $(document).on('click', '.btn-info-minta', function () {
                      // =============================
                     // 🔥 JIKA QTY > STOK GUDANG
                     // =============================
-                    if (item.qty > stokGudang) {
-                        tdJumlah = `
+
+                    tdJumlah = `
                             <td class="text-center">
                                 <input type="number"
                                     class="form-control form-control-sm qty-adjust"
@@ -377,26 +377,28 @@ $(document).on('click', '.btn-info-minta', function () {
                             ${stokGudang}
                         </td>
                     `;
+                    if (item.qty > stokGudang) {
+                        
                     } else {
-                    tdJumlah = `
-                        <td class="text-center">${item.qty}</td>
-                    `;
+                    // tdJumlah = `
+                    //     <td class="text-center">${item.qty}</td>
+                    // `;
 
-                     tdReal = `
-                        <td class="text-center text-success font-weight-bold">${item.real}
-                        </td>
-                    `;
+                    //  tdReal = `
+                    //     <td class="text-center text-success font-weight-bold">${item.real}
+                    //     </td>
+                    // `;
 
-                    tdStokGudang = `
-                        <td class="text-center text-info font-weight-bold">
-                            ${stokGudang}
-                        </td>
-                    `;
-                    tdKet = `
-                        <td class="text-center text-success font-weight-bold">
-                        Sesuai
-                        </td>
-                    `;
+                    // tdStokGudang = `
+                    //     <td class="text-center text-info font-weight-bold">
+                    //         ${stokGudang}
+                    //     </td>
+                    // `;
+                    // tdKet = `
+                    //     <td class="text-center text-success font-weight-bold">
+                    //     Sesuai
+                    //     </td>
+                    // `;
 
                     
                     }
@@ -505,7 +507,9 @@ $(document).on('click', '.btn-info-minta', function () {
                         <td class="text-center">${i + 1}</td>
                         <td>${item.bahan.nama_bahan}</td>
                         ${tdJumlah}
-                        <td>${item.qty * item.bahan.ukuran }</td>
+                        <td><span class="kg-text">
+                               ${item.bahan.ukuran} 
+                            </span></td>
                         ${tdReal}
                         <td class="text-center text-success font-weight-bold">
                            ${item.real * item.bahan.ukuran } 
@@ -516,7 +520,7 @@ $(document).on('click', '.btn-info-minta', function () {
                         
 
                         <td class="text-center">
-                            <span class="kg-text">
+                            <span class="kg-text1">
                                ${item.bahan.satuan?.nama_satuan ?? '-'} 
                             </span>
                         </td>

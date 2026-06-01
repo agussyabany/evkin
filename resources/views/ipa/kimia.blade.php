@@ -53,7 +53,7 @@
                         {{ $item->stok * $item->bahan->ukuran }}
                     </td>
                      @role(['agus','ipa'])
-                          @if(Auth::user()->jabatan == 1)
+                          @if(Auth::user()->jabatan == 2)
                             <td class="text-center">
                                 <button class="btn btn-outline-success btn-sm btn-add"
                                     data-id="{{ $item->bahan->id }}"

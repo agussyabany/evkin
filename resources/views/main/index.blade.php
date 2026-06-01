@@ -12,7 +12,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0 text-center">PERUMDAM TIRTA KENCANA KOTA SAMARINDA <br> DASHBOARD KINERJA TAHUN {{$tahun}}</h1>
+            <h1 class="m-0 text-center">PERUMDA TIRTA KENCANA KOTA SAMARINDA <br> DASHBOARD KINERJA TAHUN {{$tahun}}</h1>
           </div><!-- /.col -->
           
         </div><!-- /.row -->
@@ -32,7 +32,7 @@
           <div class="col">
           <a href="#"><div class="info-box">
              <span class="info-box-icon bg-white elevation-1 d-flex align-items-center justify-content-center">
-              <img src="{{ asset('assets/img/bpkp.jpg') }}" alt="ROE" style="width:80px; height:80px; object-fit:contain;">
+              <img src="{{ asset('assets/img/kemendagri.png') }}" alt="ROE" style="width:80px; height:80px; object-fit:contain;">
             </span>
               <div class="info-box-content">
 
