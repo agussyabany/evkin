@@ -357,14 +357,12 @@ $(document).on('click', '.btn-info-minta', function () {
                                     max="${stokGudang}"
                                     min="0"
                                     value="${item.qty}">
-                                <small class="text-danger">
-                                    Melebihi stok (${stokGudang})
-                                </small>
+                                
                             </td>
                         `;
                          tdKet = `
-                        <td class="text-center text-danger font-weight-bold">
-                            Stok Kurang
+                        <td class="text-center text-default font-weight-bold">
+                            -
                         </td>
                     `;
                      tdReal = `

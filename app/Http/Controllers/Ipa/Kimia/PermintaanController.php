@@ -98,12 +98,12 @@ public function submit(Request $request)
         ->firstOrFail();
 
     $permintaan->update([
-        'status' => 1
+        'status' => 2
     ]);
 
     PermintaanLog::create([
             'permintaan_id' => $permintaan->id,
-            'status'        => 1,
+            'status'        => 2,
             'user_id'       => auth()->id(),
             'id_ipa'        => auth()->user()->ipa,
             'id_jabatan'    => auth()->user()->jabatan

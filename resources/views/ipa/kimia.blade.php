@@ -45,7 +45,7 @@
             <tbody>
                 @foreach($stok as $item)
                 <tr>
-                    <td class="text-center">{{ $loop->iteration }}</td>
+                    <td class="text-center">{{ $loop->iteration }}</a></td>
                     <td>{{ $item->bahan->nama_bahan }}</td>
                     <td class="text-center">{{ $item->stok }}</td>
                     <td class="text-center">{{ $item->bahan->satuan->nama_satuan }}</td>

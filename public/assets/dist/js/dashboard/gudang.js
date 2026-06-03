@@ -259,5 +259,73 @@ $(document).on('click', '.btn-info-trx', function () {
     });
 
 });
+//KARTU STOK
+$(document).on('click', '.btn-kartu-stok', function (e) {
+
+    e.preventDefault();
+
+    let idBahan = $(this).data('id');
+
+    $('#tblKartuStok').html(`
+        <tr>
+            <td colspan="7">
+                Loading...
+            </td>
+        </tr>
+    `);
+
+    $.get('/stok/kartu/' + idBahan, function (res) {
+
+        // ======================
+        // HEADER
+        // ======================
+        $('#ks_bahan').text(res.bahan.nama_bahan);
+        $('#ks_satuan').text(res.bahan.satuan.nama_satuan);
+        $('#ks_stok').text(res.stok);
+        $('#ks_masuk').text(res.total_masuk);
+        $('#ks_keluar').text(res.total_keluar);
+
+        let html = '';
+
+        if (res.logs.length === 0) {
+
+            html = `
+                <tr>
+                    <td colspan="7">
+                        Tidak ada histori stok
+                    </td>
+                </tr>
+            `;
+        } else {
+
+            $.each(res.logs, function (i, item) {
+
+                html += `
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${item.created_at}</td>
+                        <td>${item.awal}</td>
+                        <td class="text-success">
+                            ${item.masuk ?? 0}
+                        </td>
+                        <td class="text-danger">
+                            ${item.keluar ?? 0}
+                        </td>
+                        <td class="text-info">
+                            ${item.akhir}
+                        </td>
+                        <td>
+                            ${item.user?.name ?? '-'}
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        $('#tblKartuStok').html(html);
+
+        $('#modalKartuStok').modal('show');
+    });
+});
 
 })

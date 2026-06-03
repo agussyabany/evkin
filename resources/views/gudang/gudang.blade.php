@@ -32,6 +32,7 @@
                                                           <th>Jumlah</th>
                                                           <th>Satuan</th>
                                                           <th>Kilo</th>
+                                                          <th>Kartu Stok</th>
                                                       </tr>
                                                   </thead>
                                                   <tbody>
@@ -44,6 +45,7 @@
                                                           <td>{{ $item->stok}}</td>
                                                           <td>{{ $item->bahan->satuan->nama_satuan}}</td>
                                                           <td>{{ $item->bahan->ukuran * $item->stok }}</td>
+                                                          <td> <a href="#"class="btn-kartu-stok" data-id="{{ $item->id_bahan }}"><i class="fa fa-eye"></i></a></td>
                                                       </tr>
                                                       @endforeach
                                                   </tbody>
@@ -176,6 +178,90 @@
     </div>
       <!-- /.modal -->
       <!-- /.modal -->
+
+<div class="modal fade" id="modalKartuStok" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content bg-dark text-white">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Kartu Stok Gudang Utama
+                </h4>
+
+                <button type="button"
+                        class="close text-white"
+                        data-dismiss="modal">
+                    ×
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- HEADER BAHAN -->
+                <fieldset class="border p-3 mb-3">
+                    <legend class="w-auto px-2">
+                        Informasi Bahan
+                    </legend>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <strong>Bahan</strong><br>
+                            <span id="ks_bahan">-</span>
+                        </div>
+
+                        <div class="col-md-2">
+                            <strong>Satuan</strong><br>
+                            <span id="ks_satuan">-</span>
+                        </div>
+
+                        <div class="col-md-2">
+                            <strong>Stok Saat Ini</strong><br>
+                            <span id="ks_stok">0</span>
+                        </div>
+
+                        <div class="col-md-2">
+                            <strong>Total Masuk</strong><br>
+                            <span id="ks_masuk">0</span>
+                        </div>
+
+                        <div class="col-md-2">
+                            <strong>Total Keluar</strong><br>
+                            <span id="ks_keluar">0</span>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- TABLE -->
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm text-center">
+
+                        <thead class="thead-light">
+                            <tr>
+                                <th>NO</th>
+                                <th>Tanggal</th>
+                                <th>Awal</th>
+                                <th>Masuk</th>
+                                <th>Keluar</th>
+                                <th>Saldo</th>
+                                <th>User</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tblKartuStok">
+                            <tr>
+                                <td colspan="7">
+                                    Tidak ada data
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
       @include('sweetalert::alert')
 
 @endsection

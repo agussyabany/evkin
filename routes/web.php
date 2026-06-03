@@ -249,6 +249,7 @@ Route::middleware('auth','verified','role:agus|gudang')->group(function () {
 
     Route::get('masuk', [LaporanMasukController::class, 'index']);
     Route::get('/gudang-masuk/detail/{id}',[LaporanMasukController::class, 'detail']);
+    Route::get('/stok/kartu/{id}', [GudangController::class, 'kartuStok']);
 });
 
 //-----------------AGENDA----------------------/
