@@ -18,4 +18,29 @@ class IpaTrxKeluar extends Model
         'id_ipa',
         'user'
     ];
+
+    public function bahan()
+    {
+        return $this->belongsTo(
+            Bahan::class,
+            'id_bahan'
+        );
+    }
+
+     public function satuan()
+    {
+        return $this->belongsTo(
+            Satuan::class,
+            'id_satuan'
+        );
+    }
+
+    public function transaksi()
+    {
+        return $this->belongsTo(
+            IpaKeluar::class,
+            'id_transaksi',
+            'id_transaksi'
+        );
+    }
 }

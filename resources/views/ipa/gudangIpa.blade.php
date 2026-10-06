@@ -80,6 +80,41 @@
               </button>
             </div>
             <div class="modal-body">
+                              <div class="row mb-3">
+
+                    <div class="col-md-6">
+                        <label>No Transaksi</label>
+                        <input type="text"
+                              class="form-control"
+                              id="no_transaksi"
+                              readonly>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Tanggal</label>
+                        <input type="date"
+                              class="form-control"
+                              id="tanggal"
+                              value="{{ date('Y-m-d') }}">
+                    </div>
+
+                    <div class="col-md-6 mt-2">
+                        <label>Dikeluarkan Oleh</label>
+                        <input type="text"
+                              class="form-control"
+                              value="{{ Auth::user()->name }}"
+                              readonly>
+                    </div>
+
+                    <div class="col-md-6 mt-2">
+                        <label>IPA</label>
+                        <input type="text"
+                              class="form-control"
+                              value="{{ Auth::user()->ipaRelasi->nama_ipa }}"
+                              readonly>
+                    </div>
+
+                </div>
                 <form id="formKeluar">
                   <table class="table table-bordered">
                       <thead>
@@ -100,23 +135,18 @@
                               <td>{{ $s->bahan->satuan->nama_satuan }}</td>
                               <td>
                                   <input type="number"
-                                      class="form-control qty"
-                                      data-id_bahan="{{ $s->id_bahan }}"
-                                      data-id_satuan="{{ $s->bahan->id_satuan }}"
-                                      max="{{ $s->stok }}"
-                                      min="0"
-                                  >
+                                        class="form-control qty"
+                                        data-id_bahan="{{ $s->id_bahan }}"
+                                        data-id_satuan="{{ $s->bahan->id_satuan }}"
+                                        max="{{ $s->stok }}"
+                                        min="0"
+                                        value="0">
                               </td>
                           </tr>
                           @endforeach
                       </tbody>
                   </table>
-
-
-
-
-
-            </div>
+                </div>
             <div class="modal-footer">
                 <div class="float-end">
                     <button type="button" id="btn-submit" class="btn btn-success">SIMPAN</button>
@@ -131,5 +161,7 @@
       <!-- /.modal -->
       <!-- /.modal -->
       @include('sweetalert::alert')
-
+<script>
+    const namaIpa = @json(Auth::user()->ipaRelasi->nama_ipa);
+</script>
 @endsection

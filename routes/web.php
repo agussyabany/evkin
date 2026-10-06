@@ -211,27 +211,24 @@ Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
     Route::put('/permintaan/cart/update', [PermintaanController::class, 'updateCart']);
     Route::delete('/permintaan/cart/delete', [PermintaanController::class, 'deleteCart']);
     Route::get('/permintaan/draft', [PermintaanController::class, 'getDraft']);
-
     Route::delete('/permintaan/draft/{id}', [PermintaanController::class, 'destroyDraft']);
 
 
     // submit permintaan
     Route::post('/permintaan/submit', [PermintaanController::class, 'submit']);
-
     Route::get('/dataMinta', [ApprovalController::class, 'index']);
     Route::get('/permintaan/detail/{id}',[ApprovalController::class, 'detail']);
-
     Route::post('/permintaan/{id}/approve',[ApprovalController::class, 'approve'])->middleware(['auth']);
-
     Route::post('/permintaan/{id}/kirim', [PermintaanController::class, 'kirim']);
-
     Route::get('/permintaan/{id}/surat-jalan',[PermintaanController::class, 'suratJalan'])->name('permintaan.suratjalan');
-
+    
     //Terima IPA
     Route::post('/permintaan/{id}/terima-ipa', [PermintaanController::class, 'terimaIpa']);
-
     Route::get('/ipa/keluar', [IpaKeluarController::class, 'index']);
     Route::post('/ipa/keluar', [IpaKeluarController::class, 'store']);
+
+    Route::get('/ipa/transaksi-keluar',[IpaController::class, 'transaksiKeluar']);
+    Route::post('/gudang-ipa/keluar',[IpaController::class, 'store'])->name('gudang-ipa.keluar.store');
 
 });
 
@@ -251,17 +248,4 @@ Route::middleware('auth','verified','role:agus|gudang')->group(function () {
     Route::get('/gudang-masuk/detail/{id}',[LaporanMasukController::class, 'detail']);
     Route::get('/stok/kartu/{id}', [GudangController::class, 'kartuStok']);
 });
-
-//-----------------AGENDA----------------------/
-Route::middleware('auth','verified','role:agus|gudang')->group(function () {
-    Route::get('/', function () {
-        return redirect('/agenda');
-    });
-    Route::get('agenda', [AgendaController::class, 'index']);
-});
-
-
-
-
-
 require __DIR__.'/auth.php';

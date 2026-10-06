@@ -53,7 +53,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         if (Auth::user()->hasRole(['ipa'])) {
-            return redirect()->to('/ipa');
+            return redirect()->to('/ipaGudang');
         }
         if (Auth::user()->hasRole(['gudang'])) {
             return redirect()->to('/gudang');

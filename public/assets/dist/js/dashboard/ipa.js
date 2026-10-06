@@ -801,6 +801,218 @@ $('#btn-submit-terima-ipa').on('click', function () {
     });
 });
 
+//BAHAN KIMIA KELUAR GUDANG IPA
+$('#tambah_ipa').on('click', function () {
+
+    let now = new Date();
+
+    let tanggal =
+        now.getFullYear().toString() +
+        String(now.getMonth() + 1).padStart(2, '0') +
+        String(now.getDate()).padStart(2, '0');
+
+    let waktu =
+        String(now.getHours()).padStart(2, '0') +
+        String(now.getMinutes()).padStart(2, '0') +
+        String(now.getSeconds()).padStart(2, '0');
+
+    $('#no_transaksi').val(namaIpa + '-' + tanggal + '-' + waktu);
+
+});
+
+$(document).ready(function () {
+
+    $('#btn-submit').on('click', function () {
+
+        let items = [];
+
+        $('.qty').each(function () {
+
+            let jumlah = parseFloat($(this).val()) || 0;
+
+            /*
+             * Hanya masukkan bahan yang jumlah keluarnya > 0
+             */
+            if (jumlah > 0) {
+
+                items.push({
+                    id_bahan: $(this).data('id_bahan'),
+                    id_satuan: $(this).data('id_satuan'),
+                    jumlah: jumlah
+                });
+
+            }
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | Cek apakah ada barang
+        |--------------------------------------------------------------------------
+        */
+
+        if (items.length === 0) {
+
+            alert('Belum ada bahan yang akan dikeluarkan.');
+
+            return;
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Generate nomor transaksi
+        |--------------------------------------------------------------------------
+        */
+
+        let now = new Date();
+
+        let tanggal =
+            now.getFullYear().toString() +
+            String(now.getMonth() + 1).padStart(2, '0') +
+            String(now.getDate()).padStart(2, '0');
+
+        let waktu =
+            String(now.getHours()).padStart(2, '0') +
+            String(now.getMinutes()).padStart(2, '0') +
+            String(now.getSeconds()).padStart(2, '0');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | ID IPA dari user login
+        |--------------------------------------------------------------------------
+        */
+
+        let idIpa = "{{ Auth::user()->id_ipa }}";
+
+
+        let noTransaksi =
+            'IPA-' +
+            idIpa +
+            '-' +
+            tanggal +
+            '-' +
+            waktu;
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Konfirmasi
+        |--------------------------------------------------------------------------
+        */
+
+        if (!confirm(
+            'Yakin bahan kimia akan dikeluarkan?\n\n' +
+            'No Transaksi: ' + noTransaksi
+        )) {
+            return;
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Disable tombol
+        |--------------------------------------------------------------------------
+        */
+
+        $('#btn-submit')
+            .prop('disabled', true)
+            .text('MENYIMPAN...');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | AJAX
+        |--------------------------------------------------------------------------
+        */
+
+        $.ajax({
+
+            url: "{{ route('gudang-ipa.keluar.store') }}",
+
+            type: 'POST',
+
+            data: {
+
+                _token: $('meta[name="csrf-token"]').attr('content'),
+
+                no_transaksi: noTransaksi,
+
+                items: items
+
+            },
+
+            success: function (res) {
+
+                alert(res.message);
+
+                /*
+                 * Tutup modal
+                 */
+                $('#modalMasuk').modal('hide');
+
+                /*
+                 * Reload halaman
+                 */
+                location.reload();
+
+            },
+
+            error: function (xhr) {
+
+                let message = 'Terjadi kesalahan.';
+
+                if (xhr.responseJSON &&
+                    xhr.responseJSON.message) {
+
+                    message = xhr.responseJSON.message;
+                }
+
+                alert(message);
+
+                /*
+                 * Aktifkan kembali tombol
+                 */
+                $('#btn-submit')
+                    .prop('disabled', false)
+                    .text('SIMPAN');
+            }
+
+        });
+
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Batasi input sesuai stok
+    |--------------------------------------------------------------------------
+    */
+
+    $('.qty').on('input', function () {
+
+        let max = parseFloat($(this).attr('max')) || 0;
+
+        let value = parseFloat($(this).val()) || 0;
+
+        if (value > max) {
+
+            $(this).val(max);
+
+            alert(
+                'Jumlah keluar tidak boleh melebihi stok.'
+            );
+        }
+
+        if (value < 0) {
+
+            $(this).val(0);
+        }
+
+    });
+
+});
+
 
 
 })

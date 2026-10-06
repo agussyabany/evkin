@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Ipa\Kimia;
 
 use App\Http\Controllers\Controller;
+use App\Models\Gudang\IpaKeluar;
+use App\Models\Gudang\IpaTrxKeluar;
 use App\Models\Gudang\StokIpa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,60 +22,122 @@ class IpaKeluarController extends Controller
         return view('ipa.gudangIpa', compact('stok'));
     }
 
+    /**
+     * Simpan transaksi bahan kimia keluar dari Gudang IPA
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'items' => 'required|array'
+            'no_transaksi' => 'required|string',
+            'items' => 'required|array|min:1',
+            'items.*.id_bahan' => 'required|integer',
+            'items.*.id_satuan' => 'required|integer',
+            'items.*.jumlah' => 'required|numeric|min:0.01',
         ]);
 
-        DB::transaction(function() use ($request) {
+        DB::beginTransaction();
 
-            $idIpa = auth()->user()->ipa;
-            $userId = auth()->id();
+        try {
 
-            // generate nomor transaksi
-            $no = 'KLR-IPA-' . now()->format('YmdHis');
+            $user = auth()->user();
 
-            // insert header
-            $trx = DB::table('gudang_ipa_keluar')->insertGetId([
-                'id_transaksi' => $no,
+            $idIpa = $user->id_ipa;
+
+            /*
+            |--------------------------------------------------------------------------
+            | Header transaksi
+            |--------------------------------------------------------------------------
+            */
+
+            $header =IpaKeluar::create([
+                'id_transaksi' => $request->no_transaksi,
                 'id_ipa'       => $idIpa,
-                'user'         => $userId,
-                'created_at'   => now(),
-                'updated_at'   => now()
+                'user'         => $user->id,
             ]);
+
+            /*
+            |--------------------------------------------------------------------------
+            | Detail transaksi
+            |--------------------------------------------------------------------------
+            */
 
             foreach ($request->items as $item) {
 
-                // insert detail transaksi
-                DB::table('gudang_ipatrx_keluar')->insert([
-                    'id_transaksi' => $trx,
-                    'id_bahan'     => $item['id_bahan'],
-                    'id_satuan'    => $item['id_satuan'],
-                    'jumlah'       => $item['jumlah'],
-                    'id_ipa'       => $idIpa,
-                    'user'         => $userId,
-                    'created_at'   => now(),
-                    'updated_at'   => now()
-                ]);
+                $jumlah = (float) $item['jumlah'];
 
-                // kurangi stok IPA
+                // Cari stok IPA
                 $stok = StokIpa::where('id_ipa', $idIpa)
                     ->where('id_bahan', $item['id_bahan'])
                     ->lockForUpdate()
                     ->first();
 
-                if (!$stok || $stok->stok < $item['jumlah']) {
-                    throw new \Exception("Stok tidak cukup untuk bahan ID " . $item['id_bahan']);
+                if (!$stok) {
+                    throw new \Exception(
+                        'Stok bahan tidak ditemukan.'
+                    );
                 }
 
-                $stok->decrement('stok', $item['jumlah']);
+                /*
+                |--------------------------------------------------------------------------
+                | Cek stok
+                |--------------------------------------------------------------------------
+                */
+
+                if ($jumlah > $stok->stok) {
+
+                    $bahan = $stok->bahan
+                        ? $stok->bahan->nama_bahan
+                        : 'Bahan ID ' . $item['id_bahan'];
+
+                    throw new \Exception(
+                        "Stok {$bahan} tidak mencukupi. " .
+                        "Stok tersedia: {$stok->stok}"
+                    );
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | Simpan detail transaksi
+                |--------------------------------------------------------------------------
+                */
+
+                IpaTrxKeluar::create([
+                    'id_transaksi' => $request->no_transaksi,
+                    'id_bahan'     => $item['id_bahan'],
+                    'id_satuan'    => $item['id_satuan'],
+                    'jumlah'       => $jumlah,
+                    'id_ipa'       => $idIpa,
+                    'user'         => $user->id,
+                ]);
+
+                /*
+                |--------------------------------------------------------------------------
+                | Kurangi stok IPA
+                |--------------------------------------------------------------------------
+                */
+
+                $stok->stok = $stok->stok - $jumlah;
+                $stok->save();
             }
 
-        });
+            DB::commit();
 
-        return response()->json([
-            'message' => 'Bahan berhasil dikeluarkan dari gudang IPA'
-        ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Transaksi bahan kimia keluar berhasil disimpan.',
+                'no_transaksi' => $request->no_transaksi,
+            ]);
+
+        } catch (\Throwable $e) {
+
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 422);
+        }
     }
+
+
 }
