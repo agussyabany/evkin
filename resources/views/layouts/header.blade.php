@@ -257,9 +257,9 @@
             </li>
             
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Bahan Keluar</p>
+              <a href="{{ url('/ipa/transaksi-keluar') }}"
+                class="btn btn-info">
+                  <i class="fa fa-history"></i> RIWAYAT KELUAR
               </a>
             </li>
         @endif

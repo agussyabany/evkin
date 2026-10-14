@@ -32,6 +32,7 @@
                                                           <th>Jumlah</th>
                                                           <th>Satuan</th>
                                                           <th>Kilo</th>
+                                                          <th>Kartu Stok</th>
                                                       </tr>
                                                   </thead>
                                                   <tbody>
@@ -44,6 +45,13 @@
                                                           <td>{{ $item->stok}}</td>
                                                           <td>{{ $item->bahan->satuan->nama_satuan}}</td>
                                                           <td>{{ $item->bahan->ukuran * $item->stok }}</td>
+                                                          <td class="text-center">
+                                                            <a href="{{ route('ipa.kartu-stok', $item->id_bahan) }}"
+                                                              class="btn btn-info btn-sm"
+                                                              title="Lihat Kartu Stok">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
+                                                        </td>
                                                       </tr>
                                                       @endforeach
                                                   </tbody>

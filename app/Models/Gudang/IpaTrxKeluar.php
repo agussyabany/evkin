@@ -43,4 +43,13 @@ class IpaTrxKeluar extends Model
             'id_transaksi'
         );
     }
+
+    public function detail()
+    {
+        return $this->hasMany(
+            IpaTrxKeluar::class,
+            'id_transaksi',
+            'id_transaksi'
+        );
+    }
 }

@@ -34,8 +34,8 @@
 <script src="{{ asset('assets/dist/js/dashboard/operasional.js')}}"></script>
 <script src="{{ asset('assets/dist/js/dashboard/pelayanan.js')}}"></script>
 <script src="{{ asset('assets/dist/js/dashboard/home.js')}}"></script>
-<script src="{{ asset('assets/dist/js/dashboard/ipa.js')}}"></script>
 <script src="{{ asset('assets/dist/js/dashboard/gudang.js')}}"></script>
+<script src="{{ asset('assets/dist/js/dashboard/ipa.js')}}"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
 

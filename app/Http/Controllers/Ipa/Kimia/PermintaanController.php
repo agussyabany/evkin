@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ipa\Kimia;
 use App\Http\Controllers\Controller;
 use App\Models\Gudang\Stok;
 use App\Models\Gudang\StokIpa;
+use App\Models\Gudang\StokIpaLog;
 use App\Models\Ipa\Kimia\GudangPermintaanKeterangan;
 use App\Models\Ipa\Kimia\Permintaan;
 use App\Models\Ipa\Kimia\PermintaanDetail;
@@ -242,108 +243,137 @@ public function kirim(Request $request, $id)
 public function terimaIpa(Request $request, $id)
 {
     $request->validate([
-        'items' => 'required|array'
+        'items' => 'required|array|min:1',
+        'items.*.detail_id' => 'required|integer',
+        'items.*.qty' => 'required|numeric|min:0',
+        'items.*.kondisi' => 'required|in:sesuai,kurang,lebih',
     ]);
 
     DB::transaction(function () use ($request, $id) {
 
-        $permintaan = Permintaan::with('details')->findOrFail($id);
+        $user = auth()->user();
+
+        $permintaan = Permintaan::with('details')
+            ->lockForUpdate()
+            ->findOrFail($id);
+            
+    if ((int) $permintaan->status === 5) {
+        throw new \RuntimeException(
+            'Permintaan ini sudah diterima IPA dan tidak dapat diproses kembali.'
+        );
+    }
 
         foreach ($request->items as $item) {
 
-            $detail = PermintaanDetail::findOrFail($item['detail_id']);
+            $detail = PermintaanDetail::where('id', $item['detail_id'])
+                ->where('permintaan_id', $permintaan->id)
+                ->lockForUpdate()
+                ->firstOrFail();
 
-            $qtyTerima = (int) $item['qty'];
-            $kondisi   = $item['kondisi']; // sesuai | kurang | lebih
+            $qtyTerima = (float) $item['qty'];
+            $kondisi = $item['kondisi'];
 
-            // ===============================
-            // 1️⃣ SIMPAN KETERANGAN PER ITEM
-            // ===============================
+            // 1. Simpan keterangan penerimaan
             GudangPermintaanKeterangan::create([
                 'permintaan_detail_id' => $detail->id,
-                'tahap'      => 'terima_ipa',
-                'kondisi'    => $kondisi,
-                'qty'        => $qtyTerima,
-                'user_id'    => auth()->id(),
-                'sumber'     => 2
+                'tahap'     => 'terima_ipa',
+                'kondisi'   => $kondisi,
+                'qty'       => $qtyTerima,
+                'user_id'   => $user->id,
+                'sumber'    => 2,
             ]);
 
-            // ===============================
-            // 2️⃣ UPDATE REALISASI DI DETAIL
-            // ===============================
+            // 2. Simpan jumlah yang benar-benar diterima
             $detail->update([
-                'terima' => $qtyTerima
+                'terima' => $qtyTerima,
             ]);
 
-            // ===============================
-            // 3️⃣ TAMBAH STOK GUDANG IPA
-            // ===============================
+            // 3. Tambahkan stok IPA dan catat kartu stok
             $stokIpa = StokIpa::where('id_ipa', $permintaan->id_ipa)
                 ->where('id_bahan', $detail->id_bahan)
                 ->lockForUpdate()
                 ->first();
 
+            $stokAwal = $stokIpa
+                ? (float) $stokIpa->stok
+                : 0;
+
+            $stokAkhir = $stokAwal + $qtyTerima;
+
             if ($stokIpa) {
-                // UPDATE (aman pakai stok + qty)
-                $stokIpa->increment('stok', $qtyTerima);
+                $stokIpa->update([
+                    'stok' => $stokAkhir,
+                ]);
             } else {
-                // INSERT (stok awal = qty diterima)
                 StokIpa::create([
-                    'id_ipa'   => $permintaan->id_ipa,
-                    'id_bahan'=> $detail->id_bahan,
-                    'stok'    => $qtyTerima
+                    'id_ipa'    => $permintaan->id_ipa,
+                    'id_bahan'  => $detail->id_bahan,
+                    'stok'      => $stokAkhir,
                 ]);
             }
 
-            // ===============================
-            // 4️⃣ JIKA KONDISI = LEBIH
-            // ===============================
+            // Log mutasi masuk gudang IPA
+            StokIpaLog::create([
+                'id_ipa'       => $permintaan->id_ipa,
+                'id_bahan'     => $detail->id_bahan,
+                'jenis'        => 'masuk',
+                'awal'         => $stokAwal,
+                'jumlah'       => $qtyTerima,
+                'akhir'        => $stokAkhir,
+                'id_transaksi' => $permintaan->no_permintaan,
+                'user_id'      => $user->id,
+            ]);
+
+            // 4. Jika kondisi lebih, kurangi stok gudang utama
             if ($kondisi === 'lebih') {
 
                 $stokGudang = Stok::where('id_bahan', $detail->id_bahan)
                     ->lockForUpdate()
                     ->firstOrFail();
 
-                $stokAwal = $stokGudang->stok;
+                $stokGudangAwal = (float) $stokGudang->stok;
 
-                // kurangi stok gudang utama
+                if ($qtyTerima > $stokGudangAwal) {
+                    throw new \RuntimeException(
+                        'Stok gudang utama tidak mencukupi untuk bahan ID '
+                        . $detail->id_bahan
+                    );
+                }
+
+                $stokGudangAkhir = $stokGudangAwal - $qtyTerima;
+
                 $stokGudang->update([
-                    'stok' => $stokAwal - $qtyTerima
+                    'stok' => $stokGudangAkhir,
                 ]);
 
-                // log stok gudang
                 StokLog::create([
                     'id_bahan'      => $detail->id_bahan,
-                    'awal'          => $stokAwal,
+                    'awal'          => $stokGudangAwal,
                     'keluar'        => $qtyTerima,
-                    'akhir'         => $stokAwal - $qtyTerima,
+                    'akhir'         => $stokGudangAkhir,
                     'permintaan_id' => $permintaan->id,
-                    'user_id'       => auth()->id(),
+                    'user_id'       => $user->id,
                 ]);
             }
         }
 
-        // ===============================
-        // 5️⃣ UPDATE STATUS PERMINTAAN
-        // ===============================
+        // 5. Update status permintaan
         $permintaan->update([
-            'status' => 5 // DITERIMA IPA
+            'status' => 5,
         ]);
 
-        // ===============================
-        // 6️⃣ LOG STATUS PERMINTAAN
-        // ===============================
+        // 6. Catat perubahan status
         PermintaanLog::create([
             'permintaan_id' => $permintaan->id,
             'status'        => 5,
-            'user_id'       => auth()->id(),
+            'user_id'       => $user->id,
             'id_ipa'        => $permintaan->id_ipa,
-            'id_jabatan'    => auth()->user()->jabatan
+            'id_jabatan'    => $user->jabatan,
         ]);
     });
 
     return response()->json([
-        'message' => 'Penerimaan barang IPA berhasil diproses'
+        'message' => 'Penerimaan barang IPA berhasil diproses',
     ]);
 }
 

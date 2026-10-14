@@ -883,12 +883,12 @@ $(document).ready(function () {
         |--------------------------------------------------------------------------
         */
 
-        let idIpa = "{{ Auth::user()->id_ipa }}";
+       
 
 
         let noTransaksi =
             'IPA-' +
-            idIpa +
+            namaIpa +
             '-' +
             tanggal +
             '-' +
@@ -928,7 +928,7 @@ $(document).ready(function () {
 
         $.ajax({
 
-            url: "{{ route('gudang-ipa.keluar.store') }}",
+            url: "/gudang-ipa/keluar",
 
             type: 'POST',
 
@@ -1012,7 +1012,122 @@ $(document).ready(function () {
     });
 
 });
+//Riwayat Keluar
+$(document).on('click', '.btn-detail', function () {
+    const noTransaksi = $(this).data('transaksi');
 
+    $('#detail-no-transaksi').text(noTransaksi);
+    $('#detail-tanggal').text('-');
+
+    $('#tbodyDetailKeluar').html(`
+        <tr>
+            <td colspan="4" class="text-center">Memuat data...</td>
+        </tr>
+    `);
+
+    $('#modalDetailKeluar').modal('show');
+
+    $.ajax({
+        url: '/ipa/transaksi-keluar/' +
+            encodeURIComponent(noTransaksi) + '/detail',
+        type: 'GET',
+
+        success: function (res) {
+            $('#detail-no-transaksi').text(
+                res.transaksi.id_transaksi
+            );
+
+            $('#detail-tanggal').text(
+                res.transaksi.created_at
+                    ? new Date(res.transaksi.created_at)
+                        .toLocaleString('id-ID')
+                    : '-'
+            );
+
+            let html = '';
+
+            if (!res.detail || res.detail.length === 0) {
+                html = `
+                    <tr>
+                        <td colspan="4" class="text-center">
+                            Tidak ada detail transaksi.
+                        </td>
+                    </tr>
+                `;
+            } else {
+                $.each(res.detail, function (i, item) {
+                    html += `
+                        <tr>
+                            <td class="text-center">${i + 1}</td>
+                            <td>${item.bahan?.nama_bahan ?? '-'}</td>
+                            <td class="text-right">${item.jumlah}</td>
+                            <td class="text-center">
+                                ${item.satuan?.nama_satuan ?? '-'}
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+
+            $('#tbodyDetailKeluar').html(html);
+        },
+
+        error: function (xhr) {
+            $('#tbodyDetailKeluar').html(`
+                <tr>
+                    <td colspan="4" class="text-center text-danger">
+                        Gagal mengambil detail transaksi.
+                    </td>
+                </tr>
+            `);
+
+            console.error(xhr.responseText);
+        }
+    });
+});
+//Batal Keluar
+$(document).on('click', '.btn-batal', function () {
+    
+    const noTransaksi = $(this).data('transaksi');
+    //  e.preventDefault();
+
+    // console.log('Tombol batal diklik');
+    // console.log('Nomor transaksi:', $(this).data('transaksi'));
+
+
+    if (!confirm(
+        'Yakin membatalkan transaksi ' + noTransaksi +
+        '?\nStok IPA akan dikembalikan.'
+    )) {
+        return;
+    }
+
+    const tombol = $(this);
+
+    tombol.prop('disabled', true);
+
+    $.ajax({
+        url: '/ipa/transaksi-keluar/' +
+            encodeURIComponent(noTransaksi) + '/batal',
+        type: 'POST',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content')
+        },
+
+        success: function (res) {
+            alert(res.message);
+            location.reload();
+        },
+
+        error: function (xhr) {
+            const pesan = xhr.responseJSON?.message
+                ?? 'Pembatalan transaksi gagal.';
+
+            alert(pesan);
+            tombol.prop('disabled', false);
+        }
+    });
+});
 
 
 })

@@ -14,7 +14,8 @@ class IpaKeluar extends Model
     protected $fillable = [
         'id_transaksi',
         'id_ipa',
-        'user'
+        'user',
+        'status'
     ];
 
    public function detail()
@@ -33,4 +34,13 @@ class IpaKeluar extends Model
             'id_ipa'
         );
     }
+
+    public function userRelasi()
+{
+    return $this->belongsTo(
+        \App\Models\User::class,
+        'user',
+        'id'
+    );
+}
 }

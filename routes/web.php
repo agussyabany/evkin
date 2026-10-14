@@ -227,8 +227,11 @@ Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
     Route::get('/ipa/keluar', [IpaKeluarController::class, 'index']);
     Route::post('/ipa/keluar', [IpaKeluarController::class, 'store']);
 
-    Route::get('/ipa/transaksi-keluar',[IpaController::class, 'transaksiKeluar']);
-    Route::post('/gudang-ipa/keluar',[IpaController::class, 'store'])->name('gudang-ipa.keluar.store');
+    Route::get('/ipa/transaksi-keluar',[IpaKeluarController::class, 'transaksiKeluar']);
+    Route::post('/gudang-ipa/keluar',[IpaKeluarController::class, 'store'])->name('gudang-ipa.keluar.store');
+    Route::get('/ipa/transaksi-keluar/{id}/detail',[IpaKeluarController::class, 'detailKeluar']);
+    Route::post('/ipa/transaksi-keluar/{id}/batal',[IpaKeluarController::class, 'batalKeluar']);
+    Route::get('/ipa/kartu-stok/{id_bahan}',[IpaKeluarController::class, 'kartuStok'])->name('ipa.kartu-stok');
 
 });
 
