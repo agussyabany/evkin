@@ -262,6 +262,12 @@
                   <i class="fa fa-history"></i> RIWAYAT KELUAR
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{ route('ipa.set-minimum-stok') }}" class="nav-link">
+                  <i class="nav-icon fas fa-sliders-h"></i>
+                  <p>Set Minimum Stok</p>
+              </a>
+          </li>
         @endif
           </ul>
         </li>

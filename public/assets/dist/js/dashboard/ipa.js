@@ -1128,6 +1128,45 @@ $(document).on('click', '.btn-batal', function () {
         }
     });
 });
+//Filter Stok IPA
+function filterTabelStok() {
+        const pencarian = ($('#cariBahan').val() || '')
+            .toLowerCase()
+            .trim();
 
+        const status = $('#filterStok').val() || '';
+        let jumlahTerlihat = 0;
+
+        $('#tabelStok tr[data-bahan]').each(function () {
+            const baris = $(this);
+            const namaBahan = String(baris.attr('data-bahan') || '')
+                .toLowerCase();
+
+            const statusBahan = String(baris.attr('data-status') || '');
+
+            const cocokNama = namaBahan.includes(pencarian);
+            const cocokStatus = status === '' || statusBahan === status;
+            const tampil = cocokNama && cocokStatus;
+
+            baris.toggle(tampil);
+
+            if (tampil) {
+                jumlahTerlihat++;
+            }
+        });
+
+        $('#barisTidakDitemukan').toggle(jumlahTerlihat === 0);
+    }
+
+    $('#cariBahan').on('input keyup search', filterTabelStok);
+    $('#filterStok').on('change', filterTabelStok);
+
+    $('#resetFilter').on('click', function () {
+        $('#cariBahan').val('');
+        $('#filterStok').val('');
+        filterTabelStok();
+    });
+
+    filterTabelStok();
 
 })

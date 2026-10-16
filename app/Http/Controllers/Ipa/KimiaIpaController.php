@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ipa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Gudang\Bahan;
+use App\Models\Gudang\GudangStokIpaSetting;
 use App\Models\Gudang\Stok;
 use App\Models\Gudang\StokIpa;
 use Illuminate\Http\Request;
@@ -18,9 +19,16 @@ class KimiaIpaController extends Controller
     }
     public function ipaGudang()
     {
-        $idIPa = Auth::user()->ipa;
-        $bahan = Bahan::with('satuan')->orderBy('nama_bahan')->get();
-        $stok = StokIpa::with(['bahan.satuan'])->where('id_ipa',$idIPa)->get();
-        return view('ipa.gudangIpa',compact(['stok','bahan']));
+        $idIpa = auth()->user()->ipa;
+
+    $stok = StokIpa::with(['bahan.satuan'])
+        ->where('id_ipa', $idIpa)
+        ->get();
+
+    // Ambil batas minimum berdasarkan IPA dan bahan
+    $minimumStok = GudangStokIpaSetting::where('id_ipa', $idIpa)
+        ->pluck('stok_minimum', 'id_bahan');
+
+    return view('ipa.gudangIpa', compact('stok', 'minimumStok'));
     }
 }

@@ -13,7 +13,7 @@ class IpaKeluarController extends Controller
 {
     public function index()
     {
-        $idIpa = auth()->user()->id_ipa;
+        $idIpa = auth()->user()->ipa;
 
         $stok = StokIpa::with(['bahan.satuan'])
             ->where('id_ipa', $idIpa)

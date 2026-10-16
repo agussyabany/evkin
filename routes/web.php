@@ -18,6 +18,7 @@ use App\Http\Controllers\Dashboard\SdmController as DashboardSdmController;
 use App\Http\Controllers\Evkin\EvkinController;
 use App\Http\Controllers\Gudang\Gudangcontroller;
 use App\Http\Controllers\Gudang\GudangMasukController;
+use App\Http\Controllers\Gudang\GudangStokIpaSettingController;
 use App\Http\Controllers\Gudang\LaporanMasukController;
 use App\Http\Controllers\Ipa\IpaController;
 use App\Http\Controllers\Ipa\Kimia\ApprovalController;
@@ -232,6 +233,9 @@ Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
     Route::get('/ipa/transaksi-keluar/{id}/detail',[IpaKeluarController::class, 'detailKeluar']);
     Route::post('/ipa/transaksi-keluar/{id}/batal',[IpaKeluarController::class, 'batalKeluar']);
     Route::get('/ipa/kartu-stok/{id_bahan}',[IpaKeluarController::class, 'kartuStok'])->name('ipa.kartu-stok');
+
+    Route::get('/ipa/set-minimum-stok',[GudangStokIpaSettingController::class, 'index'])->name('ipa.set-minimum-stok');
+    Route::post('/ipa/set-minimum-stok',[GudangStokIpaSettingController::class, 'update'])->name('ipa.set-minimum-stok.update');
 
 });
 
