@@ -196,12 +196,11 @@
                                            {{ number_format($batasMinimum, 2, ',', '.') }}
                                         </td>
                                         <td class="text-center">
-                                            <a href="{{ route('ipa.kartu-stok', $item->id_bahan) }}"
-                                               class="btn btn-info btn-sm"
-                                               title="Lihat Kartu Stok"
-                                               aria-label="Lihat kartu stok {{ $item->bahan->nama_bahan ?? '' }}">
-                                                <i class="fas fa-eye mr-1"></i> Lihat
-                                            </a>
+                                            <button type="button"
+                                                    class="btn btn-info btn-sm btn-kartu-stok"
+                                                    data-url="{{ route('ipa.kartu-stok.modal', $item->id_bahan) }}">
+                                                <i class="fas fa-eye"></i> Lihat
+                                            </button>
                                         </td>
                                     </tr>
                                 @empty
@@ -299,6 +298,42 @@
                     <i class="fas fa-save mr-1"></i> Simpan Pengeluaran
                 </button>
             </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalKartuStok" tabindex="-1"
+     role="dialog" aria-labelledby="judulKartuStok" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title" id="judulKartuStok">
+                    <i class="fas fa-clipboard-list mr-1"></i>
+                    Kartu Stok Gudang IPA
+                </h5>
+
+                <button type="button" class="close text-white"
+                        data-dismiss="modal" aria-label="Tutup">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body" id="isiKartuStok" data-url="">
+                <div class="text-center p-4">
+                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                    <p class="mt-2">Memuat kartu stok...</p>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">
+                    Tutup
+                </button>
+            </div>
+
         </div>
     </div>
 </div>

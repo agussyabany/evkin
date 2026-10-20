@@ -210,86 +210,93 @@
 
         @endif
 
-        {{-- IPA --}}
-        @if (Auth::user()->hasAnyRole(['agus','ipa','gudang']))
-        <li class="nav-item menu-close">
-          <a href="#" class="nav-link active">
-            <p>
-              BAHAN KIMIA
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-          @if (Auth::user()->hasAnyRole(['agus','gudang']))
-            <li class="nav-item">
-              <a href="/gudang" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Stok</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/masuk" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Bahan Masuk</p>
-              </a>
-            </li>
-          @endif
+       {{-- MENU BAHAN KIMIA --}}
+@if (Auth::user()->hasAnyRole(['agus', 'ipa', 'gudang']))
+<li class="nav-item {{ request()->is('gudang*', 'masuk*', 'ipaGudang*', 'dataMinta*', 'stok*', 'ipa/transaksi-keluar*', 'ipa/set-minimum-stok*') ? 'menu-open' : '' }}">
 
-          <li class="nav-item">
-              <a href="/ipaGudang" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Stok IPA</p>
-              </a>
-          </li>
-          <li class="nav-item">
-              <a href="/dataMinta" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Permintaan</p>
-              </a>
-            </li>
+    <a href="#" class="nav-link active">
+        <i class="nav-icon fas fa-flask"></i>
+        <p>
+            BAHAN KIMIA
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
 
-        @if (Auth::user()->hasAnyRole(['agus','ipa']))
+    <ul class="nav nav-treeview">
+
+        {{-- OPERASIONAL --}}
+        <li class="nav-header">OPERASIONAL</li>
+
+        @if (Auth::user()->hasAnyRole(['agus', 'gudang']))
         <li class="nav-item">
-              <a href="/stok" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Stok Gudang</p>
-              </a>
-            </li>
-            
-            <li class="nav-item">
-              <a href="{{ url('/ipa/transaksi-keluar') }}"
-                class="btn btn-info">
-                  <i class="fa fa-history"></i> RIWAYAT KELUAR
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('ipa.set-minimum-stok') }}" class="nav-link">
-                  <i class="nav-icon fas fa-sliders-h"></i>
-                  <p>Set Minimum Stok</p>
-              </a>
-          </li>
-        @endif
-          </ul>
+            <a href="/gudang"
+               class="nav-link {{ request()->is('gudang*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-warehouse"></i>
+                <p>Stok Gudang Utama</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="/masuk"
+               class="nav-link {{ request()->is('masuk*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-truck-loading"></i>
+                <p>Bahan Masuk</p>
+            </a>
         </li>
         @endif
-        
-        @if (Auth::user()->hasAnyRole(['agus']))
-        <li class="nav-item menu-close">
-          <a href="#" class="nav-link active">
-            <p>
-              SETTING
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="/guna" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>User</p>
-              </a>
-            </li>
+
+        <li class="nav-item">
+            <a href="/ipaGudang"
+               class="nav-link {{ request()->is('ipaGudang*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-boxes"></i>
+                <p>Stok IPA</p>
+                <span class="right badge badge-info">Stok</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="/dataMinta"
+               class="nav-link {{ request()->is('dataMinta*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-file-alt"></i>
+                <p>Permintaan Bahan</p>
+            </a>
+        </li>
+
+        @if (Auth::user()->hasAnyRole(['agus', 'ipa']))
+        <li class="nav-item">
+            <a href="/stok"
+               class="nav-link {{ request()->is('stok*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-box-open"></i>
+                <p>Referensi Stok Gudang</p>
+            </a>
+        </li>
+
+        {{-- TRANSAKSI --}}
+        <li class="nav-header">TRANSAKSI</li>
+
+        <li class="nav-item">
+            <a href="{{ url('/ipa/transaksi-keluar') }}"
+               class="nav-link {{ request()->is('ipa/transaksi-keluar*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-history"></i>
+                <p>Riwayat Barang Keluar</p>
+            </a>
+        </li>
+
+        {{-- PENGATURAN --}}
+        <li class="nav-header">PENGATURAN</li>
+
+        <li class="nav-item">
+            <a href="{{ route('ipa.set-minimum-stok') }}"
+               class="nav-link {{ request()->is('ipa/set-minimum-stok*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-sliders-h"></i>
+                <p>Minimum Stok IPA</p>
+            </a>
         </li>
         @endif
+
+    </ul>
+</li>
+@endif
         
       </ul>
     </nav>

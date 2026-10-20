@@ -16,6 +16,7 @@ use App\Http\Controllers\Dashboard\MobileController;
 use App\Http\Controllers\Dashboard\PelayananController as DashboardPelayananController;
 use App\Http\Controllers\Dashboard\SdmController as DashboardSdmController;
 use App\Http\Controllers\Evkin\EvkinController;
+use App\Http\Controllers\Gudang\DashboardGudangController;
 use App\Http\Controllers\Gudang\Gudangcontroller;
 use App\Http\Controllers\Gudang\GudangMasukController;
 use App\Http\Controllers\Gudang\GudangStokIpaSettingController;
@@ -222,6 +223,8 @@ Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
     Route::post('/permintaan/{id}/approve',[ApprovalController::class, 'approve'])->middleware(['auth']);
     Route::post('/permintaan/{id}/kirim', [PermintaanController::class, 'kirim']);
     Route::get('/permintaan/{id}/surat-jalan',[PermintaanController::class, 'suratJalan'])->name('permintaan.suratjalan');
+
+    Route::get('/dashboard-gudang', [DashboardGudangController::class,'index'])->name('gudang.dashboard');
     
     //Terima IPA
     Route::post('/permintaan/{id}/terima-ipa', [PermintaanController::class, 'terimaIpa']);
@@ -236,6 +239,8 @@ Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
 
     Route::get('/ipa/set-minimum-stok',[GudangStokIpaSettingController::class, 'index'])->name('ipa.set-minimum-stok');
     Route::post('/ipa/set-minimum-stok',[GudangStokIpaSettingController::class, 'update'])->name('ipa.set-minimum-stok.update');
+
+    Route::get('/ipa/kartu-stok/{id_bahan}/modal',[IpaKeluarController::class, 'kartuStokModal'])->name('ipa.kartu-stok.modal');
 
 });
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Ipa\Kimia;
 
 use App\Http\Controllers\Controller;
+use App\Models\Gudang\Bahan;
+use App\Models\Gudang\GudangStokIpaSetting;
 use App\Models\Gudang\IpaKeluar;
 use App\Models\Gudang\IpaTrxKeluar;
 use App\Models\Gudang\StokIpa;
@@ -287,6 +289,53 @@ public function kartuStok(Request $request, $id_bahan)
         'bahan',
         'logs',
         'stokSekarang'
+    ));
+}
+
+public function kartuStokModal(Request $request, $id_bahan)
+{
+    $user = auth()->user();
+    $idIpa = $user->ipa;
+
+    $request->validate([
+        'tanggal_awal' => 'nullable|date',
+        'tanggal_akhir' => 'nullable|date|after_or_equal:tanggal_awal',
+    ]);
+
+    $bahan = Bahan::findOrFail($id_bahan);
+
+    $stok = StokIpa::where('id_ipa', $idIpa)
+        ->where('id_bahan', $id_bahan)
+        ->first();
+
+    abort_unless($stok, 404, 'Data stok bahan tidak ditemukan.');
+
+    $stokMinimum = GudangStokIpaSetting::where('id_ipa', $idIpa)
+        ->where('id_bahan', $id_bahan)
+        ->value('stok_minimum') ?? 0;
+
+    $query = StokIpaLog::with('userRelasi')
+        ->where('id_ipa', $idIpa)
+        ->where('id_bahan', $id_bahan);
+
+    if ($request->filled('tanggal_awal')) {
+        $query->whereDate('created_at', '>=', $request->tanggal_awal);
+    }
+
+    if ($request->filled('tanggal_akhir')) {
+        $query->whereDate('created_at', '<=', $request->tanggal_akhir);
+    }
+
+    $logs = $query
+        ->orderBy('created_at')
+        ->orderBy('id')
+        ->get();
+
+    return view('ipa.partials.kartu-stok-modal', compact(
+        'bahan',
+        'stok',
+        'stokMinimum',
+        'logs'
     ));
 }
 

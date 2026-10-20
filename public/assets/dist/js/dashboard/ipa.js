@@ -1169,4 +1169,55 @@ function filterTabelStok() {
 
     filterTabelStok();
 
+
+    //kartu stok
+    $(document).on('click', '.btn-kartu-stok', function () {
+    const url = $(this).data('url');
+
+    $('#isiKartuStok').html(`
+        <div class="text-center p-4">
+            <i class="fas fa-spinner fa-spin fa-2x"></i>
+            <p class="mt-2">Memuat kartu stok...</p>
+        </div>
+    `);
+
+    $('#modalKartuStok').modal('show');
+
+    $.get(url)
+        .done(function (html) {
+            $('#isiKartuStok').html(html);
+        })
+        .fail(function (xhr) {
+            $('#isiKartuStok').html(`
+                <div class="alert alert-danger">
+                    Gagal memuat kartu stok.
+                    Periksa route, controller, dan log Laravel.
+                </div>
+            `);
+
+            console.error(xhr.responseText);
+        });
+});
+
+$(document).on('submit', '#formFilterKartuStok', function (e) {
+    e.preventDefault();
+
+    const url = $('.btn-kartu-stok').filter(function () {
+        return $(this).data('url') === window.kartuStokUrl;
+    }).data('url');
+
+    const form = $(this);
+    const idBahanUrl = $('#isiKartuStok').data('url');
+
+    $.get(idBahanUrl, form.serialize())
+        .done(function (html) {
+            $('#isiKartuStok').html(html);
+            $('#isiKartuStok').data('url', idBahanUrl);
+        })
+        .fail(function (xhr) {
+            console.error(xhr.responseText);
+            alert('Gagal memfilter kartu stok.');
+        });
+});
+
 })
