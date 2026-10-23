@@ -28,6 +28,7 @@ use App\Http\Controllers\Ipa\Kimia\PermintaanController;
 use App\Http\Controllers\Ipa\KimiaIpaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Gudang\MonitoringIpaController;
 use App\Models\Evkin\Pelayanan;
 use Illuminate\Support\Facades\Route;
 
@@ -224,7 +225,7 @@ Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
     Route::post('/permintaan/{id}/kirim', [PermintaanController::class, 'kirim']);
     Route::get('/permintaan/{id}/surat-jalan',[PermintaanController::class, 'suratJalan'])->name('permintaan.suratjalan');
 
-    Route::get('/dashboard-gudang', [DashboardGudangController::class,'index'])->name('gudang.dashboard');
+    
     
     //Terima IPA
     Route::post('/permintaan/{id}/terima-ipa', [PermintaanController::class, 'terimaIpa']);
@@ -259,5 +260,9 @@ Route::middleware('auth','verified','role:agus|gudang')->group(function () {
     Route::get('masuk', [LaporanMasukController::class, 'index']);
     Route::get('/gudang-masuk/detail/{id}',[LaporanMasukController::class, 'detail']);
     Route::get('/stok/kartu/{id}', [GudangController::class, 'kartuStok']);
+
+    Route::get('/dashboard-gudang', [DashboardGudangController::class,'index'])->name('gudang.dashboard');
+
+    Route::get('/monitoring-ipa/stok', [MonitoringIpaController::class,'index'])->name('monitoring-ipa.stok');
 });
 require __DIR__.'/auth.php';
