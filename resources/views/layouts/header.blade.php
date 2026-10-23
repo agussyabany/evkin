@@ -328,8 +328,17 @@
                                         <p>Minimum Stok IPA</p>
                                     </a>
                                 </li>
+                                @if (Auth::user()->hasAnyRole(['agus']))
+                                <li class="nav-item">
+                                        <a href="/guna" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>User</p>
+                                        </a>
+                                    </li>
+                                </li>
+                                 @endif
                             @endif
-
+                       
                         </ul>
                     </li>
                 @endif
