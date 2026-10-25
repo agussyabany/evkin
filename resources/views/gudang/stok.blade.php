@@ -2,169 +2,72 @@
 
 @section('content')
     <div class="container-fluid">
-
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <div>
-                <h3>Stok Seluruh IPA</h3>
-                <p class="text-muted mb-0">
-                    Monitoring stok bahan kimia di seluruh IPA
-                </p>
-            </div>
-        </div>
-
-        {{-- Ringkasan --}}
-        <div class="row">
-            <div class="col-md-4">
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>{{ $totalJenisStok }}</h3>
-                        <p>Data Stok Bahan IPA</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-boxes"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="small-box bg-danger">
-                    <div class="inner">
-                        <h3>{{ $stokHabis }}</h3>
-                        <p>Stok Habis</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="small-box bg-warning">
-                    <div class="inner">
-                        <h3>{{ $stokMenipis }}</h3>
-                        <p>Stok Menipis</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-exclamation-circle"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- Filter --}}
-        <div class="card">
-            <div class="card-body">
-                <form method="GET" action="{{ route('monitoring-ipa.stok') }}">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label>IPA</label>
-                            <select name="id_ipa" class="form-control">
-                                <option value="">Semua IPA</option>
-                                @foreach ($daftarIpa as $idIpa)
-                                    <option value="{{ $idIpa }}" {{ request('id_ipa') == $idIpa ? 'selected' : '' }}>
-                                        IPA {{ $idIpa }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-md-5">
-                            <label>Nama Bahan Kimia</label>
-                            <input type="text" name="search" class="form-control" value="{{ request('search') }}"
-                                placeholder="Cari nama bahan...">
-                        </div>
-
-                        <div class="col-md-4 d-flex align-items-end">
-                            <button type="submit" class="btn btn-primary mr-2">
-                                <i class="fas fa-search"></i> Cari
-                            </button>
-
-                            <a href="{{ route('monitoring-ipa.stok') }}" class="btn btn-secondary">
-                                Reset
-                            </a>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        {{-- Tabel stok --}}
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Daftar Stok IPA</h3>
+                <h3 class="card-title">
+                    <i class="fas fa-table mr-2"></i>
+                    Laporan Stok Bahan Kimia Seluruh IPA
+                </h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-success btn-sm" onclick="window.print()">
+                        <i class="fas fa-print"></i> Cetak
+                    </button>
+                </div>
             </div>
 
-            <div class="card-body table-responsive">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>IPA</th>
-                            <th>Bahan Kimia</th>
-                            <th>Satuan</th>
-                            <th>Stok Saat Ini</th>
-                            <th>Stok Minimum</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($stok as $item)
-                            @php
-                                $key = $item->id_ipa . '-' . $item->id_bahan;
-                                $minimum = (float) optional($minimumStok->get($key))->stok_minimum;
-
-                                $jumlah = (float) $item->stok;
-
-                                if ($jumlah <= 0) {
-                                    $status = 'Habis';
-                                    $badge = 'danger';
-                                } elseif ($minimum > 0 && $jumlah <= $minimum) {
-                                    $status = 'Menipis';
-                                    $badge = 'warning';
-                                } else {
-                                    $status = 'Normal';
-                                    $badge = 'success';
-                                }
-                            @endphp
-
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm text-center">
+                        <thead>
                             <tr>
-                                <td>
-                                    {{ $stok->firstItem() + $loop->index }}
-                                </td>
-                                <td>IPA {{ $item->id_ipa }}</td>
-                                <td>
-                                    {{ $item->bahan->nama ?? 'Bahan tidak ditemukan' }}
-                                </td>
-                                <td>
-                                    {{ $item->bahan->satuan->nama ?? '-' }}
-                                </td>
-                                <td class="text-right">
-                                    {{ number_format($jumlah, 2, ',', '.') }}
-                                </td>
-                                <td class="text-right">
-                                    {{ number_format($minimum, 2, ',', '.') }}
-                                </td>
-                                <td>
-                                    <span class="badge badge-{{ $badge }}">
-                                        {{ $status }}
-                                    </span>
-                                </td>
+                                <th colspan="{{ $ipas->count() + 1 }}" class="text-center bg-light">
+                                    LAPORAN STOK BAHAN KIMIA PER IPA
+                                </th>
                             </tr>
-                        @empty
                             <tr>
-                                <td colspan="7" class="text-center">
-                                    Data stok tidak ditemukan.
-                                </td>
+                                <th rowspan="2" class="align-middle">
+                                    BAHAN KIMIA
+                                </th>
+                                <th colspan="{{ $ipas->count() }}">
+                                    IPA
+                                </th>
                             </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                            <tr>
+                                @foreach ($ipas as $ipa)
+                                    <th>{{ strtoupper($ipa->nama_ipa) }}</th>
+                                @endforeach
+                            </tr>
+                        </thead>
 
-                <div class="mt-3">
-                    {{ $stok->links() }}
+                        <tbody>
+                            @forelse ($bahans as $bahan)
+                                <tr>
+                                    <td class="text-left">
+                                        {{ $bahan->nama }}
+                                    </td>
+
+                                    @foreach ($ipas as $ipa)
+                                        <td>
+                                            @if (isset($stokMatrix[$bahan->id][$ipa->id]))
+                                                {{ number_format($stokMatrix[$bahan->id][$ipa->id], 2, ',', '.') }}
+                                            @else
+                                                0
+                                            @endif
+                                        </td>
+                                    @endforeach
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="{{ $ipas->count() + 1 }}">
+                                        Belum ada data bahan atau stok IPA.
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-
     </div>
 @endsection

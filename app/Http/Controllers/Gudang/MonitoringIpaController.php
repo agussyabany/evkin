@@ -12,69 +12,36 @@ class MonitoringIpaController extends Controller
 {
     public function index(Request $request)
     {
-        $query = StokIpa::with(['bahan.satuan']);
+    // Ambil IPA untuk kolom laporan.
+    // GUDANG dan IT tidak ditampilkan sebagai IPA.
+    $ipas = DB::table('ipas')
+        ->whereNotIn('nama_ipa', ['GUDANG', 'IT'])
+        ->orderBy('nama_ipa')
+        ->get();
 
-        // Filter berdasarkan IPA
-        if ($request->filled('id_ipa')) {
-            $query->where('id_ipa', $request->id_ipa);
-        }
+    // Ambil seluruh stok beserta data bahan
+    $dataStok = StokIpa::with('bahan')->get();
 
-        // Pencarian nama bahan kimia
-        if ($request->filled('search')) {
-            $search = $request->search;
+    // Daftar bahan untuk baris laporan
+    $bahans = $dataStok
+        ->pluck('bahan')
+        ->filter()
+        ->unique('id')
+        ->sortBy('nama_bahan')
+        ->values();
 
-            $query->whereHas('bahan', function ($q) use ($search) {
-                $q->where('nama', 'like', "%{$search}%");
-            });
-        }
+    // Susun stok berdasarkan ID bahan dan ID IPA
+    $stokMatrix = [];
 
-        $stok = $query
-            ->orderBy('id_ipa')
-            ->orderBy('id_bahan')
-            ->paginate(20)
-            ->withQueryString();
+    foreach ($dataStok as $item) {
+        $stokMatrix[$item->id_bahan][$item->id_ipa] =
+            (float) $item->stok;
+    }
 
-        // Ambil stok minimum sesuai IPA dan bahan
-        $minimumStok = GudangStokIpaSetting::query()
-            ->get()
-            ->keyBy(fn ($item) => $item->id_ipa . '-' . $item->id_bahan);
-
-        // Ringkasan stok seluruh IPA
-        $semuaStok = StokIpa::query()->get();
-
-        $semuaMinimum = GudangStokIpaSetting::query()
-            ->get()
-            ->keyBy(fn ($item) => $item->id_ipa . '-' . $item->id_bahan);
-
-        $totalJenisStok = $semuaStok->count();
-
-        $stokHabis = $semuaStok->filter(
-            fn ($item) => (float) $item->stok <= 0
-        )->count();
-
-        $stokMenipis = $semuaStok->filter(function ($item) use ($semuaMinimum) {
-            $key = $item->id_ipa . '-' . $item->id_bahan;
-            $minimum = (float) optional($semuaMinimum->get($key))->stok_minimum;
-
-            return (float) $item->stok > 0
-                && (float) $item->stok <= $minimum
-                && $minimum > 0;
-        })->count();
-
-        // Daftar IPA berdasarkan ID yang tersedia pada tabel stok
-        $daftarIpa = DB::table('gudang_stok_ipa')
-            ->select('id_ipa')
-            ->distinct()
-            ->orderBy('id_ipa')
-            ->pluck('id_ipa');
-
-        return view('gudang.stok', compact(
-            'stok',
-            'minimumStok',
-            'daftarIpa',
-            'totalJenisStok',
-            'stokHabis',
-            'stokMenipis'
-        ));
+    return view('gudang.stok', compact(
+        'ipas',
+        'bahans',
+        'stokMatrix'
+    ));
     }
 }
