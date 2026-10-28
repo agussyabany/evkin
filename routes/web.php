@@ -29,6 +29,7 @@ use App\Http\Controllers\Ipa\KimiaIpaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Gudang\MonitoringIpaController;
+use App\Http\Controllers\ProfilController;
 use App\Models\Evkin\Pelayanan;
 use Illuminate\Support\Facades\Route;
 
@@ -264,5 +265,10 @@ Route::middleware('auth','verified','role:agus|gudang')->group(function () {
     Route::get('/dashboard-gudang', [DashboardGudangController::class,'index'])->name('gudang.dashboard');
 
     Route::get('/monitoring-ipa/stok', [MonitoringIpaController::class,'index'])->name('monitoring-ipa.stok');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::put('/profil/password', [ProfilController::class, 'updatePassword'])
+        ->name('profil.password.update');
 });
 require __DIR__.'/auth.php';

@@ -134,5 +134,12 @@ function changeBulanTahun() {
     var bulanAkhir = document.getElementById('selectBulanAkhir').value;
     window.location.href = '?tahun=' + tahun + '&bulan_awal=' + bulanAwal + '&bulan_akhir=' + bulanAkhir;
 }
+
+$(function () {
+    @if ($errors->any())
+        $('#modalProfilPengguna').modal('show');
+        $('#formUbahPassword').collapse('show');
+    @endif
+});
 </script>
 

@@ -79,7 +79,21 @@
                 <img src="{{ asset('assets/dist/img/logo.png') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="/logout" class="d-block">{{ Auth::user()->name }}</a>
+                <a href="#"
+                    class="d-flex align-items-center text-decoration-none text-light"
+                    data-toggle="modal"
+                    data-target="#modalProfilPengguna">
+
+                        {{-- <div class="mr-2 rounded-circle bg-primary d-flex align-items-center justify-content-center"
+                            style="width:36px;height:36px;min-width:36px;">
+                            <i class="fas fa-user"></i>
+                        </div> --}}
+
+                        <div class="text-truncate">
+                            <strong>{{ Auth::user()->name }}</strong>
+                            <small class="d-block text-muted">{{ Auth::user()->nipp }}</small>
+                        </div>
+                    </a>
             </div>
         </div>
 
@@ -282,6 +296,9 @@
                                 </li>
                             @endif
 
+                            
+
+                            @if (Auth::user()->hasAnyRole(['agus', 'ipa']))
                             <li class="nav-item">
                                 <a href="/ipaGudang"
                                     class="nav-link {{ request()->is('ipaGudang*') ? 'active' : '' }}">
@@ -298,8 +315,6 @@
                                     <p>Permintaan Bahan</p>
                                 </a>
                             </li>
-
-                            @if (Auth::user()->hasAnyRole(['agus', 'ipa']))
                                 <li class="nav-item">
                                     <a href="/stok" class="nav-link {{ request()->is('stok*') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-box-open"></i>
@@ -349,3 +364,161 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+
+{{-- MODAL PROFIL PENGGUNA --}}
+<div class="modal fade" id="modalProfilPengguna" tabindex="-1"
+     role="dialog" aria-labelledby="judulProfilPengguna"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0 shadow-lg"
+             style="border-radius:16px; overflow:hidden;">
+
+            <div class="text-white text-center p-4"
+                 style="background:linear-gradient(135deg,#1f4e79,#2878a5);">
+
+                <button type="button"
+                        class="close text-white"
+                        data-dismiss="modal"
+                        aria-label="Tutup"
+                        style="opacity:1;">
+                    <span>&times;</span>
+                </button>
+
+                <div class="rounded-circle bg-white text-primary d-flex align-items-center justify-content-center mx-auto mb-3"
+                     style="width:76px;height:76px;font-size:30px;">
+                    <i class="fas fa-user"></i>
+                </div>
+
+                <h5 class="mb-1" id="judulProfilPengguna">
+                    {{ Auth::user()->name }}
+                </h5>
+
+                <div style="opacity:.85;font-size:13px;">
+                    <i class="fas fa-shield-alt mr-1"></i>
+                    Akun EVKIN
+                </div>
+            </div>
+
+            <div class="modal-body p-4">
+
+                <div class="d-flex align-items-start mb-3">
+                    <div class="text-primary mr-3">
+                        <i class="fas fa-envelope fa-lg"></i>
+                    </div>
+                    <div>
+                        <small class="text-muted d-block">Email</small>
+                        <strong>{{ Auth::user()->email }}</strong>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-start mb-3">
+                    <div class="text-primary mr-3">
+                        <i class="fas fa-id-card fa-lg"></i>
+                    </div>
+                    <div>
+                        <small class="text-muted d-block">NIPP</small>
+                        <strong>{{ Auth::user()->nipp ?: '-' }}</strong>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-start mb-4">
+                    <div class="text-primary mr-3">
+                        <i class="fas fa-user-tag fa-lg"></i>
+                    </div>
+                    <div>
+                        <small class="text-muted d-block">Role Aplikasi</small>
+                        <strong>
+                            {{ Auth::user()->getRoleNames()->implode(', ') ?: '-' }}
+                        </strong>
+                    </div>
+                </div>
+
+                <button type="button"
+                        class="btn btn-outline-primary btn-block mb-2"
+                        data-toggle="collapse"
+                        data-target="#formUbahPassword"
+                        aria-expanded="false">
+                    <i class="fas fa-key mr-2"></i> Ubah Password
+                </button>
+
+                <div class="collapse mt-3" id="formUbahPassword">
+                    <div class="card card-body bg-light border-0">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                <i class="fas fa-check-circle mr-1"></i>
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <strong>Password belum berhasil diubah.</strong>
+                                <ul class="mb-0 mt-2">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form method="POST"
+                              action="{{ route('profil.password.update') }}">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="form-group">
+                                <label>Password Lama</label>
+                                <input type="password"
+                                       name="current_password"
+                                       class="form-control"
+                                       autocomplete="current-password"
+                                       required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Password Baru</label>
+                                <input type="password"
+                                       name="password"
+                                       class="form-control"
+                                       minlength="8"
+                                       autocomplete="new-password"
+                                       required>
+                                <small class="text-muted">
+                                    Minimal 8 karakter.
+                                </small>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Konfirmasi Password Baru</label>
+                                <input type="password"
+                                       name="password_confirmation"
+                                       class="form-control"
+                                       autocomplete="new-password"
+                                       required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fas fa-save mr-1"></i>
+                                Simpan Password
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <hr>
+
+                <form method="GET"
+                      action="{{ route('logout') }}"
+                      onsubmit="return confirm('Apakah Anda yakin ingin keluar dari aplikasi?')">
+                    @csrf
+
+                    <button type="submit" class="btn btn-danger btn-block">
+                        <i class="fas fa-sign-out-alt mr-2"></i>
+                        Logout
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

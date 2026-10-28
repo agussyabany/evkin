@@ -31,10 +31,14 @@ class PermintaanController extends Controller
     public function index()
     {
         $stok = Stok::with('bahan.satuan')->get();
-        $permintaan = Permintaan::with('details.bahan.satuan.statusRelasi.user')
-            ->where('user_id', auth()->id())
-            ->where('status', 0)
-            ->first();
+        $permintaan = Permintaan::with([
+    'details.bahan.satuan',
+    'statusRelasi',
+    'user',
+])
+    ->where('user_id', auth()->id())
+    ->where('status', 0)
+    ->first();
 
         return view('ipa.kimia',compact('stok','permintaan'));
     }

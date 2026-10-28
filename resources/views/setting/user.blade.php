@@ -22,7 +22,7 @@
     
     <legend class="ml-2 w-auto px-3 border border-primary rounded">DATA PENGGUNA</legend>
     <div class="content">
-    <table class="table table-striped responsive" id="tbl">
+    <table class="table table-striped responsive masuk" id="tbl">
       <thead>
           <tr>
               <th>NO</th>

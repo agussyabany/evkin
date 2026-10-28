@@ -67,12 +67,12 @@ class UserSeeder extends Seeder
             //     'password' => bcrypt('samarinda@2024'),
             //     'role' => 'adminLayan',
             // ],
-            // [
-            //     'name' => 'Muhammad Agus Syabany',
-            //     'email' => 'agus@evkin.smd',
-            //     'password' => bcrypt('a'),
-            //     'role' => 'agus',
-            // ]
+            [
+                'name' => 'Muhammad Agus Syabany',
+                'email' => 'agus@evkin.smd',
+                'password' => bcrypt('a'),
+                'role' => 'agus',
+            ]
             // [
             //     'name' => 'UMUM',
             //     'email' => 'umum@evkin.smd',
@@ -85,18 +85,18 @@ class UserSeeder extends Seeder
             //     'password' => bcrypt('tirtakencana25'),
             //     'role' => 'de-was',
             // ]
-            [
-                'name' => 'FARADIBA',
-                'email' => 'faradiba@evkin.smd',
-                'password' => bcrypt('tirtakencana25'),
-                'role' => 'dirut',
-            ],
-            [
-                'name' => 'ALFI',
-                'email' => 'alfi@evkin.smd',
-                'password' => bcrypt('tirtakencana25'),
-                'role' => 'dirut',
-            ]
+            // [
+            //     'name' => 'FARADIBA',
+            //     'email' => 'faradiba@evkin.smd',
+            //     'password' => bcrypt('tirtakencana25'),
+            //     'role' => 'dirut',
+            // ],
+            // [
+            //     'name' => 'ALFI',
+            //     'email' => 'alfi@evkin.smd',
+            //     'password' => bcrypt('tirtakencana25'),
+            //     'role' => 'dirut',
+            // ]
         ];
 
         foreach ($users as $userData) {
