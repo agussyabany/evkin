@@ -9,7 +9,7 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
-    <h1 class="m-0 text-center">STOK GUDANG CENDANA</h1>
+    <h1 class="m-0 text-center">DATA BAHAN KIMIA</h1>
   </div>
   <!-- /.content-header -->
   <div class="content">
@@ -23,7 +23,7 @@
  {{-- ===================== TABEL STOK IPA ===================== --}}
 <div class="card mb-4">
     <div class="card-header bg-dark text-white">
-        <strong>Stok Bahan Kimia IPA</strong>
+        <strong>Tambah Stok Bahan Kimia</strong>
     </div>
 
     <div class="card-body table-responsive">

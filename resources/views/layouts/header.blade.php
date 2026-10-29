@@ -466,36 +466,64 @@
                             @csrf
                             @method('PUT')
 
-                            <div class="form-group">
-                                <label>Password Lama</label>
-                                <input type="password"
-                                       name="current_password"
-                                       class="form-control"
-                                       autocomplete="current-password"
-                                       required>
-                            </div>
+                           <div class="form-group">
+                                    <label>Password Lama</label>
+                                    <div class="input-group">
+                                        <input type="password"
+                                            name="current_password"
+                                            class="form-control password-toggle-input"
+                                            autocomplete="current-password"
+                                            required>
 
-                            <div class="form-group">
-                                <label>Password Baru</label>
-                                <input type="password"
-                                       name="password"
-                                       class="form-control"
-                                       minlength="8"
-                                       autocomplete="new-password"
-                                       required>
-                                <small class="text-muted">
-                                    Minimal 8 karakter.
-                                </small>
-                            </div>
+                                        <div class="input-group-append">
+                                            <button type="button"
+                                                    class="btn btn-outline-secondary toggle-password"
+                                                    aria-label="Tampilkan password">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <div class="form-group">
-                                <label>Konfirmasi Password Baru</label>
-                                <input type="password"
-                                       name="password_confirmation"
-                                       class="form-control"
-                                       autocomplete="new-password"
-                                       required>
-                            </div>
+                                <div class="form-group">
+                                    <label>Password Baru</label>
+                                    <div class="input-group">
+                                        <input type="password"
+                                            name="password"
+                                            class="form-control password-toggle-input"
+                                            minlength="8"
+                                            autocomplete="new-password"
+                                            required>
+
+                                        <div class="input-group-append">
+                                            <button type="button"
+                                                    class="btn btn-outline-secondary toggle-password"
+                                                    aria-label="Tampilkan password">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <small class="text-muted">Minimal 8 karakter.</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Konfirmasi Password Baru</label>
+                                    <div class="input-group">
+                                        <input type="password"
+                                            name="password_confirmation"
+                                            class="form-control password-toggle-input"
+                                            autocomplete="new-password"
+                                            required>
+
+                                        <div class="input-group-append">
+                                            <button type="button"
+                                                    class="btn btn-outline-secondary toggle-password"
+                                                    aria-label="Tampilkan password">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
 
                             <button type="submit" class="btn btn-primary btn-block">
                                 <i class="fas fa-save mr-1"></i>

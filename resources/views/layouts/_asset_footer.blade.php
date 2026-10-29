@@ -141,5 +141,24 @@ $(function () {
         $('#formUbahPassword').collapse('show');
     @endif
 });
+
+$(document).on('click', '.toggle-password', function () {
+    const input = $(this)
+        .closest('.input-group')
+        .find('.password-toggle-input');
+
+    const icon = $(this).find('i');
+    const isHidden = input.attr('type') === 'password';
+
+    input.attr('type', isHidden ? 'text' : 'password');
+
+    icon.toggleClass('fa-eye', !isHidden);
+    icon.toggleClass('fa-eye-slash', isHidden);
+
+    $(this).attr(
+        'aria-label',
+        isHidden ? 'Sembunyikan password' : 'Tampilkan password'
+    );
+});
 </script>
 
