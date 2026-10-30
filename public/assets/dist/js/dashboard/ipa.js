@@ -19,35 +19,39 @@ let noPermintaan = null;
 
 
 // klik tambah bahan
-$('.btn-add').on('click', function () {
+$('.btn-add').on('click', async function () {
+    const button = $(this);
 
-    // munculkan header saat klik pertama
-    if (!noPermintaan) {
-        $.get('/permintaan/draft', function (res) {
-            noPermintaan = res.no_permintaan
-         })
+    let id = button.data('id');
 
-        
-        //'PR-'.now()->format('Ymd')
-        $('#no-permintaan').text(noPermintaan);
-        $('#cart-header').removeClass('d-none');
-        $('#cart-empty').remove();
-    }
-
-    let id = $(this).data('id');
-
-    // jika bahan sudah ada di cart, fokus ke qty
+    // Jika bahan sudah ada di cart, fokus ke qty
     if (cart[id]) {
         $('#qty-' + id).focus();
         return;
     }
 
-    let nama   = $(this).data('nama');
-    let satuan = $(this).data('satuan');
-    let ukuran = $(this).data('ukuran');
+    // Buat draft jika belum tersedia
+    if (!noPermintaan) {
+        try {
+            const res = await $.get('/permintaan/draft');
+
+            noPermintaan = res.no_permintaan;
+
+            $('#no-permintaan').text(noPermintaan);
+            $('#cart-header').removeClass('d-none');
+            $('#cart-empty').remove();
+        } catch (error) {
+            alert('Gagal membuat draft permintaan. Silakan coba lagi.');
+            return;
+        }
+    }
+
+    let nama   = button.data('nama');
+    let satuan = button.data('satuan');
+    let ukuran = button.data('ukuran');
 
     cart[id] = true;
-    let stok = $(this).data('stok');
+
     let row = `
         <tr id="row-${id}">
             <td class="text-center">${counter++}</td>
@@ -58,58 +62,53 @@ $('.btn-add').on('click', function () {
                        id="qty-${id}"
                        data-id="${id}"
                        data-ukuran="${ukuran}"
-                       data-stok="${stok}"
                        data-last="0"
                        min="0">
             </td>
             <td>${satuan}</td>
             <td class="kg-text" id="kg-${id}">0</td>
             <td class="text-center">
-                <button class="btn btn-danger btn-sm btn-remove"
-                        data-id="${id}">x</button>
+                <button type="button"
+                        class="btn btn-danger btn-sm btn-remove"
+                        data-id="${id}">
+                    <i class="fas fa-trash"></i>
+                </button>
             </td>
         </tr>
     `;
 
     $('#cart-body').append(row);
-    // 🔥 AJAX SIMPAN DRAFT DETAIL
+
+    // Simpan draft detail
     $.post('/permintaan/cart/add', {
         _token: $('meta[name="csrf-token"]').attr('content'),
         bahan_id: id,
         qty: 0,
         kg: 0
+    }).fail(function () {
+        alert('Gagal menambahkan bahan ke draft.');
     });
 });
-
-// hitung kg saat qty berubah
+//....
 $(document).on('input', '.qty-input', function () {
-    let input   = $(this);
-    let id = $(this).data('id');
-    let ukuran = $(this).data('ukuran');
-    let stok    = parseFloat(input.data('stok'));
-    let qty     = parseFloat(input.val()) || 0;
-    let lastQty = parseFloat(input.data('last')) || 0;
+    let input = $(this);
+    let id = input.data('id');
+    let ukuran = parseFloat(input.data('ukuran')) || 0;
+    let qty = parseFloat(input.val()) || 0;
 
-    // ❌ VALIDASI STOK
-    if (qty > stok) {
-        alert('Permintaan tidak boleh melebihi stok gudang utama');
-
-        // kembalikan ke nilai sebelumnya
-        input.val(lastQty);
-        input.addClass('is-invalid');
-
-        let kg = lastQty * ukuran;
-        $('#kg-' + id).text(kg);
-        return;
+    if (qty < 0) {
+        qty = 0;
+        input.val(0);
     }
 
-    // ✅ VALID
-    input.removeClass('is-invalid');
     input.data('last', qty);
+    input.removeClass('is-invalid');
 
     let kg = qty * ukuran;
+
     $('#kg-' + id).text(kg);
-     // 🔥 AJAX UPDATE QTY
+
+    // Simpan perubahan jumlah ke server
     $.ajax({
         url: '/permintaan/cart/update',
         type: 'PUT',
@@ -119,81 +118,9 @@ $(document).on('input', '.qty-input', function () {
             qty: qty,
             kg: kg
         }
+    }).fail(function () {
+        console.error('Gagal memperbarui jumlah permintaan.');
     });
-});
-
-// hapus item
-$(document).on('click', '.btn-remove', function () {
-    let id = $(this).data('id');
-    delete cart[id];
-    $('#row-' + id).remove();
-
-    // 🔥 AJAX DELETE
-    $.ajax({
-        url: '/permintaan/cart/delete',
-        type: 'DELETE',
-        data: {
-            _token: $('meta[name="csrf-token"]').attr('content'),
-            bahan_id: id
-        }
-    });
-
-    if (Object.keys(cart).length === 0) {
-        $('#cart-body').html(`
-            <tr id="cart-empty">
-                <td colspan="6" class="text-center text-muted">
-                    Belum ada bahan yang diminta
-                </td>
-            </tr>
-        `);
-        $('#cart-header').addClass('d-none');
-        noPermintaan = null;
-    }
-            
-});
-//SUBMIT DRAFT
-        $('#btn-kirim').on('click', function () {
-
-            if (!noPermintaan) {
-                alert('Belum ada bahan yang diminta');
-                return;
-            }
-
-            $.post('/permintaan/submit', {
-                _token: $('meta[name="csrf-token"]').attr('content'),
-                no_permintaan: noPermintaan
-            }, function (res) {
-                alert('Permintaan berhasil diajukan');
-                // 🔥 REDIRECT KE HALAMAN DATA PERMINTAAN
-                window.location.href = '/dataMinta';
-            });
-        });       
-
-let isSubmitting = false;
-
-// kalau klik "Kirim Permintaan", jangan hapus draft
-$('#btn-submit').on('click', function () {
-    isSubmitting = true;
-});
-
-window.addEventListener('beforeunload', function (e) {
-
-    if (window.PERMINTAAN_DRAFT_ID && !isSubmitting) {
-
-        // Tampilkan confirm browser
-        e.preventDefault();
-        e.returnValue = '';
-
-        // kirim beacon ke server untuk hapus draft
-        let data = new FormData();
-        data.append('_method', 'DELETE');
-        data.append('_token', $('meta[name="csrf-token"]').attr('content'));
-
-        navigator.sendBeacon(
-            `/permintaan/draft/${window.PERMINTAAN_DRAFT_ID}`,
-            data
-        );
-    }
 });
 
 //APPROVAL

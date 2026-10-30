@@ -32,7 +32,7 @@
                 <tr>
                     <th>No</th>
                     <th>Bahan</th>
-                    <th>Stok</th>
+                   
                     <th>Satuan</th>
                     <th>Total Kg</th>
                     @role(['agus','ipa'])
@@ -47,7 +47,7 @@
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</a></td>
                     <td>{{ $item->bahan->nama_bahan }}</td>
-                    <td class="text-center">{{ $item->stok }}</td>
+                    
                     <td class="text-center">{{ $item->bahan->satuan->nama_satuan }}</td>
                     <td class="text-center">
                         {{ $item->stok * $item->bahan->ukuran }}
