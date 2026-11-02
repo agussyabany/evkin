@@ -18,7 +18,7 @@ class ApprovalController extends Controller
             if (Auth::user()->hasAnyRole(['gudang'])) {
                $permintaan = Permintaan::with('ipa')->get(); 
             }else{
-                $permintaan = Permintaan::with('ipa')->where('id_ipa',$idIpa)->get();
+                $permintaan = Permintaan::with('ipa')->where('id_ipa',$idIpa)->where('status', '!=', 0)->get();
             }
             
             return view('ipa.permintaan',compact(['permintaan']));

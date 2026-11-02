@@ -1,9 +1,9 @@
 let currentPermintaanId = null;
-$(document).ready(function() {
+$(document).ready(function () {
     let csrf = $('meta[name="csrf-token"]').attr('content');
-        $('.cek-pompa').change(function () {
+    $('.cek-pompa').change(function () {
         let target = $(this).data('target');
-        let table  = $('#' + target);
+        let table = $('#' + target);
 
         if (this.checked) {
             table.slideDown(200);
@@ -13,42 +13,42 @@ $(document).ready(function() {
         }
     });
 
-let cart = {};
-let counter = 1;
-let noPermintaan = null;
+    let cart = {};
+    let counter = 1;
+    let noPermintaan = null;
 
 
-// klik tambah bahan
-$('.btn-add').on('click', function () {
+    // klik tambah bahan
+    $('.btn-add').on('click', function () {
 
-    // munculkan header saat klik pertama
-    if (!noPermintaan) {
-        $.get('/permintaan/draft', function (res) {
-            noPermintaan = res.no_permintaan
-         })
+        // munculkan header saat klik pertama
+        // if (!noPermintaan) {
+        //     $.get('/permintaan/draft', function (res) {
+        //         noPermintaan = res.no_permintaan
+        //      })
 
-        
-        //'PR-'.now()->format('Ymd')
-        $('#no-permintaan').text(noPermintaan);
-        $('#cart-header').removeClass('d-none');
-        $('#cart-empty').remove();
-    }
 
-    let id = $(this).data('id');
+        //     //'PR-'.now()->format('Ymd')
+        //     $('#no-permintaan').text(noPermintaan);
+        //     $('#cart-header').removeClass('d-none');
+        //     $('#cart-empty').remove();
+        // }
 
-    // jika bahan sudah ada di cart, fokus ke qty
-    if (cart[id]) {
-        $('#qty-' + id).focus();
-        return;
-    }
+        let id = $(this).data('id');
 
-    let nama   = $(this).data('nama');
-    let satuan = $(this).data('satuan');
-    let ukuran = $(this).data('ukuran');
+        // jika bahan sudah ada di cart, fokus ke qty
+        if (cart[id]) {
+            $('#qty-' + id).focus();
+            return;
+        }
 
-    cart[id] = true;
-    let stok = $(this).data('stok');
-    let row = `
+        let nama = $(this).data('nama');
+        let satuan = $(this).data('satuan');
+        let ukuran = $(this).data('ukuran');
+
+        cart[id] = true;
+        let stok = $(this).data('stok');
+        let row = `
         <tr id="row-${id}">
             <td class="text-center">${counter++}</td>
             <td>${nama}</td>
@@ -71,284 +71,284 @@ $('.btn-add').on('click', function () {
         </tr>
     `;
 
-    $('#cart-body').append(row);
-    // 🔥 AJAX SIMPAN DRAFT DETAIL
-    $.post('/permintaan/cart/add', {
-        _token: $('meta[name="csrf-token"]').attr('content'),
-        bahan_id: id,
-        qty: 0,
-        kg: 0
+        $('#cart-body').append(row);
+        // 🔥 AJAX SIMPAN DRAFT DETAIL
+        // $.post('/permintaan/cart/add', {
+        //     _token: $('meta[name="csrf-token"]').attr('content'),
+        //     bahan_id: id,
+        //     qty: 0,
+        //     kg: 0
+        // });
     });
-});
 
-// hitung kg saat qty berubah
-$(document).on('input', '.qty-input', function () {
-    let input   = $(this);
-    let id = $(this).data('id');
-    let ukuran = $(this).data('ukuran');
-    let stok    = parseFloat(input.data('stok'));
-    let qty     = parseFloat(input.val()) || 0;
-    let lastQty = parseFloat(input.data('last')) || 0;
+    // hitung kg saat qty berubah
+    $(document).on('input', '.qty-input', function () {
+        let input = $(this);
+        let id = $(this).data('id');
+        let ukuran = $(this).data('ukuran');
+        let stok = parseFloat(input.data('stok'));
+        let qty = parseFloat(input.val()) || 0;
+        let lastQty = parseFloat(input.data('last')) || 0;
 
-    // ❌ VALIDASI STOK
-    if (qty > stok) {
-        alert('Permintaan tidak boleh melebihi stok gudang utama');
+        // ❌ VALIDASI STOK
+        if (qty > stok) {
+            alert('Permintaan tidak boleh melebihi stok gudang utama');
 
-        // kembalikan ke nilai sebelumnya
-        input.val(lastQty);
-        input.addClass('is-invalid');
+            // kembalikan ke nilai sebelumnya
+            input.val(lastQty);
+            input.addClass('is-invalid');
 
-        let kg = lastQty * ukuran;
+            let kg = lastQty * ukuran;
+            $('#kg-' + id).text(kg);
+            return;
+        }
+
+        // ✅ VALID
+        input.removeClass('is-invalid');
+        input.data('last', qty);
+
+        let kg = qty * ukuran;
         $('#kg-' + id).text(kg);
-        return;
-    }
-
-    // ✅ VALID
-    input.removeClass('is-invalid');
-    input.data('last', qty);
-
-    let kg = qty * ukuran;
-    $('#kg-' + id).text(kg);
-     // 🔥 AJAX UPDATE QTY
-    $.ajax({
-        url: '/permintaan/cart/update',
-        type: 'PUT',
-        data: {
-            _token: $('meta[name="csrf-token"]').attr('content'),
-            bahan_id: id,
-            qty: qty,
-            kg: kg
-        }
-    });
-});
-
-// hapus item
-$(document).on('click', '.btn-remove', function () {
-    let id = $(this).data('id');
-    delete cart[id];
-    $('#row-' + id).remove();
-
-    // 🔥 AJAX DELETE
-    $.ajax({
-        url: '/permintaan/cart/delete',
-        type: 'DELETE',
-        data: {
-            _token: $('meta[name="csrf-token"]').attr('content'),
-            bahan_id: id
-        }
+        // 🔥 AJAX UPDATE QTY
+        $.ajax({
+            url: '/permintaan/cart/update',
+            type: 'PUT',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                bahan_id: id,
+                qty: qty,
+                kg: kg
+            }
+        });
     });
 
-    if (Object.keys(cart).length === 0) {
-        $('#cart-body').html(`
+    // hapus item
+    $(document).on('click', '.btn-remove', function () {
+        let id = $(this).data('id');
+        delete cart[id];
+        $('#row-' + id).remove();
+
+        // 🔥 AJAX DELETE
+        $.ajax({
+            url: '/permintaan/cart/delete',
+            type: 'DELETE',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                bahan_id: id
+            }
+        });
+
+        if (Object.keys(cart).length === 0) {
+            $('#cart-body').html(`
             <tr id="cart-empty">
                 <td colspan="6" class="text-center text-muted">
                     Belum ada bahan yang diminta
                 </td>
             </tr>
         `);
-        $('#cart-header').addClass('d-none');
-        noPermintaan = null;
-    }
-            
-});
-//SUBMIT DRAFT
-        $('#btn-kirim').on('click', function () {
+            $('#cart-header').addClass('d-none');
+            noPermintaan = null;
+        }
 
-            if (!noPermintaan) {
-                alert('Belum ada bahan yang diminta');
-                return;
-            }
+    });
+    //SUBMIT DRAFT
+    $('#btn-kirim').on('click', function () {
 
-            $.post('/permintaan/submit', {
-                _token: $('meta[name="csrf-token"]').attr('content'),
-                no_permintaan: noPermintaan
-            }, function (res) {
-                alert('Permintaan berhasil diajukan');
-                // 🔥 REDIRECT KE HALAMAN DATA PERMINTAAN
-                window.location.href = '/dataMinta';
-            });
-        });       
+        if (!noPermintaan) {
+            alert('Belum ada bahan yang diminta');
+            return;
+        }
 
-let isSubmitting = false;
+        $.post('/permintaan/submit', {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            no_permintaan: noPermintaan
+        }, function (res) {
+            alert('Permintaan berhasil diajukan');
+            // 🔥 REDIRECT KE HALAMAN DATA PERMINTAAN
+            window.location.href = '/dataMinta';
+        });
+    });
 
-// kalau klik "Kirim Permintaan", jangan hapus draft
-$('#btn-submit').on('click', function () {
-    isSubmitting = true;
-});
+    let isSubmitting = false;
 
-window.addEventListener('beforeunload', function (e) {
+    // kalau klik "Kirim Permintaan", jangan hapus draft
+    $('#btn-submit').on('click', function () {
+        isSubmitting = true;
+    });
 
-    if (window.PERMINTAAN_DRAFT_ID && !isSubmitting) {
+    window.addEventListener('beforeunload', function (e) {
 
-        // Tampilkan confirm browser
-        e.preventDefault();
-        e.returnValue = '';
+        if (window.PERMINTAAN_DRAFT_ID && !isSubmitting) {
 
-        // kirim beacon ke server untuk hapus draft
-        let data = new FormData();
-        data.append('_method', 'DELETE');
-        data.append('_token', $('meta[name="csrf-token"]').attr('content'));
+            // Tampilkan confirm browser
+            e.preventDefault();
+            e.returnValue = '';
 
-        navigator.sendBeacon(
-            `/permintaan/draft/${window.PERMINTAAN_DRAFT_ID}`,
-            data
-        );
-    }
-});
+            // kirim beacon ke server untuk hapus draft
+            let data = new FormData();
+            data.append('_method', 'DELETE');
+            data.append('_token', $('meta[name="csrf-token"]').attr('content'));
 
-//APPROVAL
+            navigator.sendBeacon(
+                `/permintaan/draft/${window.PERMINTAAN_DRAFT_ID}`,
+                data
+            );
+        }
+    });
 
-$(document).on('click', '.btn-info-minta', function () {
+    //APPROVAL
 
-    currentPermintaanId = $(this).data('id');
+    $(document).on('click', '.btn-info-minta', function () {
 
-    // reset
-    $('#tblDetailMinta').html(`
+        currentPermintaanId = $(this).data('id');
+
+        // reset
+        $('#tblDetailMinta').html(`
         <tr>
             <td colspan="5" class="text-center">Loading...</td>
         </tr>
     `);
 
-    $.get('/permintaan/detail/' + currentPermintaanId, function (res) {
+        $.get('/permintaan/detail/' + currentPermintaanId, function (res) {
             window.detailPermintaanCache = res.detail;
-        // ===============================
-        // ISI IDENTITAS TRANSAKSI
-        // ===============================
-        $('#m_no_transaksi').text(res.header.no_permintaan);
-        $('#m_tanggal').text(res.header.created_at);
-        $('#m_status').text(res.header.status_relasi.nama_status);
-        $('#m_ipa').text(res.header.ipa.nama_ipa);
-        // 🔥 SET ACTION FORM APPROVAL DI SINI
-        $('#formApprove').attr(
-            'action',
-            '/permintaan/' + currentPermintaanId + '/approve'
-        );
-         //let statusId = res.header.status; 
-        let statusId = res.header.status_relasi.id;
+            // ===============================
+            // ISI IDENTITAS TRANSAKSI
+            // ===============================
+            $('#m_no_transaksi').text(res.header.no_permintaan);
+            $('#m_tanggal').text(res.header.created_at);
+            $('#m_status').text(res.header.status_relasi.nama_status);
+            $('#m_ipa').text(res.header.ipa.nama_ipa);
+            // 🔥 SET ACTION FORM APPROVAL DI SINI
+            $('#formApprove').attr(
+                'action',
+                '/permintaan/' + currentPermintaanId + '/approve'
+            );
+            //let statusId = res.header.status; 
+            let statusId = res.header.status_relasi.id;
 
-        console.log('STATUS ID:', statusId);
-        //APPROVE ASMEN IPA
-        if (statusId !== 1) {
-            $('#btn-asmen-ipa')
-                .prop('disabled', true)
-                .removeClass('btn-outline-success')
-                .addClass('btn-secondary')
-                .text('DIPROSES');
-        } else {
-            $('#btn-asmen-ipa')
-                .prop('disabled', false)
-                .removeClass('btn-secondary')
-                .addClass('btn-outline-success')
-                .text('PROSES');
-        }
-        //APROVE GUDANG
-        if (statusId !== 2) {
-            $('#btn-asmen-gd')
-                .prop('disabled', true)
-                .removeClass('btn-outline-success')
-                .addClass('btn-secondary')
-                .text('DIPROSES');
-        } else {
-            $('#btn-asmen-gd')
-                .prop('disabled', false)
-                .removeClass('btn-secondary')
-                .addClass('btn-outline-success')
-                .text('PROSES');
-        }
+            console.log('STATUS ID:', statusId);
+            //APPROVE ASMEN IPA
+            if (statusId !== 1) {
+                $('#btn-asmen-ipa')
+                    .prop('disabled', true)
+                    .removeClass('btn-outline-success')
+                    .addClass('btn-secondary')
+                    .text('DIPROSES');
+            } else {
+                $('#btn-asmen-ipa')
+                    .prop('disabled', false)
+                    .removeClass('btn-secondary')
+                    .addClass('btn-outline-success')
+                    .text('PROSES');
+            }
+            //APROVE GUDANG
+            if (statusId !== 2) {
+                $('#btn-asmen-gd')
+                    .prop('disabled', true)
+                    .removeClass('btn-outline-success')
+                    .addClass('btn-secondary')
+                    .text('DIPROSES');
+            } else {
+                $('#btn-asmen-gd')
+                    .prop('disabled', false)
+                    .removeClass('btn-secondary')
+                    .addClass('btn-outline-success')
+                    .text('PROSES');
+            }
 
-        //MUAT GUDANG
-        if (statusId !== 3) {
-            $('#btn-op-gd')
-                .prop('disabled', true)
-                .removeClass('btn-outline-success')
-                .addClass('btn-secondary')
-                .text('DIPROSES');
-        } else {
-            $('#btn-op-gd')
-                .prop('disabled', false)
-                .removeClass('btn-secondary')
-                .addClass('btn-outline-success')
-                .text('PROSES');
-        }
+            //MUAT GUDANG
+            if (statusId !== 3) {
+                $('#btn-op-gd')
+                    .prop('disabled', true)
+                    .removeClass('btn-outline-success')
+                    .addClass('btn-secondary')
+                    .text('DIPROSES');
+            } else {
+                $('#btn-op-gd')
+                    .prop('disabled', false)
+                    .removeClass('btn-secondary')
+                    .addClass('btn-outline-success')
+                    .text('PROSES');
+            }
 
-        //KIRIM
-        if (statusId !== 4) {
-            $('#btn-op-gd')
-                .prop('disabled', true)
-                .removeClass('btn-outline-success')
-                .addClass('btn-secondary')
-                .text('DIPROSES');
-        } else {
-            $('#btn-op-gd')
-                .prop('disabled', false)
-                .removeClass('btn-secondary')
-                .addClass('btn-outline-success')
-                .text('PROSES');
-        }
+            //KIRIM
+            if (statusId !== 4) {
+                $('#btn-op-gd')
+                    .prop('disabled', true)
+                    .removeClass('btn-outline-success')
+                    .addClass('btn-secondary')
+                    .text('DIPROSES');
+            } else {
+                $('#btn-op-gd')
+                    .prop('disabled', false)
+                    .removeClass('btn-secondary')
+                    .addClass('btn-outline-success')
+                    .text('PROSES');
+            }
 
-        
 
-        // ===============================
-        // ISI DETAIL BAHAN
-        // ===============================
-        let html = '';
 
-        if (res.detail.length === 0) {
-            html = `
+            // ===============================
+            // ISI DETAIL BAHAN
+            // ===============================
+            let html = '';
+
+            if (res.detail.length === 0) {
+                html = `
                 <tr>
                     <td colspan="5" class="text-center">Tidak ada data</td>
                 </tr>
             `;
-        } else {
-            $.each(res.detail, function (i, item) {
-                let stokGudang = 0;
-                let tdStokGudang = '';
-                let tdJumlah = '';
-                let btnCekStok = '';
-                let tdKet = '';
-                let tdReal = '';
+            } else {
+                $.each(res.detail, function (i, item) {
+                    let stokGudang = 0;
+                    let tdStokGudang = '';
+                    let tdJumlah = '';
+                    let btnCekStok = '';
+                    let tdKet = '';
+                    let tdReal = '';
 
-                let ket = item.ket;
+                    let ket = item.ket;
 
                     // =============================
                     // 🔥 JIKA ROLE PETUGAS GUDANG
                     // =============================
-                if (window.isGudangOperator) {
+                    if (window.isGudangOperator) {
 
-                    stokGudang = item.bahan.stok_gudang
-                        ? item.bahan.stok_gudang.stok
-                        : 0;
+                        stokGudang = item.bahan.stok_gudang
+                            ? item.bahan.stok_gudang.stok
+                            : 0;
 
-                    $('.th-gudang').removeClass('d-none');
-                    
+                        $('.th-gudang').removeClass('d-none');
 
-                    // =============================
-                    // 🔥 JIKA STATUS BUKAN(SELAIN) 3(SUDAH DISETUJUI ASMEN GUDANG) MAKA BIDANG DETAIL NORMAL
-                    // =============================
-                    if (statusId !=3) {
-                   tdJumlah = `
+
+                        // =============================
+                        // 🔥 JIKA STATUS BUKAN(SELAIN) 3(SUDAH DISETUJUI ASMEN GUDANG) MAKA BIDANG DETAIL NORMAL
+                        // =============================
+                        if (statusId != 3) {
+                            tdJumlah = `
                         <td class="text-center">${item.qty}</td>
                     `;
 
-                     tdReal = `
+                            tdReal = `
                         <td class="text-center text-success font-weight-bold">${item.real}
                         </td>
                     `;
 
-                    tdStokGudang = `
+                            tdStokGudang = `
                         <td class="text-center text-info font-weight-bold">
                             ${stokGudang}
                         </td>
                     `;
 
-                    $('#btn-submit-kirim').prop('disabled', true);  
-                    
-                } else {
-                     // =============================
-                    // 🔥 JIKA QTY > STOK GUDANG
-                    // =============================
+                            $('#btn-submit-kirim').prop('disabled', true);
 
-                    tdJumlah = `
+                        } else {
+                            // =============================
+                            // 🔥 JIKA QTY > STOK GUDANG
+                            // =============================
+
+                            tdJumlah = `
                             <td class="text-center">
                                 <input type="number"
                                     class="form-control form-control-sm qty-adjust"
@@ -360,98 +360,98 @@ $(document).on('click', '.btn-info-minta', function () {
                                 
                             </td>
                         `;
-                         tdKet = `
+                            tdKet = `
                         <td class="text-center text-default font-weight-bold">
                             -
                         </td>
                     `;
-                     tdReal = `
+                            tdReal = `
                         <td class="text-center text-success font-weight-bold">${item.real}
                         </td>
                     `;
 
-                    tdStokGudang = `
+                            tdStokGudang = `
                         <td class="text-center text-info font-weight-bold">
                             ${stokGudang}
                         </td>
                     `;
-                    if (item.qty > stokGudang) {
-                        
+                            if (item.qty > stokGudang) {
+
+                            } else {
+                                // tdJumlah = `
+                                //     <td class="text-center">${item.qty}</td>
+                                // `;
+
+                                //  tdReal = `
+                                //     <td class="text-center text-success font-weight-bold">${item.real}
+                                //     </td>
+                                // `;
+
+                                // tdStokGudang = `
+                                //     <td class="text-center text-info font-weight-bold">
+                                //         ${stokGudang}
+                                //     </td>
+                                // `;
+                                // tdKet = `
+                                //     <td class="text-center text-success font-weight-bold">
+                                //     Sesuai
+                                //     </td>
+                                // `;
+
+
+                            }
+
+                            $('#btn-submit-kirim').prop('disabled', false);
+                        }
+
+
                     } else {
-                    // tdJumlah = `
-                    //     <td class="text-center">${item.qty}</td>
-                    // `;
-
-                    //  tdReal = `
-                    //     <td class="text-center text-success font-weight-bold">${item.real}
-                    //     </td>
-                    // `;
-
-                    // tdStokGudang = `
-                    //     <td class="text-center text-info font-weight-bold">
-                    //         ${stokGudang}
-                    //     </td>
-                    // `;
-                    // tdKet = `
-                    //     <td class="text-center text-success font-weight-bold">
-                    //     Sesuai
-                    //     </td>
-                    // `;
-
-                    
-                    }
-
-                     $('#btn-submit-kirim').prop('disabled', false);  
-                }
-
-                   
-                } else {
-                    // NON GUDANG (IPA, ASMEN)
-                    tdJumlah = `
+                        // NON GUDANG (IPA, ASMEN)
+                        tdJumlah = `
                         <td class="text-center">${item.qty}</td>
                     `;
 
-                    tdKet = `
+                        tdKet = `
                         <td class="text-center text-info font-weight-bold"><button class="btn btn-sm btn-primary btn-lihat-ket" data-detail-id="${item.id}"><i class="fa fa-eye"></i></button>
                         </td>
                     `;
 
-                    tdReal = `
+                        tdReal = `
                         <td class="text-center text-success font-weight-bold td-real" data-detail="${item.id}">
                             <span class="real-text">${item.real}</span>
                         </td>
                     `;
 
-                    $('#btn-submit-kirim').remove();
-                }
+                        $('#btn-submit-kirim').remove();
+                    }
 
-                if (window.isIpaOperator) {
+                    if (window.isIpaOperator) {
 
-                    if (statusId !== 4) {
+                        if (statusId !== 4) {
 
-                        tdSelOpt = `
+                            tdSelOpt = `
                         <td class="text-center">
                             -
                         </td>
                     `;
 
-                    $('#btn-submit-terima-ipa').remove();
-                    tdTerima = 
-                        `
+                            $('#btn-submit-terima-ipa').remove();
+                            tdTerima =
+                                `
                         <td class="text-center text-warning font-weight-bold td-terima" data-detail="${item.id}">
                             <span class="real-text">${item.terima}</span>
                         </td>
                     `;
 
-                    tdKlTerima = `
+                            tdKlTerima = `
                         <td class="text-center text-warning font-weight-bold kg-text-terima">
                             ${item.terima * item.bahan.ukuran}
                         </td>
                     `;
-                        
-                    }else{
 
-                        tdSelOpt = `
+                        } else {
+
+                            tdSelOpt = `
                         <td class="text-center">
                             <select class="form-control form-control-sm sel-kondisi"
                                     data-detail="${item.id}"
@@ -464,43 +464,43 @@ $(document).on('click', '.btn-info-minta', function () {
                         </td>
                     `;
 
-                    tdTerima = 
-                        `
+                            tdTerima =
+                                `
                         <td class="text-center td-terima text-warning font-weight-bold" data-detail="${item.id}">
                             <span class="real-text">${item.real}</span>
                         </td>
                     `;
 
-                    tdKlTerima = `
+                            tdKlTerima = `
                         <td class="text-center text-warning font-weight-bold kg-text-terima">
                             ${item.real * item.bahan.ukuran}
                         </td>
                     `;
 
-                    }
-
-                    
+                        }
 
 
 
-                    
-                    
-                }else{
 
-                    tdTerima = `
+
+
+
+                    } else {
+
+                        tdTerima = `
                         <td class="text-center text-warning font-weight-bold">
                             ${item.terima}
                         </td>
                     `;
 
-                    tdKlTerima = `
+                        tdKlTerima = `
                         <td class="text-center text-warning font-weight-bold kg-text-terima">
                             ${item.terima * item.bahan.ukuran}
                         </td>
                     `;
 
-                }
-                html += `
+                    }
+                    html += `
                     <tr data-detail-id="${item.id}" data-qty-awal="${item.qty}" data-real-awal="${item.real}">
                         <td class="text-center">${i + 1}</td>
                         <td>${item.bahan.nama_bahan}</td>
@@ -510,7 +510,7 @@ $(document).on('click', '.btn-info-minta', function () {
                             </span></td>
                         ${tdReal}
                         <td class="text-center text-success font-weight-bold">
-                           ${item.real * item.bahan.ukuran } 
+                           ${item.real * item.bahan.ukuran} 
                         </td>
 
                         ${tdTerima}
@@ -527,53 +527,53 @@ $(document).on('click', '.btn-info-minta', function () {
                         ${window.isIpaOperator ? tdSelOpt : ``}
                     </tr>
                 `;
-            });
-        }
+                });
+            }
 
-        $('#tblDetailMinta').html(html);
-        $('#modalDetailMinta').modal('show');
-    });
+            $('#tblDetailMinta').html(html);
+            $('#modalDetailMinta').modal('show');
+        });
 
-                $(document).on('input', '.qty-adjust', function () {
+        $(document).on('input', '.qty-adjust', function () {
 
-                let qty = parseFloat($(this).val()) || 0;
-                let max = parseFloat($(this).attr('max'));
-                let ukuran = $(this).data('ukuran');
+            let qty = parseFloat($(this).val()) || 0;
+            let max = parseFloat($(this).attr('max'));
+            let ukuran = $(this).data('ukuran');
 
-                // 🔒 AMANKAN JIKA LEBIH
-                if (qty > max) {
-                    qty = max;
-                    $(this).val(max);
-                }
+            // 🔒 AMANKAN JIKA LEBIH
+            if (qty > max) {
+                qty = max;
+                $(this).val(max);
+            }
 
-                let kg = qty * ukuran;
+            let kg = qty * ukuran;
 
-                $(this)
-                    .closest('tr')
-                    .find('.kg-text')
-                    .text(kg);
-            });
+            $(this)
+                .closest('tr')
+                .find('.kg-text')
+                .text(kg);
+        });
 
-            $(document).on('change', '.sel-kondisi', function () {
+        $(document).on('change', '.sel-kondisi', function () {
 
-                        let kondisi   = $(this).val();          // sesuai | kurang | lebih
-                        let detailId  = $(this).data('detail');
-                        let realAwal  = $(this).data('real');
-                        let ukuran    = $(this).data('ukuran');
+            let kondisi = $(this).val();          // sesuai | kurang | lebih
+            let detailId = $(this).data('detail');
+            let realAwal = $(this).data('real');
+            let ukuran = $(this).data('ukuran');
 
-                        let tdReal = $(`.td-terima[data-detail="${detailId}"]`);
-                        let tdKg   = tdReal.closest('tr').find('.kg-text-terima');
+            let tdReal = $(`.td-terima[data-detail="${detailId}"]`);
+            let tdKg = tdReal.closest('tr').find('.kg-text-terima');
 
-                        if (kondisi === 'sesuai') {
+            if (kondisi === 'sesuai') {
 
-                            // 🔁 BALIK KE TEXT
-                            tdReal.html(`<span class="real-text">${realAwal}</span>`);
-                            tdKg.text(realAwal * ukuran);
+                // 🔁 BALIK KE TEXT
+                tdReal.html(`<span class="real-text">${realAwal}</span>`);
+                tdKg.text(realAwal * ukuran);
 
-                        } else {
+            } else {
 
-                            // 🔥 JADI INPUT NUMBER
-                            tdReal.html(`
+                // 🔥 JADI INPUT NUMBER
+                tdReal.html(`
                                 <input type="number"
                                     class="form-control form-control-sm input-terima"
                                     data-detail="${detailId}"
@@ -581,92 +581,92 @@ $(document).on('click', '.btn-info-minta', function () {
                                     value="${realAwal}"
                                     min="0">
                             `);
-                        }
-                    });
+            }
+        });
 
-                    $(document).on('input', '.input-terima', function () {
+        $(document).on('input', '.input-terima', function () {
 
-                        let real   = parseFloat($(this).val()) || 0;
-                        let ukuran = $(this).data('ukuran');
+            let real = parseFloat($(this).val()) || 0;
+            let ukuran = $(this).data('ukuran');
 
-                        let kg = real * ukuran;
+            let kg = real * ukuran;
 
-                        $(this)
-                            .closest('tr')
-                            .find('.kg-text-terima')
-                            .text(kg);
-                    });
-                    // =============================
-                    // 🔥 LIHAT KETERANGAN DETAIL
-                    // =============================
-                    function formatKeteranganByTahap(ket, detail) {
-                                // tahap dari kolom `sumber`
-                                // 1 = Gudang, 2 = IPA
+            $(this)
+                .closest('tr')
+                .find('.kg-text-terima')
+                .text(kg);
+        });
+        // =============================
+        // 🔥 LIHAT KETERANGAN DETAIL
+        // =============================
+        function formatKeteranganByTahap(ket, detail) {
+            // tahap dari kolom `sumber`
+            // 1 = Gudang, 2 = IPA
 
-                                // =========================
-                                // GUDANG
-                                // =========================
-                                if (ket.sumber == 1) {
-                                    const selisih = detail.qty - detail.real;
+            // =========================
+            // GUDANG
+            // =========================
+            if (ket.sumber == 1) {
+                const selisih = detail.qty - detail.real;
 
-                                    if (selisih > 0) {
-                                        return `Kurang ${selisih}, stok gudang kurang`;
-                                    }
+                if (selisih > 0) {
+                    return `Kurang ${selisih}, stok gudang kurang`;
+                }
 
-                                    return 'Sesuai';
-                                }
+                return 'Sesuai';
+            }
 
-                                // =========================
-                                // IPA
-                                // =========================
-                                if (ket.sumber == 2) {
-                                    const selisih = ket.qty - detail.real;
+            // =========================
+            // IPA
+            // =========================
+            if (ket.sumber == 2) {
+                const selisih = ket.qty - detail.real;
 
-                                    if (selisih > 0) {
-                                        return `Lebih ${selisih}, masuk stok IPA`;
-                                    }
+                if (selisih > 0) {
+                    return `Lebih ${selisih}, masuk stok IPA`;
+                }
 
-                                    if (selisih < 0) {
-                                        return `Kurang ${Math.abs(selisih)} saat pengantaran`;
-                                    }
+                if (selisih < 0) {
+                    return `Kurang ${Math.abs(selisih)} saat pengantaran`;
+                }
 
-                                    return 'Sesuai';
-                                }
+                return 'Sesuai';
+            }
 
-                                return '-';
-                            }
+            return '-';
+        }
 
-                            function labelTahap(val) {
-                                return val == 1 ? 'Gudang' : 'IPA';
-                            }
+        function labelTahap(val) {
+            return val == 1 ? 'Gudang' : 'IPA';
+        }
 
-                    $(document).on('click', '.btn-lihat-ket', function () {
+        $(document).on('click', '.btn-lihat-ket', function () {
 
-    let detailId = $(this).data('detail-id');
+            let detailId = $(this).data('detail-id');
 
-    let detail = window.detailPermintaanCache.find(d => d.id == detailId);
+            let detail = window.detailPermintaanCache.find(d => d.id == detailId);
 
-    if (!detail) return;
+            if (!detail) return;
 
-    $('#ket-nama-bahan').text(detail.bahan.nama_bahan);
+            $('#ket-nama-bahan').text(detail.bahan.nama_bahan);
 
-    let html = '';
+            let html = '';
 
-    if (!detail.keterangans || detail.keterangans.length === 0) {
-        html = `
+            if (!detail.keterangans || detail.keterangans.length === 0) {
+                html = `
             <tr>
                 <td colspan="6" class="text-center text-muted">
                     Tidak ada keterangan
                 </td>
             </tr>
         `;
-    } else {
+            } else {
 
-        $.each(detail.keterangans, function (i, ket) {
+                $.each(detail.keterangans, function (i, ket) {
 
-            const keteranganText = formatKeteranganByTahap(ket, detail);
+                    const keteranganText = formatKeteranganByTahap(ket, detail);
 
-            html += `
+                    html += `
                 <tr>
                     <td class="text-center">${i + 1}</td>
 
@@ -675,12 +675,11 @@ $(document).on('click', '.btn-info-minta', function () {
                     </td>
 
                     <td class="text-center">
-                        <span class="badge badge-${
-                            ket.kondisi === 'sesuai'
-                                ? 'success'
-                                : (ket.kondisi === 'lebih'
-                                    ? 'warning'
-                                    : 'danger')
+                        <span class="badge badge-${ket.kondisi === 'sesuai'
+                            ? 'success'
+                            : (ket.kondisi === 'lebih'
+                                ? 'warning'
+                                : 'danger')
                         }">
                             ${ket.kondisi.toUpperCase()}
                         </span>
@@ -695,174 +694,114 @@ $(document).on('click', '.btn-info-minta', function () {
                     </td>
                 </tr>
             `;
-        });
-    }
+                });
+            }
 
-    $('#tblKeterangan').html(html);
-    $('#fieldset-keterangan').removeClass('d-none');
-});
-});
-                    // =============================
-                    // 🔥 KIRIM GUNDANG UTAMA
-                    // =============================
-$(document).on('click', '#btn-submit-kirim', function () {
-
-    if (!currentPermintaanId) {
-        alert('Permintaan tidak valid');
-        return;
-    }
-    if (!confirm('Yakin proses muat & kirim barang?')) {
-        return;
-    }
-    let items = [];
-
-$('#tblDetailMinta tr').each(function () {
-
-    let detailId = $(this).data('detail-id');
-    if (!detailId) return; // skip header / kosong
-
-    let qtyInput = $(this).find('.qty-adjust');
-    let qtyAwal  = $(this).data('qty-awal');
-
-    let qtyFinal = qtyInput.length
-        ? parseFloat(qtyInput.val()) || 0
-        : qtyAwal;
-
-    let ket = $(this).find('.text-danger').length
-        ? 'Stok Kurang'
-        : null;
-
-    items.push({
-        detail_id: detailId,
-        qty: qtyFinal,
-        ket: ket
-    });
-});
-
-$.ajax({
-    url: '/permintaan/' + currentPermintaanId + '/kirim',
-    type: 'POST',
-    data: {
-        _token: $('meta[name="csrf-token"]').attr('content'),
-        items: items
-    },
-    success: function (res) {
-        alert(res.message);
-
-        window.open(
-            '/permintaan/' + currentPermintaanId + '/surat-jalan',
-            '_blank'
-        );
-        location.reload();
-    }
-});
-
-
-});
-
-                    // =============================
-                    // 🔥 KIRIM GUDANG IPA
-                    // =============================
-$('#btn-submit-terima-ipa').on('click', function () {
-
-    if (!confirm('Yakin terima barang ini?')) return;
-
-    let items = [];
-
-    $('#tblDetailMinta tr').each(function () {
-
-        let detailId = $(this).data('detail-id');
-        if (!detailId) return;
-
-        let kondisi = $(this).find('.sel-kondisi').val();
-
-        let qtyTerima = $(this).find('.input-terima').length
-            ? parseInt($(this).find('.input-terima').val())
-            : parseInt($(this).find('.td-terima .real-text').text()) || 0;
-
-        items.push({
-            detail_id: detailId,
-            kondisi: kondisi,
-            qty: qtyTerima
+            $('#tblKeterangan').html(html);
+            $('#fieldset-keterangan').removeClass('d-none');
         });
     });
+    // =============================
+    // 🔥 KIRIM GUNDANG UTAMA
+    // =============================
+    $(document).on('click', '#btn-submit-kirim', function () {
 
-    $.ajax({
-        url: '/permintaan/' + currentPermintaanId + '/terima-ipa',
-        type: 'POST',
-        data: {
-            _token: $('meta[name="csrf-token"]').attr('content'),
-            items: items
-        },
-        success: function (res) {
-            alert(res.message);
-            location.reload();
+        if (!currentPermintaanId) {
+            alert('Permintaan tidak valid');
+            return;
         }
-    });
-});
-
-//BAHAN KIMIA KELUAR GUDANG IPA
-$('#tambah_ipa').on('click', function () {
-
-    let now = new Date();
-
-    let tanggal =
-        now.getFullYear().toString() +
-        String(now.getMonth() + 1).padStart(2, '0') +
-        String(now.getDate()).padStart(2, '0');
-
-    let waktu =
-        String(now.getHours()).padStart(2, '0') +
-        String(now.getMinutes()).padStart(2, '0') +
-        String(now.getSeconds()).padStart(2, '0');
-
-    $('#no_transaksi').val(namaIpa + '-' + tanggal + '-' + waktu);
-
-});
-
-$(document).ready(function () {
-
-    $('#btn-submit').on('click', function () {
-
+        if (!confirm('Yakin proses muat & kirim barang?')) {
+            return;
+        }
         let items = [];
 
-        $('.qty').each(function () {
+        $('#tblDetailMinta tr').each(function () {
 
-            let jumlah = parseFloat($(this).val()) || 0;
+            let detailId = $(this).data('detail-id');
+            if (!detailId) return; // skip header / kosong
 
-            /*
-             * Hanya masukkan bahan yang jumlah keluarnya > 0
-             */
-            if (jumlah > 0) {
+            let qtyInput = $(this).find('.qty-adjust');
+            let qtyAwal = $(this).data('qty-awal');
 
-                items.push({
-                    id_bahan: $(this).data('id_bahan'),
-                    id_satuan: $(this).data('id_satuan'),
-                    jumlah: jumlah
-                });
+            let qtyFinal = qtyInput.length
+                ? parseFloat(qtyInput.val()) || 0
+                : qtyAwal;
 
+            let ket = $(this).find('.text-danger').length
+                ? 'Stok Kurang'
+                : null;
+
+            items.push({
+                detail_id: detailId,
+                qty: qtyFinal,
+                ket: ket
+            });
+        });
+
+        $.ajax({
+            url: '/permintaan/' + currentPermintaanId + '/kirim',
+            type: 'POST',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                items: items
+            },
+            success: function (res) {
+                alert(res.message);
+
+                window.open(
+                    '/permintaan/' + currentPermintaanId + '/surat-jalan',
+                    '_blank'
+                );
+                location.reload();
             }
         });
 
-        /*
-        |--------------------------------------------------------------------------
-        | Cek apakah ada barang
-        |--------------------------------------------------------------------------
-        */
 
-        if (items.length === 0) {
+    });
 
-            alert('Belum ada bahan yang akan dikeluarkan.');
+    // =============================
+    // 🔥 KIRIM GUDANG IPA
+    // =============================
+    $('#btn-submit-terima-ipa').on('click', function () {
 
-            return;
-        }
+        if (!confirm('Yakin terima barang ini?')) return;
 
+        let items = [];
 
-        /*
-        |--------------------------------------------------------------------------
-        | Generate nomor transaksi
-        |--------------------------------------------------------------------------
-        */
+        $('#tblDetailMinta tr').each(function () {
+
+            let detailId = $(this).data('detail-id');
+            if (!detailId) return;
+
+            let kondisi = $(this).find('.sel-kondisi').val();
+
+            let qtyTerima = $(this).find('.input-terima').length
+                ? parseInt($(this).find('.input-terima').val())
+                : parseInt($(this).find('.td-terima .real-text').text()) || 0;
+
+            items.push({
+                detail_id: detailId,
+                kondisi: kondisi,
+                qty: qtyTerima
+            });
+        });
+
+        $.ajax({
+            url: '/permintaan/' + currentPermintaanId + '/terima-ipa',
+            type: 'POST',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                items: items
+            },
+            success: function (res) {
+                alert(res.message);
+                location.reload();
+            }
+        });
+    });
+
+    //BAHAN KIMIA KELUAR GUDANG IPA
+    $('#tambah_ipa').on('click', function () {
 
         let now = new Date();
 
@@ -876,187 +815,247 @@ $(document).ready(function () {
             String(now.getMinutes()).padStart(2, '0') +
             String(now.getSeconds()).padStart(2, '0');
 
+        $('#no_transaksi').val(namaIpa + '-' + tanggal + '-' + waktu);
 
-        /*
-        |--------------------------------------------------------------------------
-        | ID IPA dari user login
-        |--------------------------------------------------------------------------
-        */
+    });
 
-       
+    $(document).ready(function () {
 
+        $('#btn-submit').on('click', function () {
 
-        let noTransaksi =
-            'IPA-' +
-            namaIpa +
-            '-' +
-            tanggal +
-            '-' +
-            waktu;
+            let items = [];
 
+            $('.qty').each(function () {
 
-        /*
-        |--------------------------------------------------------------------------
-        | Konfirmasi
-        |--------------------------------------------------------------------------
-        */
-
-        if (!confirm(
-            'Yakin bahan kimia akan dikeluarkan?\n\n' +
-            'No Transaksi: ' + noTransaksi
-        )) {
-            return;
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Disable tombol
-        |--------------------------------------------------------------------------
-        */
-
-        $('#btn-submit')
-            .prop('disabled', true)
-            .text('MENYIMPAN...');
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | AJAX
-        |--------------------------------------------------------------------------
-        */
-
-        $.ajax({
-
-            url: "/gudang-ipa/keluar",
-
-            type: 'POST',
-
-            data: {
-
-                _token: $('meta[name="csrf-token"]').attr('content'),
-
-                no_transaksi: noTransaksi,
-
-                items: items
-
-            },
-
-            success: function (res) {
-
-                alert(res.message);
+                let jumlah = parseFloat($(this).val()) || 0;
 
                 /*
-                 * Tutup modal
+                 * Hanya masukkan bahan yang jumlah keluarnya > 0
                  */
-                $('#modalMasuk').modal('hide');
+                if (jumlah > 0) {
 
-                /*
-                 * Reload halaman
-                 */
-                location.reload();
+                    items.push({
+                        id_bahan: $(this).data('id_bahan'),
+                        id_satuan: $(this).data('id_satuan'),
+                        jumlah: jumlah
+                    });
 
-            },
+                }
+            });
 
-            error: function (xhr) {
+            /*
+            |--------------------------------------------------------------------------
+            | Cek apakah ada barang
+            |--------------------------------------------------------------------------
+            */
 
-                let message = 'Terjadi kesalahan.';
+            if (items.length === 0) {
 
-                if (xhr.responseJSON &&
-                    xhr.responseJSON.message) {
+                alert('Belum ada bahan yang akan dikeluarkan.');
 
-                    message = xhr.responseJSON.message;
+                return;
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Generate nomor transaksi
+            |--------------------------------------------------------------------------
+            */
+
+            let now = new Date();
+
+            let tanggal =
+                now.getFullYear().toString() +
+                String(now.getMonth() + 1).padStart(2, '0') +
+                String(now.getDate()).padStart(2, '0');
+
+            let waktu =
+                String(now.getHours()).padStart(2, '0') +
+                String(now.getMinutes()).padStart(2, '0') +
+                String(now.getSeconds()).padStart(2, '0');
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | ID IPA dari user login
+            |--------------------------------------------------------------------------
+            */
+
+
+
+
+            let noTransaksi =
+                'IPA-' +
+                namaIpa +
+                '-' +
+                tanggal +
+                '-' +
+                waktu;
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Konfirmasi
+            |--------------------------------------------------------------------------
+            */
+
+            if (!confirm(
+                'Yakin bahan kimia akan dikeluarkan?\n\n' +
+                'No Transaksi: ' + noTransaksi
+            )) {
+                return;
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Disable tombol
+            |--------------------------------------------------------------------------
+            */
+
+            $('#btn-submit')
+                .prop('disabled', true)
+                .text('MENYIMPAN...');
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | AJAX
+            |--------------------------------------------------------------------------
+            */
+
+            $.ajax({
+
+                url: "/gudang-ipa/keluar",
+
+                type: 'POST',
+
+                data: {
+
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+
+                    no_transaksi: noTransaksi,
+
+                    items: items
+
+                },
+
+                success: function (res) {
+
+                    alert(res.message);
+
+                    /*
+                     * Tutup modal
+                     */
+                    $('#modalMasuk').modal('hide');
+
+                    /*
+                     * Reload halaman
+                     */
+                    location.reload();
+
+                },
+
+                error: function (xhr) {
+
+                    let message = 'Terjadi kesalahan.';
+
+                    if (xhr.responseJSON &&
+                        xhr.responseJSON.message) {
+
+                        message = xhr.responseJSON.message;
+                    }
+
+                    alert(message);
+
+                    /*
+                     * Aktifkan kembali tombol
+                     */
+                    $('#btn-submit')
+                        .prop('disabled', false)
+                        .text('SIMPAN');
                 }
 
-                alert(message);
+            });
 
-                /*
-                 * Aktifkan kembali tombol
-                 */
-                $('#btn-submit')
-                    .prop('disabled', false)
-                    .text('SIMPAN');
+        });
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Batasi input sesuai stok
+        |--------------------------------------------------------------------------
+        */
+
+        $('.qty').on('input', function () {
+
+            let max = parseFloat($(this).attr('max')) || 0;
+
+            let value = parseFloat($(this).val()) || 0;
+
+            if (value > max) {
+
+                $(this).val(max);
+
+                alert(
+                    'Jumlah keluar tidak boleh melebihi stok.'
+                );
+            }
+
+            if (value < 0) {
+
+                $(this).val(0);
             }
 
         });
 
     });
+    //Riwayat Keluar
+    $(document).on('click', '.btn-detail', function () {
+        const noTransaksi = $(this).data('transaksi');
 
+        $('#detail-no-transaksi').text(noTransaksi);
+        $('#detail-tanggal').text('-');
 
-    /*
-    |--------------------------------------------------------------------------
-    | Batasi input sesuai stok
-    |--------------------------------------------------------------------------
-    */
-
-    $('.qty').on('input', function () {
-
-        let max = parseFloat($(this).attr('max')) || 0;
-
-        let value = parseFloat($(this).val()) || 0;
-
-        if (value > max) {
-
-            $(this).val(max);
-
-            alert(
-                'Jumlah keluar tidak boleh melebihi stok.'
-            );
-        }
-
-        if (value < 0) {
-
-            $(this).val(0);
-        }
-
-    });
-
-});
-//Riwayat Keluar
-$(document).on('click', '.btn-detail', function () {
-    const noTransaksi = $(this).data('transaksi');
-
-    $('#detail-no-transaksi').text(noTransaksi);
-    $('#detail-tanggal').text('-');
-
-    $('#tbodyDetailKeluar').html(`
+        $('#tbodyDetailKeluar').html(`
         <tr>
             <td colspan="4" class="text-center">Memuat data...</td>
         </tr>
     `);
 
-    $('#modalDetailKeluar').modal('show');
+        $('#modalDetailKeluar').modal('show');
 
-    $.ajax({
-        url: '/ipa/transaksi-keluar/' +
-            encodeURIComponent(noTransaksi) + '/detail',
-        type: 'GET',
+        $.ajax({
+            url: '/ipa/transaksi-keluar/' +
+                encodeURIComponent(noTransaksi) + '/detail',
+            type: 'GET',
 
-        success: function (res) {
-            $('#detail-no-transaksi').text(
-                res.transaksi.id_transaksi
-            );
+            success: function (res) {
+                $('#detail-no-transaksi').text(
+                    res.transaksi.id_transaksi
+                );
 
-            $('#detail-tanggal').text(
-                res.transaksi.created_at
-                    ? new Date(res.transaksi.created_at)
-                        .toLocaleString('id-ID')
-                    : '-'
-            );
+                $('#detail-tanggal').text(
+                    res.transaksi.created_at
+                        ? new Date(res.transaksi.created_at)
+                            .toLocaleString('id-ID')
+                        : '-'
+                );
 
-            let html = '';
+                let html = '';
 
-            if (!res.detail || res.detail.length === 0) {
-                html = `
+                if (!res.detail || res.detail.length === 0) {
+                    html = `
                     <tr>
                         <td colspan="4" class="text-center">
                             Tidak ada detail transaksi.
                         </td>
                     </tr>
                 `;
-            } else {
-                $.each(res.detail, function (i, item) {
-                    html += `
+                } else {
+                    $.each(res.detail, function (i, item) {
+                        html += `
                         <tr>
                             <td class="text-center">${i + 1}</td>
                             <td>${item.bahan?.nama_bahan ?? '-'}</td>
@@ -1066,14 +1065,14 @@ $(document).on('click', '.btn-detail', function () {
                             </td>
                         </tr>
                     `;
-                });
-            }
+                    });
+                }
 
-            $('#tbodyDetailKeluar').html(html);
-        },
+                $('#tbodyDetailKeluar').html(html);
+            },
 
-        error: function (xhr) {
-            $('#tbodyDetailKeluar').html(`
+            error: function (xhr) {
+                $('#tbodyDetailKeluar').html(`
                 <tr>
                     <td colspan="4" class="text-center text-danger">
                         Gagal mengambil detail transaksi.
@@ -1081,55 +1080,55 @@ $(document).on('click', '.btn-detail', function () {
                 </tr>
             `);
 
-            console.error(xhr.responseText);
-        }
+                console.error(xhr.responseText);
+            }
+        });
     });
-});
-//Batal Keluar
-$(document).on('click', '.btn-batal', function () {
-    
-    const noTransaksi = $(this).data('transaksi');
-    //  e.preventDefault();
+    //Batal Keluar
+    $(document).on('click', '.btn-batal', function () {
 
-    // console.log('Tombol batal diklik');
-    // console.log('Nomor transaksi:', $(this).data('transaksi'));
+        const noTransaksi = $(this).data('transaksi');
+        //  e.preventDefault();
+
+        // console.log('Tombol batal diklik');
+        // console.log('Nomor transaksi:', $(this).data('transaksi'));
 
 
-    if (!confirm(
-        'Yakin membatalkan transaksi ' + noTransaksi +
-        '?\nStok IPA akan dikembalikan.'
-    )) {
-        return;
-    }
-
-    const tombol = $(this);
-
-    tombol.prop('disabled', true);
-
-    $.ajax({
-        url: '/ipa/transaksi-keluar/' +
-            encodeURIComponent(noTransaksi) + '/batal',
-        type: 'POST',
-        data: {
-            _token: $('meta[name="csrf-token"]').attr('content')
-        },
-
-        success: function (res) {
-            alert(res.message);
-            location.reload();
-        },
-
-        error: function (xhr) {
-            const pesan = xhr.responseJSON?.message
-                ?? 'Pembatalan transaksi gagal.';
-
-            alert(pesan);
-            tombol.prop('disabled', false);
+        if (!confirm(
+            'Yakin membatalkan transaksi ' + noTransaksi +
+            '?\nStok IPA akan dikembalikan.'
+        )) {
+            return;
         }
+
+        const tombol = $(this);
+
+        tombol.prop('disabled', true);
+
+        $.ajax({
+            url: '/ipa/transaksi-keluar/' +
+                encodeURIComponent(noTransaksi) + '/batal',
+            type: 'POST',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+
+            success: function (res) {
+                alert(res.message);
+                location.reload();
+            },
+
+            error: function (xhr) {
+                const pesan = xhr.responseJSON?.message
+                    ?? 'Pembatalan transaksi gagal.';
+
+                alert(pesan);
+                tombol.prop('disabled', false);
+            }
+        });
     });
-});
-//Filter Stok IPA
-function filterTabelStok() {
+    //Filter Stok IPA
+    function filterTabelStok() {
         const pencarian = ($('#cariBahan').val() || '')
             .toLowerCase()
             .trim();
@@ -1172,53 +1171,53 @@ function filterTabelStok() {
 
     //kartu stok
     $(document).on('click', '.btn-kartu-stok', function () {
-    const url = $(this).data('url');
+        const url = $(this).data('url');
 
-    $('#isiKartuStok').html(`
+        $('#isiKartuStok').html(`
         <div class="text-center p-4">
             <i class="fas fa-spinner fa-spin fa-2x"></i>
             <p class="mt-2">Memuat kartu stok...</p>
         </div>
     `);
 
-    $('#modalKartuStok').modal('show');
+        $('#modalKartuStok').modal('show');
 
-    $.get(url)
-        .done(function (html) {
-            $('#isiKartuStok').html(html);
-        })
-        .fail(function (xhr) {
-            $('#isiKartuStok').html(`
+        $.get(url)
+            .done(function (html) {
+                $('#isiKartuStok').html(html);
+            })
+            .fail(function (xhr) {
+                $('#isiKartuStok').html(`
                 <div class="alert alert-danger">
                     Gagal memuat kartu stok.
                     Periksa route, controller, dan log Laravel.
                 </div>
             `);
 
-            console.error(xhr.responseText);
-        });
-});
+                console.error(xhr.responseText);
+            });
+    });
 
-$(document).on('submit', '#formFilterKartuStok', function (e) {
-    e.preventDefault();
+    $(document).on('submit', '#formFilterKartuStok', function (e) {
+        e.preventDefault();
 
-    const url = $('.btn-kartu-stok').filter(function () {
-        return $(this).data('url') === window.kartuStokUrl;
-    }).data('url');
+        const url = $('.btn-kartu-stok').filter(function () {
+            return $(this).data('url') === window.kartuStokUrl;
+        }).data('url');
 
-    const form = $(this);
-    const idBahanUrl = $('#isiKartuStok').data('url');
+        const form = $(this);
+        const idBahanUrl = $('#isiKartuStok').data('url');
 
-    $.get(idBahanUrl, form.serialize())
-        .done(function (html) {
-            $('#isiKartuStok').html(html);
-            $('#isiKartuStok').data('url', idBahanUrl);
-        })
-        .fail(function (xhr) {
-            console.error(xhr.responseText);
-            alert('Gagal memfilter kartu stok.');
-        });
-});
+        $.get(idBahanUrl, form.serialize())
+            .done(function (html) {
+                $('#isiKartuStok').html(html);
+                $('#isiKartuStok').data('url', idBahanUrl);
+            })
+            .fail(function (xhr) {
+                console.error(xhr.responseText);
+                alert('Gagal memfilter kartu stok.');
+            });
+    });
 
 
 

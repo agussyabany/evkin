@@ -16,38 +16,46 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto d-flex align-items-center">
+        <li class="nav-item">
+            <a class="nav-link" href="#" id="themeToggle" title="Ganti tampilan">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </a>
+        </li>
         <!-- Navbar Search -->
-        <li class="nav-item mx-2"> <!-- Added margin spacing -->
-            <select id="selectBulanAwal" class="form-control select2" style="width: 100px;"
-                onchange="changeBulanTahun()">
-                @for ($i = 1; $i <= 12; $i++)
-                    <option value="{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}"
-                        {{ session('bulan_awal', '01') == str_pad($i, 2, '0', STR_PAD_LEFT) ? 'selected' : '' }}>
-                        {{ strtoupper(\Carbon\Carbon::create()->month($i)->translatedFormat('F')) }}
-                    </option>
-                @endfor
-            </select>
-        </li>
+        {{-- Filter periode, kecuali role Gudang dan IPA --}}
+        @unless (auth()->user()->hasAnyRole(['gudang', 'ipa']))
+            <li class="nav-item mx-2"> <!-- Added margin spacing -->
+                <select id="selectBulanAwal" class="form-control select2" style="width: 100px;"
+                    onchange="changeBulanTahun()">
+                    @for ($i = 1; $i <= 12; $i++)
+                        <option value="{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}"
+                            {{ session('bulan_awal', '01') == str_pad($i, 2, '0', STR_PAD_LEFT) ? 'selected' : '' }}>
+                            {{ strtoupper(\Carbon\Carbon::create()->month($i)->translatedFormat('F')) }}
+                        </option>
+                    @endfor
+                </select>
+            </li>
 
-        <li class="nav-item mx-2"> <!-- Added margin spacing -->
-            <select id="selectBulanAkhir" class="form-control select2" style="width: 100px;"
-                onchange="changeBulanTahun()">
-                @for ($i = 1; $i <= 12; $i++)
-                    <option value="{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}"
-                        {{ session('bulan_akhir', '12') == str_pad($i, 2, '0', STR_PAD_LEFT) ? 'selected' : '' }}>
-                        {{ strtoupper(\Carbon\Carbon::create()->month($i)->translatedFormat('F')) }}
-                    </option>
-                @endfor
-            </select>
-        </li>
+            <li class="nav-item mx-2"> <!-- Added margin spacing -->
+                <select id="selectBulanAkhir" class="form-control select2" style="width: 100px;"
+                    onchange="changeBulanTahun()">
+                    @for ($i = 1; $i <= 12; $i++)
+                        <option value="{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}"
+                            {{ session('bulan_akhir', '12') == str_pad($i, 2, '0', STR_PAD_LEFT) ? 'selected' : '' }}>
+                            {{ strtoupper(\Carbon\Carbon::create()->month($i)->translatedFormat('F')) }}
+                        </option>
+                    @endfor
+                </select>
+            </li>
 
-        <li class="nav-item mx-2"> <!-- Added margin spacing -->
-            <select id="selectTahun" class="form-control select2" style="width: 100px;" onchange="changeBulanTahun()">
-                <option value="2024" {{ session('tahun', date('Y')) == '2024' ? 'selected' : '' }}>2024</option>
-                <option value="2025" {{ session('tahun', date('Y')) == '2025' ? 'selected' : '' }}>2025</option>
-                <option value="2026" {{ session('tahun', date('Y')) == '2026' ? 'selected' : '' }}>2026</option>
-            </select>
-        </li>
+            <li class="nav-item mx-2"> <!-- Added margin spacing -->
+                <select id="selectTahun" class="form-control select2" style="width: 100px;" onchange="changeBulanTahun()">
+                    <option value="2024" {{ session('tahun', date('Y')) == '2024' ? 'selected' : '' }}>2024</option>
+                    <option value="2025" {{ session('tahun', date('Y')) == '2025' ? 'selected' : '' }}>2025</option>
+                    <option value="2026" {{ session('tahun', date('Y')) == '2026' ? 'selected' : '' }}>2026</option>
+                </select>
+            </li>
+        @endunless
 
         {{-- <li class="nav-item mx-2">  <!-- Added margin spacing -->
       <a href="/perumdam" class="nav-link btn btn-info px-3">  <!-- Added horizontal padding -->
@@ -79,21 +87,19 @@
                 <img src="{{ asset('assets/dist/img/logo.png') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#"
-                    class="d-flex align-items-center text-decoration-none text-light"
-                    data-toggle="modal"
+                <a href="#" class="d-flex align-items-center text-decoration-none text-light" data-toggle="modal"
                     data-target="#modalProfilPengguna">
 
-                        {{-- <div class="mr-2 rounded-circle bg-primary d-flex align-items-center justify-content-center"
+                    {{-- <div class="mr-2 rounded-circle bg-primary d-flex align-items-center justify-content-center"
                             style="width:36px;height:36px;min-width:36px;">
                             <i class="fas fa-user"></i>
                         </div> --}}
 
-                        <div class="text-truncate">
-                            <strong>{{ Auth::user()->name }}</strong>
-                            <small class="d-block text-muted">{{ Auth::user()->nipp }}</small>
-                        </div>
-                    </a>
+                    <div class="text-truncate">
+                        <strong>{{ Auth::user()->name }}</strong>
+                        <small class="d-block text-muted">{{ Auth::user()->nipp }}</small>
+                    </div>
+                </a>
             </div>
         </div>
 
@@ -263,10 +269,10 @@
                                         <p>Dashboard Gudang</p>
                                     </a>
                                 </li>
-                            @endif
 
-                            {{-- OPERASIONAL GUDANG --}}
-                            @if (Auth::user()->hasAnyRole(['agus', 'gudang']))
+
+                                {{-- OPERASIONAL GUDANG --}}
+
                                 <li class="nav-header">OPERASIONAL</li>
 
                                 <li class="nav-item">
@@ -296,32 +302,35 @@
                                 </li>
                             @endif
 
-                            
+
 
                             @if (Auth::user()->hasAnyRole(['agus', 'ipa']))
-                            <li class="nav-item">
-                                <a href="/ipaGudang"
-                                    class="nav-link {{ request()->is('ipaGudang*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-boxes"></i>
-                                    <p>Stok IPA</p>
-                                    <span class="right badge badge-info">Stok</span>
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="/dataMinta"
-                                    class="nav-link {{ request()->is('dataMinta*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-file-alt"></i>
-                                    <p>Permintaan Bahan</p>
-                                </a>
-                            </li>
                                 <li class="nav-item">
-                                    <a href="/stok" class="nav-link {{ request()->is('stok*') ? 'active' : '' }}">
-                                        <i class="nav-icon fas fa-box-open"></i>
-                                        <p>Referensi Stok Gudang</p>
+                                    <a href="/ipaGudang"
+                                        class="nav-link {{ request()->is('ipaGudang*') ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-boxes"></i>
+                                        <p>Stok IPA</p>
+                                        <span class="right badge badge-info">Stok</span>
                                     </a>
                                 </li>
-
+                            @endif
+                            @if (Auth::user()->hasAnyRole(['agus', 'gudang']))
+                                <li class="nav-item">
+                                    <a href="/dataMinta"
+                                        class="nav-link {{ request()->is('dataMinta*') ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-file-alt"></i>
+                                        <p>Permintaan Bahan</p>
+                                    </a>
+                                </li>
+                                @if (Auth::user()->hasAnyRole(['agus', 'ipa']))
+                                    <li class="nav-item">
+                                        <a href="/stok"
+                                            class="nav-link {{ request()->is('stok*') ? 'active' : '' }}">
+                                            <i class="nav-icon fas fa-box-open"></i>
+                                            <p>Ajukan Permintaan</p>
+                                        </a>
+                                    </li>
+                                @endif
                                 {{-- TRANSAKSI --}}
                                 <li class="nav-header">TRANSAKSI</li>
 
@@ -343,20 +352,21 @@
                                         <p>Minimum Stok IPA</p>
                                     </a>
                                 </li>
-                                @if (Auth::user()->hasAnyRole(['agus']))
-                                <li class="nav-item">
-                                        <a href="/guna" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>User</p>
-                                        </a>
-                                    </li>
-                                </li>
-                                 @endif
                             @endif
-                       
-                        </ul>
+                            @if (Auth::user()->hasAnyRole(['agus']))
+                                <li class="nav-item">
+                                    <a href="/guna" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>User</p>
+                                    </a>
+                                </li>
                     </li>
                 @endif
+
+
+            </ul>
+            </li>
+            @endif
 
             </ul>
         </nav>
@@ -366,27 +376,21 @@
 </aside>
 
 {{-- MODAL PROFIL PENGGUNA --}}
-<div class="modal fade" id="modalProfilPengguna" tabindex="-1"
-     role="dialog" aria-labelledby="judulProfilPengguna"
-     aria-hidden="true">
+<div class="modal fade" id="modalProfilPengguna" tabindex="-1" role="dialog"
+    aria-labelledby="judulProfilPengguna" aria-hidden="true">
 
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content border-0 shadow-lg"
-             style="border-radius:16px; overflow:hidden;">
+        <div class="modal-content border-0 shadow-lg" style="border-radius:16px; overflow:hidden;">
 
-            <div class="text-white text-center p-4"
-                 style="background:linear-gradient(135deg,#1f4e79,#2878a5);">
+            <div class="text-white text-center p-4" style="background:linear-gradient(135deg,#1f4e79,#2878a5);">
 
-                <button type="button"
-                        class="close text-white"
-                        data-dismiss="modal"
-                        aria-label="Tutup"
-                        style="opacity:1;">
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Tutup"
+                    style="opacity:1;">
                     <span>&times;</span>
                 </button>
 
                 <div class="rounded-circle bg-white text-primary d-flex align-items-center justify-content-center mx-auto mb-3"
-                     style="width:76px;height:76px;font-size:30px;">
+                    style="width:76px;height:76px;font-size:30px;">
                     <i class="fas fa-user"></i>
                 </div>
 
@@ -434,11 +438,8 @@
                     </div>
                 </div>
 
-                <button type="button"
-                        class="btn btn-outline-primary btn-block mb-2"
-                        data-toggle="collapse"
-                        data-target="#formUbahPassword"
-                        aria-expanded="false">
+                <button type="button" class="btn btn-outline-primary btn-block mb-2" data-toggle="collapse"
+                    data-target="#formUbahPassword" aria-expanded="false">
                     <i class="fas fa-key mr-2"></i> Ubah Password
                 </button>
 
@@ -461,69 +462,57 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="POST"
-                              action="{{ route('profil.password.update') }}">
+                        <form method="POST" action="{{ route('profil.password.update') }}">
                             @csrf
                             @method('PUT')
 
-                           <div class="form-group">
-                                    <label>Password Lama</label>
-                                    <div class="input-group">
-                                        <input type="password"
-                                            name="current_password"
-                                            class="form-control password-toggle-input"
-                                            autocomplete="current-password"
-                                            required>
+                            <div class="form-group">
+                                <label>Password Lama</label>
+                                <div class="input-group">
+                                    <input type="password" name="current_password"
+                                        class="form-control password-toggle-input" autocomplete="current-password"
+                                        required>
 
-                                        <div class="input-group-append">
-                                            <button type="button"
-                                                    class="btn btn-outline-secondary toggle-password"
-                                                    aria-label="Tampilkan password">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </div>
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-outline-secondary toggle-password"
+                                            aria-label="Tampilkan password">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="form-group">
-                                    <label>Password Baru</label>
-                                    <div class="input-group">
-                                        <input type="password"
-                                            name="password"
-                                            class="form-control password-toggle-input"
-                                            minlength="8"
-                                            autocomplete="new-password"
-                                            required>
+                            <div class="form-group">
+                                <label>Password Baru</label>
+                                <div class="input-group">
+                                    <input type="password" name="password" class="form-control password-toggle-input"
+                                        minlength="8" autocomplete="new-password" required>
 
-                                        <div class="input-group-append">
-                                            <button type="button"
-                                                    class="btn btn-outline-secondary toggle-password"
-                                                    aria-label="Tampilkan password">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <small class="text-muted">Minimal 8 karakter.</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Konfirmasi Password Baru</label>
-                                    <div class="input-group">
-                                        <input type="password"
-                                            name="password_confirmation"
-                                            class="form-control password-toggle-input"
-                                            autocomplete="new-password"
-                                            required>
-
-                                        <div class="input-group-append">
-                                            <button type="button"
-                                                    class="btn btn-outline-secondary toggle-password"
-                                                    aria-label="Tampilkan password">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </div>
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-outline-secondary toggle-password"
+                                            aria-label="Tampilkan password">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
                                     </div>
                                 </div>
+                                <small class="text-muted">Minimal 8 karakter.</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Konfirmasi Password Baru</label>
+                                <div class="input-group">
+                                    <input type="password" name="password_confirmation"
+                                        class="form-control password-toggle-input" autocomplete="new-password"
+                                        required>
+
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-outline-secondary toggle-password"
+                                            aria-label="Tampilkan password">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
 
                             <button type="submit" class="btn btn-primary btn-block">
                                 <i class="fas fa-save mr-1"></i>
@@ -535,9 +524,8 @@
 
                 <hr>
 
-                <form method="GET"
-                      action="{{ route('logout') }}"
-                      onsubmit="return confirm('Apakah Anda yakin ingin keluar dari aplikasi?')">
+                <form method="GET" action="{{ route('logout') }}"
+                    onsubmit="return confirm('Apakah Anda yakin ingin keluar dari aplikasi?')">
                     @csrf
 
                     <button type="submit" class="btn btn-danger btn-block">
@@ -550,3 +538,38 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggle = document.getElementById('themeToggle');
+        const icon = document.getElementById('themeIcon');
+
+        // Ambil tema tersimpan
+        let theme = localStorage.getItem('theme') || 'light';
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                document.body.classList.remove('dark-mode');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+
+            localStorage.setItem('theme', theme);
+        }
+
+        applyTheme(theme);
+
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            theme = document.body.classList.contains('dark-mode') ?
+                'light' :
+                'dark';
+
+            applyTheme(theme);
+        });
+    });
+</script>

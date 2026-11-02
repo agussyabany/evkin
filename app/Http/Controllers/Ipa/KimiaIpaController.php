@@ -18,8 +18,8 @@ class KimiaIpaController extends Controller
         return view('ipa.kimia',compact(['stok']));
     }
     public function ipaGudang()
-    {
-        $idIpa = auth()->user()->ipa;
+{
+    $idIpa = auth()->user()->ipa;
 
     $stok = StokIpa::with(['bahan.satuan'])
         ->where('id_ipa', $idIpa)
@@ -29,6 +29,11 @@ class KimiaIpaController extends Controller
     $minimumStok = GudangStokIpaSetting::where('id_ipa', $idIpa)
         ->pluck('stok_minimum', 'id_bahan');
 
+    // Masukkan stok_minimum ke setiap item stok
+    $stok->each(function ($item) use ($minimumStok) {
+        $item->stok_minimum = (float) ($minimumStok[$item->id_bahan] ?? 0);
+    });
+
     return view('ipa.gudangIpa', compact('stok', 'minimumStok'));
-    }
+}
 }

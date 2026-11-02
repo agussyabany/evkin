@@ -1,185 +1,179 @@
-{{-- <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout> --}}
-
-{{-- <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
-    <title>Perumdam Tirta Kencana</title>
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-                <style>
-                .bd-placeholder-img {
-                    font-size: 1.125rem;
-                    text-anchor: middle;
-                    -webkit-user-select: none;
-                    -moz-user-select: none;
-                    user-select: none;
-                }
-
-                @media (min-width: 768px) {
-                    .bd-placeholder-img-lg {
-                    font-size: 3.5rem;
-                    }
-                }
-                </style>
-                <!-- Custom styles for this template -->
-                <link href="{{asset('assets/dist/css/signin.css')}}" rel="stylesheet">
-            </head>
-            <body class="text-center" style="background-image: url('{{asset('assets/dist/img/bg.jpg')}}');background-size: cover; background-repeat: no-repeat;font-family: 'Bahnschrift-SemiLight', sans-serif; width:100%; height:100%">
-
-            <main class="form-signin">
-           <div class="container">
-            <form method="post" action="{{ route('login') }}">
-                @csrf
-                <img class="mb-4" src="{{asset('assets/dist/img/logo.png')}}" alt="" width="300" height="300">
-                <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
-                <div class="form-floating">
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $item)
-                                    <li>{{ $item }}</li>                        
-                            @endforeach
-                        </ul>
-                    </div>
-                     @endif
-                     
-                <input class="form-control" placeholder="name@example.com" id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" >
-                <label for="floatingInput">Email address</label>
-                </div>
-                <div class="form-floating">
-                <input id="password"type="password" name="password" required autocomplete="current-password"  type="password" class="form-control" placeholder="Password">
-                <label for="floatingPassword">Password</label>
-                </div>
-
-               
-
-                <div class="checkbox mb-3">
-                <label>
-                    <input id="remember_me"  class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember" type="checkbox" value="remember-me"> Remember me
-                </label>
-                </div>
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-                <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-            </form>
-        </div>
-            </main>
-         </body>
-    </html> --}}
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Perumdam Tirta Kencana</title>
-  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
-<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'><link rel="stylesheet" href="{{asset('assets/dist/css/signin.css')}}">
+<html lang="id">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#5368e8">
+
+    <title>Login | Perumdam Tirta Kencana</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/signin.css') }}">
 </head>
+
 <body>
-<!-- partial:index.partial.html -->
-<div class="container">
-	<div class="screen">
-		<div class="screen__content">
-			<form class="login" method="post" action="{{ route('login') }}">
-                @csrf
+
+    <main class="login-page">
+
+        <!-- Ornamen vector air -->
+        <div class="water-vector water-drop-one">
+            <i class="fa-solid fa-droplet"></i>
+        </div>
+
+        <div class="water-vector water-drop-two">
+            <i class="fa-solid fa-droplet"></i>
+        </div>
+
+        <div class="water-circle circle-one"></div>
+        <div class="water-circle circle-two"></div>
+
+        <div class="water-wave">
+            <svg viewBox="0 0 1440 250" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 120 C180 30 300 220 520 130 S850 40 1080 130 S1300 190 1440 80 V250 H0 Z"
+                    fill="rgba(255,255,255,0.12)" />
+                <path d="M0 160 C200 70 350 240 570 150 S900 70 1100 160 S1300 210 1440 120 V250 H0 Z"
+                    fill="rgba(255,255,255,0.10)" />
+                <path d="M0 190 C200 110 350 250 580 180 S900 110 1150 190 S1320 230 1440 160" fill="none"
+                    stroke="rgba(255,255,255,0.30)" stroke-width="3" />
+            </svg>
+        </div>
+
+        <section class="login-card">
+
+            <div class="login-brand">
+
+                <div class="brand-logo">
+                    <img src="{{ asset('assets/dist/img/logo.png') }}" alt="Logo Perumdam Tirta Kencana">
+                </div>
+
+                <div class="brand-name">
+                    <h2>PERUMDAM TIRTA KENCANA</h2>
+                    <span>KOTA SAMARINDA</span>
+                </div>
+
+                <div class="brand-line"></div>
+
+                <div class="welcome-text">
+                    <h1>Selamat Datang</h1>
+                    <p>
+                        Silakan masuk untuk mengakses sistem
+                        Perumdam Tirta Kencana.
+                    </p>
+                </div>
+
+                <div class="brand-watermark">
+                    <i class="fa-solid fa-droplet"></i>
+                </div>
+
+            </div>
+
+            <div class="login-form-container">
+
+                <div class="form-heading">
+                    <span class="heading-line"></span>
+                    <h2>Masuk ke Sistem</h2>
+                    <p>Gunakan akun Anda untuk melanjutkan.</p>
+                </div>
+
                 @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $item)
-                                <li>{{ $item }}</li>                        
+                    <div class="login-alert">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <div>
+                            @foreach ($errors->all() as $error)
+                                <p>{{ $error }}</p>
                             @endforeach
-                        </ul>
+                        </div>
                     </div>
                 @endif
-                
-                <!-- Tambahkan gambar di atas input email -->
-                <div class="image-container">
-                    <img src="{{asset('assets/dist/img/logo.png')}}" width="100px" height="100px" alt="">
+
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+
+                    <div class="form-group">
+                        <label for="email">Email / Username</label>
+
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-user input-icon"></i>
+
+                            <input type="text" id="email" name="email" value="{{ old('email') }}"
+                                placeholder="Masukkan email atau username" autocomplete="username" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock input-icon"></i>
+
+                            <input type="password" id="password" name="password" placeholder="Masukkan password"
+                                autocomplete="current-password" required>
+
+                            <button type="button" class="password-toggle" id="togglePassword"
+                                aria-label="Tampilkan password">
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" name="remember" value="1">
+                            <span>Ingat saya</span>
+                        </label>
+
+                        @if (Route::has('password.request'))
+                            <a href="{{ route('password.request') }}" class="forgot-password">
+                                Lupa password?
+                            </a>
+                        @endif
+                    </div>
+
+                    <button type="submit" class="login-button">
+                        <span>Masuk ke Sistem</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </form>
+
+                <div class="login-footer">
+                    <span></span>
+                    <p>PERUMDAM TIRTA KENCANA</p>
+                    <span></span>
                 </div>
-                
-				<div class="login__field">
-					<i class="login__icon fas fa-user"></i>
-					<input type="text" class="login__input" placeholder="name@example.com" id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username">
-				</div>
-				<div class="login__field">
-					<i class="login__icon fas fa-lock"></i>
-					<input type="password" class="login__input" placeholder="Password"  name="password" required autocomplete="current-password" type="password" class="form-control" placeholder="Password">
-				</div>
-				<button class="button login__submit" type="submit">
-					<span class="button__text">Log In Now</span>
-					<i class="button__icon fas fa-chevron-right"></i>
-				</button>				
-			</form>
-			<div class="social-login">
-				
-				<div class="social-icons">
-					
-				</div>
-			</div>
-		</div>
-		<div class="screen__background">
-			<span class="screen__background__shape screen__background__shape4"></span>
-			<span class="screen__background__shape screen__background__shape3"></span>		
-			<span class="screen__background__shape screen__background__shape2"></span>
-			<span class="screen__background__shape screen__background__shape1">
-				
-			</span>
-		</div>		
-	</div>
-</div>
-<!-- partial -->
-  
+
+                <div class="security-note">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Akses sistem yang aman dan terlindungi</span>
+                </div>
+
+            </div>
+
+        </section>
+
+        <footer class="page-footer">
+            &copy; {{ date('Y') }} Perumdam Tirta Kencana Kota Samarinda
+        </footer>
+
+    </main>
+
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function() {
+            const isPassword = passwordInput.type === 'password';
+
+            passwordInput.type = isPassword ? 'text' : 'password';
+
+            this.innerHTML = isPassword ?
+                '<i class="fa-regular fa-eye-slash"></i>' :
+                '<i class="fa-regular fa-eye"></i>';
+        });
+    </script>
+
 </body>
+
 </html>
