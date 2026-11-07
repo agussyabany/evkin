@@ -220,7 +220,7 @@
                                                 <th rowspan="2">KET</th>
                                                 @role(['agus', 'ipa'])
                                                     @if (Auth::user()->jabatan == 1)
-                                                        <th rowspan="2">JUMLAH DIKIRIM</th>
+                                                        <th rowspan="2">DIKIRIM</th>
                                                     @endif
                                                 @endrole
                                             </tr>
@@ -228,9 +228,9 @@
                                                 <th>JUMLAH</th>
                                                 <th>KILO</th>
                                                 <th class="text-success">JUMLAH</th>
-                                                <th class="text-success">KILO</th>
+                                                
                                                 <th class="text-warning">JUMLAH</th>
-                                                <th class="text-warning">KILO</th>
+                                                
                                             </tr>
                                         </thead>
 

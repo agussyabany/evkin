@@ -15,7 +15,7 @@
   <div class="content">
     <div class="float-right">
       @if (Auth::user()->hasAnyRole(['gudang','agus']))
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMasuk" id="tambah_ipa">TAMBAH</button>
+      {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMasuk" id="tambah_ipa">TAMBAH</button> --}}
       @endif
     </div>
   <br><br>

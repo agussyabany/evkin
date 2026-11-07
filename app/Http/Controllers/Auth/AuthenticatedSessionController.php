@@ -56,7 +56,7 @@ class AuthenticatedSessionController extends Controller
             return redirect()->to('/ipaGudang');
         }
         if (Auth::user()->hasRole(['gudang'])) {
-            return redirect()->to('/gudang');
+            return redirect()->to('/dashboard-gudang');
         }
 
         return redirect()->intended(RouteServiceProvider::HOME);

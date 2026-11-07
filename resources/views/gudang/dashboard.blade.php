@@ -104,7 +104,7 @@
                 </div>
 
                 <div class="card-body table-responsive">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped masuk">
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -139,7 +139,7 @@
                                             </span>
                                         @elseif ((int) $item->status === 0)
                                             <span class="badge badge-warning">
-                                                Status 0
+                                                Diajukan
                                             </span>
                                         @else
                                             <span class="badge badge-secondary">

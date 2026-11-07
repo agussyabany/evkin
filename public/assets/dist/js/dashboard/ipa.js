@@ -21,18 +21,18 @@ $(document).ready(function () {
     // klik tambah bahan
     $('.btn-add').on('click', function () {
 
-        // munculkan header saat klik pertama
-        // if (!noPermintaan) {
-        //     $.get('/permintaan/draft', function (res) {
-        //         noPermintaan = res.no_permintaan
-        //      })
+        //munculkan header saat klik pertama
+        if (!noPermintaan) {
+            $.get('/permintaan/draft', function (res) {
+                noPermintaan = res.no_permintaan
+             })
 
 
-        //     //'PR-'.now()->format('Ymd')
-        //     $('#no-permintaan').text(noPermintaan);
-        //     $('#cart-header').removeClass('d-none');
-        //     $('#cart-empty').remove();
-        // }
+            //'PR-'.now()->format('Ymd')
+            $('#no-permintaan').text(noPermintaan);
+            $('#cart-header').removeClass('d-none');
+            $('#cart-empty').remove();
+        }
 
         let id = $(this).data('id');
 
@@ -72,13 +72,13 @@ $(document).ready(function () {
     `;
 
         $('#cart-body').append(row);
-        // 🔥 AJAX SIMPAN DRAFT DETAIL
-        // $.post('/permintaan/cart/add', {
-        //     _token: $('meta[name="csrf-token"]').attr('content'),
-        //     bahan_id: id,
-        //     qty: 0,
-        //     kg: 0
-        // });
+        //🔥 AJAX SIMPAN DRAFT DETAIL
+        $.post('/permintaan/cart/add', {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            bahan_id: id,
+            qty: 0,
+            kg: 0
+        });
     });
 
     // hitung kg saat qty berubah
