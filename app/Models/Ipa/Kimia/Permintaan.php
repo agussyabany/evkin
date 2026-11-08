@@ -47,5 +47,11 @@ class Permintaan extends Model
         return $this->belongsTo(Ipa::class, 'id_ipa');
     }
 
+    public function logTerakhir()
+    {
+        return $this->hasOne(PermintaanLog::class, 'permintaan_id')
+            ->latestOfMany();
+    }
+
 
 }

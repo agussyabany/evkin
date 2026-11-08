@@ -25,7 +25,7 @@ $(document).ready(function () {
         if (!noPermintaan) {
             $.get('/permintaan/draft', function (res) {
                 noPermintaan = res.no_permintaan
-             })
+            })
 
 
             //'PR-'.now()->format('Ymd')
@@ -216,7 +216,31 @@ $(document).ready(function () {
             // ===============================
             $('#m_no_transaksi').text(res.header.no_permintaan);
             $('#m_tanggal').text(res.header.created_at);
-            $('#m_status').text(res.header.status_relasi.nama_status);
+            let statusId = parseInt(res.header.status_relasi.id);
+
+            let badgeStatus = '';
+
+            if (statusId === 5) {
+                badgeStatus = `
+        <span class="badge badge-success">
+            ${res.header.status_relasi.nama_status}
+        </span>
+    `;
+            } else if (statusId >= 1 && statusId <= 4) {
+                badgeStatus = `
+        <span class="badge badge-warning">
+            ${res.header.status_relasi.nama_status}
+        </span>
+    `;
+            } else {
+                badgeStatus = `
+        <span class="badge badge-secondary">
+            ${res.header.status_relasi.nama_status}
+        </span>
+    `;
+            }
+
+            $('#m_status').html(badgeStatus);
             $('#m_ipa').text(res.header.ipa.nama_ipa);
             // 🔥 SET ACTION FORM APPROVAL DI SINI
             $('#formApprove').attr(
@@ -224,7 +248,7 @@ $(document).ready(function () {
                 '/permintaan/' + currentPermintaanId + '/approve'
             );
             //let statusId = res.header.status; 
-            let statusId = res.header.status_relasi.id;
+            //let statusId = res.header.status_relasi.id;
 
             console.log('STATUS ID:', statusId);
             //APPROVE ASMEN IPA
@@ -318,7 +342,23 @@ $(document).ready(function () {
                         stokGudang = item.bahan.stok_gudang
                             ? item.bahan.stok_gudang.stok
                             : 0;
-
+                        // Tampilkan tombol keterangan jika barang sudah diterima IPA
+                        if (statusId === 5) {
+                            tdKet = `
+                                    <td class="text-center text-info font-weight-bold">
+                                        <button class="btn btn-sm btn-primary btn-lihat-ket"
+                                            data-detail-id="${item.id}">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                    </td>
+                                `;
+                        } else {
+                            tdKet = `
+                                        <td class="text-center text-default font-weight-bold">
+                                            -
+                                        </td>
+                                    `;
+                        }
                         $('.th-gudang').removeClass('d-none');
 
 
@@ -500,29 +540,30 @@ $(document).ready(function () {
                     `;
 
                     }
+                    // Cek selisih barang dikirim dan diterima
+                    let real = parseFloat(item.real) || 0;
+                    let terima = parseFloat(item.terima) || 0;
+
+                    let adaSelisih = statusId === 5 && terima !== real;
+                    let rowClass = adaSelisih ? 'table-danger' : '';
                     html += `
-                    <tr data-detail-id="${item.id}" data-qty-awal="${item.qty}" data-real-awal="${item.real}">
+                    <tr class="${rowClass}"
+                        data-detail-id="${item.id}"
+                        data-qty-awal="${item.qty}"
+                        data-real-awal="${item.real}">
+
                         <td class="text-center">${i + 1}</td>
                         <td>${item.bahan.nama_bahan}</td>
                         ${tdJumlah}
-                        <td><span class="kg-text">
-                               ${item.bahan.ukuran} 
-                            </span></td>
                         ${tdReal}
-                        <td class="text-center text-success font-weight-bold">
-                           ${item.real * item.bahan.ukuran} 
-                        </td>
-
                         ${tdTerima}
-                        ${tdKlTerima} 
-                        
 
                         <td class="text-center">
                             <span class="kg-text1">
-                               ${item.bahan.satuan?.nama_satuan ?? '-'} 
+                                ${item.bahan.satuan?.nama_satuan ?? '-'}
                             </span>
                         </td>
-                        ${window.isGudangOperator ? tdStokGudang : ``}
+
                         ${tdKet}
                         ${window.isIpaOperator ? tdSelOpt : ``}
                     </tr>

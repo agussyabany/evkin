@@ -34,8 +34,9 @@
                                     <th class="text-center">NO PERMINTAAN</th>
                                     <th class="text-center">IPA</th>
                                     <th class="text-center">DAJUKAN OLEH</th>
-                                    <th class="text-center">TANGGAL</th>
+                                    <th class="text-center">TANGGAL DIAJUKAN</th>
                                     <th class="text-center">STATUS</th>
+                                    <th class="text-center">TANGGAL UPDATE PROSES</th>
                                     <th class="text-center">DETAIL</th>
                                 </tr>
                             </thead>
@@ -58,9 +59,27 @@
                                                 </span>
                                             @endif
                                         </td>
+                                        <td class="text-center">
+                                            {{ $item->logTerakhir?->created_at ? $item->logTerakhir->created_at->format('d-m-Y H:i:s') : '-' }}
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="position-relative d-inline-block">
 
-                                        <td><button class="btn btn-outline-success btn-sm btn-info-minta"
-                                                data-id="{{ $item->id }}"><i class="fa fa-eye"></i></button></td>
+                                                <button class="btn btn-outline-success btn-sm btn-info-minta"
+                                                    data-id="{{ $item->id }}">
+                                                    <i class="fa fa-eye"></i>
+                                                </button>
+
+                                                @if ((int) $item->status === 5 && $item->ada_selisih)
+                                                    <span class="badge badge-danger position-absolute"
+                                                        style="top:-8px; right:-8px; border-radius:50%;"
+                                                        title="Jumlah barang diterima tidak sesuai pengiriman">
+                                                        !
+                                                    </span>
+                                                @endif
+
+                                            </span>
+                                        </td>
                                     </tr>
                                 @endforeach
 
@@ -131,7 +150,7 @@
                                     @role(['agus', 'ipa'])
                                         @if (Auth::user()->jabatan == 2)
                                             <tr>
-                                                <th>PERSETUJUAN ASMEN IPA</th>
+                                                <th>DIAJUKAN ASMEN IPA</th>
                                                 <td>
 
 
@@ -211,12 +230,12 @@
                                             <tr>
                                                 <th rowspan="2">NO</th>
                                                 <th rowspan="2">BAHAN</th>
-                                                <th colspan="2">PERMINTAAN</th>
-                                                <th colspan="2" class="bg-success">DIKIRIM</th>
-                                                <th colspan="2" class="bg-warning">DITERIMA</th>
+                                                <th colspan="1">PERMINTAAN</th>
+                                                <th colspan="1" class="bg-success">DIKIRIM</th>
+                                                <th colspan="1" class="bg-warning">DITERIMA</th>
 
                                                 <th rowspan="2">SATUAN</th>
-                                                <th rowspan="2" class="th-gudang d-none bg-info">STOK</th>
+
                                                 <th rowspan="2">KET</th>
                                                 @role(['agus', 'ipa'])
                                                     @if (Auth::user()->jabatan == 1)
@@ -224,14 +243,7 @@
                                                     @endif
                                                 @endrole
                                             </tr>
-                                            <tr>
-                                                <th>JUMLAH</th>
-                                                <th>KILO</th>
-                                                <th class="text-success">JUMLAH</th>
-                                                
-                                                <th class="text-warning">JUMLAH</th>
-                                                
-                                            </tr>
+
                                         </thead>
 
 
@@ -277,7 +289,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="float-end">
-                        <button class="btn btn-primary" id="btn-submit-kirim">SUBMIT</button>
+                        <button class="btn btn-primary" id="btn-submit-kirim">KIRIM</button>
                     </div>
                     @role(['agus', 'ipa'])
                         @if (Auth::user()->jabatan == 2)

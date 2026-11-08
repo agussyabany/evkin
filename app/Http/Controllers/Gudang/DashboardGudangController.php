@@ -24,7 +24,8 @@ class DashboardGudangController extends Controller
         $permintaanDiterima = KimiaPermintaan::where('status', 5)->count();
 
         // Permintaan terbaru
-        $permintaanTerbaru = KimiaPermintaan::with('ipa')
+       $permintaanTerbaru = KimiaPermintaan::with('ipa')
+            ->where('status', '!=', 0)
             ->orderByDesc('created_at')
             ->limit(10)
             ->get();

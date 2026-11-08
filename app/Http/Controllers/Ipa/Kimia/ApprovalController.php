@@ -13,16 +13,34 @@ use Illuminate\Support\Facades\DB;
 class ApprovalController extends Controller
 {
         public function index()
-        {
-            $idIpa = Auth::user()->ipa;
-            if (Auth::user()->hasAnyRole(['gudang'])) {
-               $permintaan = Permintaan::with('ipa')->get(); 
-            }else{
-                $permintaan = Permintaan::with('ipa')->where('id_ipa',$idIpa)->where('status', '!=', 0)->get();
-            }
-            
-            return view('ipa.permintaan',compact(['permintaan']));
+{
+    $idIpa = Auth::user()->ipa;
+
+    $query = Permintaan::with([
+        'ipa',
+        'user',
+        'statusRelasi',
+        'logTerakhir'
+    ])
+    ->withExists([
+        'details as ada_selisih' => function ($query) {
+            $query->whereRaw(
+                'COALESCE(terima, 0) <> COALESCE(real, 0)'
+            );
         }
+    ])
+    ->where('status', '!=', 0);
+
+    if (Auth::user()->hasAnyRole(['gudang'])) {
+        $permintaan = $query->get();
+    } else {
+        $permintaan = $query
+            ->where('id_ipa', $idIpa)
+            ->get();
+    }
+
+    return view('ipa.permintaan', compact('permintaan'));
+}
 
             public function detail($id)
         {
