@@ -302,10 +302,18 @@
                 <li class="nav-header">TRANSAKSI GUDANG</li>
 
                 <li class="nav-item">
-                    <a href="/dataMinta"
-                        class="nav-link {{ request()->is('dataMinta*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-file-alt"></i>
-                        <p>Permintaan Bahan</p>
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-flask"></i>
+
+                        <p>
+                            Permintaan Bahan
+
+                            @if($jumlahNotifikasi > 0)
+                                <span class="right badge badge-danger">
+                                    {{ $jumlahNotifikasi }}
+                                </span>
+                            @endif
+                        </p>
                     </a>
                 </li>
 
