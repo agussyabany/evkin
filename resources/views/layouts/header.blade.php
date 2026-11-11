@@ -281,12 +281,7 @@
                         <p>Dashboard Gudang</p>
                     </a>
                 </li>
-
-                
-
-               
-
-                {{-- MONITORING STOK IPA --}}
+                 {{-- MONITORING STOK IPA --}}
                 <li class="nav-item">
                     <a href="{{ route('monitoring-ipa.stok') }}"
                         class="nav-link {{ request()->routeIs('monitoring-ipa.stok*') ? 'active' : '' }}">
@@ -316,12 +311,7 @@
                         </p>
                     </a>
                 </li>
-
-               
-
-               
-
-            @endif
+                @endif
 
 
             {{-- =========================================
