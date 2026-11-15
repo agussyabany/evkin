@@ -29,7 +29,10 @@ use App\Http\Controllers\Ipa\KimiaIpaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Gudang\MonitoringIpaController;
+//use App\Http\Controllers\Ipa\Kimia\StokOpnameIpaController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\StokOpnameIpaController;
+//use App\Http\Controllers\StokOpnameIpaController as ControllersStokOpnameIpaController;
 use App\Models\Evkin\Pelayanan;
 use Illuminate\Support\Facades\Route;
 
@@ -243,8 +246,22 @@ Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
     Route::post('/ipa/set-minimum-stok',[GudangStokIpaSettingController::class, 'update'])->name('ipa.set-minimum-stok.update');
 
     Route::get('/ipa/kartu-stok/{id_bahan}/modal',[IpaKeluarController::class, 'kartuStokModal'])->name('ipa.kartu-stok.modal');
-
 });
+
+Route::middleware(['auth', 'asmen.ipa'])
+    ->prefix('stok-opname-ipa')
+    ->name('stok-opname-ipa.')
+    ->group(function () {
+
+        Route::get('/', [StokOpnameIpaController::class, 'index'])
+            ->name('index');
+
+        Route::get('/create', [StokOpnameIpaController::class, 'create'])
+            ->name('create');
+
+        Route::post('/store', [StokOpnameIpaController::class, 'store'])
+            ->name('store');
+    });
 
 
 Route::middleware('auth','verified','role:agus|gudang')->group(function () {
