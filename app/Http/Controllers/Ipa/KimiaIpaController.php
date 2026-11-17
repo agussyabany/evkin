@@ -36,4 +36,20 @@ class KimiaIpaController extends Controller
 
     return view('ipa.gudangIpa', compact('stok', 'minimumStok'));
 }
+
+    public function printStokIpa()
+    {
+        $idIpa = auth()->user()->ipa;
+
+        $stok = StokIpa::with(['bahan.satuan'])
+            ->where('id_ipa', $idIpa)
+            ->orderBy('id_bahan')
+            ->get();
+
+        return view('ipa.print-stok', [
+            'stok' => $stok,
+            'idIpa' => $idIpa,
+            'tanggalCetak' => now(),
+        ]);
+    }
 }

@@ -112,6 +112,13 @@
                             <i class="fas fa-box-open mr-1"></i> Persediaan Bahan Kimia
                         </h3>
                         <div class="card-tools">
+                            <a href="{{ route('stok-ipa.print') }}"
+                            target="_blank"
+                            class="btn btn-danger btn-sm">
+                                <i class="fas fa-print"></i> Print Stok IPA
+                            </a>
+                        </div>
+                        <div class="card-tools">
                             <span class="badge badge-light">{{ $totalJenisBahan }} jenis bahan</span>
                         </div>
                     </div>

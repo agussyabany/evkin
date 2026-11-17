@@ -199,4 +199,40 @@ public function store(Request $request)
         ->with('success', 'Stok opname berhasil diposting.');
 }
 
+        public function show($id)
+        {
+            $idIpa = auth()->user()->ipa;
+
+            // Ambil header opname sesuai IPA pengguna
+            $opname = DB::table('stok_opname_ipa as so')
+                ->leftJoin('users as u', 'u.id', '=', 'so.user_id')
+                ->where('so.id', $id)
+                ->where('so.id_ipa', $idIpa)
+                ->select(
+                    'so.*',
+                    'u.name as nama_petugas'
+                )
+                ->first();
+
+            if (!$opname) {
+                abort(404, 'Data stok opname tidak ditemukan.');
+            }
+
+            // Ambil detail bahan
+            $detail = DB::table('stok_opname_ipa_detail as d')
+                ->join('gudang_bahan as b', 'b.id', '=', 'd.id_bahan')
+                ->where('d.stok_opname_id', $id)
+                ->select(
+                    'd.*',
+                    'b.nama_bahan'
+                )
+                ->orderBy('b.nama_bahan')
+                ->get();
+
+            return view('stok-opname-ipa.show', compact(
+                'opname',
+                'detail'
+            ));
+        }
+
 }

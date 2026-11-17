@@ -253,6 +253,7 @@
         'stok*',
         'ipa/transaksi-keluar*',
         'ipa/set-minimum-stok*',
+        'stok-opname-ipa*',
         'guna*'
     ) ? 'menu-open' : '' }}">
 
@@ -320,6 +321,23 @@
                                 @if (Auth::user()->hasAnyRole(['agus', 'ipa']))
 
                         <li class="nav-header">OPERASIONAL IPA</li>
+                        {{-- STOK OPNAME IPA --}}
+                        @if (Auth::user()->jabatan == 2 && Auth::user()->ipa)
+
+                            <li class="nav-item">
+                                <a href="{{ route('stok-opname-ipa.index') }}"
+                                    class="nav-link {{ request()->is('stok-opname-ipa*') ? 'active' : '' }}">
+
+                                    <i class="nav-icon fas fa-clipboard-check"></i>
+
+                                    <p>
+                                        Stok Opname IPA
+                                        <span class="right badge badge-success">Opname</span>
+                                    </p>
+                                </a>
+                            </li>
+
+                        @endif
 
                         {{-- STOK IPA --}}
                         <li class="nav-item">

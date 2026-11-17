@@ -36,7 +36,7 @@
                         </h3>
                     </div>
 
-                    <form action="{{ route('stok-opname-ipa.store') }}" method="POST">
+                    <form action="{{ route('stok-opname-ipa.store') }}" method="POST" id="formStokOpname">
                         @csrf
 
                         <div class="card-body">
@@ -120,7 +120,11 @@
                                 Kembali
                             </a>
 
-                            <button type="submit" class="btn btn-primary" {{ $bahan->isEmpty() ? 'disabled' : '' }}>
+                            <button type="submit"
+                                    id="btnPosting"
+                                    class="btn btn-primary"
+                                    {{ $bahan->isEmpty() ? 'disabled' : '' }}>
+
                                 <i class="fas fa-save mr-1"></i>
                                 Posting Stok Opname
                             </button>
@@ -134,7 +138,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script>
         $(document).on('input', '.stok-fisik', function() {
             let stokSistem = parseFloat($(this).data('stok')) || 0;
@@ -159,4 +163,106 @@
             }
         });
     </script>
-@endsection
+    <script>
+
+            $(document).ready(function () {
+
+                let sedangPosting = false;
+
+                // Hitung selisih otomatis
+                $(document).on('input', '.stok-fisik', function () {
+
+                    let stokSistem = parseFloat($(this).data('stok')) || 0;
+                    let nilaiInput = $(this).val();
+
+                    let stokFisik = parseFloat(nilaiInput);
+
+                    let selisih = nilaiInput === ''
+                        ? ''
+                        : stokFisik - stokSistem;
+
+                    let kolomSelisih = $(this)
+                        .closest('tr')
+                        .find('.selisih');
+
+                    kolomSelisih.val(
+                        selisih === '' ? '' : selisih.toFixed(2)
+                    );
+
+                    kolomSelisih.removeClass('text-success text-danger');
+
+                    if (selisih > 0) {
+                        kolomSelisih.addClass('text-success');
+                    } else if (selisih < 0) {
+                        kolomSelisih.addClass('text-danger');
+                    }
+                });
+
+                // Konfirmasi sebelum posting
+                $('#formStokOpname').on('submit', function (e) {
+
+                    if (sedangPosting) {
+                        e.preventDefault();
+                        return false;
+                    }
+
+                    e.preventDefault();
+
+                    let form = this;
+                    let tombol = $('#btnPosting');
+
+                    // Pastikan seluruh input stok fisik valid
+                    let valid = true;
+
+                    $('.stok-fisik').each(function () {
+
+                        let nilai = $(this).val();
+
+                        if (nilai === '' || !Number.isFinite(Number(nilai)) || Number(nilai) < 0) {
+                            valid = false;
+                        }
+                    });
+
+                    if (!valid) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Input belum lengkap',
+                            text: 'Pastikan seluruh stok fisik sudah diisi dengan angka nol atau lebih.'
+                        });
+
+                        return false;
+                    }
+
+                    Swal.fire({
+                        title: 'Posting Stok Opname?',
+                        text: 'Saldo stok IPA akan disesuaikan dengan hasil perhitungan fisik. Proses ini tidak dapat dibatalkan secara langsung.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#007bff',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: 'Ya, Posting Sekarang',
+                        cancelButtonText: 'Periksa Kembali',
+                        reverseButtons: true
+                    }).then((result) => {
+
+                        if (result.isConfirmed) {
+
+                            sedangPosting = true;
+
+                            tombol.prop('disabled', true);
+
+                            tombol.html(
+                                '<i class="fas fa-spinner fa-spin mr-1"></i> Memproses...'
+                            );
+
+                            // Submit form tanpa memicu event submit kembali
+                            form.submit();
+                        }
+                    });
+
+                });
+
+            });
+
+    </script>
+@endpush

@@ -246,6 +246,9 @@ Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
     Route::post('/ipa/set-minimum-stok',[GudangStokIpaSettingController::class, 'update'])->name('ipa.set-minimum-stok.update');
 
     Route::get('/ipa/kartu-stok/{id_bahan}/modal',[IpaKeluarController::class, 'kartuStokModal'])->name('ipa.kartu-stok.modal');
+    Route::get('/stok-ipa/print', [KimiaIpaController::class, 'printStokIpa'])
+        ->name('stok-ipa.print');
+
 });
 
 Route::middleware(['auth', 'asmen.ipa'])
@@ -261,6 +264,8 @@ Route::middleware(['auth', 'asmen.ipa'])
 
         Route::post('/store', [StokOpnameIpaController::class, 'store'])
             ->name('store');
+
+        Route::get('/{id}', [StokOpnameIpaController::class,'show'])->name('show');
     });
 
 

@@ -69,7 +69,11 @@
                                 @forelse($opname as $i => $item)
                                     <tr>
                                         <td>{{ $i + 1 }}</td>
-                                        <td>{{ $item->no_opname }}</td>
+                                        <td>
+                                            <a href="{{ route('stok-opname-ipa.show', $item->id) }}">
+                                            {{ $item->no_opname }}
+                                            </a>
+                                       </td>
                                         <td>{{ $item->periode?->format('m/Y') }}</td>
                                         <td>{{ $item->tanggal_opname?->format('d/m/Y H:i') }}</td>
                                         <td>{{ $item->petugas->name ?? '-' }}</td>

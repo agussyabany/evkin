@@ -10,13 +10,22 @@
             <meta name="csrf-token" content="{{ csrf_token() }}">
         </head>
         <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
+
             @include('layouts.header')
+
             @yield('content')
-            @stack('scripts')
+
             @include('layouts.footer')
+
+            {{-- Load library JavaScript --}}
+            @include('layouts._asset_footer')
+
+            {{-- Load script dari masing-masing halaman --}}
+            @stack('scripts')
+
         </body>
 </html>
-            @include('layouts._asset_footer')
+            {{-- @include('layouts._asset_footer') --}}
 
         {{-- //@include('sweetalert::alert') --}}
 
