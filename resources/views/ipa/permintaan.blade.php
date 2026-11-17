@@ -298,7 +298,9 @@
                             </div>
                         @endif
                     @endrole
-
+                    <a href="#" id="btnPrintPermintaan" target="_blank" class="btn btn-danger">
+                        <i class="fas fa-print"></i> Cetak Permintaan
+                    </a>
                 </div>
                 <!-- /.modal-content -->
             </div>

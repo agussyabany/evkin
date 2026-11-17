@@ -112,9 +112,7 @@
                             <i class="fas fa-box-open mr-1"></i> Persediaan Bahan Kimia
                         </h3>
                         <div class="card-tools">
-                            <a href="{{ route('stok-ipa.print') }}"
-                            target="_blank"
-                            class="btn btn-danger btn-sm">
+                            <a href="{{ route('stok-ipa.print') }}" target="_blank" class="btn btn-danger btn-sm">
                                 <i class="fas fa-print"></i> Print Stok IPA
                             </a>
                         </div>
@@ -211,10 +209,10 @@
                                                 {{ number_format($batasMinimum, 2, ',', '.') }}
                                             </td>
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-info btn-sm btn-kartu-stok"
-                                                    data-url="{{ route('ipa.kartu-stok.modal', $item->id_bahan) }}">
+                                                <a href="{{ route('ipa.kartu-stok', $item->id_bahan) }}"
+                                                    class="btn btn-info btn-sm">
                                                     <i class="fas fa-eye"></i> Lihat
-                                                </button>
+                                                </a>
                                             </td>
                                         </tr>
                                     @empty

@@ -228,6 +228,8 @@ Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
     Route::post('/permintaan/{id}/approve',[ApprovalController::class, 'approve'])->middleware(['auth']);
     Route::post('/permintaan/{id}/kirim', [PermintaanController::class, 'kirim']);
     Route::get('/permintaan/{id}/surat-jalan',[PermintaanController::class, 'suratJalan'])->name('permintaan.suratjalan');
+    
+    Route::get('/permintaan/{id}/print', [PermintaanController::class,'printPermintaan'])->name('permintaan.print');
 
     
     
@@ -242,12 +244,19 @@ Route::middleware('auth','verified','role:ipa|agus|gudang')->group(function () {
     Route::post('/ipa/transaksi-keluar/{id}/batal',[IpaKeluarController::class, 'batalKeluar']);
     Route::get('/ipa/kartu-stok/{id_bahan}',[IpaKeluarController::class, 'kartuStok'])->name('ipa.kartu-stok');
 
+    Route::get('/ipa/transaksi-keluar/{id}/print', [IpaKeluarController::class,'printKeluar'])->name('ipa.transaksi-keluar.print');
+
     Route::get('/ipa/set-minimum-stok',[GudangStokIpaSettingController::class, 'index'])->name('ipa.set-minimum-stok');
     Route::post('/ipa/set-minimum-stok',[GudangStokIpaSettingController::class, 'update'])->name('ipa.set-minimum-stok.update');
 
     Route::get('/ipa/kartu-stok/{id_bahan}/modal',[IpaKeluarController::class, 'kartuStokModal'])->name('ipa.kartu-stok.modal');
+    Route::get('/ipa/kartu-stok/{id_bahan}', [IpaKeluarController::class,'kartuStok'])->name('ipa.kartu-stok');
     Route::get('/stok-ipa/print', [KimiaIpaController::class, 'printStokIpa'])
         ->name('stok-ipa.print');
+
+    Route::get('/ipa/kartu-stok/{id_bahan}/print', [KimiaIpaController::class,'printKartuStok'])->name('ipa.kartu-stok.print');
+
+    //Route::get('/kartu-stok-ipa', [KimiaIpaController::class,'kartuStokIpa'])->name('kartu-stok-ipa.print');
 
 });
 

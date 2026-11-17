@@ -339,5 +339,22 @@ public function kartuStokModal(Request $request, $id_bahan)
     ));
 }
 
+public function printKeluar($id)
+{
+    $idIpa = auth()->user()->ipa;
+
+    $transaksi = \App\Models\Gudang\IpaKeluar::with([
+        'ipa',
+        'userRelasi',
+        'detail.bahan.satuan',
+        'detail.satuan'
+    ])
+        ->where('id_ipa', $idIpa)
+        ->where('id_transaksi', $id)
+        ->firstOrFail();
+
+    return view('ipa.print-transaksi-keluar', compact('transaksi'));
+}
+
 
 }

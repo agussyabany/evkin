@@ -381,6 +381,32 @@ public function terimaIpa(Request $request, $id)
     ]);
 }
 
+public function printPermintaan($id)
+{
+    $permintaan = Permintaan::with([
+        'statusRelasi',
+        'ipa',
+    ])->findOrFail($id);
+
+    $detail = PermintaanDetail::with([
+        'bahan.satuan',
+        'bahan.stokGudang',
+        'keterangans',
+    ])
+    ->where('permintaan_id', $id)
+    ->get();
+
+    // Pastikan hanya IPA milik akun yang sedang login
+    if ($permintaan->id_ipa != auth()->user()->ipa) {
+        abort(403, 'Anda tidak memiliki akses ke permintaan ini.');
+    }
+
+    return view('ipa.print-permintaan', compact(
+        'permintaan',
+        'detail'
+    ));
+}
+
 
 
 }

@@ -741,6 +741,11 @@ $(document).ready(function () {
             $('#tblKeterangan').html(html);
             $('#fieldset-keterangan').removeClass('d-none');
         });
+
+        $('#btnPrintPermintaan').attr(
+            'href',
+            '/permintaan/' + currentPermintaanId + '/print'
+        );
     });
     // =============================
     // 🔥 KIRIM GUNDANG UTAMA
