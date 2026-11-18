@@ -275,6 +275,9 @@ Route::middleware(['auth', 'asmen.ipa'])
             ->name('store');
 
         Route::get('/{id}', [StokOpnameIpaController::class,'show'])->name('show');
+
+         Route::get('/{id}/print', [StokOpnameIpaController::class, 'print'])
+            ->name('print');
     });
 
 

@@ -23,11 +23,19 @@
                     </h3>
 
                     <div class="card-tools">
+                         <a href="{{ route('stok-opname-ipa.print', $opname->id) }}"
+                            target="_blank"
+                            class="btn btn-sm btn-danger">
+                                <i class="fas fa-print"></i>
+                                Cetak / Simpan PDF
+                         </a>
+                         
                         <a href="{{ route('stok-opname-ipa.index') }}"
                            class="btn btn-sm btn-secondary">
                             <i class="fas fa-arrow-left"></i>
                             Kembali
                         </a>
+
                     </div>
                 </div>
 
