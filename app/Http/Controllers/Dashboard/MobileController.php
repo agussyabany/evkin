@@ -99,7 +99,7 @@ class MobileController extends Controller
             $biayaOps = evkinHelper::biayaOps($tahun,$bulanAwal,$bulanAkhir);
             $PndptnOps = evkinHelper::PndptnOps($tahun,$bulanAwal,$bulanAkhir);
             $hitungRop = evkinHelper::hitungRop($tahun,$bulanAwal,$bulanAkhir);
-            $hasilRop = round($hitungRop, 2);
+            $hasilRop = round($hitungRop, 4);
             $ropData = evkinHelper::nilaiRop($hasilRop);
             $nilaiRop = $ropData['nilaiRop'];
             $clsRop = $ropData['clsRop'];
